@@ -1,0 +1,13 @@
+# Docker Ignore
+.git
+.vscode
+.agent
+__pycache__
+*.png
+*.jpg
+*.mp4
+*.md
+!GEMINI.md
+!CORTEX_MAP.md
+experience_log.json
+.playwright-mcp

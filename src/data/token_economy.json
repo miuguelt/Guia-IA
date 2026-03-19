@@ -1,0 +1,14 @@
+{
+    "total_tokens": 27550111.0,
+    "distribution": {
+        "gpu_local": 500000.0,
+        "deepseek_l3": 27044611.0,
+        "gemini_l4": 0.0
+    },
+    "expenses_usd": 2.09154,
+    "balance_usd": 7.89846,
+    "api_requests": 688,
+    "last_update": "2026-03-19T17:28:49.587998",
+    "version": "32.4",
+    "status": "LIVE_SYNCED"
+}

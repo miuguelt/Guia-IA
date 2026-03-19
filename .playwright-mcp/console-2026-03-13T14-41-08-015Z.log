@@ -1,0 +1,17 @@
+[     399ms] [ERROR] Error loading module module-teams-meet from src/modules/tools/module-teams-meet.js SyntaxError: Invalid or unexpected token @ http://127.0.0.1:8082/app.js:258
+[     549ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:8082/favicon.ico:0
+[   72365ms] [ERROR] Error loading module module-teams-meet from src/modules/tools/module-teams-meet.js SyntaxError: Invalid or unexpected token @ http://127.0.0.1:8082/app.js:258
+[  142255ms] [ERROR] Error loading module module-teams-meet from src/modules/tools/module-teams-meet.js SyntaxError: Invalid or unexpected token
+    at GuiaIA.loadModuleDynamic (http://127.0.0.1:8082/app.js:256:40)
+    at http://127.0.0.1:8082/app.js:68:75
+    at Array.map (<anonymous>)
+    at GuiaIA.loadAllModules (http://127.0.0.1:8082/app.js:68:60)
+    at GuiaIA.init (http://127.0.0.1:8082/app.js:43:16)
+    at HTMLDocument.<anonymous> (http://127.0.0.1:8082/app.js:8:7) @ http://127.0.0.1:8082/app.js:258
+[  318041ms] [ERROR] Error loading module module-teams-meet from src/modules/tools/module-teams-meet.js SyntaxError: Invalid or unexpected token @ http://127.0.0.1:8082/app.js:258
+[  349443ms] TypeError: Cannot read properties of null (reading 'querySelector')
+    at HTMLBodyElement.<anonymous> (http://127.0.0.1:8082/app.js:507:31)
+[  515614ms] TypeError: Cannot read properties of null (reading 'querySelector')
+    at HTMLBodyElement.<anonymous> (http://127.0.0.1:8082/app.js:507:31)
+[ 1077509ms] TypeError: container.getElementById is not a function
+    at initProgressiveUI (http://127.0.0.1:8082/src/modules/ia/module-antigravity.js?v=1773413945408:271:36)

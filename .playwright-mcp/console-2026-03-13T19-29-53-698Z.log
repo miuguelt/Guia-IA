@@ -1,0 +1,12 @@
+[     462ms] Unexpected token '{'
+[     511ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:8080/favicon.ico:0
+[   31691ms] Unexpected token '{'
+[   66264ms] Unexpected token '{'
+[   83077ms] Unexpected token '{'
+[  154314ms] Unexpected token '{'
+[  693221ms] Unexpected token '{'
+[  701679ms] Unexpected token '{'
+[ 1338219ms] Unexpected token '{'
+[ 1719936ms] Unexpected token '{'
+[ 1762613ms] Unexpected token '{'
+[ 4406786ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:8080/favicon.ico:0

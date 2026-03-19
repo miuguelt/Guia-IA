@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  guia-ia:
+    build: .
+    container_name: guia_ia_sovereign
+    ports:
+      - "8003:8000"
+    volumes:
+      - .:/app
+      - experience_data:/app/data
+      - knowledge_base:/app/src/knowledge
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - EXPERIENCE_PROTOCOL=SINGULARITY_V20.1
+      - REDIS_HOST=redis
+    restart: unless-stopped
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:alpine
+    container_name: guia_ia_cache
+    restart: unless-stopped
+
+  dozzle:
+    image: amir20/dozzle:latest
+    container_name: guia_ia_monitor
+    ports:
+      - "8888:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: antigravity_ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped
+
+  chromadb:
+    image: chromadb/chroma
+    container_name: chromadb_memory
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/chroma/data
+    restart: unless-stopped
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: antigravity_ui
+    ports:
+      - "3000:8080"
+    volumes:
+      - ui_data:/app/backend/data
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    restart: unless-stopped
+    depends_on:
+      - ollama
+
+volumes:
+  experience_data:
+  knowledge_base:
+  ollama_data:
+  chroma_data:
+  ui_data:
