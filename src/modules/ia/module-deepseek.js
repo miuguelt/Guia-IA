@@ -4,54 +4,38 @@
    ═══════════════════════════════════════════ */
 (function() {
   const dseekHTML = `
-<style>
-  :root {
-    --ds-primary: #6366f1;
-    --ds-secondary: #818cf8;
-    --ds-bg: #030712;
-    --ds-border: #1e293b;
-  }
-
-  .m-ds-container { color: #f1f5f9; font-family: 'Inter', sans-serif; }
-  .m-ds-card { background: var(--ds-bg); border: 1px solid var(--ds-border); border-radius: 16px; padding: 25px; margin-bottom: 20px; position: relative; overflow: hidden; }
-  .m-ds-header-bg { position: absolute; top:0; left:0; width:100%; height:120px; background: linear-gradient(180deg, rgba(99,102,241,0.1) 0%, transparent 100%); pointer-events:none; }
-
-  /* Tabs Bar */
-  .premium-tab-ds { background: none; border: none; padding: 10px 15px; color: #64748b; cursor: pointer; border-bottom: 2px solid transparent; transition: 0.3s; font-weight: 600; white-space: nowrap; }
-  .premium-tab-ds.active { color: var(--ds-primary); border-bottom-color: var(--ds-primary); }
-
-  /* CoT Simulator */
-  .m-ds-terminal { background: #000; border: 1px solid var(--ds-border); border-radius: 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; overflow: hidden; margin-top: 20px; }
-  .m-ds-t-header { background: #0f172a; padding: 10px 15px; border-bottom: 1px solid var(--ds-border); display: flex; justify-content: space-between; align-items: center; }
-  .m-ds-t-body { padding: 15px; height: 280px; overflow-y: auto; line-height: 1.6; color: #94a3b8; }
-  
-  .m-ds-thought-block { background: rgba(99,102,241,0.05); border-left: 3px solid var(--ds-primary); padding: 12px; margin: 10px 0; border-radius: 0 8px 8px 0; }
-  .m-ds-thought-line { opacity: 0; transform: translateY(5px); animation: dsFadeIn 0.3s forwards; margin-bottom: 5px; }
-  @keyframes dsFadeIn { to { opacity: 1; transform: translateY(0); } }
-
-  .ds-btn-glow { 
-    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%); 
-    color: white; border: none; padding: 12px 24px; border-radius: 8px;
-    font-weight: 700; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(99,102,241,0.3);
-  }
-  .ds-btn-glow:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(99,102,241,0.5); }
-</style>
-
-<div class="m-ds-container">
-  <div class="module-header premium-header" style="border: 1px solid rgba(99,102,241,0.3); background: rgba(99,102,241,0.02);">
-    <div class="module-number gamer-badge" style="background:var(--ds-primary);color:#fff;">BONUS: EL CEREBRO DE LA TRÍADA</div>
-    <h2 class="module-title glow-text" style="color:#818cf8;">🧠 <span style="color:#6366f1;">DeepSeek R1:</span> Inteligencia Pura</h2>
+  const dseekHTML = `
+<div class="m-ds-container" style="--ds-primary: var(--primary); --ds-bg: var(--bg-dark); --ds-border: var(--glass-border);">
+  <div class="module-header premium-header">
+    <div class="module-number gamer-badge">BONUS: EL CEREBRO DE LA TRÍADA</div>
+    <h2 class="module-title glow-text" style="color:var(--primary-light);">🧠 <span style="color:var(--primary);">DeepSeek R1:</span> Inteligencia Pura</h2>
     <p class="module-description">Domina el modelo que rompió el mercado. R1 no solo predice palabras, <b>razona mediante procesos de pensamiento internos</b> antes de responder.</p>
   </div>
 
-  <div class="ag-tabs game-tabs" style="display:flex; overflow-x:auto; gap:5px; margin-bottom:20px; border-bottom:1px solid #1e293b;">
-    <button class="tab-btn premium-tab-ds active" data-tab="m-ds-arch">🏗️ Arquitectura RL</button>
-    <button class="tab-btn premium-tab-ds" data-tab="m-ds-local">🏠 Inferencia GPU</button>
-    <button class="tab-btn premium-tab-ds" data-tab="m-ds-prompt">✍️ Prompting CoT</button>
-    <button class="tab-btn premium-tab-ds" data-tab="m-ds-lab">⚡ Lab Pensamiento</button>
-    <button class="tab-btn premium-tab-ds" data-tab="m-ds-cases">🧭 Casos Prácticos</button>
-    <button class="tab-btn premium-tab-ds" data-tab="m-ds-estrategia">🎯 Estrategia Real</button>
-    <button class="tab-btn premium-tab-ds" data-tab="m-ds-mission">🏆 Reto Final</button>
+  <div class="m-ds-hero glass-card" style="border-color: var(--primary-glow); background: rgba(var(--primary-rgb), 0.05);">
+    <h3 style="margin:0 0 8px; color:#fff;">La idea central de DeepSeek R1</h3>
+    <p class="m-ds-note" style="margin:0; opacity: 0.9;">DeepSeek R1 brilla cuando la tarea exige <strong>razonamiento secuencial, depuración, contraste de opciones o análisis con varios pasos</strong>. Si solo quieres una respuesta rápida o una redacción simple, a veces es demasiado motor para tan poca carretera.</p>
+    <div class="m-ag-chip-row">
+      <span class="m-ag-chip">Razonamiento</span>
+      <span class="m-ag-chip">Debugging</span>
+      <span class="m-ag-chip">Comparación</span>
+      <span class="m-ag-chip">Auditoría lógica</span>
+      <span class="m-ag-chip">Inferencia local</span>
+      <span class="m-ag-chip">CoT</span>
+    </div>
+  </div>
+
+  <div class="ag-tabs">
+    <button class="premium-tab active" data-tab="m-ds-arch">🏗️ Arquitectura RL</button>
+    <button class="premium-tab" data-tab="m-ds-decider">🧭 Cuándo Usarlo</button>
+    <button class="premium-tab" data-tab="m-ds-local">🏠 Inferencia GPU</button>
+    <button class="premium-tab" data-tab="m-ds-prompt">✍️ Prompting CoT</button>
+    <button class="premium-tab" data-tab="m-ds-lab">⚡ Lab Pensamiento</button>
+    <button class="premium-tab" data-tab="m-ds-cases">🧭 Casos Prácticos</button>
+    <button class="premium-tab" data-tab="m-ds-prompts">🧠 Prompts Maestros</button>
+    <button class="premium-tab" data-tab="m-ds-antipatterns">🚫 Errores</button>
+    <button class="premium-tab" data-tab="m-ds-estrategia">🎯 Estrategia Real</button>
+    <button class="premium-tab" data-tab="m-ds-mission">🏆 Reto Final</button>
   </div>
 
   <!-- TAB 1: ARCHITECTURE -->
@@ -68,6 +52,35 @@
                 <h4 style="color:var(--ds-primary);">Chain of Thought (CoT)</h4>
                 <p style="font-size:0.85rem; color:#94a3b8;">El modelo escribe sus dudas y correcciones en un bloque oculto (<code>&lt;thought&gt;</code>) antes de entregarte el resultado final.</p>
             </div>
+        </div>
+    </div>
+  </div>
+
+  <div id="m-ds-decider" class="ag-content">
+    <div class="section-card animate-in">
+        <h3>🧭 Cuándo usar un modelo de razonamiento</h3>
+        <div class="m-ds-grid-2" style="margin-top:18px;">
+          <div class="m-ds-panel">
+            <h4>Úsalo cuando...</h4>
+            <p class="m-ds-note">Debes descomponer un problema, revisar hipótesis, justificar una decisión o encontrar fallos lógicos ocultos.</p>
+          </div>
+          <div class="m-ds-panel">
+            <h4>No es la mejor opción cuando...</h4>
+            <p class="m-ds-note">Solo necesitas redactar un texto corto, resumir algo obvio o responder rápido sin mucho análisis.</p>
+          </div>
+          <div class="m-ds-panel">
+            <h4>Se luce especialmente en...</h4>
+            <p class="m-ds-note">Código, matemáticas, comparaciones complejas, revisión de procedimientos y problemas con varias restricciones.</p>
+          </div>
+          <div class="m-ds-panel">
+            <h4>Pierde valor si...</h4>
+            <p class="m-ds-note">No le das contexto suficiente, no defines criterio de validación o lo usas como si fuera un modelo conversacional genérico.</p>
+          </div>
+        </div>
+        <div class="m-ds-grid-3" style="margin-top:16px;">
+          <div class="m-ds-step"><div class="m-ds-step-badge">1</div><h4 style="margin:0 0 6px; color:#fff;">Expón el problema</h4><p class="m-ds-note" style="margin:0;">Qué hay que resolver y qué no debe asumirse.</p></div>
+          <div class="m-ds-step"><div class="m-ds-step-badge">2</div><h4 style="margin:0 0 6px; color:#fff;">Pide revisión paso a paso</h4><p class="m-ds-note" style="margin:0;">Obliga a revisar hipótesis, cálculos o ramas de decisión.</p></div>
+          <div class="m-ds-step"><div class="m-ds-step-badge">3</div><h4 style="margin:0 0 6px; color:#fff;">Valida el cierre</h4><p class="m-ds-note" style="margin:0;">Siempre termina con prueba, ejemplo o criterio de verificación.</p></div>
         </div>
     </div>
   </div>
@@ -153,6 +166,44 @@
           <p style="font-size:0.78rem; color:#94a3b8; margin:0 0 10px;">Funciona bien para instrucciones mal redactadas, procesos ambiguos o reglas poco claras.</p>
           <div style="font-size:0.76rem; color:#cbd5e1; line-height:1.8;">1. Pega el procedimiento actual.<br>2. Pide ambigüedades y huecos.<br>3. Solicita versión mejorada.<br>4. Cierra con checklist de control.</div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="m-ds-prompts" class="ag-content">
+    <div class="section-card animate-in">
+      <h3 style="color:#818cf8; margin-top:0;">🧠 Prompts Maestros para DeepSeek R1</h3>
+      <div class="m-ds-grid-2" style="margin-top:18px;">
+        <div class="m-ds-panel">
+          <h4>Debugging serio</h4>
+          <div style="font-size:0.78rem; color:#c4b5fd; line-height:1.7; background:rgba(0,0,0,0.2); border:1px solid rgba(99,102,241,0.18); border-radius:10px; padding:12px;">Analiza este código como auditor técnico. Revisa variable por variable, identifica errores lógicos, explica por qué ocurren y entrega versión corregida con criterio de validación.</div>
+        </div>
+        <div class="m-ds-panel">
+          <h4>Comparar opciones</h4>
+          <div style="font-size:0.78rem; color:#c4b5fd; line-height:1.7; background:rgba(0,0,0,0.2); border:1px solid rgba(99,102,241,0.18); border-radius:10px; padding:12px;">Compara estas alternativas con una matriz de costo, riesgo, tiempo, complejidad y reversibilidad. Luego recomienda una opción y justifica el porqué.</div>
+        </div>
+        <div class="m-ds-panel">
+          <h4>Auditar procedimiento</h4>
+          <div style="font-size:0.78rem; color:#c4b5fd; line-height:1.7; background:rgba(0,0,0,0.2); border:1px solid rgba(99,102,241,0.18); border-radius:10px; padding:12px;">Lee este procedimiento paso a paso, detecta ambigüedades, puntos de fallo y decisiones mal definidas. Después reescríbelo en una versión más robusta.</div>
+        </div>
+        <div class="m-ds-panel">
+          <h4>Resolver con validación</h4>
+          <div style="font-size:0.78rem; color:#c4b5fd; line-height:1.7; background:rgba(0,0,0,0.2); border:1px solid rgba(99,102,241,0.18); border-radius:10px; padding:12px;">Resuelve este problema y al final valida tu respuesta con un caso de prueba, chequeo lógico o ejemplo concreto para confirmar que no hay inconsistencias.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="m-ds-antipatterns" class="ag-content">
+    <div class="section-card animate-in">
+      <h3 style="color:#818cf8; margin-top:0;">🚫 Errores al usar modelos de razonamiento</h3>
+      <div class="m-ds-grid-3" style="margin-top:18px;">
+        <div class="m-ds-panel"><h4>Pedir demasiado vago</h4><p class="m-ds-note">Sin problema claro, el modelo piensa mucho pero aterriza poco.</p></div>
+        <div class="m-ds-panel"><h4>No validar el resultado</h4><p class="m-ds-note">Que razone mejor no significa que nunca se equivoque.</p></div>
+        <div class="m-ds-panel"><h4>Usarlo para tareas triviales</h4><p class="m-ds-note">Pierdes tiempo y tokens donde bastaba un modelo más simple.</p></div>
+        <div class="m-ds-panel"><h4>No definir criterio</h4><p class="m-ds-note">Si no sabe qué optimizar, el razonamiento puede irse por la rama incorrecta.</p></div>
+        <div class="m-ds-panel"><h4>Confundir pensamiento con verdad</h4><p class="m-ds-note">El bloque de razonamiento ayuda, pero no reemplaza una validación externa.</p></div>
+        <div class="m-ds-panel"><h4>Olvidar el caso de prueba</h4><p class="m-ds-note">La verificación final es lo que convierte una buena respuesta en una respuesta confiable.</p></div>
       </div>
     </div>
   </div>

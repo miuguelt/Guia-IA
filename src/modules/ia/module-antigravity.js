@@ -5,100 +5,52 @@ window.GuiaModules['module-antigravity'] = (function() {
      Versión "Titan Supreme" — DNA v31.4 [ULTIMATE]
      ═══════════════════════════════════════════ */
   const agHTML = `
-<style>
-  :root {
-    --ag-primary: #58a6ff;
-    --ag-secondary: #00ff88;
-    --ag-bg-dark: #0d1117;
-    --ag-border: #30363d;
-    --ag-glass: rgba(255, 255, 255, 0.05);
-    --ag-accent: #f59e0b;
-    --ag-pink: #f43f5e;
-  }
-
-  .m-ag-container { color: #c9d1d9; font-family: 'Outfit', 'Inter', sans-serif; animation: fadeIn 0.5s ease; padding: 10px; }
-  .m-ag-card { 
-    background: rgba(22, 27, 34, 0.4); 
-    backdrop-filter: blur(20px); 
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-    border-radius: 16px; 
-    padding: 25px; 
-    margin-bottom: 20px; 
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-    position: relative; 
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  }
-  .m-ag-card:hover { 
-    border-color: rgba(88, 166, 255, 0.4); 
-    box-shadow: 0 12px 40px rgba(0,0,0,0.5); 
-    transform: translateY(-2px);
-  }
-
-  /* Roadmap Styling */
-  .roadmap-item { opacity: 0; transform: translateY(20px); animation: slideInUp 0.6s forwards; }
-  .roadmap-item:nth-child(1) { animation-delay: 0.1s; }
-  .roadmap-item:nth-child(2) { animation-delay: 0.2s; }
-  .roadmap-item:nth-child(3) { animation-delay: 0.3s; }
-  .roadmap-item:nth-child(4) { animation-delay: 0.4s; }
-  .roadmap-item:nth-child(5) { animation-delay: 0.5s; }
-
-  @keyframes slideInUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Tabs Bar Premium - Usando dna_theme.css */
-  .premium-tab { 
-    background: none; 
-    border: none; 
-    padding: 12px 15px; 
-    color: rgba(139, 148, 158, 0.7); 
-    cursor: pointer; 
-    border-bottom: 3px solid transparent; 
-    transition: 0.3s; 
-    font-weight: 700; 
-    white-space: nowrap; 
-    font-size: 0.75rem; 
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .premium-tab.active { 
-    color: var(--ag-primary); 
-    border-bottom-color: var(--ag-primary); 
-    background: rgba(88, 166, 255, 0.08); 
-    text-shadow: 0 0 10px rgba(88, 166, 255, 0.3);
-  }
-
-  .ag-content { display: none; min-height: 450px; }
-  .ag-content.active { display: block; animation: slideUp 0.4s ease; }
-
-  @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-  /* Componentes Específicos */
-  .m-ag-terminal { background: #010409; border: 1px solid var(--ag-border); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; padding: 15px; color: #3fb950; min-height: 180px; overflow-y: auto; margin-top: 15px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); }
-  
-  .ag-btn-glow { 
-    background: linear-gradient(135deg, #1f6feb 0%, #58a6ff 100%); 
-    color: white; border: none; padding: 12px 24px; border-radius: 8px;
-    font-weight: 700; cursor: pointer; transition: 0.3s; width: 100%; margin-top: 15px;
-    text-transform: uppercase; letter-spacing: 1px; display: block;
-  }
-  .ag-btn-glow:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(88,166,255,0.5); }
-
-  /* Grid Layouts */
-  .m-ag-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-  @media (max-width: 768px) { .m-ag-grid-2 { grid-template-columns: 1fr; } }
-</style>
-
-<div class="m-ag-container">
-  <div class="module-header premium-header" style="border: 1px solid rgba(88,166,255,0.3); background: rgba(88,166,255,0.02);">
-    <div class="module-number gamer-badge" style="background:var(--ag-primary);color:#000;">TITAN SUPREME</div>
-    <h2 class="module-title glow-text">🛡️ <span style="color:#58a6ff;">Antigravity Academy:</span> El Ojo del Titán</h2>
+  const agHTML = `
+<div class="m-ag-container" style="--ag-primary: var(--primary); --ag-secondary: var(--success); --ag-accent: var(--warning);">
+  <div class="module-header premium-header">
+    <div class="module-number gamer-badge">TITAN SUPREME</div>
+    <h2 class="module-title glow-text">🛡️ <span style="color:var(--primary);">Antigravity Academy:</span> El Ojo del Titán</h2>
     <p class="module-description">Construye orquestaciones perfectas y audita tu constitución para la soberanía total.</p>
+  </div>
+
+  <div class="m-ag-hero glass-card">
+    <div style="font-size:0.76rem; font-weight:800; color:var(--primary-light); margin-bottom:8px;">MAPA MENTAL DEL MÓDULO</div>
+    <h3 style="margin:0 0 8px; color:#fff;">Antigravity no enseña a “hablar con IA”; enseña a gobernar agentes.</h3>
+    <p style="margin:0; color:var(--text-main); line-height:1.8; opacity:0.9;">La diferencia importante es esta: un chat responde; un agente ejecuta dentro de límites, herramientas y memoria. Por eso este módulo no va de prompts bonitos, sino de constituciones, workflows, handoffs, auditoría y trazabilidad.</p>
+    <div class="m-ag-chip-row">
+      <span class="m-ag-chip">Constituciones</span>
+      <span class="m-ag-chip">Herramientas MCP</span>
+      <span class="m-ag-chip">Workflows</span>
+      <span class="m-ag-chip">Auditoría</span>
+      <span class="m-ag-chip">Handoffs</span>
+      <span class="m-ag-chip">Trazabilidad</span>
+    </div>
   </div>
 
   <div class="ag-tabs">
     <button class="premium-tab active" data-tab="tab-stepbystep">🛤️ Paso a Paso</button>
     <button class="premium-tab" data-tab="tab-concept">📚 Conceptos</button>
+    <button class="premium-tab" data-tab="tab-mcp">🔌 MCP Tools</button>
+    <button class="premium-tab" data-tab="tab-cases">🧭 Casos</button>
+    <button class="premium-tab" data-tab="tab-config">🗂️ Configuración</button>
+    <button class="premium-tab" data-tab="tab-vguide">🖼️ Guía Visual</button>
+    <button class="premium-tab" data-tab="tab-wb">⛓️ Constructor</button>
+    <button class="premium-tab" data-tab="tab-audit">🛡️ Auditoría</button>
+    <button class="premium-tab" data-tab="tab-handoff">🧬 Handoff</button>
+    <button class="premium-tab" data-tab="tab-lab">⚡ Laboratorio</button>
+    <button class="premium-tab" data-tab="tab-rgen">🛠️ Generador</button>
+    <button class="premium-tab" data-tab="tab-projects">🌐 Proyectos</button>
+    <button class="premium-tab" data-tab="tab-ref">📖 Referencia</button>
+    <button class="premium-tab" data-tab="tab-workshop">🏆 Reto Final</button>
+    <button class="premium-tab" data-tab="tab-estrategia">🎯 Estrategia Real</button>
+  </div>
+
+  </div>
+
+  <div class="ag-tabs">
+    <button class="premium-tab active" data-tab="tab-stepbystep">🛤️ Paso a Paso</button>
+    <button class="premium-tab" data-tab="tab-concept">📚 Conceptos</button>
+    <button class="premium-tab" data-tab="tab-mcp">🔌 MCP Tools</button>
     <button class="premium-tab" data-tab="tab-cases">🧭 Casos</button>
     <button class="premium-tab" data-tab="tab-config">🗂️ Configuración</button>
     <button class="premium-tab" data-tab="tab-vguide">🖼️ Guía Visual</button>
@@ -206,6 +158,20 @@ window.GuiaModules['module-antigravity'] = (function() {
           <h4 style="margin:0 0 8px; color:#c9d1d9;">Ejemplo simple</h4>
           <p style="font-size:0.8rem; color:#8b949e; margin:0;">Tarea normal con chat: “resume este PDF”. Tarea de agente: “lee el PDF, identifica riesgos, clasifícalos por prioridad, y entrega una tabla ejecutiva siguiendo este formato y estas reglas”. Ese salto es lo que enseña este módulo.</p>
         </div>
+        <div class="m-ag-grid-3" style="margin-top:16px;">
+          <div class="m-ag-panel">
+            <h4 style="margin:0 0 8px; color:#fff;">Piensa en roles</h4>
+            <p style="margin:0; font-size:0.8rem; color:#8b949e;">Un agente funciona mejor cuando sabe quién es, qué puede hacer y qué no debe tocar.</p>
+          </div>
+          <div class="m-ag-panel">
+            <h4 style="margin:0 0 8px; color:#fff;">Piensa en etapas</h4>
+            <p style="margin:0; font-size:0.8rem; color:#8b949e;">Investigar, analizar, ejecutar y cerrar no deberían mezclarse sin control.</p>
+          </div>
+          <div class="m-ag-panel">
+            <h4 style="margin:0 0 8px; color:#fff;">Piensa en pruebas</h4>
+            <p style="margin:0; font-size:0.8rem; color:#8b949e;">Si una regla no puede validarse con ejemplos reales, aún no está lista para producción.</p>
+          </div>
+        </div>
     </div>
   </div>
 
@@ -235,6 +201,7 @@ window.GuiaModules['module-antigravity'] = (function() {
             <button class="gl-btn gl-btn-outline" onclick="mAgSimT('shell_execute', 'git commit -m \\'Fix sovereignty\\'')">💻 Probar Shell</button>
             <button class="gl-btn gl-btn-outline" onclick="mAgSimT('web_search', 'Brave Search: Current weather')">🔍 Probar Search</button>
         </div>
+        <div class="m-ag-note" style="margin-top:16px;">La pregunta correcta no es “qué herramienta existe”, sino “qué herramienta reduce incertidumbre en este paso”. Si dependes de un archivo, una web o una acción real, necesitas una herramienta. Si solo transformas texto, probablemente no.</div>
     </div>
   </div>
 

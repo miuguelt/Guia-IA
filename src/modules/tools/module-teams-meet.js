@@ -6,6 +6,16 @@
   const teamsHTML = `
 <style>
   .m-tm-card { background: #1f1f1f; border: 1px solid #333; border-radius: 12px; padding: 15px; position: relative; overflow: hidden; margin-bottom: 20px;}
+  .m-tm-hero { background: linear-gradient(135deg, rgba(70,78,184,0.12), rgba(255,255,255,0.03)); border: 1px solid rgba(70,78,184,0.24); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
+  .m-tm-chip-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+  .m-tm-chip { padding:7px 12px; border-radius:999px; background:rgba(70,78,184,0.08); border:1px solid rgba(70,78,184,0.18); color:#c7d2fe; font-size:0.72rem; font-weight:700; }
+  .m-tm-grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .m-tm-grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .m-tm-panel { background:rgba(255,255,255,0.03); border:1px solid rgba(70,78,184,0.14); border-radius:12px; padding:18px; }
+  .m-tm-panel h4 { margin:0 0 8px; color:#fff; }
+  .m-tm-note { font-size:0.8rem; color:#cbd5e1; line-height:1.8; }
+  .m-tm-step { position:relative; padding:16px 16px 16px 52px; border-radius:12px; border:1px solid rgba(70,78,184,0.16); background:rgba(255,255,255,0.02); }
+  .m-tm-step-badge { position:absolute; left:14px; top:14px; width:24px; height:24px; border-radius:50%; background:#464eb8; color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:0.72rem; }
   
   .m-tm-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; height: 350px; }
   
@@ -41,7 +51,7 @@
   .m-tm-pulse { width: 8px; height: 8px; background: #a972ff; border-radius: 50%; display: inline-block; animation: pulse 1.5s infinite;}
   
   @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(169,114,255,0.7); } 70% { box-shadow: 0 0 0 5px rgba(169,114,255,0); } 100% { box-shadow: 0 0 0 0 rgba(169,114,255,0); } }
-
+  @media (max-width:900px){ .m-tm-grid-2,.m-tm-grid-3 { grid-template-columns:1fr; } }
 </style>
 
 <div class="module-header premium-header" style="background: linear-gradient(135deg, rgba(70,78,184,0.1), rgba(10,10,10,0.5)); border: 1px solid rgba(70,78,184,0.3);">
@@ -55,10 +65,26 @@
   </div>
 </div>
 
+<div class="m-tm-hero">
+  <h3 style="margin:0 0 8px; color:#fff;">La idea central de IA en reuniones</h3>
+  <p class="m-tm-note" style="margin:0;">Teams con Copilot y Meet con Gemini no valen solo por “transcribir”. Su valor real está en <strong>convertir conversación en memoria, decisiones, tareas y seguimiento</strong>. Una reunión bien asistida por IA deja menos ambigüedad y menos trabajo invisible después.</p>
+  <div class="m-tm-chip-row">
+    <span class="m-tm-chip">Transcripción</span>
+    <span class="m-tm-chip">Recap</span>
+    <span class="m-tm-chip">Action items</span>
+    <span class="m-tm-chip">Minutas</span>
+    <span class="m-tm-chip">Seguimiento</span>
+    <span class="m-tm-chip">Resumen ejecutivo</span>
+  </div>
+</div>
+
 <div class="ag-tabs game-tabs" style="margin-bottom:28px;">
   <button class="tab-btn active" data-tab="m-tm-concept">📚 El Fin del Secretario</button>
+  <button class="tab-btn" data-tab="m-tm-decider">🧭 Cuándo Activarla</button>
   <button class="tab-btn" data-tab="m-tm-lab">✨ Simulador de Llamada</button>
   <button class="tab-btn" data-tab="m-tm-cases">🧭 Casos Prácticos</button>
+  <button class="tab-btn" data-tab="m-tm-prompts">🧠 Prompts</button>
+  <button class="tab-btn" data-tab="m-tm-antipatterns">🚫 Errores</button>
   <button class="tab-btn" data-tab="m-tm-estrategia">🎯 Estrategia Real</button>
   <button class="tab-btn" data-tab="m-tm-mission">🏆 Reto Final</button>
 </div>
@@ -81,6 +107,35 @@
         <p style="font-size:0.85rem;color:#cbd5e1;margin:0;">Alguien dice: *"Ana, envíame el reporte para el viernes"*. La IA anota en segundo plano. Al final, genera un acta de reunión con la tarea y se la asigna a Ana en Planner de manera automática.</p>
       </div>
       
+    </div>
+  </div>
+</div>
+
+<div id="m-tm-decider" class="ag-content">
+  <div class="section-card animate-in">
+    <h3><span class="icon">🧭</span> Cuándo vale la pena usar IA en reuniones</h3>
+    <div class="m-tm-grid-2" style="margin-top:18px;">
+      <div class="m-tm-panel">
+        <h4>Úsala cuando...</h4>
+        <p class="m-tm-note">Hay decisiones, compromisos, personas ausentes, temas complejos o necesidad de dejar trazabilidad clara.</p>
+      </div>
+      <div class="m-tm-panel">
+        <h4>No alcanza por sí sola cuando...</h4>
+        <p class="m-tm-note">La reunión es caótica, la gente no verbaliza responsables o nadie define fechas ni acuerdos concretos.</p>
+      </div>
+      <div class="m-tm-panel">
+        <h4>Se vuelve muy útil si...</h4>
+        <p class="m-tm-note">Terminas la sesión con resumen ejecutivo, action items y mensaje de seguimiento listo para enviar.</p>
+      </div>
+      <div class="m-tm-panel">
+        <h4>Pierde valor si...</h4>
+        <p class="m-tm-note">Solo acumulas transcripción sin convertirla en decisiones, tareas y responsables verificables.</p>
+      </div>
+    </div>
+    <div class="m-tm-grid-3" style="margin-top:16px;">
+      <div class="m-tm-step"><div class="m-tm-step-badge">1</div><h4 style="margin:0 0 6px; color:#fff;">Captura</h4><p class="m-tm-note" style="margin:0;">Activa transcripción y asegúrate de que la conversación quede registrada.</p></div>
+      <div class="m-tm-step"><div class="m-tm-step-badge">2</div><h4 style="margin:0 0 6px; color:#fff;">Extrae</h4><p class="m-tm-note" style="margin:0;">Convierte la conversación en acuerdos, responsables, riesgos y próximos pasos.</p></div>
+      <div class="m-tm-step"><div class="m-tm-step-badge">3</div><h4 style="margin:0 0 6px; color:#fff;">Acciona</h4><p class="m-tm-note" style="margin:0;">Envía la minuta, alimenta tareas y comparte el resumen con quien decide.</p></div>
     </div>
   </div>
 </div>
@@ -170,6 +225,44 @@
         <p style="font-size:0.78rem; color:#94a3b8;">Convierte una reunión de crisis en un mensaje breve y profesional listo para correo o Teams.</p>
         <div style="font-size:0.76rem; color:#cbd5e1; line-height:1.8;">1. Usa la misma transcripción.<br>2. Pega prompt ejecutivo.<br>3. Ajusta tono formal.<br>4. Copia y comparte.</div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div id="m-tm-prompts" class="ag-content">
+  <div class="section-card animate-in">
+    <h3 style="color:#a5b4fc; margin-top:0;">🧠 Prompts Maestros para reuniones con IA</h3>
+    <div class="m-tm-grid-2" style="margin-top:18px;">
+      <div class="m-tm-panel">
+        <h4>Tabla de compromisos</h4>
+        <div style="font-size:0.78rem; color:#c4b5fd; line-height:1.7; background:rgba(0,0,0,0.2); border:1px solid rgba(70,78,184,0.18); border-radius:10px; padding:12px;">Genera una tabla con Responsable | Tarea | Fecha límite | Riesgo si no se cumple, usando solo la transcripción de esta reunión.</div>
+      </div>
+      <div class="m-tm-panel">
+        <h4>Resumen ejecutivo</h4>
+        <div style="font-size:0.78rem; color:#c4b5fd; line-height:1.7; background:rgba(0,0,0,0.2); border:1px solid rgba(70,78,184,0.18); border-radius:10px; padding:12px;">Resume esta reunión en máximo 5 líneas para un directivo ocupado. Incluye qué pasó, qué se decidió y qué sigue.</div>
+      </div>
+      <div class="m-tm-panel">
+        <h4>Recap para quien llegó tarde</h4>
+        <div style="font-size:0.78rem; color:#c4b5fd; line-height:1.7; background:rgba(0,0,0,0.2); border:1px solid rgba(70,78,184,0.18); border-radius:10px; padding:12px;">Explícame en lenguaje claro qué me perdí hasta ahora, qué decisiones se tomaron y si hay algo que debo responder o validar.</div>
+      </div>
+      <div class="m-tm-panel">
+        <h4>Detección de vacíos</h4>
+        <div style="font-size:0.78rem; color:#c4b5fd; line-height:1.7; background:rgba(0,0,0,0.2); border:1px solid rgba(70,78,184,0.18); border-radius:10px; padding:12px;">Analiza esta reunión y dime qué decisiones quedaron ambiguas, qué responsables no quedaron claros y qué preguntas faltó responder.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="m-tm-antipatterns" class="ag-content">
+  <div class="section-card animate-in">
+    <h3 style="color:#a5b4fc; margin-top:0;">🚫 Errores que vuelven inútil la IA en reuniones</h3>
+    <div class="m-tm-grid-3" style="margin-top:18px;">
+      <div class="m-tm-panel"><h4>No activar la transcripción</h4><p class="m-tm-note">Sin texto base, el copiloto tiene muy poco con qué trabajar.</p></div>
+      <div class="m-tm-panel"><h4>No verbalizar responsables</h4><p class="m-tm-note">Si nadie dice quién hace qué, la IA no puede inventar buena gobernanza.</p></div>
+      <div class="m-tm-panel"><h4>No cerrar fechas</h4><p class="m-tm-note">“Luego lo vemos” produce actas bonitas pero poco accionables.</p></div>
+      <div class="m-tm-panel"><h4>Pedir solo resumen</h4><p class="m-tm-note">A veces lo importante no es resumir, sino extraer compromisos y riesgos.</p></div>
+      <div class="m-tm-panel"><h4>No revisar el acta</h4><p class="m-tm-note">La IA acelera mucho, pero sigue valiendo la pena una validación rápida del facilitador.</p></div>
+      <div class="m-tm-panel"><h4>No convertir salida en seguimiento</h4><p class="m-tm-note">Una buena minuta sin tareas ni mensajes posteriores se enfría demasiado rápido.</p></div>
     </div>
   </div>
 </div>

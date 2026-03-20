@@ -9,6 +9,16 @@ window.GuiaModules['module-notebooklm'] = (function() {
 <style>
   .m-nlm-card { background: #fdfbf7; border: 1px solid #e2e8f0; border-radius: 12px; padding: 25px; position: relative; overflow: hidden; margin-bottom: 20px;}
   .m-nlm-header-bg { position: absolute; top:0; left:0; width:100%; height:80px; background: linear-gradient(180deg, rgba(251,191,36,0.1) 0%, transparent 100%); pointer-events:none; }
+  .m-nlm-hero { background: linear-gradient(135deg, rgba(251,191,36,0.12), rgba(255,255,255,0.04)); border: 1px solid rgba(251,191,36,0.25); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
+  .m-nlm-chip-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+  .m-nlm-chip { padding:7px 12px; border-radius:999px; background:rgba(255,255,255,0.06); border:1px solid rgba(251,191,36,0.18); color:#fef3c7; font-size:0.72rem; font-weight:700; }
+  .m-nlm-grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .m-nlm-grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .m-nlm-panel { background:rgba(255,255,255,0.03); padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.08); }
+  .m-nlm-panel h4 { margin:0 0 8px; color:#f8fafc; }
+  .m-nlm-note { font-size:0.8rem; color:#cbd5e1; line-height:1.8; }
+  .m-nlm-step { position:relative; padding:16px 16px 16px 52px; border-radius:12px; border:1px solid rgba(251,191,36,0.14); background:rgba(255,255,255,0.02); }
+  .m-nlm-step-badge { position:absolute; left:14px; top:14px; width:24px; height:24px; border-radius:50%; background:#f59e0b; color:#000; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:0.72rem; }
   
   .m-nlm-layout { display: flex; gap: 20px; margin-top: 15px; flex-wrap: wrap; }
   
@@ -46,6 +56,7 @@ window.GuiaModules['module-notebooklm'] = (function() {
   .m-nlm-input-area { display: flex; gap: 10px; margin-top: 15px; border-top: 1px solid #e2e8f0; padding-top: 15px;}
   .m-nlm-input { flex: 1; border: 1px solid #cbd5e1; border-radius: 20px; padding: 10px 15px; outline: none; transition: 0.2s; }
   .m-nlm-input:focus { border-color: #fbbf24; }
+  @media (max-width:900px){ .m-nlm-grid-2,.m-nlm-grid-3 { grid-template-columns:1fr; } }
 </style>
 
 <div class="module-header premium-header" style="background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(255,255,255,0.05)); border: 1px solid rgba(251,191,36,0.3);">
@@ -59,10 +70,25 @@ window.GuiaModules['module-notebooklm'] = (function() {
   </div>
 </div>
 
+<div class="m-nlm-hero">
+  <h3 style="margin:0 0 8px; color:#f8fafc;">La idea central de NotebookLM</h3>
+  <p class="m-nlm-note" style="margin:0;">NotebookLM no sirve para “saber de todo”. Sirve para <strong>pensar mejor con un conjunto cerrado de fuentes</strong>. Cuando lo entiendes así, deja de ser un simple chatbot y se convierte en tu sala de lectura aumentada.</p>
+  <div class="m-nlm-chip-row">
+    <span class="m-nlm-chip">Fuentes cerradas</span>
+    <span class="m-nlm-chip">Citas verificables</span>
+    <span class="m-nlm-chip">Resumen multifuente</span>
+    <span class="m-nlm-chip">Audio Overview</span>
+    <span class="m-nlm-chip">Menos alucinación</span>
+  </div>
+</div>
+
 <div class="ag-tabs game-tabs" style="margin-bottom:28px;">
   <button class="tab-btn active" data-tab="m-nlm-concept">📚 RAG vs Prompting</button>
+  <button class="tab-btn" data-tab="m-nlm-decider">🧭 Cuándo Usarlo</button>
   <button class="tab-btn" data-tab="m-nlm-lab">✨ Simulador Notebook</button>
   <button class="tab-btn" data-tab="m-nlm-cases">🧭 Casos Prácticos</button>
+  <button class="tab-btn" data-tab="m-nlm-prompts">🧠 Prompts</button>
+  <button class="tab-btn" data-tab="m-nlm-antipatterns">🚫 Errores</button>
   <button class="tab-btn" data-tab="m-nlm-estrategia">🎯 Estrategia Real</button>
   <button class="tab-btn" data-tab="m-nlm-mission">🏆 Reto Final</button>
 </div>
@@ -85,6 +111,35 @@ window.GuiaModules['module-notebooklm'] = (function() {
         <p style="font-size:0.85rem;color:#cbd5e1;margin:0;">No hay cabida a la alucinación. Si le preguntas "¿Cuál es la norma de permisos?", te responde con el texto y un número clickeable. Haces clic y salta a la página exacta del PDF.</p>
       </div>
 
+    </div>
+  </div>
+</div>
+
+<div id="m-nlm-decider" class="ag-content">
+  <div class="section-card animate-in">
+    <h3><span class="icon">🧭</span> Cuándo usar NotebookLM y cuándo no</h3>
+    <div class="m-nlm-grid-2" style="margin-top:18px;">
+      <div class="m-nlm-panel">
+        <h4>Úsalo cuando...</h4>
+        <p class="m-nlm-note">Tienes PDFs, normas, contratos, manuales, presentaciones, transcripciones o enlaces concretos y necesitas respuestas ancladas a evidencia.</p>
+      </div>
+      <div class="m-nlm-panel">
+        <h4>No es la mejor opción cuando...</h4>
+        <p class="m-nlm-note">Necesitas creatividad abierta, brainstorming libre o conocimiento general que no depende de tus fuentes cargadas.</p>
+      </div>
+      <div class="m-nlm-panel">
+        <h4>Se vuelve brillante si...</h4>
+        <p class="m-nlm-note">Subes fuentes del mismo tema, haces preguntas comparativas y obligas a que todo quede citado.</p>
+      </div>
+      <div class="m-nlm-panel">
+        <h4>Pierde valor si...</h4>
+        <p class="m-nlm-note">Subes documentos desordenados, mezclas temas distintos o pides respuestas vagas sin formato de salida.</p>
+      </div>
+    </div>
+    <div class="m-nlm-grid-3" style="margin-top:16px;">
+      <div class="m-nlm-step"><div class="m-nlm-step-badge">1</div><h4 style="margin:0 0 6px; color:#f8fafc;">Define el tema</h4><p class="m-nlm-note" style="margin:0;">Cada cuaderno debe tener una pregunta rectora clara.</p></div>
+      <div class="m-nlm-step"><div class="m-nlm-step-badge">2</div><h4 style="margin:0 0 6px; color:#f8fafc;">Curar fuentes</h4><p class="m-nlm-note" style="margin:0;">Pocas fuentes buenas valen más que veinte irrelevantes.</p></div>
+      <div class="m-nlm-step"><div class="m-nlm-step-badge">3</div><h4 style="margin:0 0 6px; color:#f8fafc;">Exigir evidencia</h4><p class="m-nlm-note" style="margin:0;">Pide siempre cita, vacío encontrado y punto a revisar.</p></div>
     </div>
   </div>
 </div>
@@ -203,6 +258,54 @@ window.GuiaModules['module-notebooklm'] = (function() {
       <strong style="color:#86efac;">Cómo saber si lo usaste bien:</strong>
       <div style="margin-top:6px; font-size:0.8rem; color:#cbd5e1; line-height:1.7;">
         Un buen resultado en NotebookLM siempre tiene trazabilidad. Si la respuesta no cita o no puedes abrir la evidencia, vuelve a pedir que fundamente cada afirmación.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="m-nlm-prompts" class="ag-content">
+  <div class="section-card animate-in">
+    <h3 style="color:#fbbf24; margin-top:0;">🧠 Prompts Maestros para NotebookLM</h3>
+    <div class="m-nlm-grid-2" style="margin-top:18px;">
+      <div class="m-nlm-panel">
+        <h4>Resumen ejecutivo con cita</h4>
+        <div class="kit-copyblock">Usa únicamente las fuentes cargadas para construir un resumen ejecutivo de máximo 180 palabras. Incluye: 1) tema central, 2) hallazgos más importantes, 3) riesgo o vacío detectado, 4) siguiente paso recomendado. Cita cada afirmación importante.</div>
+        <button class="kit-copy-btn" style="margin-top:10px;" onclick="nlmCopyAsset(this, 'Usa únicamente las fuentes cargadas para construir un resumen ejecutivo de máximo 180 palabras. Incluye: 1) tema central, 2) hallazgos más importantes, 3) riesgo o vacío detectado, 4) siguiente paso recomendado. Cita cada afirmación importante.')">📋 Copiar</button>
+      </div>
+      <div class="m-nlm-panel">
+        <h4>Comparar fuentes</h4>
+        <div class="kit-copyblock">Compara las fuentes cargadas y sepáralas en tres bloques: coincidencias, contradicciones y vacíos. Para cada punto, indica la fuente o cita que lo respalda.</div>
+        <button class="kit-copy-btn" style="margin-top:10px;" onclick="nlmCopyAsset(this, 'Compara las fuentes cargadas y sepáralas en tres bloques: coincidencias, contradicciones y vacíos. Para cada punto, indica la fuente o cita que lo respalda.')">📋 Copiar</button>
+      </div>
+      <div class="m-nlm-panel">
+        <h4>Estudio guiado</h4>
+        <div class="kit-copyblock">Convierte estas fuentes en una guía de estudio. Necesito: conceptos clave, explicación simple, 5 preguntas de repaso y 3 errores frecuentes de interpretación. Todo respaldado por las fuentes.</div>
+        <button class="kit-copy-btn" style="margin-top:10px;" onclick="nlmCopyAsset(this, 'Convierte estas fuentes en una guía de estudio. Necesito: conceptos clave, explicación simple, 5 preguntas de repaso y 3 errores frecuentes de interpretación. Todo respaldado por las fuentes.')">📋 Copiar</button>
+      </div>
+      <div class="m-nlm-panel">
+        <h4>Preparar decisión</h4>
+        <div class="kit-copyblock">Con base en estas fuentes, dime: 1) qué ya sabemos, 2) qué no sabemos todavía, 3) qué decisión podríamos tomar hoy, 4) qué parte debe verificarse de nuevo en el documento original.</div>
+        <button class="kit-copy-btn" style="margin-top:10px;" onclick="nlmCopyAsset(this, 'Con base en estas fuentes, dime: 1) qué ya sabemos, 2) qué no sabemos todavía, 3) qué decisión podríamos tomar hoy, 4) qué parte debe verificarse de nuevo en el documento original.')">📋 Copiar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="m-nlm-antipatterns" class="ag-content">
+  <div class="section-card animate-in">
+    <h3 style="color:#fbbf24; margin-top:0;">🚫 Errores que hacen que NotebookLM parezca menos útil</h3>
+    <div class="m-nlm-grid-3" style="margin-top:18px;">
+      <div class="m-nlm-panel"><h4>Subir fuentes mezcladas</h4><p class="m-nlm-note">Un cuaderno con temas distintos genera respuestas confusas y menos profundas.</p></div>
+      <div class="m-nlm-panel"><h4>No pedir cita</h4><p class="m-nlm-note">Si no exiges evidencia, desaprovechas su principal ventaja frente a un chat común.</p></div>
+      <div class="m-nlm-panel"><h4>Querer creatividad abierta</h4><p class="m-nlm-note">NotebookLM es fuerte en grounding documental, no en exploración libre sin fuentes.</p></div>
+      <div class="m-nlm-panel"><h4>No revisar vacíos</h4><p class="m-nlm-note">Lo más valioso a veces no es lo que responde, sino lo que demuestra que falta.</p></div>
+      <div class="m-nlm-panel"><h4>Usarlo como lector pasivo</h4><p class="m-nlm-note">No te quedes en el resumen. Pregunta, compara, cuestiona y convierte el audio en acción.</p></div>
+      <div class="m-nlm-panel"><h4>No separar cuadernos por objetivo</h4><p class="m-nlm-note">Un cuaderno por problema suele funcionar mejor que un gran repositorio amorfo.</p></div>
+    </div>
+    <div class="kit-result-box">
+      <strong style="color:#86efac;">Señal de buen uso:</strong>
+      <div style="margin-top:6px; font-size:0.8rem; color:#cbd5e1; line-height:1.7;">
+        Terminas con una respuesta verificable, una cita reutilizable y una mejor comprensión del material, no solo con un resumen bonito.
       </div>
     </div>
   </div>

@@ -682,26 +682,44 @@ class GuiaIA {
   analyzePromptSovereign(promptText) {
     const text = promptText.toLowerCase();
     const criteria = {
-      c: text.length > 40 || /oficina|entidad|departamento|situación|sector/i.test(text),
-      r: /eres|actúa|experto|especialista|asistente|redactor/i.test(text),
-      e: /necesito|tarea|haz|resume|crea|redacta|genera/i.test(text),
-      a: /tabla|lista|formato|tono|puntos|markdown/i.test(text)
+      c: /oficina|entidad|departamento|situación|sector|estamos|contexto|institucional/i.test(text) && text.length > 30,
+      r: /eres|actúa|experto|especialista|asistente|redactor|líder|coordinador|analista|audit/i.test(text),
+      e: /necesito|tarea|haz|resume|crea|redacta|genera|identifica|analiza|propón/i.test(text),
+      a: /tabla|lista|formato|tono|puntos|markdown|csv|viñetas|párrafos|profesional|formal/i.test(text)
     };
 
     let score = 0;
     let feedback = [];
-    if (criteria.c) score += 25; else feedback.push("Falta <b>Contexto</b>");
-    if (criteria.r) score += 25; else feedback.push("Falta un <b>Rol</b>");
-    if (criteria.e) score += 25; else feedback.push("Falta <b>Ejecución</b>");
-    if (criteria.a) score += 25; else feedback.push("Falta <b>Acabado</b>");
+    
+    // C - Contexto
+    if (criteria.c) score += 25; 
+    else feedback.push("Define mejor el <b>Contexto</b>: ¿En qué oficina estás? ¿Cuál es el objetivo de fondo?");
+    
+    // R - Rol
+    if (criteria.r) score += 25; 
+    else feedback.push("Asigna un <b>Rol</b>: Dile a la IA quién debe ser (ej: Experto en Contratación).");
+    
+    // E - Especificación
+    if (criteria.e) score += 25; 
+    else feedback.push("Mejora la <b>Especificación</b>: Usa un verbo de acción claro (Resume, Analiza, etc).");
+    
+    // A - Acabado/Acción
+    if (criteria.a) score += 25; 
+    else feedback.push("Falta el <b>Acabado</b>: Define el formato de salida (ej: Tabla, Lista de puntos).");
 
     const spec = localStorage.getItem('guia-ia-specialization') || 'institucional';
-    const role = spec === 'institucional' ? 'especialista en administración pública' : 'consultor estratégico';
     
-    const optimized = `Actúa como un ${role}. 
-Contexto: Sector público / Área administrativa. 
-Tarea: ${promptText}. 
-Instrucción: Genera una respuesta técnica y estructurada.`;
+    // Simple logic to generate an "Optimized" version
+    let optimized = "";
+    if (score < 100) {
+      const rolePrefix = criteria.r ? "" : "Actúa como un Coordinador Administrativo experto en el sector público. ";
+      const contextPrefix = criteria.c ? "" : "En el contexto de una oficina gubernamental que busca eficiencia y transparencia, ";
+      const actionSuffix = criteria.a ? "" : " Presenta el resultado en una tabla comparativa clara y con tono profesional.";
+      
+      optimized = `${rolePrefix}${contextPrefix}${promptText}.${actionSuffix}`.replace(/\.\./g, '.');
+    } else {
+      optimized = promptText + "\n\n(Tu prompt ya es excelente, no requiere optimización inmediata)";
+    }
 
     return { score, feedback, optimized };
   }

@@ -30,6 +30,10 @@
   .m-gm-surface-icon { font-size:1.4rem; margin-bottom:10px; }
   .m-gm-mini { font-size:0.72rem; color:#cbd5e1; line-height:1.7; }
   .m-gm-promptbox { background:#070710; border:1px solid #31225e; border-radius:14px; padding:16px; }
+  .m-gm-tier { border-radius:16px; padding:18px; border:1px solid rgba(179,136,255,0.14); background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01)); }
+  .m-gm-tier-label { display:inline-block; padding:4px 10px; border-radius:999px; font-size:0.68rem; font-weight:800; letter-spacing:0.04em; margin-bottom:10px; }
+  .m-gm-play { border-radius:16px; padding:18px; border:1px solid rgba(179,136,255,0.16); background:rgba(255,255,255,0.02); }
+  .m-gm-play h4 { margin:0 0 8px; color:#fff; }
   @media (max-width:900px){ .m-gm-grid-2,.m-gm-grid-3 { grid-template-columns:1fr; } }
   @media (max-width:900px){ .m-gm-matrix { grid-template-columns:1fr; } }
 </style>
@@ -63,12 +67,15 @@
     <button class="tab-btn premium-tab-gm" data-tab="m-gm-gemas">💎 Gemas</button>
     <button class="tab-btn premium-tab-gm" data-tab="m-gm-build">🧪 AI Studio / Vertex</button>
     <button class="tab-btn premium-tab-gm" data-tab="m-gm-profiles">🧑‍💼 Perfiles</button>
+    <button class="tab-btn premium-tab-gm" data-tab="m-gm-plays">🎯 Playbooks</button>
     <button class="tab-btn premium-tab-gm" data-tab="m-gm-flows">⚙️ Flujos</button>
     <button class="tab-btn premium-tab-gm" data-tab="m-gm-ecosystem">🧩 Ecosistema Vivo</button>
     <button class="tab-btn premium-tab-gm" data-tab="m-gm-cases">🧭 Casos Prácticos</button>
     <button class="tab-btn premium-tab-gm" data-tab="m-gm-hidden">⚡ Usos Poco Obvios</button>
     <button class="tab-btn premium-tab-gm" data-tab="m-gm-prompts">🧠 Prompts Maestros</button>
     <button class="tab-btn premium-tab-gm" data-tab="m-gm-architectures">🏗️ Arquitecturas</button>
+    <button class="tab-btn premium-tab-gm" data-tab="m-gm-maturity">📈 Madurez</button>
+    <button class="tab-btn premium-tab-gm" data-tab="m-gm-antipatterns">🚫 Anti-Patrones</button>
     <button class="tab-btn premium-tab-gm" data-tab="m-gm-estrategia">🎯 Estrategia Real</button>
     <button class="tab-btn premium-tab-gm" data-tab="m-gm-mission">🏆 Reto Final</button>
   </div>
@@ -191,6 +198,43 @@
           <li>Querer una respuesta final cuando todavía falta definir formato, audiencia o tono.</li>
           <li>Usar Gemini para redactar todo desde cero en vez de darle material real para mejorar.</li>
         </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="m-gm-plays" class="ag-content">
+    <div class="m-gm-card">
+      <h3 style="margin:0 0 10px; color:#fff;">Playbooks por tipo de trabajo</h3>
+      <p class="m-gm-note">Esta pestaña traduce el ecosistema Google a rutas concretas. La pregunta deja de ser “qué hace Gemini” y pasa a ser “cómo lo usaría una persona real en su jornada”.</p>
+      <div class="m-gm-grid-3" style="margin-top:16px;">
+        <div class="m-gm-play">
+          <h4>Gerencia / coordinación</h4>
+          <div class="m-gm-route-line">Entrada: Gmail, Meet, Docs.<br>Transformación: Gemini resume, ordena, prioriza y prepara respuesta.<br>Salida: correo ejecutivo, minuta, tabla de compromisos.<br>Escala: Gema para seguimiento semanal.</div>
+        </div>
+        <div class="m-gm-play">
+          <h4>Docencia / formación</h4>
+          <div class="m-gm-route-line">Entrada: Docs, Classroom, YouTube, Drive.<br>Transformación: Gemini convierte contenido en material claro, rúbricas y preguntas.<br>Salida: guía, actividad, presentación o recap.<br>Escala: Gema docente o flujo con Forms.</div>
+        </div>
+        <div class="m-gm-play">
+          <h4>Análisis / control</h4>
+          <div class="m-gm-route-line">Entrada: Sheets, PDFs, Drive, Gemini App.<br>Transformación: detectar anomalías, resumir riesgos y armar hallazgos.<br>Salida: tabla ejecutiva, memo o tablero inicial.<br>Escala: BigQuery, Looker o Vertex.</div>
+        </div>
+        <div class="m-gm-play">
+          <h4>Comercial / servicio</h4>
+          <div class="m-gm-route-line">Entrada: Gmail, Forms, Meet, Sheets.<br>Transformación: clasificar necesidades, redactar propuestas y dar seguimiento.<br>Salida: correo, oferta, propuesta o checklist comercial.<br>Escala: AppSheet o Apps Script.</div>
+        </div>
+        <div class="m-gm-play">
+          <h4>Desarrollo / producto</h4>
+          <div class="m-gm-route-line">Entrada: AI Studio, Code Assist, Docs, Sheets.<br>Transformación: prototipar prompts, estructurar lógica, probar salidas.<br>Salida: PoC, especificación o flujo programable.<br>Escala: API, Vertex, Cloud Run.</div>
+        </div>
+        <div class="m-gm-play">
+          <h4>Trabajo en campo</h4>
+          <div class="m-gm-route-line">Entrada: Android, cámara, voz, Forms.<br>Transformación: capturar evidencia y convertirla en reporte o incidente.<br>Salida: acta, reporte, ticket o consolidado diario.<br>Escala: AppSheet + Sheets + automatización.</div>
+        </div>
+      </div>
+      <div class="m-gm-promptbox" style="margin-top:16px;">
+        <h4 style="margin:0 0 8px; color:#fff;">Regla transversal</h4>
+        <p class="m-gm-note" style="margin:0;">Empieza donde nace el contexto, transforma donde vive el entregable y escala solo cuando la secuencia ya demostró valor repetido.</p>
       </div>
     </div>
   </div>
@@ -574,6 +618,68 @@ Responde como si fueras arquitecto de solución.</pre>
         <div class="m-gm-step"><div class="m-gm-step-badge">I</div><h4 style="margin:0 0 6px; color:#fff;">Inicio</h4><p class="m-gm-note" style="margin:0;">El flujo arranca donde nace el problema real, no donde te gusta trabajar.</p></div>
         <div class="m-gm-step"><div class="m-gm-step-badge">II</div><h4 style="margin:0 0 6px; color:#fff;">Orquestación</h4><p class="m-gm-note" style="margin:0;">Cada producto hace una parte distinta: captar, interpretar, documentar, comunicar o escalar.</p></div>
         <div class="m-gm-step"><div class="m-gm-step-badge">III</div><h4 style="margin:0 0 6px; color:#fff;">Madurez</h4><p class="m-gm-note" style="margin:0;">El nivel avanzado consiste en pasar de ayuda puntual a capacidad institucional.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="m-gm-maturity" class="ag-content">
+    <div class="m-gm-card">
+      <h3 style="margin:0 0 10px; color:#fff;">Ruta de madurez: de usuario curioso a organización aumentada</h3>
+      <p class="m-gm-note">Esta ruta ayuda a entender en qué nivel está una persona o un equipo. La mayoría se queda en el nivel 1 o 2. El verdadero salto ocurre cuando Gemini deja de ser ayuda ocasional y se convierte en forma de trabajo.</p>
+      <div class="m-gm-grid-2" style="margin-top:16px;">
+        <div class="m-gm-tier">
+          <div class="m-gm-tier-label" style="background:rgba(96,165,250,0.14); color:#bfdbfe;">Nivel 1</div>
+          <h4 style="margin:0 0 8px; color:#fff;">Uso exploratorio</h4>
+          <p class="m-gm-note">Haces preguntas, pruebas ideas y pides resúmenes. Sirve para descubrir posibilidades, pero todavía no cambia el sistema de trabajo.</p>
+        </div>
+        <div class="m-gm-tier">
+          <div class="m-gm-tier-label" style="background:rgba(16,185,129,0.14); color:#a7f3d0;">Nivel 2</div>
+          <h4 style="margin:0 0 8px; color:#fff;">Uso productivo</h4>
+          <p class="m-gm-note">Gemini ya vive en Gmail, Docs, Meet o Sheets. Ahorras tiempo real y entregas mejor, pero dependes todavía de trabajo manual humano.</p>
+        </div>
+        <div class="m-gm-tier">
+          <div class="m-gm-tier-label" style="background:rgba(250,204,21,0.14); color:#fde68a;">Nivel 3</div>
+          <h4 style="margin:0 0 8px; color:#fff;">Uso sistematizado</h4>
+          <p class="m-gm-note">Creas Gemas, reutilizas prompts maestros, defines formatos y conviertes buenas prácticas en hábitos del equipo.</p>
+        </div>
+        <div class="m-gm-tier">
+          <div class="m-gm-tier-label" style="background:rgba(244,114,182,0.14); color:#fbcfe8;">Nivel 4</div>
+          <h4 style="margin:0 0 8px; color:#fff;">Uso escalado</h4>
+          <p class="m-gm-note">Pasas a AI Studio, Apps Script, AppSheet o Vertex. La IA ya no ayuda solo a una persona: se convierte en capacidad de proceso o producto.</p>
+        </div>
+      </div>
+      <div class="m-gm-card" style="margin-top:16px;">
+        <h4 style="margin:0 0 8px; color:#fff;">Cómo subir de nivel</h4>
+        <ul style="font-size:0.8rem; color:var(--gm-soft); line-height:1.9; padding-left:18px; margin:0;">
+          <li>Del 1 al 2: deja de pedir ideas abstractas y trabaja con correos, documentos, tablas y reuniones reales.</li>
+          <li>Del 2 al 3: estandariza lo que funciona con Gemas, prompts y estructuras repetibles.</li>
+          <li>Del 3 al 4: automatiza o integra lo que ya demostró valor en la práctica diaria.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="m-gm-antipatterns" class="ag-content">
+    <div class="m-gm-card">
+      <h3 style="margin:0 0 10px; color:#fff;">Anti-patrones: cómo desperdiciar Gemini sin darte cuenta</h3>
+      <p class="m-gm-note">Esta sección es importante porque muchas implementaciones fallan no por falta de capacidad del modelo, sino por malas decisiones de uso.</p>
+      <div class="m-gm-grid-3" style="margin-top:16px;">
+        <div class="m-gm-route"><h4>Usarlo fuera del contexto</h4><div class="m-gm-route-line">Copiar y pegar todo en un chat cuando ya estabas trabajando en Gmail, Docs o Sheets.</div></div>
+        <div class="m-gm-route"><h4>Confundir velocidad con valor</h4><div class="m-gm-route-line">Generar texto más rápido, pero sin mejorar la decisión, la claridad o el resultado final.</div></div>
+        <div class="m-gm-route"><h4>No definir salida</h4><div class="m-gm-route-line">Pedir ayuda sin decir si quieres correo, tabla, minuta, informe o recomendación ejecutiva.</div></div>
+        <div class="m-gm-route"><h4>Saltarse la verificación</h4><div class="m-gm-route-line">Aceptar la primera respuesta en temas sensibles, legales, financieros o estratégicos.</div></div>
+        <div class="m-gm-route"><h4>No capturar lo que funciona</h4><div class="m-gm-route-line">Resolver bien un caso hoy, pero no convertirlo en Gema, prompt reusable o flujo estándar.</div></div>
+        <div class="m-gm-route"><h4>Escalar demasiado pronto</h4><div class="m-gm-route-line">Querer API o Vertex antes de demostrar que el flujo funciona bien en trabajo humano real.</div></div>
+      </div>
+      <div class="m-gm-grid-2" style="margin-top:14px;">
+        <div class="m-gm-promptbox">
+          <h4 style="margin:0 0 8px; color:#fff;">Señal de mal uso</h4>
+          <p class="m-gm-note" style="margin:0;">“Gemini me responde bonito, pero igual tengo que rehacer casi todo”.</p>
+        </div>
+        <div class="m-gm-promptbox">
+          <h4 style="margin:0 0 8px; color:#fff;">Señal de buen uso</h4>
+          <p class="m-gm-note" style="margin:0;">“Gemini me deja más cerca de la decisión, el entregable o la acción siguiente”.</p>
+        </div>
       </div>
     </div>
   </div>

@@ -281,44 +281,63 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
 
       <!-- 2. LABORATORIO (SANDBOX) -->
       <div id="m2-lab-sandbox" class="ag-content">
-        <div class="section-card animate-in glass-card">
-          <div class="card-header-premium">
-            <span class="badge-premium">LAB</span>
-            <h3><span class="icon">🧪</span> Laboratorio de Prompts</h3>
-            <p>Experimenta aquí antes de ir a las herramientas reales. La IA analizará la calidad de tu instrucción.</p>
+        <div class="section-card animate-in glass-card" style="padding: 0; overflow: hidden; border: 1px solid rgba(var(--primary-rgb), 0.2);">
+          <div class="card-header-premium" style="background: linear-gradient(90deg, rgba(var(--primary-rgb), 0.1) 0%, transparent 100%); padding: 25px; border-bottom: 1px solid var(--glass-border);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div>
+                <span class="badge-premium" style="background: var(--primary); color: #fff; margin-bottom: 10px;">PROMPT REFINER v32.4</span>
+                <h3 style="margin: 0;"><span class="icon">🧠</span> Laboratorio de Alquimia</h3>
+                <p style="margin: 5px 0 0; opacity: 0.8; font-size: 0.9rem;">El "Copiloto" analizará los 4 vectores de tu instrucción usando el Método CREA.</p>
+              </div>
+              <div class="quality-gauge-premium" style="text-align: right;">
+                <div style="font-size: 0.7rem; font-weight: 800; color: var(--primary-light); letter-spacing: 1px; margin-bottom: 5px;">POTENCIA DE PROMPT</div>
+                <div id="promptQualityValue" style="font-size: 2rem; font-weight: 900; color: var(--primary);">0%</div>
+                <div class="gauge-track" style="width: 100px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; margin-top: 5px;">
+                  <div id="promptQualityBar" class="gauge-fill" style="width: 0%; height: 100%; background: var(--primary); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);"></div>
+                </div>
+              </div>
+            </div>
           </div>
           
-          <div class="sandbox-container-premium">
-            <div class="input-glow-wrapper">
-              <label class="premium-label">TU PROMPT:</label>
-              <textarea id="sandboxInput" class="premium-textarea" placeholder="Escribe aquí tu instrucción... (Ej: Hola, hazme un resumen de este texto)"></textarea>
-            </div>
-            
-            <div class="sandbox-controls">
-              <button id="testPromptBtn" class="gl-btn gl-btn-primary gl-btn-lux" type="button">
-                <span class="btn-icon">🚀</span> Analizar y Mejorar
-              </button>
-              <button id="clearSandboxBtn" class="gl-btn gl-btn-danger-soft" type="button">
-                <span class="btn-icon">🧹</span> Limpiar
-              </button>
-            </div>
-            
-            <div class="quality-gauge-container">
-              <div class="gauge-header">
-                <span class="gauge-label">POTENCIA DE PROMPT</span>
-                <span id="promptQualityValue" class="gauge-value">0%</span>
-              </div>
-              <div class="gauge-track">
-                <div id="promptQualityBar" class="gauge-fill" style="width: 0%"></div>
+          <div class="sandbox-inner" style="padding: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="input-zone">
+              <label class="premium-label" style="display: flex; align-items: center; gap: 8px; margin-bottom: 15px;">
+                <span style="background: var(--primary); width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #fff;">1</span>
+                TÚ ESCRIBES:
+              </label>
+              <div class="input-glow-wrapper" style="position: relative;">
+                <textarea id="sandboxInput" class="premium-textarea" style="width: 100%; min-height: 250px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 15px; color: #fff; padding: 20px; font-family: 'Inter', sans-serif; resize: none; transition: 0.3s;" placeholder="Ej: Hola, hazme un resumen de este texto para mi jefe..."></textarea>
+                <div class="textarea-actions" style="position: absolute; bottom: 15px; right: 15px; display: flex; gap: 10px;">
+                   <button id="clearSandboxBtn" class="gl-btn small" style="background: rgba(255,255,255,0.1); border: none;">🧹 Limpiar</button>
+                   <button id="testPromptBtn" class="gl-btn gl-btn-primary gl-btn-lux small" style="padding: 8px 20px;">
+                     <span class="btn-icon">🚀</span> Analizar
+                   </button>
+                </div>
               </div>
             </div>
-            
-            <div class="output-premium-wrapper">
-              <label class="premium-label-muted">RESULTADO DEL ANÁLISIS:</label>
-              <div id="sandboxOutput" class="sandbox-output-display">
-                <div class="empty-state-text">El resultado del "Copiloto" aparecerá aquí...</div>
+
+            <div class="output-zone">
+              <label class="premium-label" style="display: flex; align-items: center; gap: 8px; margin-bottom: 15px;">
+                <span style="background: var(--secondary); width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #fff;">2</span>
+                ANÁLISIS DEL COPILOTO:
+              </label>
+              <div id="sandboxOutput" class="output-premium-display" style="width: 100%; min-height: 250px; background: rgba(255,255,255,0.02); border: 1px dashed var(--glass-border); border-radius: 15px; padding: 20px; display: flex; align-items: center; justify-content: center; overflow-y: auto;">
+                <div class="empty-state" style="text-align: center; opacity: 0.4;">
+                  <span style="font-size: 3rem; display: block; margin-bottom: 15px;">🧪</span>
+                  <p>Inyecta una instrucción para recibir feedback técnico real</p>
+                </div>
               </div>
             </div>
+          </div>
+
+          <div class="sandbox-footer" style="background: rgba(255,255,255,0.02); padding: 15px 25px; border-top: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; gap: 20px;">
+              <span style="font-size: 0.75rem;"><b style="color:var(--primary);">C</b>ontexto</span>
+              <span style="font-size: 0.75rem;"><b style="color:var(--secondary);">R</b>ol</span>
+              <span style="font-size: 0.75rem;"><b style="color:#10b981;">E</b>specificación</span>
+              <span style="font-size: 0.75rem;"><b style="color:#f59e0b;">A</b>cción</span>
+            </div>
+            <div style="font-size: 0.7rem; opacity: 0.6; font-style: italic;">Potenciado por Antigravity Engine v3.1</div>
           </div>
         </div>
       </div>

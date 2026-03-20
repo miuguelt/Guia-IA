@@ -7,27 +7,52 @@ window.GuiaModules['module-notion'] = (function() {
 
   const notionHTML = `
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap');
+
   :root {
-    --notion-bg: #ffffff;
-    --notion-text: #374151;
+    --notion-bg: rgba(255, 255, 255, 0.03);
+    --notion-text: #e2e8f0;
     --notion-accent: #a972ff;
-    --notion-glass: rgba(255, 255, 255, 0.7);
-    --notion-border: rgba(0, 0, 0, 0.1);
+    --notion-glass: rgba(15, 23, 42, 0.8);
+    --notion-border: rgba(255, 255, 255, 0.1);
+    --font-premium: 'Outfit', sans-serif;
+    --font-mono: 'Space Grotesk', monospace;
   }
 
   .m-notion-container {
     perspective: 1000px;
     margin-bottom: 30px;
     color: var(--notion-text);
+    font-family: var(--font-premium);
   }
 
   .m-notion-card {
-    background: var(--notion-bg);
+    background: var(--notion-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--notion-border);
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 24px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   }
+
+  .m-notion-hero {
+    background: linear-gradient(135deg, rgba(169,114,255,0.12), rgba(255,255,255,0.03));
+    border: 1px solid rgba(169,114,255,0.18);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 22px;
+  }
+
+  .m-notion-chip-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+  .m-notion-chip { padding:7px 12px; border-radius:999px; background:rgba(255,255,255,0.05); border:1px solid rgba(169,114,255,0.14); color:#e9d5ff; font-size:0.72rem; font-weight:700; }
+  .m-notion-grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .m-notion-grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .m-notion-panel { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:18px; }
+  .m-notion-panel h4 { margin:0 0 8px; color:#fff; }
+  .m-notion-note { font-size:0.8rem; color:#cbd5e1; line-height:1.8; }
+  .m-notion-step { position:relative; padding:16px 16px 16px 52px; border-radius:12px; border:1px solid rgba(169,114,255,0.16); background:rgba(255,255,255,0.02); }
+  .m-notion-step-badge { position:absolute; left:14px; top:14px; width:24px; height:24px; border-radius:50%; background:#a972ff; color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:0.72rem; }
 
   /* Editor Magic */
   .m-notion-editor {
@@ -151,6 +176,7 @@ window.GuiaModules['module-notion'] = (function() {
   }
 
   @keyframes spin { to { transform: rotate(360deg); } }
+  @media (max-width:900px){ .m-notion-grid-2,.m-notion-grid-3 { grid-template-columns:1fr; } }
 </style>
 
 <div class="m-notion-container">
@@ -160,12 +186,29 @@ window.GuiaModules['module-notion'] = (function() {
     <p class="module-description">No uses Notion para guardar notas. Úsalo para que escriban y piensen por ti.</p>
   </div>
 
+  <div class="m-notion-hero">
+    <h3 style="margin:0 0 8px; color:#fff;">La idea central de Notion AI</h3>
+    <p class="m-notion-note" style="margin:0;">Notion AI no es solo un asistente de escritura. Su verdadero valor aparece cuando combinas <strong>páginas, bases de datos, contexto del workspace y bloques reutilizables</strong> para convertir información dispersa en operación, criterio y memoria institucional.</p>
+    <div class="m-notion-chip-row">
+      <span class="m-notion-chip">Escritura</span>
+      <span class="m-notion-chip">Resúmenes</span>
+      <span class="m-notion-chip">Ask Notion</span>
+      <span class="m-notion-chip">Bases de datos</span>
+      <span class="m-notion-chip">SOPs</span>
+      <span class="m-notion-chip">Memoria del equipo</span>
+    </div>
+  </div>
+
   <div class="ag-tabs game-tabs" style="margin-bottom:28px;">
     <button class="tab-btn active" data-tab="m-no-editor">🪄 Editor Mágico</button>
     <button class="tab-btn" data-tab="m-no-concept">📚 Conceptos</button>
+    <button class="tab-btn" data-tab="m-no-decider">🧭 Cuándo Usarlo</button>
     <button class="tab-btn" data-tab="m-no-db">🗃️ Autofill DB</button>
     <button class="tab-btn" data-tab="m-no-qa">🔎 Ask Notion</button>
     <button class="tab-btn" data-tab="m-no-cases">🧭 Casos Prácticos</button>
+    <button class="tab-btn" data-tab="m-no-prompts">🧠 Prompts</button>
+    <button class="tab-btn" data-tab="m-no-antipatterns">🚫 Errores</button>
+    <button class="tab-btn" data-tab="m-no-templates">💎 Plantillas Pro</button>
     <button class="tab-btn" data-tab="m-no-mission">🏆 Reto Final</button>
   </div>
 
@@ -227,6 +270,35 @@ window.GuiaModules['module-notion'] = (function() {
     </div>
   </div>
 
+  <div id="m-no-decider" class="ag-content">
+    <div class="section-card animate-in">
+      <h3><span class="icon">🧭</span> Cuándo usar Notion AI y cuándo no</h3>
+      <div class="m-notion-grid-2" style="margin-top:18px;">
+        <div class="m-notion-panel">
+          <h4>Úsalo cuando...</h4>
+          <p class="m-notion-note">Necesitas escribir mejor, estructurar conocimiento, organizar procesos, resumir páginas o consultar información que ya vive dentro de tu espacio.</p>
+        </div>
+        <div class="m-notion-panel">
+          <h4>No es ideal cuando...</h4>
+          <p class="m-notion-note">Buscas investigación abierta en internet o respuestas que dependan de fuentes externas no cargadas ni documentadas en el workspace.</p>
+        </div>
+        <div class="m-notion-panel">
+          <h4>Se vuelve muy potente si...</h4>
+          <p class="m-notion-note">Conectas notas, tareas, decisiones, feedback y documentación operativa en una sola arquitectura de trabajo.</p>
+        </div>
+        <div class="m-notion-panel">
+          <h4>Pierde valor si...</h4>
+          <p class="m-notion-note">El espacio está desordenado, duplicado o lleno de páginas sin criterios claros de uso.</p>
+        </div>
+      </div>
+      <div class="m-notion-grid-3" style="margin-top:16px;">
+        <div class="m-notion-step"><div class="m-notion-step-badge">1</div><h4 style="margin:0 0 6px; color:#fff;">Captura</h4><p class="m-notion-note" style="margin:0;">Notas, minutas, feedback, decisiones, SOPs.</p></div>
+        <div class="m-notion-step"><div class="m-notion-step-badge">2</div><h4 style="margin:0 0 6px; color:#fff;">Organiza</h4><p class="m-notion-note" style="margin:0;">Bases de datos, propiedades, plantillas y relaciones.</p></div>
+        <div class="m-notion-step"><div class="m-notion-step-badge">3</div><h4 style="margin:0 0 6px; color:#fff;">Activa IA</h4><p class="m-notion-note" style="margin:0;">Resume, consulta, clasifica y convierte información en acciones.</p></div>
+      </div>
+    </div>
+  </div>
+
   <!-- TAB 3: AUTOFILL DB -->
   <div id="m-no-db" class="ag-content">
     <div class="section-card animate-in">
@@ -284,53 +356,203 @@ window.GuiaModules['module-notion'] = (function() {
     </div>
   </div>
 
+  <!-- TAB 5: CASOS PRACTICOS -->
   <div id="m-no-cases" class="ag-content">
-    <div class="section-card animate-in">
-      <h3><span class="icon">🧭</span> Tres Usos de Notion AI que Sí Ahorran Tiempo</h3>
-      <p>Notion AI vale la pena cuando ya tienes información dentro del workspace y quieres estructurar, clasificar o consultar sin empezar desde cero.</p>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:14px; margin-top:18px;">
-        <div style="background:rgba(169,114,255,0.05); border:1px solid rgba(169,114,255,0.2); border-radius:12px; padding:16px;">
-          <div style="font-size:0.72rem; font-weight:800; color:#a972ff; margin-bottom:8px;">CASO 1 · REDACCIÓN</div>
-          <h4 style="margin:0 0 8px; color:#e2e8f0;">Convertir notas crudas en minuta</h4>
-          <p style="font-size:0.78rem; color:#cbd5e1; margin:0 0 10px;">Pega ideas sueltas y usa `/ai` para estructurar una página lista para compartir.</p>
-          <div style="font-size:0.75rem; color:#cbd5e1; line-height:1.8;">1. Crea una página.<br>2. Pega notas caóticas.<br>3. Usa `/ai` o menú contextual.<br>4. Pide minuta con responsables y próximos pasos.</div>
-          <div style="font-size:0.72rem; color:#c4b5fd; margin-top:8px;">Resultado esperado: acta o minuta sin reescribir todo a mano.</div>
-          <button class="gl-btn gl-btn-outline" style="width:100%; margin-top:10px; border-color:#a972ff; color:#a972ff;" onclick="mNotionCopyText(this, 'Convierte estas notas crudas en una minuta profesional. Usa esta estructura: objetivo, asistentes, puntos tratados, decisiones y próximos pasos con responsable. Mantén tono claro y ejecutivo.')">📋 Copiar Prompt del Caso 1</button>
+    <div class="section-card animate-in" style="background: var(--notion-glass); border: 1px solid var(--notion-border); backdrop-filter: blur(20px); border-radius: 16px; padding: 24px;">
+      <h3 style="font-family: var(--font-mono); letter-spacing: -0.5px;"><span class="icon">🧭</span> Casos de Uso Reales (Sovereign Edition)</h3>
+      <p style="color: #94a3b8; font-size: 0.9rem;">No limites la IA a corrección ortográfica. Úsala como un socio de pensamiento (Sparring Partner).</p>
+      
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px; margin-top:20px;">
+        
+        <!-- CASO 1: REDACCIÓN -->
+        <div class="glass-exercise-card" style="background: rgba(169,114,255,0.07); border: 1px solid rgba(169,114,255,0.2); border-radius: 14px; padding: 20px; transition: transform 0.3s ease;">
+          <div style="font-size: 0.65rem; font-weight: 800; color: #a972ff; text-transform: uppercase; margin-bottom: 8px; font-family: var(--font-mono);">Nivel: Básico · 5 min</div>
+          <h4 style="margin: 0 0 10px; color: #fff; font-family: var(--font-premium);">🧠 El "Ghostwriter" de Minutas</h4>
+          <p style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 12px;">Convierte un caos de notas sueltas en una estructura formal compartible en segundos.</p>
+          <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.6; margin-bottom: 15px; border-left: 2px solid #a972ff; padding-left: 10px;">
+            1. Pega notas sin formato.<br>
+            2. Selecciona texto + `/ai`.<br>
+            3. Prompt: "Extrae acta, accionables y fechas".<br>
+            4. <b>Resultado:</b> Documento ejecutivo impecable.
+          </div>
+          <button class="gl-btn gl-btn-outline" style="width:100%; border-color: #a972ff; color: #a972ff; font-size: 0.75rem;" onclick="mNotionCopyText(this, 'Actúa como un experto en redacción corporativa. Toma estas notas crudas y conviértelas en una minuta estructurada con: Título, Objetivo, Asistentes, Decisiones clave y una Tabla de Tareas con (Responsable, Fecha límite, Estado). Tono ejecutivo y directo.')">📋 Copiar Prompt Maestro</button>
         </div>
-        <div style="background:rgba(169,114,255,0.05); border:1px solid rgba(169,114,255,0.2); border-radius:12px; padding:16px;">
-          <div style="font-size:0.72rem; font-weight:800; color:#a972ff; margin-bottom:8px;">CASO 2 · BASES</div>
-          <h4 style="margin:0 0 8px; color:#e2e8f0;">Clasificar feedback o tickets</h4>
-          <p style="font-size:0.78rem; color:#cbd5e1; margin:0 0 10px;">Deja que Notion categorice, etiquete sentimiento y convierta tablas simples en tableros útiles.</p>
-          <div style="font-size:0.75rem; color:#cbd5e1; line-height:1.8;">1. Crea una base.<br>2. Agrega 5 comentarios o tickets.<br>3. Usa autofill AI.<br>4. Revisa si categoría y sentimiento quedaron coherentes.</div>
-          <div style="font-size:0.72rem; color:#c4b5fd; margin-top:8px;">Resultado esperado: la tabla ya se puede filtrar por tipo de problema o urgencia.</div>
-          <button class="gl-btn gl-btn-outline" style="width:100%; margin-top:10px; border-color:#a972ff; color:#a972ff;" onclick="mNotionCopyText(this, 'Clasifica cada registro en una categoría útil para gestión. Además, asigna sentimiento: positivo, neutro o crítico. Si detectas una falla repetida, márcala como prioritaria.')">📋 Copiar Prompt del Caso 2</button>
+
+        <!-- CASO 2: BASES DE DATOS -->
+        <div class="glass-exercise-card" style="background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.2); border-radius: 14px; padding: 20px;">
+          <div style="font-size: 0.65rem; font-weight: 800; color: #10b981; text-transform: uppercase; margin-bottom: 8px; font-family: var(--font-mono);">Nivel: Intermedio · 10 min</div>
+          <h4 style="margin: 0 0 10px; color: #fff; font-family: var(--font-premium);">📊 Analista de Feedback 24/7</h4>
+          <p style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 12px;">Clasifica cientos de comentarios de clientes automáticamente mediante propiedades de IA.</p>
+          <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.6; margin-bottom: 15px; border-left: 2px solid #10b981; padding-left: 10px;">
+            1. Crea base de datos de tickets.<br>
+            2. Agrega propiedad "AI Autofill".<br>
+            3. Instrucción: "Categoriza por urgencia".<br>
+            4. <b>Resultado:</b> Priorización visual instantánea.
+          </div>
+          <button class="gl-btn gl-btn-outline" style="width:100%; border-color: #10b981; color: #10b981; font-size: 0.75rem;" onclick="mNotionCopyText(this, 'Analiza el contenido de esta entrada y clasifícala en una de estas categorías: [Bug, Sugerencia, Facturación, Felicitación]. Además, asigna un nivel de prioridad del 1 al 5 basado en la frustración del usuario detectada.')">📋 Copiar Configuración AI</button>
         </div>
-        <div style="background:rgba(169,114,255,0.05); border:1px solid rgba(169,114,255,0.2); border-radius:12px; padding:16px;">
-          <div style="font-size:0.72rem; font-weight:800; color:#a972ff; margin-bottom:8px;">CASO 3 · BÚSQUEDA</div>
-          <h4 style="margin:0 0 8px; color:#e2e8f0;">Preguntar al espacio de trabajo</h4>
-          <p style="font-size:0.78rem; color:#cbd5e1; margin:0 0 10px;">Busca responsables, decisiones y datos dispersos sin abrir cinco páginas distintas.</p>
-          <div style="font-size:0.75rem; color:#cbd5e1; line-height:1.8;">1. Ten páginas y bases relacionadas.<br>2. Abre Ask Notion.<br>3. Haz una pregunta concreta.<br>4. Confirma si la respuesta realmente sale del workspace.</div>
-          <div style="font-size:0.72rem; color:#c4b5fd; margin-top:8px;">Resultado esperado: respuesta precisa, contextual y lista para actuar.</div>
-          <button class="gl-btn gl-btn-outline" style="width:100%; margin-top:10px; border-color:#a972ff; color:#a972ff;" onclick="mNotionCopyText(this, 'Responde usando únicamente la información existente en este workspace. Si la respuesta no está clara, indica qué página o base debería consultarse primero en lugar de inventar.')">📋 Copiar Prompt del Caso 3</button>
+
+        <!-- CASO 3: Q&A -->
+        <div class="glass-exercise-card" style="background: rgba(59,130,246,0.07); border: 1px solid rgba(59,130,246,0.2); border-radius: 14px; padding: 20px;">
+          <div style="font-size: 0.65rem; font-weight: 800; color: #3b82f6; text-transform: uppercase; margin-bottom: 8px; font-family: var(--font-mono);">Nivel: Intermedio · 8 min</div>
+          <h4 style="margin: 0 0 10px; color: #fff; font-family: var(--font-premium);">🔍 Oráculo de Conocimiento</h4>
+          <p style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 12px;">Busca respuestas complejas cruzando datos de múltiples páginas en milisegundos.</p>
+          <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.6; margin-bottom: 15px; border-left: 2px solid #3b82f6; padding-left: 10px;">
+            1. Abre Ask Notion (Ctrl + J).<br>
+            2. Pregunta: "¿Quién aprobó el presupuesto?".<br>
+            3. La IA cita las fuentes exactas.<br>
+            4. <b>Resultado:</b> No más búsqueda manual de archivos.
+          </div>
+          <button class="gl-btn gl-btn-outline" style="width:100%; border-color: #3b82f6; color: #3b82f6; font-size: 0.75rem;" onclick="mNotionCopyText(this, 'Responder basándote ÚNICAMENTE en la documentación interna de este espacio. Si la información no está disponible, indícame qué documento falta cargar.')">📋 Copiar Prompt de Consulta</button>
+        </div>
+
+        <!-- CASO 4: AVANZADO -->
+        <div class="glass-exercise-card" style="background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.2); border-radius: 14px; padding: 20px;">
+          <div style="font-size: 0.65rem; font-weight: 800; color: #f59e0b; text-transform: uppercase; margin-bottom: 8px; font-family: var(--font-mono);">Nivel: Avanzado · 15 min</div>
+          <h4 style="margin: 0 0 10px; color: #fff; font-family: var(--font-premium);">🚀 Resumen de Proyecto Dinámico</h4>
+          <p style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 12px;">Crea una propiedad que resuma el estado de un proyecto cada vez que cambian las notas.</p>
+          <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.6; margin-bottom: 15px; border-left: 2px solid #f59e0b; padding-left: 10px;">
+            1. Usa bloques de sincronización.<br>
+            2. Configura IA para "Resumir página".<br>
+            3. Vincula con tablero Kanban.<br>
+            4. <b>Resultado:</b> Dashboard que se actualiza solo.
+          </div>
+          <button class="gl-btn gl-btn-outline" style="width:100%; border-color: #f59e0b; color: #f59e0b; font-size: 0.75rem;" onclick="mNotionCopyText(this, 'Genera un resumen ejecutivo de máximo 3 bullets que resuma los avances, riesgos detectados y el porcentaje de completitud estimado basándote en las notas de esta página.')">📋 Copiar Prompt Dashboard</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- TAB 6: RETO FINAL -->
-  <div id="m-no-mission" class="ag-content">
-    <div class="exercise-box mission-card animate-in">
-      <div class="exercise-header"><span class="exercise-icon">📝</span><span class="exercise-title">Reto Final: Base de Conocimiento Viva</span></div>
-      <div class="mission-instructions" style="background:rgba(169,114,255,0.05); padding:25px; border-radius:16px; border:1px solid rgba(169,114,255,0.2); margin:20px 0;">
-        <h4 style="margin-top:0; color:#a972ff;">🎯 Objetivo de Hoy:</h4>
-        <ul style="margin-top:15px; font-size:0.9rem; line-height:1.8; color:#cbd5e1;">
-          <li>Crea una página estructurada con IA.</li>
-          <li>Construye una base simple con 5 registros y clasifícala con IA.</li>
-          <li>Haz 3 consultas útiles con Ask Notion sobre ese mismo espacio.</li>
-        </ul>
+  <div id="m-no-prompts" class="ag-content">
+    <div class="section-card animate-in">
+      <h3 style="color:#a972ff; margin-top:0;">🧠 Prompts Maestros para Notion AI</h3>
+      <div class="m-notion-grid-2" style="margin-top:18px;">
+        <div class="m-notion-panel">
+          <h4>Minuta ejecutiva</h4>
+          <div style="font-size:0.78rem; color:#c4b5fd; line-height:1.7; background:rgba(0,0,0,0.18); border:1px solid rgba(169,114,255,0.18); border-radius:10px; padding:12px;">Convierte estas notas crudas en una minuta ejecutiva con: contexto, decisiones, responsables, fechas y riesgos. Elimina ruido y deja el texto listo para compartir.</div>
+          <button class="gl-btn gl-btn-outline" style="margin-top:10px; border-color:#a972ff; color:#a972ff; font-size:0.75rem;" onclick="mNotionCopyText(this, 'Convierte estas notas crudas en una minuta ejecutiva con: contexto, decisiones, responsables, fechas y riesgos. Elimina ruido y deja el texto listo para compartir.')">📋 Copiar</button>
+        </div>
+        <div class="m-notion-panel">
+          <h4>Base de feedback</h4>
+          <div style="font-size:0.78rem; color:#c4b5fd; line-height:1.7; background:rgba(0,0,0,0.18); border:1px solid rgba(169,114,255,0.18); border-radius:10px; padding:12px;">Analiza esta entrada y clasifícala por categoría, urgencia, tono del usuario y acción sugerida para el equipo.</div>
+          <button class="gl-btn gl-btn-outline" style="margin-top:10px; border-color:#a972ff; color:#a972ff; font-size:0.75rem;" onclick="mNotionCopyText(this, 'Analiza esta entrada y clasifícala por categoría, urgencia, tono del usuario y acción sugerida para el equipo.')">📋 Copiar</button>
+        </div>
+        <div class="m-notion-panel">
+          <h4>Ask Notion con criterio</h4>
+          <div style="font-size:0.78rem; color:#c4b5fd; line-height:1.7; background:rgba(0,0,0,0.18); border:1px solid rgba(169,114,255,0.18); border-radius:10px; padding:12px;">Responde basándote solo en la información del workspace. Si falta contexto, dime qué página, base o documento debo completar.</div>
+          <button class="gl-btn gl-btn-outline" style="margin-top:10px; border-color:#a972ff; color:#a972ff; font-size:0.75rem;" onclick="mNotionCopyText(this, 'Responde basándote solo en la información del workspace. Si falta contexto, dime qué página, base o documento debo completar.')">📋 Copiar</button>
+        </div>
+        <div class="m-notion-panel">
+          <h4>Resumen de proyecto</h4>
+          <div style="font-size:0.78rem; color:#c4b5fd; line-height:1.7; background:rgba(0,0,0,0.18); border:1px solid rgba(169,114,255,0.18); border-radius:10px; padding:12px;">Resume esta página en 5 bullets: avance, bloqueo, decisión pendiente, responsable clave y siguiente paso recomendado.</div>
+          <button class="gl-btn gl-btn-outline" style="margin-top:10px; border-color:#a972ff; color:#a972ff; font-size:0.75rem;" onclick="mNotionCopyText(this, 'Resume esta página en 5 bullets: avance, bloqueo, decisión pendiente, responsable clave y siguiente paso recomendado.')">📋 Copiar</button>
+        </div>
       </div>
-      <textarea class="premium-textarea" placeholder="Escribe qué página crearías, qué base clasificarías y qué 3 preguntas útiles harías a Notion AI..." style="height:120px;"></textarea>
-      <div class="reward-tag" style="margin-top:20px;">💎 +150 XP · 🏆 Insignia: Arquitecto del Conocimiento</div>
+    </div>
+  </div>
+
+  <div id="m-no-antipatterns" class="ag-content">
+    <div class="section-card animate-in">
+      <h3 style="color:#a972ff; margin-top:0;">🚫 Errores comunes con Notion AI</h3>
+      <div class="m-notion-grid-3" style="margin-top:18px;">
+        <div class="m-notion-panel"><h4>Usarlo solo para escribir bonito</h4><p class="m-notion-note">Eso es útil, pero pequeño comparado con su valor en sistemas de conocimiento y operaciones.</p></div>
+        <div class="m-notion-panel"><h4>Workspace desordenado</h4><p class="m-notion-note">Si las páginas están mal nombradas o duplicadas, la IA también se vuelve menos útil.</p></div>
+        <div class="m-notion-panel"><h4>No estructurar bases de datos</h4><p class="m-notion-note">Sin propiedades claras, la IA no puede clasificar ni resumir con consistencia.</p></div>
+        <div class="m-notion-panel"><h4>Pedir demasiado genérico</h4><p class="m-notion-note">“Mejora esto” produce menos valor que pedir salida, tono y criterio concretos.</p></div>
+        <div class="m-notion-panel"><h4>No convertir conocimiento en plantillas</h4><p class="m-notion-note">Si cada página empieza desde cero, pierdes el efecto compuesto del sistema.</p></div>
+        <div class="m-notion-panel"><h4>Confundir memoria con verdad</h4><p class="m-notion-note">Si el espacio contiene errores, la IA los reutiliza. El orden editorial sigue importando.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 6: PLANTILLAS MAESTRAS -->
+  <div id="m-no-templates" class="ag-content">
+    <div class="section-card animate-in" style="background: var(--notion-glass); border: 1px solid var(--notion-border); backdrop-filter: blur(20px); border-radius: 16px; padding: 24px;">
+      <h3 style="font-family: var(--font-mono); letter-spacing: -0.5px;"><span class="icon">💎</span> Plantillas Pro: Productividad 2025</h3>
+      <p style="color: #94a3b8; font-size: 0.9rem;">Las mejores estructuras de Notion vitaminadas con Propiedades de IA (Autofill).</p>
+      
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px; margin-top:20px;">
+        
+        <!-- TEMPLATE 1: SECOND BRAIN -->
+        <div class="glass-exercise-card" style="background: rgba(169,114,255,0.07); border: 1px solid rgba(169,114,255,0.2); border-radius: 14px; padding: 20px;">
+          <h4 style="margin: 0 0 10px; color: #fff; font-family: var(--font-premium);">🧠 Second Brain AI (PARA)</h4>
+          <p style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 12px;">Captura todo y deja que la IA clasifique por proyectos y áreas automáticamente.</p>
+          <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.6; margin-bottom: 15px; border-left: 2px solid #a972ff; padding-left: 10px;">
+            <b>Setup:</b> Crea una propiedad "AI Autofill" llamada <i>Categoría</i>.<br>
+            <b>Instrucción AI:</b> "Lee la nota y asígnala a Proyectos, Áreas, Recursos o Archivo (P.A.R.A) según su contenido prioritario."
+          </div>
+          <button class="gl-btn gl-btn-outline" style="width:100%; border-color: #a972ff; color: #a972ff; font-size: 0.75rem;" onclick="mNotionCopyText(this, 'Basado en el sistema P.A.R.A de Tiago Forte, analiza esta entrada y determina si es un Proyecto (acción inmediata), un Área (responsabilidad a largo plazo), un Recurso (interés general) o Archivo (completado). Justifica brevemente.')">📋 Copiar Prompt P.A.R.A</button>
+        </div>
+
+        <!-- TEMPLATE 2: PROJECT MANAGER -->
+        <div class="glass-exercise-card" style="background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.2); border-radius: 14px; padding: 20px;">
+          <h4 style="margin: 0 0 10px; color: #fff; font-family: var(--font-premium);">🚀 AI-Project Manager Pro</h4>
+          <p style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 12px;">Genera desgloses de tareas (WBS) y reportes de estado automáticos.</p>
+          <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.6; margin-bottom: 15px; border-left: 2px solid #10b981; padding-left: 10px;">
+            <b>Setup:</b> Botón de IA "Generar Roadmap".<br>
+            <b>Instrucción AI:</b> "Toma el objetivo del proyecto y divídelo en 5 hitos con fechas estimadas y riesgos."
+          </div>
+          <button class="gl-btn gl-btn-outline" style="width:100%; border-color: #10b981; color: #10b981; font-size: 0.75rem;" onclick="mNotionCopyText(this, 'Actúa como un Senior Project Manager. Desglosa este objetivo en una Estructura de Desglose de Trabajo (EDT/WBS) con tareas específicas, entregables y criterios de éxito. Presentalo en una lista lista para convertir a base de datos.')">📋 Copiar Breakdown Engine</button>
+        </div>
+
+        <!-- TEMPLATE 3: SMART MEETINGS -->
+        <div class="glass-exercise-card" style="background: rgba(59,130,246,0.07); border: 1px solid rgba(59,130,246,0.2); border-radius: 14px; padding: 20px;">
+          <h4 style="margin: 0 0 10px; color: #fff; font-family: var(--font-premium);">📹 Smart Meeting Records</h4>
+          <p style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 12px;">De transcripción bruta a acta ejecutiva sincronizada en segundos.</p>
+          <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.6; margin-bottom: 15px; border-left: 2px solid #3b82f6; padding-left: 10px;">
+            <b>Setup:</b> Propiedad "Resumen AI" y "Acciones AI".<br>
+            <b>Instrucción AI:</b> "Busca cada mención de compromisos y extráela en formato de tarea con responsable."
+          </div>
+          <button class="gl-btn gl-btn-outline" style="width:100%; border-color: #3b82f6; color: #3b82f6; font-size: 0.75rem;" onclick="mNotionCopyText(this, 'Resume esta transcripción de reunión extrayendo: 1. Decisiones clave, 2. Tareas asignadas (indicando quién), 3. Temas pendientes para la próxima sesión. Formato: Tabla Markdown para las tareas.')">📋 Copiar Action Tracker</button>
+        </div>
+
+        <!-- TEMPLATE 4: CONTENT STUDIO -->
+        <div class="glass-exercise-card" style="background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.2); border-radius: 14px; padding: 20px;">
+          <h4 style="margin: 0 0 10px; color: #fff; font-family: var(--font-premium);">🤳 AI Content Studio</h4>
+          <p style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 12px;">De idea suelta a guion multimodal (TikTok, LinkedIn, Blog).</p>
+          <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.6; margin-bottom: 15px; border-left: 2px solid #f59e0b; padding-left: 10px;">
+            <b>Setup:</b> Propiedad "Adaptar Plataforma".<br>
+            <b>Instrucción AI:</b> "Reescribe la idea para LinkedIn (profesional) y TikTok (gancho rápido)."
+          </div>
+          <button class="gl-btn gl-btn-outline" style="width:100%; border-color: #f59e0b; color: #f59e0b; font-size: 0.75rem;" onclick="mNotionCopyText(this, 'Toma esta idea central y genera 3 piezas de contenido: un post reflexivo para LinkedIn con 5 líneas, un guion de video de 30 segundos para TikTok con un hook impactante, y un asunto de newsletter llamativo.')">📋 Copiar Content Engine</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 7: RETO FINAL -->
+  <div id="m-no-mission" class="ag-content">
+    <div class="exercise-box mission-card animate-in" style="background: var(--notion-glass); border: 1px solid var(--notion-border); backdrop-filter: blur(20px); padding: 30px; border-radius: 20px;">
+      <div class="exercise-header" style="font-family: var(--font-mono);"><span class="exercise-icon">🏆</span><span class="exercise-title">Misión: Arquitecto de Conocimiento Digital</span></div>
+      
+      <div class="mission-context" style="margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px dashed rgba(255,255,255,0.1);">
+        <p style="font-size: 0.85rem; color: #94a3b8; margin: 0;"><strong>Contexto:</strong> Eres el Project Manager de una Startup de IA. Tienes 50 feedback de clientes sin procesar y 3 minutas de reuniones de desarrollo caóticas. Debes usar Notion AI para poner orden.</p>
+      </div>
+
+      <div class="mission-instructions" style="background:rgba(169,114,255,0.05); padding:20px; border-radius:16px; border:1px solid rgba(169,114,255,0.2); margin:20px 0;">
+        <h4 style="margin-top:0; color:#a972ff; font-family: var(--font-premium);">🎯 Desafío Práctico:</h4>
+        <div style="font-size:0.9rem; line-height:1.8; color:#cbd5e1;">
+          <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px;">
+            <input type="checkbox" id="check-1" style="margin-top: 6px;">
+            <label for="check-1">Crea una página "Cerebro Central" y usa `/ai` para generar un índice de proyecto basado en estas notas: <i>[Lanzamiento Q3, Core Engine v2.0, API Docs, User Feedback]</i>.</label>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px;">
+            <input type="checkbox" id="check-2" style="margin-top: 6px;">
+            <label for="check-2">Configura una base de datos con una propiedad de <b>Resumen AI</b> que analice automáticamente el contenido de cada página de feedback.</label>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px;">
+            <input type="checkbox" id="check-3" style="margin-top: 6px;">
+            <label for="check-3">Realiza una consulta a <b>Ask Notion</b> para saber: "¿Cuáles son los 3 mayores dolores del cliente este mes?" basándote en la base anterior.</label>
+          </div>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 10px; font-size: 0.8rem; color: #a972ff; font-weight: 700;">PROMETES TU SOLUCIÓN:</div>
+      <textarea class="premium-textarea" placeholder="Pega aquí el enlace de tu página de Notion (o describe cómo estructuraste la solución) para validar..." style="height:120px; background: rgba(0,0,0,0.2); border-color: rgba(255,255,255,0.1); color: #fff;"></textarea>
+      
+      <div class="reward-tag" style="margin-top:20px; background: rgba(169,114,255,0.1); border: 1px solid #a972ff; padding: 10px; border-radius: 8px; text-align: center; font-weight: 800; color: #a972ff; box-shadow: 0 0 15px rgba(169,114,255,0.2);">
+        💎 +500 XP · 🏆 Medalla: ARQUITECTO SOBERANO
+      </div>
       <button class="gl-btn gl-btn-primary complete-module-btn" data-module="module-notion" style="width:100%; margin-top:20px; background:linear-gradient(90deg, #7c3aed, #a972ff); height:50px; font-weight:700;">FINALIZAR Y RECLAMAR XP</button>
     </div>
   </div>

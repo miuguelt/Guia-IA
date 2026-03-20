@@ -7,6 +7,16 @@ window.GuiaModules['module-multimedia-pro'] = (function() {
 
   const mediaHTML = `
 <style>
+  .m-mm-hero { background: linear-gradient(135deg, rgba(236,72,153,0.12), rgba(139,92,246,0.08)); border: 1px solid rgba(236,72,153,0.24); border-radius: 18px; padding: 22px; margin-bottom: 22px; }
+  .m-mm-chip-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+  .m-mm-chip { background: rgba(255,255,255,0.04); border:1px solid rgba(236,72,153,0.22); color:#fbcfe8; border-radius:999px; padding:8px 12px; font-size:0.75rem; font-weight:700; }
+  .m-mm-grid-2 { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:16px; }
+  .m-mm-grid-3 { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:16px; }
+  .m-mm-panel { background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:18px; }
+  .m-mm-note { background: rgba(236,72,153,0.08); border-left:3px solid #ec4899; border-radius:10px; padding:12px 14px; color:#fbcfe8; font-size:0.8rem; line-height:1.7; }
+  .m-mm-step { display:flex; gap:12px; align-items:flex-start; padding:12px 0; border-top:1px solid rgba(255,255,255,0.05); }
+  .m-mm-step:first-child { border-top:none; padding-top:0; }
+  .m-mm-step-badge { width:28px; height:28px; border-radius:999px; background:rgba(236,72,153,0.18); border:1px solid rgba(236,72,153,0.35); color:#f9a8d4; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:800; flex-shrink:0; }
   .m-mm-card { background: #111827; border: 1px solid #374151; border-radius: 12px; padding: 25px; position: relative; overflow: hidden; margin-bottom: 20px;}
   .m-mm-header-bg { position: absolute; top:0; left:0; width:100%; height:80px; background: linear-gradient(180deg, rgba(236,72,153,0.1) 0%, transparent 100%); pointer-events:none; }
   
@@ -29,6 +39,7 @@ window.GuiaModules['module-multimedia-pro'] = (function() {
   
   .m-mm-gen-btn { background: linear-gradient(90deg, #ec4899, #8b5cf6); color: #fff; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: 700; transition: transform 0.2s; align-self: center; display: inline-block; margin-top: 15px;}
   .m-mm-gen-btn:hover { transform: scale(1.05); }
+  @media (max-width: 900px) { .m-mm-grid-3, .m-mm-grid-2 { grid-template-columns:1fr; } }
   
 </style>
 
@@ -43,10 +54,26 @@ window.GuiaModules['module-multimedia-pro'] = (function() {
   </div>
 </div>
 
+<div class="m-mm-hero">
+  <div style="font-size:0.76rem; font-weight:800; color:#f9a8d4; margin-bottom:8px;">MAPA MENTAL DEL MÓDULO</div>
+  <h3 style="margin:0 0 8px; color:#fff;">La IA visual no es solo para “crear arte”; es una fábrica rápida de activos de comunicación.</h3>
+  <p style="margin:0; color:#dbe4f0; line-height:1.8;">Piensa estas herramientas como un estudio creativo comprimido: idean conceptos, exploran variaciones, generan storyboards, ayudan a vender ideas y aceleran la preproducción. El secreto no es “escribir más palabras”, sino dirigir composición, intención, audiencia y formato final.</p>
+  <div class="m-mm-chip-row">
+    <span class="m-mm-chip">Portadas y banners</span>
+    <span class="m-mm-chip">Storyboards y guiones visuales</span>
+    <span class="m-mm-chip">Mockups de campañas</span>
+    <span class="m-mm-chip">Frames para video</span>
+    <span class="m-mm-chip">Exploración creativa rápida</span>
+  </div>
+</div>
+
 <div class="ag-tabs game-tabs" style="margin-bottom:28px;">
   <button class="tab-btn active" data-tab="m-mm-concept">📚 Anatomía del Prompt</button>
+  <button class="tab-btn" data-tab="m-mm-decider">🧭 Cuándo Usarlo</button>
   <button class="tab-btn" data-tab="m-mm-lab">✨ Generador Studio</button>
   <button class="tab-btn" data-tab="m-mm-cases">🧭 Casos Prácticos</button>
+  <button class="tab-btn" data-tab="m-mm-prompts">🧠 Prompts Maestros</button>
+  <button class="tab-btn" data-tab="m-mm-antipatterns">🚫 Errores</button>
   <button class="tab-btn" data-tab="m-mm-mission">🏆 Reto Final</button>
 </div>
 
@@ -69,6 +96,46 @@ window.GuiaModules['module-multimedia-pro'] = (function() {
       <div style="background:rgba(255,255,255,0.03);padding:15px;border-radius:8px;">
         <div style="color:#8b5cf6; font-weight:700; margin-bottom:5px;">🎥 Lentes (Estilo Realista)</div>
         <div style="font-size:0.8rem; color:#cbd5e1;">Usa términos como: <i>Shot on 35mm lens, f/1.8 aperture, DSLR, hyper-detailed, IMAX 70mm.</i></div>
+      </div>
+    </div>
+    <div class="m-mm-note" style="margin-top:18px;">Fórmula práctica: primero define la intención del activo visual, luego la escena, después el tono y por último el acabado técnico. El orden importa porque evita prompts llenos de adjetivos sin dirección.</div>
+  </div>
+</div>
+
+<div id="m-mm-decider" class="ag-content">
+  <div class="section-card animate-in">
+    <h3 style="margin-top:0;">🧭 Cuándo usar IA visual y cuándo no</h3>
+    <p style="color:#cbd5e1;">Estas herramientas brillan en exploración, ideación y preproducción. No sustituyen por completo el diseño profesional cuando hay identidad de marca estricta o piezas finales altamente reguladas.</p>
+    <div class="m-mm-grid-3" style="margin-top:18px;">
+      <div class="m-mm-panel">
+        <div style="font-size:0.72rem; font-weight:800; color:#f9a8d4; margin-bottom:8px;">SÍ</div>
+        <h4 style="margin:0 0 8px; color:#fff;">Explorar conceptos</h4>
+        <p style="margin:0; font-size:0.8rem; color:#cbd5e1;">Úsala para visualizar ideas rápido antes de producir con equipo, presupuesto o tiempos formales.</p>
+      </div>
+      <div class="m-mm-panel">
+        <div style="font-size:0.72rem; font-weight:800; color:#f9a8d4; margin-bottom:8px;">SÍ</div>
+        <h4 style="margin:0 0 8px; color:#fff;">Producir piezas internas</h4>
+        <p style="margin:0; font-size:0.8rem; color:#cbd5e1;">Ideal para slides, banners, mini campañas, material educativo o prototipos visuales.</p>
+      </div>
+      <div class="m-mm-panel">
+        <div style="font-size:0.72rem; font-weight:800; color:#f9a8d4; margin-bottom:8px;">NO SOLO</div>
+        <h4 style="margin:0 0 8px; color:#fff;">Marca, legal o consistencia crítica</h4>
+        <p style="margin:0; font-size:0.8rem; color:#cbd5e1;">Si el activo exige fidelidad exacta, aprobación legal o identidad cerrada, úsala como borrador y termina con diseño humano.</p>
+      </div>
+    </div>
+    <div class="m-mm-card" style="margin-top:18px;">
+      <h4 style="margin-top:0; color:#fff;">Flujo simple para producir algo útil</h4>
+      <div class="m-mm-step">
+        <div class="m-mm-step-badge">1</div>
+        <div><b style="color:#fff;">Define el objetivo.</b><div style="font-size:0.8rem; color:#cbd5e1;">No empieces con estilo, empieza con para qué servirá la pieza.</div></div>
+      </div>
+      <div class="m-mm-step">
+        <div class="m-mm-step-badge">2</div>
+        <div><b style="color:#fff;">Elige formato y audiencia.</b><div style="font-size:0.8rem; color:#cbd5e1;">16:9, 1:1, vertical, miniatura, portada o storyboard cambian por completo el prompt.</div></div>
+      </div>
+      <div class="m-mm-step">
+        <div class="m-mm-step-badge">3</div>
+        <div><b style="color:#fff;">Genera variaciones y compara.</b><div style="font-size:0.8rem; color:#cbd5e1;">El valor está en iterar rápido hasta encontrar una dirección visual defendible.</div></div>
       </div>
     </div>
   </div>
@@ -173,6 +240,56 @@ window.GuiaModules['module-multimedia-pro'] = (function() {
         <button class="gl-btn gl-btn-outline" style="width:100%; margin-top:10px; border-color:#ec4899; color:#ec4899;" onclick="mMmCopyPrompt(this, 'Genera un storyboard visual de 3 escenas para un video corto sobre [TEMA]. Mantén el mismo estilo artístico, misma paleta de color y coherencia cinematográfica entre las tres escenas.')">📋 Copiar Prompt del Caso 3</button>
       </div>
     </div>
+  </div>
+</div>
+
+<div id="m-mm-prompts" class="ag-content">
+  <div class="section-card animate-in">
+    <h3 style="margin-top:0;">🧠 Prompts Maestros para producción visual</h3>
+    <p style="color:#cbd5e1;">Estas plantillas sirven como punto de partida profesional. Cambia el tema, la audiencia y el tono, pero mantén la lógica.</p>
+    <div class="m-mm-grid-2" style="margin-top:18px;">
+      <div class="m-mm-card">
+        <h4 style="margin-top:0; color:#fff;">Portada de presentación</h4>
+        <div style="font-size:0.76rem; color:#f5d0fe; line-height:1.8;" id="mm-master-cover">Crea una imagen conceptual para una presentacion sobre [tema], orientada a [audiencia], con composicion limpia, foco visual unico, estilo moderno y profesional, sin texto incrustado, iluminacion cinematografica suave, formato horizontal 16:9, alta definicion.</div>
+        <button class="m-mm-gen-btn" style="width:100%;" onclick="mMmCopyPrompt(this, document.getElementById('mm-master-cover').innerText)">📋 Copiar prompt</button>
+      </div>
+      <div class="m-mm-card">
+        <h4 style="margin-top:0; color:#fff;">Mini campaña institucional</h4>
+        <div style="font-size:0.76rem; color:#f5d0fe; line-height:1.8;" id="mm-master-campaign">Disena una escena principal para una campana sobre [tema], con tono [tono], orientada a [publico], paleta coherente con comunicacion institucional, imagen clara y confiable, composicion preparada para usar en banner o post, sin tipografia incrustada, version cuadrada 1:1 y version horizontal 16:9.</div>
+        <button class="m-mm-gen-btn" style="width:100%;" onclick="mMmCopyPrompt(this, document.getElementById('mm-master-campaign').innerText)">📋 Copiar prompt</button>
+      </div>
+      <div class="m-mm-card">
+        <h4 style="margin-top:0; color:#fff;">Storyboard de video</h4>
+        <div style="font-size:0.76rem; color:#f5d0fe; line-height:1.8;" id="mm-master-storyboard">Genera un storyboard visual de 4 escenas para un video corto sobre [tema]. Mantén mismo estilo cinematografico, misma paleta de color y coherencia de personajes. Escena 1: apertura. Escena 2: problema. Escena 3: solucion. Escena 4: cierre inspirador.</div>
+        <button class="m-mm-gen-btn" style="width:100%;" onclick="mMmCopyPrompt(this, document.getElementById('mm-master-storyboard').innerText)">📋 Copiar prompt</button>
+      </div>
+      <div class="m-mm-card">
+        <h4 style="margin-top:0; color:#fff;">Mockup de producto o servicio</h4>
+        <div style="font-size:0.76rem; color:#f5d0fe; line-height:1.8;" id="mm-master-mockup">Crea un mockup visual para presentar [producto o servicio], con ambiente realista, composicion elegante, foco en uso practico, iluminacion premium, alto nivel de detalle, aspecto comercial y limpio, listo para propuesta o pieza de venta.</div>
+        <button class="m-mm-gen-btn" style="width:100%;" onclick="mMmCopyPrompt(this, document.getElementById('mm-master-mockup').innerText)">📋 Copiar prompt</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="m-mm-antipatterns" class="ag-content">
+  <div class="section-card animate-in">
+    <h3 style="margin-top:0;">🚫 Errores comunes al usar IA visual</h3>
+    <div class="m-mm-grid-3" style="margin-top:18px;">
+      <div class="m-mm-panel">
+        <h4 style="margin:0 0 8px; color:#fff;">Pedir “algo bonito”</h4>
+        <p style="margin:0; font-size:0.8rem; color:#cbd5e1;">La estética sin intención produce imágenes llamativas pero inútiles para comunicar.</p>
+      </div>
+      <div class="m-mm-panel">
+        <h4 style="margin:0 0 8px; color:#fff;">No pensar en formato final</h4>
+        <p style="margin:0; font-size:0.8rem; color:#cbd5e1;">Una portada, una miniatura y una historia vertical necesitan composiciones distintas.</p>
+      </div>
+      <div class="m-mm-panel">
+        <h4 style="margin:0 0 8px; color:#fff;">Aceptar la primera versión</h4>
+        <p style="margin:0; font-size:0.8rem; color:#cbd5e1;">El verdadero poder está en iterar: cambiar encuadre, tono, luz y jerarquía visual.</p>
+      </div>
+    </div>
+    <div class="m-mm-note" style="margin-top:18px;">Señal de buen uso: la pieza ayuda a entender, vender o presentar algo mejor. Señal de mal uso: la imagen se ve vistosa, pero nadie sabría para qué sirve dentro del proyecto.</div>
   </div>
 </div>
 

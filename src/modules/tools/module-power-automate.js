@@ -7,6 +7,17 @@
 <style>
   .m-pa-card { background: #fafafa; border: 1px solid #d1d5db; border-radius: 12px; padding: 25px; position: relative; overflow: hidden; margin-bottom: 20px;}
   .m-pa-header-bg { position: absolute; top:0; left:0; width:100%; height:80px; background: linear-gradient(180deg, rgba(8,84,199,0.1) 0%, transparent 100%); pointer-events:none; }
+  .m-pa-hero { background: linear-gradient(135deg, rgba(8,84,199,0.12), rgba(255,255,255,0.04)); border: 1px solid rgba(8,84,199,0.25); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
+  .m-pa-chip-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+  .m-pa-chip { padding:7px 12px; border-radius:999px; background:rgba(8,84,199,0.08); border:1px solid rgba(8,84,199,0.18); color:#dbeafe; font-size:0.72rem; font-weight:700; }
+  .m-pa-grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .m-pa-grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .m-pa-panel-card { background:rgba(255,255,255,0.03); border:1px solid rgba(8,84,199,0.12); border-radius:12px; padding:18px; }
+  .m-pa-panel-card h4 { margin:0 0 8px; color:#e5eefc; }
+  .m-pa-note { font-size:0.8rem; color:#cbd5e1; line-height:1.8; }
+  .m-pa-step { position:relative; padding:16px 16px 16px 52px; border-radius:12px; border:1px solid rgba(8,84,199,0.14); background:rgba(255,255,255,0.02); }
+  .m-pa-step-badge { position:absolute; left:14px; top:14px; width:24px; height:24px; border-radius:50%; background:#0854c7; color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:0.72rem; }
+  .m-pa-codebox { background:#0a1628; border:1px solid #1e3a5f; border-radius:10px; padding:12px 14px; font-size:0.76rem; color:#93c5fd; line-height:1.7; white-space:pre-wrap; }
   
   .m-pa-flow-container { background: #f3f4f6; border: 1px dashed #9ca3af; border-radius: 8px; padding: 30px; margin-top: 15px; display: flex; flex-direction: column; align-items: center; min-height: 250px; position: relative; }
   
@@ -39,7 +50,7 @@
   .m-pa-run-overlay { position:absolute; inset:0; background:rgba(255,255,255,0.9); z-index:20; display:none; flex-direction:column; align-items:center; justify-content:center; }
   .m-pa-run-overlay.active { display:flex; }
   .m-pa-spinner { width:40px; height:40px; border:4px solid #e5e7eb; border-top-color:#0854c7; border-radius:50%; animation: spin 1s linear infinite; margin-bottom:15px; }
-
+  @media (max-width:900px){ .m-pa-grid-2,.m-pa-grid-3 { grid-template-columns:1fr; } }
 </style>
 
 <div class="module-header premium-header" style="background: linear-gradient(135deg, rgba(8,84,199,0.1), rgba(255,255,255,0.05)); border: 1px solid rgba(8,84,199,0.3);">
@@ -53,10 +64,26 @@
   </div>
 </div>
 
+<div class="m-pa-hero">
+  <h3 style="margin:0 0 8px; color:#e5eefc;">La idea central de Power Automate + IA</h3>
+  <p class="m-pa-note" style="margin:0;">Power Automate no consiste en “hacer bots porque sí”. Sirve para <strong>quitar fricción a procesos repetitivos</strong> conectando disparadores, decisiones y salidas en el ecosistema Microsoft. Cuando añades IA, el flujo ya no solo mueve datos: también puede leer, clasificar, resumir y decidir rutas.</p>
+  <div class="m-pa-chip-row">
+    <span class="m-pa-chip">Triggers</span>
+    <span class="m-pa-chip">Condiciones</span>
+    <span class="m-pa-chip">Aprobaciones</span>
+    <span class="m-pa-chip">Teams</span>
+    <span class="m-pa-chip">Excel / SharePoint</span>
+    <span class="m-pa-chip">IA + OCR</span>
+  </div>
+</div>
+
 <div class="ag-tabs game-tabs" style="margin-bottom:28px;">
   <button class="tab-btn active" data-tab="m-pa-concept">📚 ¿Qué es RPA?</button>
+  <button class="tab-btn" data-tab="m-pa-decider">🧭 Cuándo Automatizar</button>
   <button class="tab-btn" data-tab="m-pa-lab">✨ Simulador de Flujos</button>
   <button class="tab-btn" data-tab="m-pa-cases">🧭 Casos Prácticos</button>
+  <button class="tab-btn" data-tab="m-pa-prompts">🧠 Plantillas</button>
+  <button class="tab-btn" data-tab="m-pa-antipatterns">🚫 Errores</button>
   <button class="tab-btn" data-tab="m-pa-estrategia">🎯 Estrategia Real</button>
   <button class="tab-btn" data-tab="m-pa-mission">🏆 Reto Final</button>
 </div>
@@ -84,6 +111,35 @@
         <p style="font-size:0.85rem;color:#475569;margin:0;">Inyecta el resultado final (como agregar una fila en Excel) y manda un mensaje de Teams avisando al jefe sin interferencia humana.</p>
       </div>
 
+    </div>
+  </div>
+</div>
+
+<div id="m-pa-decider" class="ag-content">
+  <div class="section-card animate-in">
+    <h3><span class="icon">🧭</span> Cuándo automatizar y cuándo no</h3>
+    <div class="m-pa-grid-2" style="margin-top:18px;">
+      <div class="m-pa-panel-card">
+        <h4>Sí automatices cuando...</h4>
+        <p class="m-pa-note">La tarea se repite mucho, tiene reglas claras y el coste del error es controlable o se puede revisar.</p>
+      </div>
+      <div class="m-pa-panel-card">
+        <h4>No empieces por aquí cuando...</h4>
+        <p class="m-pa-note">El proceso todavía cambia cada semana, nadie sabe bien las reglas o depende de juicio humano muy sensible.</p>
+      </div>
+      <div class="m-pa-panel-card">
+        <h4>La IA aporta valor si...</h4>
+        <p class="m-pa-note">Hay que leer correos, PDFs, formularios o texto libre para clasificar, extraer o enrutar mejor.</p>
+      </div>
+      <div class="m-pa-panel-card">
+        <h4>La automatización se rompe si...</h4>
+        <p class="m-pa-note">No defines excepciones, faltan validaciones o dependes de texto ambiguo sin control de calidad.</p>
+      </div>
+    </div>
+    <div class="m-pa-grid-3" style="margin-top:16px;">
+      <div class="m-pa-step"><div class="m-pa-step-badge">1</div><h4 style="margin:0 0 6px; color:#e5eefc;">Define el trigger</h4><p class="m-pa-note" style="margin:0;">Qué evento inicia el flujo: correo, formulario, archivo, fecha o aprobación.</p></div>
+      <div class="m-pa-step"><div class="m-pa-step-badge">2</div><h4 style="margin:0 0 6px; color:#e5eefc;">Diseña la lógica</h4><p class="m-pa-note" style="margin:0;">Qué condición, clasificación o lectura de IA debe ocurrir.</p></div>
+      <div class="m-pa-step"><div class="m-pa-step-badge">3</div><h4 style="margin:0 0 6px; color:#e5eefc;">Aterriza la salida</h4><p class="m-pa-note" style="margin:0;">Dónde termina el valor: Teams, Excel, SharePoint, aprobación o alerta.</p></div>
     </div>
   </div>
 </div>
@@ -185,6 +241,51 @@
         <h4 style="margin:0 0 8px; color:#1f2937;">Automatizar solicitudes de permiso o compra</h4>
         <p style="font-size:0.78rem; color:#64748b;">Funciona bien cuando un proceso depende de una decisión rápida y repetitiva.</p>
         <div style="font-size:0.76rem; color:#334155; line-height:1.8;">1. Trigger por Forms.<br>2. Condición por monto o tipo.<br>3. Enviar aprobación.<br>4. Notificar decisión y guardar registro.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="m-pa-prompts" class="ag-content">
+  <div class="section-card animate-in">
+    <h3 style="color:#60a5fa; margin-top:0;">🧠 Plantillas mentales para diseñar flujos</h3>
+    <p class="m-pa-note">En Power Automate no usas prompts como en un chat, pero sí conviene trabajar con plantillas conceptuales para diseñar automatizaciones más robustas.</p>
+    <div class="m-pa-grid-2" style="margin-top:18px;">
+      <div class="m-pa-panel-card">
+        <h4>Plantilla 1: Trigger + filtro + alerta</h4>
+        <div class="m-pa-codebox">Cuando ocurra [evento], revisa [campo o criterio]. Si cumple [condición], envía [notificación o acción] a [destino]. Si no cumple, registra o archiva.</div>
+      </div>
+      <div class="m-pa-panel-card">
+        <h4>Plantilla 2: Documento + IA + registro</h4>
+        <div class="m-pa-codebox">Cuando llegue [archivo o PDF], usa IA para extraer [dato 1, dato 2, dato 3]. Valida [campo crítico]. Luego guarda en [Excel / SharePoint / Dataverse] y notifica el resultado.</div>
+      </div>
+      <div class="m-pa-panel-card">
+        <h4>Plantilla 3: Solicitud + aprobación</h4>
+        <div class="m-pa-codebox">Cuando se reciba [solicitud], evalúa [monto / tipo / prioridad]. Si supera [umbral], envía aprobación a [rol]. Si no, resuelve automáticamente y deja trazabilidad.</div>
+      </div>
+      <div class="m-pa-panel-card">
+        <h4>Plantilla 4: Captura + clasificación + enrutamiento</h4>
+        <div class="m-pa-codebox">Cuando entre [correo / formulario], clasifica en [categorías]. Según la categoría, dirige a [equipo A / equipo B / cola C] y deja mensaje o registro del motivo.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="m-pa-antipatterns" class="ag-content">
+  <div class="section-card animate-in">
+    <h3 style="color:#60a5fa; margin-top:0;">🚫 Errores caros en automatización</h3>
+    <div class="m-pa-grid-3" style="margin-top:18px;">
+      <div class="m-pa-panel-card"><h4>Automatizar caos</h4><p class="m-pa-note">Si el proceso ya está roto, el flujo solo rompe más rápido.</p></div>
+      <div class="m-pa-panel-card"><h4>No pensar en excepciones</h4><p class="m-pa-note">Los flujos fallan por el 10% raro que nadie modeló.</p></div>
+      <div class="m-pa-panel-card"><h4>Confiar ciegamente en la IA</h4><p class="m-pa-note">Extraer o clasificar sin validar puede mandar mal el proceso.</p></div>
+      <div class="m-pa-panel-card"><h4>No dejar trazabilidad</h4><p class="m-pa-note">Si nadie puede ver qué pasó, el flujo se vuelve caja negra.</p></div>
+      <div class="m-pa-panel-card"><h4>Hacer flujos gigantes</h4><p class="m-pa-note">Los buenos flujos suelen ser más simples, modulares y mantenibles.</p></div>
+      <div class="m-pa-panel-card"><h4>No medir impacto</h4><p class="m-pa-note">Si no sabes cuánto tiempo ahorra o qué evita, no sabes si vale la pena.</p></div>
+    </div>
+    <div style="background:rgba(16,185,129,0.07); border:1px solid rgba(16,185,129,0.3); border-radius:8px; padding:14px; margin-top:16px;">
+      <strong style="color:#86efac;">Señal de buen uso:</strong>
+      <div style="margin-top:6px; font-size:0.8rem; color:#cbd5e1; line-height:1.7;">
+        El flujo termina en una acción útil, deja trazabilidad y reduce trabajo manual sin crear más supervisión de la que elimina.
       </div>
     </div>
   </div>
