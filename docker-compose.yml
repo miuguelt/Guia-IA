@@ -1,5 +1,4 @@
 version: '3.8'
-
 services:
   guia-ia:
     build: .
@@ -7,13 +6,12 @@ services:
     expose:
       - 8000
     volumes:
-      - .:/app
       - experience_data:/app/data
       - knowledge_base:/app/src/knowledge
     restart: unless-stopped
 
-
 volumes:
   experience_data:
   knowledge_base:
+ 
 

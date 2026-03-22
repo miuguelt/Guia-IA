@@ -12,13 +12,26 @@ def check_gpu():
         print("❌ Error: No se detectó GPU NVIDIA (RTX 4070 requerida).")
         return False
 
+def stop_host_ollama():
+    print("🧹 Deteniendo instancia nativa de Ollama (Port 11434 conflict)...")
+    try:
+        # Intentar detener el servicio en Linux
+        subprocess.run(["sudo", "systemctl", "stop", "ollama"], check=True, capture_output=True)
+        print("✅ Host Ollama detenido.")
+    except:
+        print("ℹ️ Host Ollama no detectado o ya detenido.")
+
 def start_docker():
     print("🚀 Iniciando Infraestructura Soberana Docker...")
     try:
         subprocess.run(["docker", "compose", "up", "-d"], check=True)
         print("✅ Contenedores activos.")
+        # Asegurar modelo en el contenedor
+        print("📥 Asegurando modelo nomic-embed-text en Docker...")
+        subprocess.run(["docker", "exec", "antigravity_ollama", "ollama", "pull", "nomic-embed-text"], check=True)
+        print("✅ Modelo sincronizado.")
     except Exception as e:
-        print(f"❌ Error al iniciar Docker: {e}")
+        print(f"❌ Error en despliegue Docker: {e}")
 
 def activate_gpu_persistence():
     print("🔋 Activando GPU Persistence Mode...")
@@ -41,6 +54,7 @@ def start_sovereignty_suite():
 
 def main():
     print("🧬 SINGULARITY v23.0 [ASCENSION] - Secuencia de Arranque")
+    stop_host_ollama()
     activate_gpu_persistence()
     if check_gpu():
         start_docker()
