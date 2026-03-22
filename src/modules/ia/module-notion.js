@@ -386,56 +386,167 @@ window.GuiaModules['module-notion'] = (function() {
 
   <!-- TAB 6: PLANTILLAS MAESTRAS -->
   <div id="m-no-templates" class="ag-content">
-    <div class="section-card animate-in" style="background: var(--notion-glass); border: 1px solid var(--notion-border); backdrop-filter: blur(20px); border-radius: 16px; padding: 24px;">
-      <h3 style="font-family: var(--font-mono); letter-spacing: -0.5px;"><span class="icon">💎</span> Plantillas Pro: Productividad 2025</h3>
-      <p style="color: #94a3b8; font-size: 0.9rem;">Las mejores estructuras de Notion vitaminadas con Propiedades de IA (Autofill).</p>
+    <div class="section-card animate-in" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(24px); border-radius: 24px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; margin-bottom: 24px;">
+        <div>
+          <div style="display: inline-block; padding: 4px 10px; background: rgba(169,114,255,0.1); border: 1px solid rgba(169,114,255,0.2); border-radius: 8px; color: #d8b4fe; font-size: 0.65rem; font-weight: 800; letter-spacing: 1px; margin-bottom: 10px; font-family: var(--font-mono);">COLECCIÓN PREMIUM</div>
+          <h3 style="font-family: var(--font-premium); font-size: 1.8rem; margin:0; color: #fff; text-shadow: 0 0 20px rgba(255,255,255,0.1);"><span class="icon">💎</span> Plantillas Pro Sovereign</h3>
+          <p style="color: #94a3b8; font-size: 0.95rem; margin-top:8px;">Estructuras operativas de alto rendimiento vitaminadas con IA (Autofill).</p>
+        </div>
+      </div>
       
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px; margin-top:20px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px; margin-top:10px;">
         
         <!-- TEMPLATE 1: SECOND BRAIN -->
-        <div class="glass-exercise-card" style="background: rgba(169,114,255,0.07); border: 1px solid rgba(169,114,255,0.2); border-radius: 14px; padding: 20px;">
-          <h4 style="margin: 0 0 10px; color: #fff; font-family: var(--font-premium);">🧠 Second Brain AI (PARA)</h4>
-          <p style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 12px;">Captura todo y deja que la IA clasifique por proyectos y áreas automáticamente.</p>
-          <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.6; margin-bottom: 15px; border-left: 2px solid #a972ff; padding-left: 10px;">
-            <b>Setup:</b> Crea una propiedad "AI Autofill" llamada <i>Categoría</i>.<br>
-            <b>Instrucción AI:</b> "Lee la nota y asígnala a Proyectos, Áreas, Recursos o Archivo (P.A.R.A) según su contenido prioritario."
+        <div class="glass-exercise-card m-template-card" style="background: linear-gradient(145deg, rgba(169,114,255,0.05), rgba(0,0,0,0.2)); border: 1px solid rgba(169,114,255,0.15); border-radius: 16px; padding: 24px; position: relative; overflow: hidden; transition: all 0.4s ease;">
+          <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(169,114,255,0.2) 0%, transparent 70%); border-radius: 50%;"></div>
+          
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(169,114,255,0.1); border: 1px solid rgba(169,114,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 0 15px rgba(169,114,255,0.2);">🧠</div>
+            <div>
+              <h4 style="margin: 0 0 4px; color: #fff; font-family: var(--font-premium); font-size: 1.1rem;">Second Brain AI (PARA)</h4>
+              <div style="font-size: 0.7rem; color: #a972ff; font-family: var(--font-mono); text-transform: uppercase; font-weight: 700;">Gestión de Conocimiento</div>
+            </div>
           </div>
-          <button class="gl-btn gl-btn-outline" style="width:100%; border-color: #a972ff; color: #a972ff; font-size: 0.75rem;" onclick="mNotionCopyText(this, 'Basado en el sistema P.A.R.A de Tiago Forte, analiza esta entrada y determina si es un Proyecto (acción inmediata), un Área (responsabilidad a largo plazo), un Recurso (interés general) o Archivo (completado). Justifica brevemente.')">📋 Copiar Prompt P.A.R.A</button>
+          
+          <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 16px; line-height: 1.5;">Captura todo de forma caótica y deja que la IA clasifique cada nota por proyectos y áreas automáticamente.</p>
+          
+          <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+            <div style="font-size: 0.75rem; color: #94a3b8; display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <span style="color: #a972ff;">⚙️</span> <b>Setup:</b> Propiedad "AI Autofill" (Categoría)
+            </div>
+            <div style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.6; border-left: 2px solid #a972ff; padding-left: 10px;">
+              "Lee la nota y asígnala a Proyectos, Áreas, Recursos o Archivo (P.A.R.A) según su contenido prioritario."
+            </div>
+          </div>
+          
+          <div style="display: flex; gap: 10px;">
+            <button class="gl-btn gl-btn-outline" style="flex: 1; border-color: rgba(169,114,255,0.3); color: #d8b4fe; font-size: 0.75rem; background: rgba(169,114,255,0.05);" onclick="mNotionCopyText(this, 'Basado en el sistema P.A.R.A de Tiago Forte, analiza esta entrada y determina si es un Proyecto (acción inmediata), un Área (responsabilidad a largo plazo), un Recurso (interés general) o Archivo (completado). Justifica brevemente.')">📋 Copiar Prompt</button>
+            <button class="gl-btn" style="width: 40px; padding: 0; background: rgba(169,114,255,0.1); border: 1px solid rgba(169,114,255,0.2); color: #a972ff;" onclick="mNotionPreviewTemplate('para')" title="Ver Estructura">👁️</button>
+          </div>
         </div>
 
         <!-- TEMPLATE 2: PROJECT MANAGER -->
-        <div class="glass-exercise-card" style="background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.2); border-radius: 14px; padding: 20px;">
-          <h4 style="margin: 0 0 10px; color: #fff; font-family: var(--font-premium);">🚀 AI-Project Manager Pro</h4>
-          <p style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 12px;">Genera desgloses de tareas (WBS) y reportes de estado automáticos.</p>
-          <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.6; margin-bottom: 15px; border-left: 2px solid #10b981; padding-left: 10px;">
-            <b>Setup:</b> Botón de IA "Generar Roadmap".<br>
-            <b>Instrucción AI:</b> "Toma el objetivo del proyecto y divídelo en 5 hitos con fechas estimadas y riesgos."
+        <div class="glass-exercise-card m-template-card" style="background: linear-gradient(145deg, rgba(16,185,129,0.05), rgba(0,0,0,0.2)); border: 1px solid rgba(16,185,129,0.15); border-radius: 16px; padding: 24px; position: relative; overflow: hidden; transition: all 0.4s ease;">
+          <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(16,185,129,0.2) 0%, transparent 70%); border-radius: 50%;"></div>
+          
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 0 15px rgba(16,185,129,0.2);">🚀</div>
+            <div>
+              <h4 style="margin: 0 0 4px; color: #fff; font-family: var(--font-premium); font-size: 1.1rem;">AI-Project Manager Pro</h4>
+              <div style="font-size: 0.7rem; color: #10b981; font-family: var(--font-mono); text-transform: uppercase; font-weight: 700;">Operaciones Ágiles</div>
+            </div>
           </div>
-          <button class="gl-btn gl-btn-outline" style="width:100%; border-color: #10b981; color: #10b981; font-size: 0.75rem;" onclick="mNotionCopyText(this, 'Actúa como un Senior Project Manager. Desglosa este objetivo en una Estructura de Desglose de Trabajo (EDT/WBS) con tareas específicas, entregables y criterios de éxito. Presentalo en una lista lista para convertir a base de datos.')">📋 Copiar Breakdown Engine</button>
+          
+          <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 16px; line-height: 1.5;">Genera desgloses de tareas complejos (WBS) y reportes de estado automáticos desde un objetivo simple.</p>
+          
+          <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+            <div style="font-size: 0.75rem; color: #94a3b8; display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <span style="color: #10b981;">⚙️</span> <b>Setup:</b> Botón de IA en Base de Datos
+            </div>
+            <div style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.6; border-left: 2px solid #10b981; padding-left: 10px;">
+              "Toma el objetivo del proyecto y divídelo en 5 hitos con fechas estimadas y riesgos asociados."
+            </div>
+          </div>
+          
+          <div style="display: flex; gap: 10px;">
+            <button class="gl-btn gl-btn-outline" style="flex: 1; border-color: rgba(16,185,129,0.3); color: #6ee7b7; font-size: 0.75rem; background: rgba(16,185,129,0.05);" onclick="mNotionCopyText(this, 'Actúa como un Senior Project Manager. Desglosa este objetivo en una Estructura de Desglose de Trabajo (EDT/WBS) con tareas específicas, entregables y criterios de éxito. Presentalo en una tabla Markdown lista para exportar.')">📋 Copiar Prompt</button>
+            <button class="gl-btn" style="width: 40px; padding: 0; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); color: #10b981;" onclick="mNotionPreviewTemplate('pm')" title="Ver Estructura">👁️</button>
+          </div>
         </div>
 
         <!-- TEMPLATE 3: SMART MEETINGS -->
-        <div class="glass-exercise-card" style="background: rgba(59,130,246,0.07); border: 1px solid rgba(59,130,246,0.2); border-radius: 14px; padding: 20px;">
-          <h4 style="margin: 0 0 10px; color: #fff; font-family: var(--font-premium);">📹 Smart Meeting Records</h4>
-          <p style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 12px;">De transcripción bruta a acta ejecutiva sincronizada en segundos.</p>
-          <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.6; margin-bottom: 15px; border-left: 2px solid #3b82f6; padding-left: 10px;">
-            <b>Setup:</b> Propiedad "Resumen AI" y "Acciones AI".<br>
-            <b>Instrucción AI:</b> "Busca cada mención de compromisos y extráela en formato de tarea con responsable."
+        <div class="glass-exercise-card m-template-card" style="background: linear-gradient(145deg, rgba(59,130,246,0.05), rgba(0,0,0,0.2)); border: 1px solid rgba(59,130,246,0.15); border-radius: 16px; padding: 24px; position: relative; overflow: hidden; transition: all 0.4s ease;">
+          <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(59,130,246,0.2) 0%, transparent 70%); border-radius: 50%;"></div>
+          
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 0 15px rgba(59,130,246,0.2);">📹</div>
+            <div>
+              <h4 style="margin: 0 0 4px; color: #fff; font-family: var(--font-premium); font-size: 1.1rem;">Smart Meeting Records</h4>
+              <div style="font-size: 0.7rem; color: #3b82f6; font-family: var(--font-mono); text-transform: uppercase; font-weight: 700;">Comunicación Asíncrona</div>
+            </div>
           </div>
-          <button class="gl-btn gl-btn-outline" style="width:100%; border-color: #3b82f6; color: #3b82f6; font-size: 0.75rem;" onclick="mNotionCopyText(this, 'Resume esta transcripción de reunión extrayendo: 1. Decisiones clave, 2. Tareas asignadas (indicando quién), 3. Temas pendientes para la próxima sesión. Formato: Tabla Markdown para las tareas.')">📋 Copiar Action Tracker</button>
+          
+          <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 16px; line-height: 1.5;">De transcripción bruta a acta ejecutiva limpia y sincronizada con tu gestor de tareas en segundos.</p>
+          
+          <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+            <div style="font-size: 0.75rem; color: #94a3b8; display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <span style="color: #3b82f6;">⚙️</span> <b>Setup:</b> Bloque AI de "Resumen"
+            </div>
+            <div style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.6; border-left: 2px solid #3b82f6; padding-left: 10px;">
+              "Busca cada mención de compromisos en las notas y extráela en formato de tarea con un responsable."
+            </div>
+          </div>
+          
+          <div style="display: flex; gap: 10px;">
+            <button class="gl-btn gl-btn-outline" style="flex: 1; border-color: rgba(59,130,246,0.3); color: #93c5fd; font-size: 0.75rem; background: rgba(59,130,246,0.05);" onclick="mNotionCopyText(this, 'Resume esta transcripción extrayendo: 1. Decisiones ejecutivas, 2. Tareas asignadas, 3. Temas bloqueantes. Formato: Tabla Markdown para importación directa.')">📋 Copiar Prompt</button>
+            <button class="gl-btn" style="width: 40px; padding: 0; background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); color: #3b82f6;" onclick="mNotionPreviewTemplate('meetings')" title="Ver Estructura">👁️</button>
+          </div>
         </div>
 
         <!-- TEMPLATE 4: CONTENT STUDIO -->
-        <div class="glass-exercise-card" style="background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.2); border-radius: 14px; padding: 20px;">
-          <h4 style="margin: 0 0 10px; color: #fff; font-family: var(--font-premium);">🤳 AI Content Studio</h4>
-          <p style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 12px;">De idea suelta a guion multimodal (TikTok, LinkedIn, Blog).</p>
-          <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.6; margin-bottom: 15px; border-left: 2px solid #f59e0b; padding-left: 10px;">
-            <b>Setup:</b> Propiedad "Adaptar Plataforma".<br>
-            <b>Instrucción AI:</b> "Reescribe la idea para LinkedIn (profesional) y TikTok (gancho rápido)."
+        <div class="glass-exercise-card m-template-card" style="background: linear-gradient(145deg, rgba(245,158,11,0.05), rgba(0,0,0,0.2)); border: 1px solid rgba(245,158,11,0.15); border-radius: 16px; padding: 24px; position: relative; overflow: hidden; transition: all 0.4s ease;">
+          <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(245,158,11,0.2) 0%, transparent 70%); border-radius: 50%;"></div>
+          
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 0 15px rgba(245,158,11,0.2);">🤳</div>
+            <div>
+              <h4 style="margin: 0 0 4px; color: #fff; font-family: var(--font-premium); font-size: 1.1rem;">AI Content Studio</h4>
+              <div style="font-size: 0.7rem; color: #f59e0b; font-family: var(--font-mono); text-transform: uppercase; font-weight: 700;">Máquina de Audiencias</div>
+            </div>
           </div>
-          <button class="gl-btn gl-btn-outline" style="width:100%; border-color: #f59e0b; color: #f59e0b; font-size: 0.75rem;" onclick="mNotionCopyText(this, 'Toma esta idea central y genera 3 piezas de contenido: un post reflexivo para LinkedIn con 5 líneas, un guion de video de 30 segundos para TikTok con un hook impactante, y un asunto de newsletter llamativo.')">📋 Copiar Content Engine</button>
+          
+          <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 16px; line-height: 1.5;">De una idea suelta a un ecosistema de contenido multimodal adaptado para LinkedIn, X y TikTok.</p>
+          
+          <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+            <div style="font-size: 0.75rem; color: #94a3b8; display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <span style="color: #f59e0b;">⚙️</span> <b>Setup:</b> Propiedad "AI Translation"
+            </div>
+            <div style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.6; border-left: 2px solid #f59e0b; padding-left: 10px;">
+              "Reescribe la idea para LinkedIn (tono profesional) y extrae las frases más potentes para X."
+            </div>
+          </div>
+          
+          <div style="display: flex; gap: 10px;">
+            <button class="gl-btn gl-btn-outline" style="flex: 1; border-color: rgba(245,158,11,0.3); color: #fde68a; font-size: 0.75rem; background: rgba(245,158,11,0.05);" onclick="mNotionCopyText(this, 'Toma esta idea central y genera: 1 post para LinkedIn con hook de 5 líneas, 1 guion corto para TikTok, y 1 gancho para newsletter. Aplica sesgos cognitivos para retener atención.')">📋 Copiar Prompt</button>
+            <button class="gl-btn" style="width: 40px; padding: 0; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); color: #f59e0b;" onclick="mNotionPreviewTemplate('content')" title="Ver Estructura">👁️</button>
+          </div>
         </div>
+        
+        <!-- NEW TEMPLATE: SOVEREIGN DASHBOARD -->
+        <div class="glass-exercise-card m-template-card" style="background: linear-gradient(145deg, rgba(236,72,153,0.05), rgba(0,0,0,0.2)); border: 1px solid rgba(236,72,153,0.15); border-radius: 16px; padding: 24px; position: relative; overflow: hidden; transition: all 0.4s ease; grid-column: 1 / -1;">
+          <div style="position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 250px; height: 100px; background: radial-gradient(ellipse, rgba(236,72,153,0.15) 0%, transparent 70%);"></div>
+          
+          <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 16px;">
+            <div style="width: 56px; height: 56px; border-radius: 16px; background: rgba(236,72,153,0.1); border: 1px solid rgba(236,72,153,0.3); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 0 25px rgba(236,72,153,0.2); margin-bottom: 12px;">👑</div>
+            <div style="font-size: 0.7rem; color: #ec4899; font-family: var(--font-mono); text-transform: uppercase; font-weight: 800; letter-spacing: 2px; margin-bottom: 4px;">SISTEMA MAESTRO</div>
+            <h4 style="margin: 0 0 8px; color: #fff; font-family: var(--font-premium); font-size: 1.4rem;">The Sovereign CEO Dashboard</h4>
+            <p style="font-size: 0.9rem; color: #cbd5e1; max-width: 600px; line-height: 1.6;">El panel de control definitivo que cruza tareas, notas, finanzas y metas usando Ask Notion y relaciones avanzadas para darte contexto total de tu negocio en una sola pantalla.</p>
+          </div>
+          
+          <div style="display: flex; gap: 15px; justify-content: center; margin-top: 24px;">
+            <button class="gl-btn-neon" style="border-color: #ec4899; color: #fbcfe8; font-size: 0.85rem; padding: 12px 24px; box-shadow: 0 0 15px rgba(236,72,153,0.2);" onclick="mNotionPreviewTemplate('ceo')"><span class="icon">✨</span> Inspeccionar Arquitectura Base</button>
+          </div>
+        </div>
+
       </div>
+      
+      <!-- Contenedor Visualizador de Template -->
+      <div id="m-notion-template-viewer" style="display: none; margin-top: 30px; background: #0f172a; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); opacity: 0; transform: translateY(20px); transition: all 0.4s ease;">
+         <div style="background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+               <div style="width: 12px; height: 12px; border-radius: 50%; background: #ef4444;"></div>
+               <div style="width: 12px; height: 12px; border-radius: 50%; background: #f59e0b;"></div>
+               <div style="width: 12px; height: 12px; border-radius: 50%; background: #10b981;"></div>
+               <span id="m-notion-viewer-title" style="margin-left: 15px; font-family: var(--font-mono); font-size: 0.8rem; color: #94a3b8;">database_architecture.db</span>
+            </div>
+            <button style="background:none; border:none; color:#94a3b8; cursor:pointer;" onclick="document.getElementById('m-notion-template-viewer').style.opacity='0'; setTimeout(()=> {document.getElementById('m-notion-template-viewer').style.display='none'}, 400);">✖</button>
+         </div>
+         <div id="m-notion-viewer-content" style="padding: 0; background: #020617; overflow-x: auto;">
+            <!-- Contenido dinámico -->
+         </div>
+      </div>
+
     </div>
   </div>
 
@@ -698,6 +809,135 @@ window.GuiaModules['module-notion'] = (function() {
           btn.style.color = '#a972ff';
         }, 2500);
         if (window.app) window.app.addXP(5);
+      };
+
+      window.mNotionPreviewTemplate = function(type) {
+        const viewer = document.getElementById('m-notion-template-viewer');
+        const content = document.getElementById('m-notion-viewer-content');
+        const title = document.getElementById('m-notion-viewer-title');
+        
+        let html = '';
+        let titleText = '';
+        
+        if (type === 'para') {
+          titleText = 'Second_Brain_AI_Database.notion';
+          html = `
+            <table class="m-notion-table" style="width: 100%; border-collapse: collapse; min-width: 600px;">
+              <tr style="background: rgba(255,255,255,0.02);">
+                <th style="padding: 12px 16px; text-align: left; color: #94a3b8; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05);">Aa Nombre (Nota)</th>
+                <th style="padding: 12px 16px; text-align: left; color: #a972ff; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05);">✨ AI Categoría (P.A.R.A)</th>
+                <th style="padding: 12px 16px; text-align: left; color: #94a3b8; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05);">✨ AI Tono/Contexto</th>
+                <th style="padding: 12px 16px; text-align: left; color: #94a3b8; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.05);"># Fecha</th>
+              </tr>
+              <tr>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); color: #fff;">Ideas para rediseño web</td>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05);"><span style="background: rgba(169,114,255,0.15); color: #c084fc; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">Proyecto</span></td>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); color: #cbd5e1; font-size: 0.8rem;">Estratégico / Creativo</td>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #94a3b8; font-size: 0.8rem;">Hoy</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); color: #fff;">Impuestos Q3</td>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05);"><span style="background: rgba(59,130,246,0.15); color: #60a5fa; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">Área (Finanzas)</span></td>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); color: #cbd5e1; font-size: 0.8rem;">Administrativo / Urgente</td>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #94a3b8; font-size: 0.8rem;">Ayer</td>
+              </tr>
+            </table>
+          `;
+        } else if (type === 'pm') {
+          titleText = 'Agile_AI_Projects.db';
+          html = `
+            <table class="m-notion-table" style="width: 100%; border-collapse: collapse; min-width: 600px;">
+              <tr style="background: rgba(255,255,255,0.02);">
+                <th style="padding: 12px 16px; text-align: left; color: #94a3b8; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05);">Aa Tarea</th>
+                <th style="padding: 12px 16px; text-align: left; color: #94a3b8; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05);">≡ Estado</th>
+                <th style="padding: 12px 16px; text-align: left; color: #10b981; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05);">✨ Resumen Automático</th>
+                <th style="padding: 12px 16px; text-align: left; color: #10b981; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05);">⚡ AI Action (Botón)</th>
+              </tr>
+              <tr>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); color: #fff;">Crear Landing Page</td>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05);"><span style="background: rgba(245,158,11,0.15); color: #fbbf24; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">En Progreso</span></td>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); color: #cbd5e1; font-size: 0.8rem; line-height: 1.4;">Diseño listo, falta integrar API de pagos (Stripe). Riesgo medio.</td>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05);"><button style="background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: #10b981; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer;">Generar Sub-tareas</button></td>
+              </tr>
+            </table>
+          `;
+        } else if (type === 'meetings') {
+          titleText = 'Smart_Meeting_Minutes.csv';
+          html = `
+            <table class="m-notion-table" style="width: 100%; border-collapse: collapse; min-width: 600px;">
+              <tr style="background: rgba(255,255,255,0.02);">
+                <th style="padding: 12px 16px; text-align: left; color: #94a3b8; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05);">Aa Reunión</th>
+                <th style="padding: 12px 16px; text-align: left; color: #3b82f6; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05);">✨ Decisiones (AI)</th>
+                <th style="padding: 12px 16px; text-align: left; color: #3b82f6; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05);">✨ Next Steps</th>
+                <th style="padding: 12px 16px; text-align: left; color: #94a3b8; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.05);">↗️ Vinculación Tareas</th>
+              </tr>
+              <tr>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); color: #fff;">Kickoff Q2</td>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); color: #cbd5e1; font-size: 0.8rem; line-height: 1.4;">- Budget aprobado: 50k<br>- Lanzamiento movido a Mayo</td>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); color: #cbd5e1; font-size: 0.8rem; line-height: 1.4;">[ ] Crear roadmap (Carlos)<br>[ ] Contratar Dev (Ana)</td>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05);"><span style="color:#60a5fa; font-size:0.8rem;">↗ 2 Tareas creadas</span></td>
+              </tr>
+            </table>
+          `;
+        } else if (type === 'content') {
+           titleText = 'Omnichannel_Studio.json';
+           html = `
+            <table class="m-notion-table" style="width: 100%; border-collapse: collapse; min-width: 600px;">
+              <tr style="background: rgba(255,255,255,0.02);">
+                <th style="padding: 12px 16px; text-align: left; color: #94a3b8; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05);">Aa Idea Core</th>
+                <th style="padding: 12px 16px; text-align: left; color: #f59e0b; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05);">✨ LinkedIn Versión</th>
+                <th style="padding: 12px 16px; text-align: left; color: #f59e0b; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05);">✨ X Hook</th>
+              </tr>
+              <tr>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); color: #fff;">La IA no quita trabajos, los transforma.</td>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); color: #cbd5e1; font-size: 0.8rem; line-height: 1.4;">"Hace 10 años, tener Excel era una ventaja. Hoy es el estándar. Con la IA está pasando exactamente lo mismo. El problema no es la herramienta..."</td>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); color: #cbd5e1; font-size: 0.8rem; line-height: 1.4;">"ChatGPT no va a robarte el trabajo. El que sabe usar ChatGPT sí. Abro hilo 🧵:"</td>
+              </tr>
+            </table>
+           `;
+        } else if (type === 'ceo') {
+           titleText = 'Sovereign_CEO_Nexus.ai';
+           html = `
+            <div style="padding: 20px; color: #cbd5e1;">
+              <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+                <div style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 15px;">
+                  <h5 style="color: #ec4899; margin: 0 0 10px; font-family: var(--font-mono); font-size: 0.75rem;">✨ AI RESUMEN GLOBAL</h5>
+                  <p style="font-size: 0.85rem; line-height: 1.5; margin: 0;">"Esta semana el progreso general aumentó a 65%. Riesgo detectado en 'Frontend Dev' (2 días de retraso). Finanzas saludables con runway de 18 meses."</p>
+                </div>
+                <div style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 15px;">
+                  <h5 style="color: #ec4899; margin: 0 0 10px; font-family: var(--font-mono); font-size: 0.75rem;">⚡ AI NEXT BEST ACTION</h5>
+                  <p style="font-size: 0.85rem; line-height: 1.5; margin: 0;">"Aprobar la factura pendiente de AWS ($1,200) para evitar corte de servicio y reasignar 1 Dev al equipo Frontend."</p>
+                </div>
+              </div>
+              <div style="background: rgba(236,72,153,0.05); border: 1px dashed rgba(236,72,153,0.2); border-radius: 8px; padding: 20px; text-align: center; color: #fbcfe8; font-size: 0.85rem;">
+                <p style="margin: 0;"><b>Relaciones Activas en el Nexus:</b></p>
+                <div style="margin-top: 10px; display: flex; justify-content: center; gap: 15px; font-family: var(--font-mono); font-size: 0.7rem;">
+                  <span style="background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 4px;">↗ Tareas (58)</span>
+                  <span style="background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 4px;">↗ Notas (12)</span>
+                  <span style="background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 4px;">↗ Finanzas (Q2)</span>
+                  <span style="background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 4px;">↗ Objetivos (OKRs)</span>
+                </div>
+              </div>
+            </div>
+           `;
+        }
+
+        title.textContent = titleText;
+        content.innerHTML = html;
+        viewer.style.display = 'block';
+        
+        // Animación suave de aparición
+        requestAnimationFrame(() => {
+          viewer.style.opacity = '1';
+          viewer.style.transform = 'translateY(0)';
+        });
+        
+        // Efecto scroll
+        setTimeout(() => {
+          viewer.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }, 50);
+        
+        if (window.app) window.app.addXP(10);
       };
 
       window.mNoSimulate = function(btn, type, xp) {
