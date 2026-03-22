@@ -6,69 +6,18 @@ window.GuiaModules['module-notebooklm'] = (function() {
    ═══════════════════════════════════════════ */
 
   const nlmHTML = `
-<style>
-  .m-nlm-card { background: #fdfbf7; border: 1px solid #e2e8f0; border-radius: 12px; padding: 25px; position: relative; overflow: hidden; margin-bottom: 20px;}
-  .m-nlm-header-bg { position: absolute; top:0; left:0; width:100%; height:80px; background: linear-gradient(180deg, rgba(251,191,36,0.1) 0%, transparent 100%); pointer-events:none; }
-  .m-nlm-hero { background: linear-gradient(135deg, rgba(251,191,36,0.12), rgba(255,255,255,0.04)); border: 1px solid rgba(251,191,36,0.25); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
-  .m-nlm-chip-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
-  .m-nlm-chip { padding:7px 12px; border-radius:999px; background:rgba(255,255,255,0.06); border:1px solid rgba(251,191,36,0.18); color:#fef3c7; font-size:0.72rem; font-weight:700; }
-  .m-nlm-grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
-  .m-nlm-grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-  .m-nlm-panel { background:rgba(255,255,255,0.03); padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.08); }
-  .m-nlm-panel h4 { margin:0 0 8px; color:#f8fafc; }
-  .m-nlm-note { font-size:0.8rem; color:#cbd5e1; line-height:1.8; }
-  .m-nlm-step { position:relative; padding:16px 16px 16px 52px; border-radius:12px; border:1px solid rgba(251,191,36,0.14); background:rgba(255,255,255,0.02); }
-  .m-nlm-step-badge { position:absolute; left:14px; top:14px; width:24px; height:24px; border-radius:50%; background:#f59e0b; color:#000; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:0.72rem; }
-  
-  .m-nlm-layout { display: flex; gap: 20px; margin-top: 15px; flex-wrap: wrap; }
-  
-  /* Panel Izquierdo: Fuentes */
-  .m-nlm-sources { flex: 1; min-width: 250px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 15px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-  .m-nlm-title { font-weight: 700; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; }
-  .m-nlm-source-item { display: flex; align-items: center; gap: 10px; background: #f8fafc; padding: 10px; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 10px; transition: all 0.2s; cursor: pointer;}
-  .m-nlm-source-item:hover { border-color: #fbbf24; background: #fffbeb; }
-  .m-nlm-source-icon { font-size: 1.5rem; }
-  .m-nlm-source-text { font-size: 0.8rem; color: #475569; font-weight: 600; flex: 1; }
-  
-  /* Botón subir */
-  .m-nlm-upload-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; border: 2px dashed #cbd5e1; background: transparent; color: #64748b; padding: 12px; border-radius: 8px; cursor: pointer; transition: 0.2s; font-weight: 600;}
-  .m-nlm-upload-btn:hover { border-color: #fbbf24; color: #d97706; background: rgba(251,191,36,0.05); }
 
-  /* Panel Derecho: Audio Overview */
-  .m-nlm-chat { flex: 2; min-width: 300px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
-  
-  .m-nlm-audio-card { background: #1e293b; border-radius: 12px; padding: 20px; color: #fff; text-align: center; margin-bottom: 20px; position:relative; overflow:hidden;}
-  .m-nlm-audio-wave { position:absolute; bottom:0; left:0; width:100%; height:30%; background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 10 Q 25 20 50 10 T 100 10 L 100 20 L 0 20 Z" fill="rgba(251,191,36,0.3)"/></svg>') repeat-x; background-size: 50% 100%; animation: wave 3s linear infinite; display:none;}
-  @keyframes wave { 0% {background-position: 0 0;} 100% {background-position: 100% 0;} }
-  
-  .m-nlm-play-btn { width: 50px; height: 50px; border-radius: 50%; background: #fbbf24; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; cursor: pointer; font-size: 1.5rem; color: #000; border: none; box-shadow: 0 4px 10px rgba(251,191,36,0.4); transition: transform 0.2s; z-index:2; position:relative;}
-  .m-nlm-play-btn:hover { transform: scale(1.1); }
-  
-  .m-nlm-audio-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 5px; z-index:2; position:relative;}
-  .m-nlm-audio-sub { color: #94a3b8; font-size: 0.8rem; z-index:2; position:relative;}
-  
-  .m-nlm-chat-box { flex: 1; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;}
-  .m-nlm-msg { padding: 12px; border-radius: 8px; max-width: 85%; line-height: 1.5; position:relative;}
-  .m-nlm-msg.user { background: #f1f5f9; align-self: flex-end; color: #1e293b; border-bottom-right-radius: 0; }
-  .m-nlm-msg.ai { background: #fffbeb; border: 1px solid #fde68a; align-self: flex-start; color: #92400e; border-bottom-left-radius: 0; }
-  .m-nlm-citation { display:inline-block; background: #fbbf24; color: #000; font-size: 0.65rem; padding: 1px 6px; border-radius: 10px; margin-left: 5px; cursor:pointer;}
-  
-  .m-nlm-input-area { display: flex; gap: 10px; margin-top: 15px; border-top: 1px solid #e2e8f0; padding-top: 15px;}
-  .m-nlm-input { flex: 1; border: 1px solid #cbd5e1; border-radius: 20px; padding: 10px 15px; outline: none; transition: 0.2s; }
-  .m-nlm-input:focus { border-color: #fbbf24; }
-  @media (max-width:900px){ .m-nlm-grid-2,.m-nlm-grid-3 { grid-template-columns:1fr; } }
-</style>
-
-<div class="module-header premium-header" style="background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(255,255,255,0.05)); border: 1px solid rgba(251,191,36,0.3);">
-  <div class="module-number gamer-badge" style="background:#f59e0b;color:#fff;">BONUS TOOL</div>
-  <h2 class="module-title glow-text" style="color:#f59e0b;">📓 NotebookLM: Tu Asistente de Investigación</h2>
-  <p class="module-description" style="color:#f8fafc;">Sube hasta 50 documentos (PDFs, PPTs, Enlaces, YouTube) y Google creará un asistente que <strong>solo sabe lo que tú le diste</strong>. Evita alucinaciones citando siempre la página exacta.</p>
-  <div class="module-meta">
-    <span class="module-meta-item">⏱️ 20 min</span>
-    <span class="module-meta-item">💎 150 XP</span>
-    <span class="module-meta-item">🏆 Insignia: Investigador Digital</span>
+<div class="m-nlm-container animate-in">
+  <div class="module-header premium-header animate-in">
+    <div class="badge-titan" style="margin-bottom: 20px;">BONUS TOOL</div>
+    <h2 class="module-title text-gradient-primary">📓 NotebookLM: Tu Asistente de Investigación</h2>
+    <p class="m-pa-note">Sube hasta 50 documentos (PDFs, PPTs, Enlaces, YouTube) y Google creará un asistente que <strong>solo sabe lo que tú le diste</strong>. Evita alucinaciones citando siempre la página exacta.</p>
+    <div class="module-meta" style="margin-top: 20px; display: flex; gap: 20px;">
+      <span class="module-meta-item">⏱️ 20 min</span>
+      <span class="module-meta-item">💎 150 XP</span>
+      <span class="module-meta-item">🏆 Insignia: Investigador Digital</span>
+    </div>
   </div>
-</div>
 
 <div class="m-nlm-hero">
   <h3 style="margin:0 0 8px; color:#f8fafc;">La idea central de NotebookLM</h3>
@@ -148,8 +97,8 @@ window.GuiaModules['module-notebooklm'] = (function() {
 <div id="m-nlm-lab" class="ag-content">
   <div class="section-card animate-in m-nlm-card">
     <div class="m-nlm-header-bg"></div>
-    <h3 style="position:relative;z-index:2;margin-top:0;color:#1e293b;"><span class="icon">✨</span> Simulador: El "Deep Dive"</h3>
-    <p style="font-size:0.85rem;color:#475569;position:relative;z-index:2;">Haz clic en <b>Generar Podcast</b> o pregunta algo en el chat basado en los documentos pre-cargados a la izquierda.</p>
+    <h3 style="position:relative; z-index:2; margin-top:0;" class="text-gradient-primary"><span class="icon">✨</span> Simulador: El "Deep Dive"</h3>
+    <p class="m-pa-note" style="position:relative; z-index:2; color: #fff;">Haz clic en <b>Generar Podcast</b> o pregunta algo en el chat basado en los documentos pre-cargados a la izquierda.</p>
     
     <div class="m-nlm-layout">
       <!-- Fuentes -->
@@ -207,7 +156,7 @@ window.GuiaModules['module-notebooklm'] = (function() {
   </div>
 </div>
 
-<!-- TAB 3: ESTRATEGIA REAL -->
+<!-- TAB 3: CASOS PRÁCTICOS -->
 <div id="m-nlm-cases" class="ag-content">
   <div class="section-card animate-in">
     <h3 style="color:#fbbf24; margin-top:0;">🧭 Tres Formas de Sacarle Valor a NotebookLM</h3>
@@ -216,40 +165,49 @@ window.GuiaModules['module-notebooklm'] = (function() {
     <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:14px; margin-top:18px;">
       <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:16px;">
         <div style="font-size:0.72rem; font-weight:800; color:#fbbf24; margin-bottom:8px;">CASO 1 · CONSULTA CON CITA</div>
-        <h4 style="margin:0 0 8px; color:#e2e8f0;">Responder una duda puntual con página exacta</h4>
-        <p style="font-size:0.78rem; color:#94a3b8; margin:0 0 10px;">Úsalo cuando alguien te pida: "¿Dónde dice eso?" y no quieras responder de memoria.</p>
-        <div style="font-size:0.76rem; color:#cbd5e1; line-height:1.8;">
-          1. Crea un cuaderno.<br>
-          2. Sube 1 o 2 PDFs.<br>
-          3. Haz una pregunta cerrada.<br>
-          4. Abre la cita naranja y verifica el párrafo.
-        </div>
+          <h4 style="margin:0 0 8px; color:#e2e8f0;">Consulta con cita exacta</h4>
+          <p style="font-size:0.78rem; color:#94a3b8; margin:0 0 10px;">Úsalo cuando necesites respuestas con trazabilidad y no quieras adivinar.</p>
+          <div style="margin: 12px 0; border-top: 1px solid rgba(251,191,36,0.1); padding-top: 10px;">
+            <p style="font-size: 0.72rem; color: #fbbf24; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Guía de Ejecución:</p>
+            <div style="font-size:0.76rem; color:#cbd5e1; line-height:1.8;">
+              1. Crea un cuaderno y sube tus PDFs.<br>
+              2. Haz una pregunta cerrada y puntual.<br>
+              3. Abre la cita naranja generada.<br>
+              4. Verifica el párrafo resaltado en el origen.
+            </div>
+          </div>
         <button class="kit-copy-btn" style="margin-top:10px;" onclick="nlmCopyAsset(this, 'En base únicamente a las fuentes cargadas, responde esta pregunta con cita exacta de página. Si la información no aparece, dilo de forma explícita y no inventes nada. Pregunta: [ESCRIBE AQUÍ TU DUDA].')">📋 Copiar Prompt del Caso 1</button>
       </div>
 
       <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:16px;">
         <div style="font-size:0.72rem; font-weight:800; color:#fbbf24; margin-bottom:8px;">CASO 2 · SÍNTESIS DE VARIAS FUENTES</div>
-        <h4 style="margin:0 0 8px; color:#e2e8f0;">Unificar 3 documentos en un solo resumen ejecutivo</h4>
-        <p style="font-size:0.78rem; color:#94a3b8; margin:0 0 10px;">Ideal para proyectos, auditorías, informes o procesos con documentación repartida.</p>
-        <div style="font-size:0.76rem; color:#cbd5e1; line-height:1.8;">
-          1. Sube 3 fuentes del mismo tema.<br>
-          2. Pide coincidencias y contradicciones.<br>
-          3. Solicita resumen en lenguaje simple.<br>
-          4. Revisa que las conclusiones tengan cita.
-        </div>
+          <h4 style="margin:0 0 8px; color:#e2e8f0;">Síntesis multifuente</h4>
+          <p style="font-size:0.78rem; color:#94a3b8; margin:0 0 10px;">Ideal para unificar informes o auditorías con documentación repartida.</p>
+          <div style="margin: 12px 0; border-top: 1px solid rgba(251,191,36,0.1); padding-top: 10px;">
+            <p style="font-size: 0.72rem; color: #fbbf24; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Guía de Ejecución:</p>
+            <div style="font-size:0.76rem; color:#cbd5e1; line-height:1.8;">
+              1. Sube al menos 3 fuentes relacionadas.<br>
+              2. Pide buscar coincidencias y vacíos.<br>
+              3. Solicita un informe en lenguaje simple.<br>
+              4. Revisa que cada idea tenga su cita.
+            </div>
+          </div>
         <button class="kit-copy-btn" style="margin-top:10px;" onclick="nlmCopyAsset(this, 'Usa todas las fuentes cargadas para construir un resumen ejecutivo de máximo 200 palabras. Incluye: 1) puntos en común, 2) diferencias o contradicciones, 3) riesgos o vacíos. Cada afirmación importante debe quedar respaldada por una cita.')">📋 Copiar Prompt del Caso 2</button>
       </div>
 
       <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:16px;">
         <div style="font-size:0.72rem; font-weight:800; color:#fbbf24; margin-bottom:8px;">CASO 3 · AUDIO OVERVIEW</div>
-        <h4 style="margin:0 0 8px; color:#e2e8f0;">Convertir un documento denso en una explicación audible</h4>
-        <p style="font-size:0.78rem; color:#94a3b8; margin:0 0 10px;">Muy útil para estudiar normas, manuales técnicos o informes que nadie quiere leer completos.</p>
-        <div style="font-size:0.76rem; color:#cbd5e1; line-height:1.8;">
-          1. Carga la fuente principal.<br>
-          2. Genera el Audio Overview.<br>
-          3. Escúchalo completo.<br>
-          4. Extrae 3 ideas accionables del audio.
-        </div>
+          <h4 style="margin:0 0 8px; color:#e2e8f0;">Audio Overview</h4>
+          <p style="font-size:0.78rem; color:#94a3b8; margin:0 0 10px;">Útil para estudiar manuales técnicos o informes densos de forma audible.</p>
+          <div style="margin: 12px 0; border-top: 1px solid rgba(251,191,36,0.1); padding-top: 10px;">
+            <p style="font-size: 0.72rem; color: #fbbf24; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Guía de Ejecución:</p>
+            <div style="font-size:0.76rem; color:#cbd5e1; line-height:1.8;">
+              1. Carga la fuente principal sugerida.<br>
+              2. Genera el Audio Overview (Podcast).<br>
+              3. Escucha el análisis de los locutores.<br>
+              4. Anota 3 ideas clave para tu área.
+            </div>
+          </div>
         <button class="kit-copy-btn" style="margin-top:10px;" onclick="nlmCopyAsset(this, 'Después de generar el Audio Overview, resume en 3 viñetas: qué entendiste, qué decisión puedes tomar y qué duda debes revisar de nuevo en el documento original.')">📋 Copiar Prompt del Caso 3</button>
       </div>
     </div>
@@ -279,8 +237,8 @@ window.GuiaModules['module-notebooklm'] = (function() {
       </div>
       <div class="m-nlm-panel">
         <h4>Estudio guiado</h4>
-        <div class="kit-copyblock">Convierte estas fuentes en una guía de estudio. Necesito: conceptos clave, explicación simple, 5 preguntas de repaso y 3 errores frecuentes de interpretación. Todo respaldado por las fuentes.</div>
-        <button class="kit-copy-btn" style="margin-top:10px;" onclick="nlmCopyAsset(this, 'Convierte estas fuentes en una guía de estudio. Necesito: conceptos clave, explicación simple, 5 preguntas de repaso y 3 errores frecuentes de interpretación. Todo respaldado por las fuentes.')">📋 Copiar</button>
+        <div class="kit-copyblock">Convierte estas fuentes en una guía de estudio. Necesito: conceptos clave, explanation simple, 5 preguntas de repaso y 3 errores frecuentes de interpretación. Todo respaldado por las fuentes.</div>
+        <button class="kit-copy-btn" style="margin-top:10px;" onclick="nlmCopyAsset(this, 'Convierte estas fuentes en una guía de estudio. Necesito: conceptos clave, explanation simple, 5 preguntas de repaso y 3 errores frecuentes de interpretación. Todo respaldado por las fuentes.')">📋 Copiar</button>
       </div>
       <div class="m-nlm-panel">
         <h4>Preparar decisión</h4>
@@ -311,38 +269,7 @@ window.GuiaModules['module-notebooklm'] = (function() {
   </div>
 </div>
 
-<!-- TAB 4: ESTRATEGIA REAL -->
 <div id="m-nlm-estrategia" class="ag-content">
-  <style>
-    .kit-header { background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(251,191,36,0.03)); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-    .kit-badge { background: #f59e0b; color: #000; padding: 3px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 800; display: inline-block; margin-bottom: 8px; }
-    .kit-title { font-size: 1.1rem; font-weight: 800; color: #f59e0b; margin: 0 0 6px; }
-    .kit-sub { font-size: 0.85rem; color: #94a3b8; margin: 0; }
-    .kit-assets { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
-    .kit-asset { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 12px 15px; display: flex; align-items: center; gap: 12px; }
-    .kit-asset-icon { font-size: 1.4rem; flex-shrink: 0; }
-    .kit-asset-body { flex: 1; }
-    .kit-asset-name { font-weight: 700; font-size: 0.85rem; color: #e2e8f0; margin: 0 0 2px; }
-    .kit-asset-desc { font-size: 0.75rem; color: #64748b; margin: 0; }
-    .kit-copy-btn { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); color: #f59e0b; padding: 5px 12px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; cursor: pointer; white-space: nowrap; transition: 0.2s; }
-    .kit-copy-btn:hover { background: rgba(251,191,36,0.25); }
-    .kit-copy-btn.copied { background: rgba(16,185,129,0.2); border-color: #10b981; color: #10b981; }
-    .kit-steps { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
-    .kit-step { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); cursor: pointer; transition: 0.2s; }
-    .kit-step:hover { background: rgba(255,255,255,0.03); }
-    .kit-step.done { border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.05); }
-    .kit-step-check { width: 20px; height: 20px; border: 2px solid #475569; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; margin-top: 2px; transition: 0.2s; }
-    .kit-step.done .kit-step-check { background: #10b981; border-color: #10b981; color: #fff; }
-    .kit-step-body { flex: 1; }
-    .kit-step-title { font-weight: 700; font-size: 0.85rem; color: #e2e8f0; margin: 0 0 4px; }
-    .kit-step-detail { font-size: 0.78rem; color: #64748b; margin: 0; line-height: 1.5; }
-    .kit-step-tip { font-size: 0.72rem; background: rgba(251,191,36,0.08); border-left: 2px solid #f59e0b; padding: 4px 8px; border-radius: 0 4px 4px 0; color: #fbbf24; margin-top: 6px; }
-    .kit-step-xp { font-size: 0.7rem; font-weight: 800; color: #10b981; margin-left: auto; flex-shrink: 0; padding-top: 2px; }
-    .kit-copyblock { background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 12px 14px; font-family: monospace; font-size: 0.78rem; color: #a78bfa; line-height: 1.6; white-space: pre-wrap; position: relative; }
-    .kit-result-box { background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.3); border-radius: 8px; padding: 14px; margin-top: 16px; }
-    .kit-xp-total { background: linear-gradient(135deg, #10b981, #059669); color: #fff; border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; margin-top: 16px; font-weight: 800; }
-  </style>
-
   <div class="section-card animate-in">
     <!-- Kit Header -->
     <div class="kit-header">
@@ -393,52 +320,54 @@ window.GuiaModules['module-notebooklm'] = (function() {
     </div>
 
     <!-- Checklist de Pasos -->
-    <h4 style="color:#f59e0b; margin: 16px 0 10px;">✅ Ejecuta la Estrategia</h4>
+    <h4 style="color:#f59e0b; margin: 16px 0 10px;">✅ Ejecuta la Estrategia Paso a Paso</h4>
+    <p style="color: #94a3b8; font-size: 0.8rem; margin-bottom: 12px;">Haz clic en cada paso para simular su ejecución y ganar XP.</p>
+    
     <ul class="kit-steps" id="nlm-steps">
       <li class="kit-step" onclick="nlmCheckStep(this, 0, 30)">
         <div class="kit-step-check">✓</div>
         <div class="kit-step-body">
-          <p class="kit-step-title">Abre notebooklm.google.com e inicia sesión con tu cuenta Google</p>
-          <p class="kit-step-detail">Haz clic en el botón azul "Nuevo cuaderno". Ponle nombre: <b>"Auditoría Contratos 2025"</b>.</p>
-          <div class="kit-step-tip">💡 Funciona 100% gratis — no necesitas plan de pago.</div>
+          <p class="kit-step-title">Abre notebooklm.google.com e inicia sesión</p>
+          <p class="kit-step-detail">Crea un nuevo cuaderno llamado <b>"Auditoría Contratos 2025"</b>.</p>
+          <div class="kit-step-tip">💡 Funciona 100% gratis con tu cuenta personal o Workspace.</div>
         </div>
         <span class="kit-step-xp">+30 XP</span>
       </li>
       <li class="kit-step" onclick="nlmCheckStep(this, 1, 40)">
         <div class="kit-step-check">✓</div>
         <div class="kit-step-body">
-          <p class="kit-step-title">Sube mínimo 2 documentos de tu entidad como fuentes</p>
-          <p class="kit-step-detail">Puede ser un contrato en PDF, el Estatuto de Contratación (URL arriba) o cualquier política interna. O usa el link copiado del Maletín.</p>
-          <div class="kit-step-tip">💡 Acepta PDFs, DOCX, TXT, URLs y hasta videos de YouTube.</div>
+          <p class="kit-step-title">Sube fuentes críticas (PDF/URL)</p>
+          <p class="kit-step-detail">Carga la Ley 80 de Contratación o cualquier manual técnico de tu área.</p>
+          <div class="kit-step-tip">💡 NotebookLM puede procesar hasta 500,000 palabras por fuente.</div>
         </div>
         <span class="kit-step-xp">+40 XP</span>
       </li>
       <li class="kit-step" onclick="nlmCheckStep(this, 2, 50)">
         <div class="kit-step-check">✓</div>
         <div class="kit-step-body">
-          <p class="kit-step-title">Pega el Prompt Maestro #1 en el chat y analiza los riesgos</p>
-          <p class="kit-step-detail">Copia el prompt de búsqueda de cláusulas (botón del Maletín) y pégalo en el campo de chat de NotebookLM. Observa cómo cada respuesta viene acompañada de una <b>cita con número de página</b>.</p>
-          <div class="kit-step-tip">💡 Haz clic en la cita naranja para ir directo al párrafo en el PDF.</div>
+          <p class="kit-step-title">Identifica Cláusulas de Riesgo con Prompt Maestro</p>
+          <p class="kit-step-detail">Usa el prompt del maletín para encontrar sanciones y fechas críticas.</p>
+          <div class="kit-step-tip">💡 Haz clic en las citas naranjas para ver la evidencia en el PDF.</div>
         </div>
         <span class="kit-step-xp">+50 XP</span>
       </li>
-      <li class="kit-step" onclick="nlmCheckStep(this, 3, 40)">
+      <li class="kit-step" onclick="nlmCheckStep(this, 3, 60)">
         <div class="kit-step-check">✓</div>
         <div class="kit-step-body">
-          <p class="kit-step-title">Genera el Resumen Ejecutivo con el Prompt #2</p>
-          <p class="kit-step-detail">Usa el Prompt Maestro #2. El resultado debe ser un texto listo para enviárselo directamente a tu jefe sin edición.</p>
-          <div class="kit-step-tip">💡 Si el resumen es muy largo, añade: "Hazlo más corto, máximo 150 palabras".</div>
+          <p class="kit-step-title">Genera y Personaliza el Audio Overview</p>
+          <p class="kit-step-detail">Crea la charla tipo podcast entre dos expertos analizando tus fuentes.</p>
+          <div class="kit-step-tip">💡 ¡Novedad 2025! Ahora puedes guiar la charla pidiendo temas específicos.</div>
         </div>
-        <span class="kit-step-xp">+40 XP</span>
+        <span class="kit-step-xp">+60 XP</span>
       </li>
-      <li class="kit-step" onclick="nlmCheckStep(this, 4, 90)">
+      <li class="kit-step" onclick="nlmCheckStep(this, 4, 70)">
         <div class="kit-step-check">✓</div>
         <div class="kit-step-body">
-          <p class="kit-step-title">Genera el Audio Overview del contrato</p>
-          <p class="kit-step-detail">En el panel derecho de NotebookLM, busca la sección <b>"Audio Overview"</b> y haz clic en "Generar". Espera 2-3 minutos. Escucha cómo dos locutores analizan tu contrato como un podcast.</p>
-          <div class="kit-step-tip">💡 Resultado esperado: audio de 8-12 minutos con tono conversacional y datos del documento.</div>
+          <p class="kit-step-title">Exporta Resumen a Google Docs</p>
+          <p class="kit-step-detail">Convierte tus hallazgos en un documento formal con un solo clic.</p>
+          <div class="kit-step-tip">💡 Ideal para pasar de la investigación a la acción en segundos.</div>
         </div>
-        <span class="kit-step-xp">+90 XP</span>
+        <span class="kit-step-xp">+70 XP</span>
       </li>
     </ul>
 
@@ -449,7 +378,6 @@ window.GuiaModules['module-notebooklm'] = (function() {
   </div>
 </div>
 
-<!-- TAB 5: RETO FINAL -->
 <div id="m-nlm-mission" class="ag-content">
   <div class="exercise-box mission-card animate-in">
     <div class="exercise-header"><span class="exercise-icon">📓</span><span class="exercise-title">Reto Final: Tu Oráculo Documental</span></div>
@@ -477,116 +405,129 @@ window.GuiaModules['module-notebooklm'] = (function() {
 
 <div class="module-nav">
   <button class="gl-btn gl-btn-primary" data-goto="welcome">← Volver al Menú Bonus</button>
-</div>
+</div>`;
 
-<script>
-  // Tabs logic
-  setTimeout(() => {
-    const parent = document.getElementById('module-notebooklm');
-    if(!parent) return;
-    const tabs = parent.querySelectorAll('.tab-btn');
-    const contents = parent.querySelectorAll('.ag-content');
-    
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            contents.forEach(c => c.classList.remove('active'));
-            tab.classList.add('active');
-            const targetId = tab.dataset.tab;
-            const content = parent.querySelector('#' + targetId);
-            if (content) content.classList.add('active');
-        });
-    });
-  }, 300);
 
-  // Kit de Estrategia Real
-  window.nlmCopyAsset = function(btn, text) {
-    navigator.clipboard.writeText(text).catch(() => {});
-    btn.textContent = '✅ Copiado';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = btn.textContent.includes('URL') ? '🔗 Copiar URL' : '📋 Copiar Prompt'; btn.classList.remove('copied'); }, 2500);
-    if(window.app) window.app.addXP(5);
-  };
-
-  let nlmStepXP = [false, false, false, false, false];
-  let nlmTotalXP = 0;
-  const nlmStepValues = [30, 40, 50, 40, 90];
-
-  window.nlmCheckStep = function(el, idx, xp) {
-    if(nlmStepXP[idx]) return;
-    nlmStepXP[idx] = true;
-    el.classList.add('done');
-    nlmTotalXP += xp;
-    if(window.app) window.app.addXP(xp);
-    const counter = document.getElementById('nlm-xp-count');
-    if(counter) counter.textContent = nlmTotalXP + ' / 250 XP';
-    const totalBox = document.getElementById('nlm-xp-total');
-    if(totalBox && nlmTotalXP >= 250) totalBox.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
-  };
-
-  // Funciones Interactivas
-  window.mNlmAddSource = function(btn) {
-    const p = btn.parentElement;
-    const d = document.createElement('div');
-    d.className = 'm-nlm-source-item';
-    d.innerHTML = '<span class="m-nlm-source-icon">🌐</span><span class="m-nlm-source-text">Conocimiento_Nuevo.txt</span>';
-    p.insertBefore(d, btn);
-    btn.innerHTML = '<span>✔️</span> Fuente Agregada';
-    btn.style.borderColor = '#10b981';
-    btn.style.color = '#10b981';
-    if(window.app) window.app.addXP(10);
-  };
-
-  window.mNlmPlayAudio = function() {
-    const btn = document.getElementById('nlm-play');
-    const wave = document.getElementById('nlm-wave');
-    const title = document.getElementById('nlm-a-title');
-    const sub = document.getElementById('nlm-a-sub');
-    
-    if(btn.innerText === '▶') {
-      btn.innerText = '⏸';
-      title.innerText = "Deep Dive en Progreso...";
-      sub.innerText = "Simulando voces de los presentadores...";
-      wave.style.display = 'block';
-      if(window.app) window.app.addXP(25);
-    } else {
-      btn.innerText = '▶';
-      wave.style.display = 'none';
-      title.innerText = "Audio Pausado";
+  const nlmInstance = {
+    init: function(app) {
+      console.log('Initialized module-notebooklm.js');
+      const target = document.getElementById('module-notebooklm');
+      if (target && !target.querySelector('.module-header')) {
+        target.insertAdjacentHTML('afterbegin', nlmHTML);
+        setupNlmHandlers(target);
+      }
     }
   };
 
-  window.mNlmChat = function() {
-    const input = document.getElementById('nlm-input-val');
-    const box = document.getElementById('nlm-chat-box');
-    const val = input.value.trim();
-    if(!val) return;
-    
-    // User message
-    box.innerHTML += \`<div class="m-nlm-msg user">\${val}</div>\`;
-    input.value = '';
-    
-    // Scroll
-    box.scrollTop = box.scrollHeight;
-    
-    setTimeout(() => {
-      let r = '';
-      if(val.toLowerCase().includes('presupuesto') || val.toLowerCase().includes('2024')) {
-        r = 'De acuerdo al documento <span class="m-nlm-citation" onclick="alert(\\'Iría a Pág 14 del CSV\\')">2</span>, el presupuesto 2024 asigna mayor capital a infraestructura respecto a 2023. Esto contradice la matriz de la <span class="m-nlm-citation" onclick="alert(\\'Iría al Art. 5\\')">1</span> Ley 1712 que pedía austeridad.';
-      } else {
-        r = 'Basado en las directrices del documento de Transparencia <span class="m-nlm-citation" onclick="alert(\\'Hiciste click en la cita: Pág 3, Párrafo 2\\')">1</span>, tu entidad debe publicar el extracto en los primeros 5 días hábiles.';
-      }
-      box.innerHTML += \`<div class="m-nlm-msg ai">\${r}</div>\`;
-      box.scrollTop = box.scrollHeight;
-      if(window.app) window.app.addXP(15);
-    }, 1000);
-  };
-</script>
-`;
+  function setupNlmHandlers(parent) {
+      const tabs = parent.querySelectorAll('.tab-btn');
+      const contents = parent.querySelectorAll('.ag-content');
+      
+      tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+              tabs.forEach(t => t.classList.remove('active'));
+              contents.forEach(c => c.classList.remove('active'));
+              tab.classList.add('active');
+              const targetId = tab.dataset.tab;
+              const content = parent.querySelector('#' + targetId);
+              if (content) content.classList.add('active');
+          });
+      });
 
-  const target = document.getElementById('module-notebooklm');
-  if (target) {
-    target.innerHTML = nlmHTML;
+      window.nlmCopyAsset = function(btn, text) {
+        navigator.clipboard.writeText(text).catch(() => {});
+        const origText = btn.innerHTML;
+        btn.innerHTML = '✅ Copiado';
+        btn.style.color = '#fbbf24';
+        setTimeout(() => {
+          btn.innerHTML = origText;
+          btn.style.color = '';
+        }, 2000);
+        if (window.app) window.app.addXP(5);
+      };
+
+      window.nlmCheckStep = function(li, index, xp) {
+        if (li.classList.contains('completed')) return;
+        li.classList.add('completed');
+        li.style.borderLeft = '4px solid #10b981';
+        li.style.background = 'rgba(16,185,129,0.05)';
+        if (window.app) window.app.addXP(xp);
+        
+        // Animación de la marca de verificación
+        const check = li.querySelector('.kit-step-check');
+        if (check) {
+          check.style.background = '#10b981';
+          check.style.borderColor = '#10b981';
+          check.style.color = '#fff';
+          check.style.transform = 'scale(1.2)';
+        }
+
+        // Actualizar contador total
+        const countElem = document.getElementById('nlm-xp-count');
+        if (countElem) {
+          const current = parseInt(countElem.innerText.split(' / ')[0]) + xp;
+          countElem.innerText = current + ' / 250 XP';
+        }
+      };
+
+      // Simulación de Chat
+      window.mNlmChat = function() {
+        const input = document.getElementById('nlm-input-val');
+        const box = document.getElementById('nlm-chat-box');
+        if (!input || !box || input.value.trim() === '') return;
+
+        const uMsg = document.createElement('div');
+        uMsg.className = 'm-nlm-msg user';
+        uMsg.innerText = input.value;
+        box.appendChild(uMsg);
+        const q = input.value;
+        input.value = '';
+        box.scrollTop = box.scrollHeight;
+
+        setTimeout(() => {
+          const aiMsg = document.createElement('div');
+          aiMsg.className = 'm-nlm-msg ai';
+          aiMsg.innerHTML = '<div class="m-nlm-spinner-small"></div> Analizando fuentes...';
+          box.appendChild(aiMsg);
+          box.scrollTop = box.scrollHeight;
+
+          setTimeout(() => {
+            let res = "Basado en los documentos cargados: ";
+            if (q.toLowerCase().includes('presupuesto')) {
+              res = "El Presupuesto Anual 2024 (fuente 2) indica un total de 667M. Se detecta una desviación crítica en 'Acabados' [pág. 12].";
+            } else if (q.toLowerCase().includes('transparencia') || q.toLowerCase().includes('ley')) {
+              res = "La Ley 1712 de Transparencia (fuente 1) obliga en su Art. 9 a publicar proactivamente la información contractual [pág. 4].";
+            } else {
+              res = "He encontrado información relevante en la Directiva 03 sobre la optimización de recursos y la urgencia de contratación [pág. 2].";
+            }
+            aiMsg.innerHTML = res + " <span class='m-nlm-citation' title='Ver fuente' onclick='alert(\"Abriendo PDF en pág. correlacionada...\")'>[1]</span>";
+            box.scrollTop = box.scrollHeight;
+            if (window.app) window.app.addXP(20);
+          }, 1500);
+        }, 500);
+      };
+
+      // Simulación Audio
+      let playing = false;
+      window.mNlmPlayAudio = function() {
+        const btn = document.getElementById('nlm-play');
+        const wave = document.getElementById('nlm-wave');
+        const title = document.getElementById('nlm-a-title');
+        
+        if (!playing) {
+          playing = true;
+          btn.innerText = '⏸';
+          wave.classList.add('active');
+          title.innerText = 'Reproduciendo Audio Overview...';
+          if (window.app) window.app.addXP(30);
+        } else {
+          playing = false;
+          btn.innerText = '▶';
+          wave.classList.remove('active');
+          title.innerText = 'Audio Overview Pausado';
+        }
+      };
   }
-  return { init: function(app) { console.log('Initialized module-notebooklm.js'); } };
+
+  return nlmInstance;
 })();

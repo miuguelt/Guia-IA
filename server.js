@@ -6,7 +6,7 @@ const cors = require('cors');
 const fs = require('fs');
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8080;
 const DB_PATH = path.join(__dirname, 'src/data/leaderboard.db');
 
 // Ensure data directory exists
@@ -119,9 +119,20 @@ app.post('/api/leaderboard', async (req, res) => {
 // Health check
 app.get('/health', (req, res) => res.send('OK - Antigravity Ledger Online'));
 
+const { updateMetrics } = require('./scripts/update_metrics');
+
+app.use((req, res, next) => {
+    console.log(`[REQ] ${req.method} ${req.url} - ${new Date().toLocaleTimeString()}`);
+    next();
+});
+
 initDB().then(() => {
-    app.listen(PORT, () => {
-        console.log(`🚀 Antigravity Node Server running on http://localhost:${PORT}`);
+    app.listen(PORT, '0.0.0.0', () => {
+        console.log(`🚀 [DEB_SYNC_V14] Server on http://0.0.0.0:${PORT}`);
         console.log(`🧬 SQLite Registry Active at: ${DB_PATH}`);
+        
+        // Start Sovereign Telemetry Loop
+        updateMetrics();
+        setInterval(updateMetrics, 30000); // 30s Loop
     });
 });

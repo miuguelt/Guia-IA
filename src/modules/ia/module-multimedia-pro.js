@@ -6,42 +6,6 @@ window.GuiaModules['module-multimedia-pro'] = (function() {
    ═══════════════════════════════════════════ */
 
   const mediaHTML = `
-<style>
-  .m-mm-hero { background: linear-gradient(135deg, rgba(236,72,153,0.12), rgba(139,92,246,0.08)); border: 1px solid rgba(236,72,153,0.24); border-radius: 18px; padding: 22px; margin-bottom: 22px; }
-  .m-mm-chip-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
-  .m-mm-chip { background: rgba(255,255,255,0.04); border:1px solid rgba(236,72,153,0.22); color:#fbcfe8; border-radius:999px; padding:8px 12px; font-size:0.75rem; font-weight:700; }
-  .m-mm-grid-2 { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:16px; }
-  .m-mm-grid-3 { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:16px; }
-  .m-mm-panel { background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:18px; }
-  .m-mm-note { background: rgba(236,72,153,0.08); border-left:3px solid #ec4899; border-radius:10px; padding:12px 14px; color:#fbcfe8; font-size:0.8rem; line-height:1.7; }
-  .m-mm-step { display:flex; gap:12px; align-items:flex-start; padding:12px 0; border-top:1px solid rgba(255,255,255,0.05); }
-  .m-mm-step:first-child { border-top:none; padding-top:0; }
-  .m-mm-step-badge { width:28px; height:28px; border-radius:999px; background:rgba(236,72,153,0.18); border:1px solid rgba(236,72,153,0.35); color:#f9a8d4; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:800; flex-shrink:0; }
-  .m-mm-card { background: #111827; border: 1px solid #374151; border-radius: 12px; padding: 25px; position: relative; overflow: hidden; margin-bottom: 20px;}
-  .m-mm-header-bg { position: absolute; top:0; left:0; width:100%; height:80px; background: linear-gradient(180deg, rgba(236,72,153,0.1) 0%, transparent 100%); pointer-events:none; }
-  
-  .m-mm-prompt-builder { background: #1f2937; border: 1px solid #4b5563; border-radius: 8px; padding: 20px; display: grid; gap: 15px;}
-  .m-mm-label { font-size: 0.8rem; color: #9ca3af; font-weight: 700; text-transform: uppercase; margin-bottom: 5px;}
-  .m-mm-select { width: 100%; background: #374151; border: 1px solid #4b5563; color: #fff; padding: 10px; border-radius: 6px; outline: none; transition: 0.2s;}
-  .m-mm-select:focus { border-color: #ec4899; }
-  
-  .m-mm-final-prompt { background: #000; padding: 15px; border-radius: 6px; font-family: monospace; color: #a78bfa; font-size: 0.85rem; border: 1px dashed #6b7280; min-height: 50px;}
-  
-  .m-mm-canvas { width: 100%; height: 300px; background: #030712; border-radius: 8px; margin-top: 20px; border: 1px solid #374151; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow:hidden;}
-  
-  .m-mm-loader { display: none; flex-direction: column; align-items: center; gap: 10px;}
-  .m-mm-loader.active { display: flex; }
-  .m-mm-pbar { width: 200px; height: 6px; background: #374151; border-radius: 3px; overflow: hidden;}
-  .m-mm-pfill { width: 0%; height: 100%; background: linear-gradient(90deg, #ec4899, #8b5cf6); transition: width 0.1s linear;}
-  
-  .m-mm-result-img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; opacity: 0; transition: opacity 0.5s;}
-  .m-mm-result-img.active { opacity: 1; }
-  
-  .m-mm-gen-btn { background: linear-gradient(90deg, #ec4899, #8b5cf6); color: #fff; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: 700; transition: transform 0.2s; align-self: center; display: inline-block; margin-top: 15px;}
-  .m-mm-gen-btn:hover { transform: scale(1.05); }
-  @media (max-width: 900px) { .m-mm-grid-3, .m-mm-grid-2 { grid-template-columns:1fr; } }
-  
-</style>
 
 <div class="module-header premium-header" style="background: linear-gradient(135deg, rgba(236,72,153,0.1), rgba(139,92,246,0.1)); border: 1px solid rgba(236,72,153,0.3);">
   <div class="module-number gamer-badge" style="background:#ec4899;color:#fff;">BONUS: CREATIVIDAD</div>
@@ -74,6 +38,7 @@ window.GuiaModules['module-multimedia-pro'] = (function() {
   <button class="tab-btn" data-tab="m-mm-cases">🧭 Casos Prácticos</button>
   <button class="tab-btn" data-tab="m-mm-prompts">🧠 Prompts Maestros</button>
   <button class="tab-btn" data-tab="m-mm-antipatterns">🚫 Errores</button>
+  <button class="tab-btn" data-tab="m-mm-estrategia">🎯 Estrategia Real</button>
   <button class="tab-btn" data-tab="m-mm-mission">🏆 Reto Final</button>
 </div>
 
@@ -219,24 +184,48 @@ window.GuiaModules['module-multimedia-pro'] = (function() {
         <div style="font-size:0.72rem;font-weight:800;color:#f9a8d4;margin-bottom:8px;">CASO 1 · PIEZA INSTITUCIONAL</div>
         <h4 style="margin:0 0 8px;color:#fff;">Banner para curso o evento</h4>
         <p style="font-size:0.78rem;color:#cbd5e1; margin:0 0 10px;">Genera una portada visual para clases, campañas o convocatorias.</p>
-        <div style="font-size:0.75rem; color:#cbd5e1; line-height:1.8;">1. Define el evento.<br>2. Elige formato 16:9 o 1:1.<br>3. Genera 3 variaciones.<br>4. Quédate con la más clara y usable.</div>
-        <div style="font-size:0.72rem; color:#f9a8d4; margin-top:8px;">Resultado esperado: una imagen que pueda ir directo a una presentación o publicación.</div>
+        <div style="margin: 12px 0; border-top: 1px solid rgba(236,72,153,0.1); padding-top: 10px;">
+          <p style="font-size: 0.72rem; color: #f9a8d4; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Guía de Ejecución:</p>
+          <div style="font-size:0.75rem; color:#cbd5e1; line-height:1.8;">
+            1. Define el objetivo del evento.<br>
+            2. Elige el formato (16:9 para web, 1:1 para post).<br>
+            3. Usa el generador para armar tu prompt base.<br>
+            4. Genera y elige la versión más limpia.
+          </div>
+        </div>
+        <div style="font-size:0.72rem; color:#f9a8d4; margin-top:8px;">Resultado esperado: una imagen que pueda ir directo a una publicación.</div>
         <button class="gl-btn gl-btn-outline" style="width:100%; margin-top:10px; border-color:#ec4899; color:#ec4899;" onclick="mMmCopyPrompt(this, 'Diseña un banner institucional para [NOMBRE DEL EVENTO], estilo limpio y profesional, composición clara, texto no incrustado, iluminación cinematográfica suave, formato horizontal 16:9, alta definición.')">📋 Copiar Prompt del Caso 1</button>
       </div>
       <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:12px;border:1px solid rgba(236,72,153,0.2);">
         <div style="font-size:0.72rem;font-weight:800;color:#f9a8d4;margin-bottom:8px;">CASO 2 · PRESENTACIÓN</div>
-        <h4 style="margin:0 0 8px;color:#fff;">Imagen para diapositiva o portada</h4>
-        <p style="font-size:0.78rem;color:#cbd5e1; margin:0 0 10px;">Útil para reforzar presentaciones, informes o propuestas sin depender de bancos de imágenes genéricos.</p>
-        <div style="font-size:0.75rem; color:#cbd5e1; line-height:1.8;">1. Define el concepto central.<br>2. Pide una sola escena potente.<br>3. Ajusta color y encuadre.<br>4. Usa la versión final como portada.</div>
-        <div style="font-size:0.72rem; color:#f9a8d4; margin-top:8px;">Resultado esperado: una portada visual coherente con el tema, no una imagen genérica.</div>
+        <h4 style="margin:0 0 8px;color:#fff;">Imagen para diapositiva</h4>
+        <p style="font-size:0.78rem;color:#cbd5e1; margin:0 0 10px;">Útil para reforzar presentaciones, informes o propuestas profesionales.</p>
+        <div style="margin: 12px 0; border-top: 1px solid rgba(236,72,153,0.1); padding-top: 10px;">
+          <p style="font-size: 0.72rem; color: #f9a8d4; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Guía de Ejecución:</p>
+          <div style="font-size:0.75rem; color:#cbd5e1; line-height:1.8;">
+            1. Define el concepto central de la diapositiva.<br>
+            2. Pide una escena conceptual minimalista.<br>
+            3. Asegura que haya espacio para texto (negativo).<br>
+            4. Exporta en alta definición (HD).
+          </div>
+        </div>
+        <div style="font-size:0.72rem; color:#f9a8d4; margin-top:8px;">Resultado esperado: una portada visual coherente con el tema.</div>
         <button class="gl-btn gl-btn-outline" style="width:100%; margin-top:10px; border-color:#ec4899; color:#ec4899;" onclick="mMmCopyPrompt(this, 'Crea una imagen conceptual para una presentación sobre [TEMA], estilo moderno, composición minimalista, foco visual claro, iluminación profesional, lista para portada de diapositiva, formato 16:9.')">📋 Copiar Prompt del Caso 2</button>
       </div>
       <div style="background:rgba(255,255,255,0.03);padding:16px;border-radius:12px;border:1px solid rgba(236,72,153,0.2);">
         <div style="font-size:0.72rem;font-weight:800;color:#f9a8d4;margin-bottom:8px;">CASO 3 · STORYBOARD</div>
         <h4 style="margin:0 0 8px;color:#fff;">Escenas para video corto</h4>
-        <p style="font-size:0.78rem;color:#cbd5e1; margin:0 0 10px;">Perfecto para campañas, reels o guiones visuales antes de producir un video.</p>
-        <div style="font-size:0.75rem; color:#cbd5e1; line-height:1.8;">1. Define escena 1, 2 y 3.<br>2. Mantén mismo estilo visual.<br>3. Cambia solo acción o encuadre.<br>4. Usa las escenas como storyboard.</div>
-        <div style="font-size:0.72rem; color:#f9a8d4; margin-top:8px;">Resultado esperado: tres imágenes coherentes entre sí y útiles para secuenciar un mensaje.</div>
+        <p style="font-size:0.78rem;color:#cbd5e1; margin:0 0 10px;">Perfecto para campañas, reels o guiones visuales antes de producir.</p>
+        <div style="margin: 12px 0; border-top: 1px solid rgba(236,72,153,0.1); padding-top: 10px;">
+          <p style="font-size: 0.72rem; color: #f9a8d4; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Guía de Ejecución:</p>
+          <div style="font-size:0.75rem; color:#cbd5e1; line-height:1.8;">
+            1. Describe la secuencia (inicio, nudo, desenlace).<br>
+            2. Mantén la misma paleta de colores en el prompt.<br>
+            3. Cambia solo la acción del sujeto.<br>
+            4. Ordena las imágenes en un visor de diapositivas.
+          </div>
+        </div>
+        <div style="font-size:0.72rem; color:#f9a8d4; margin-top:8px;">Resultado esperado: tres imágenes coherentes para secuenciar un mensaje.</div>
         <button class="gl-btn gl-btn-outline" style="width:100%; margin-top:10px; border-color:#ec4899; color:#ec4899;" onclick="mMmCopyPrompt(this, 'Genera un storyboard visual de 3 escenas para un video corto sobre [TEMA]. Mantén el mismo estilo artístico, misma paleta de color y coherencia cinematográfica entre las tres escenas.')">📋 Copiar Prompt del Caso 3</button>
       </div>
     </div>
@@ -244,35 +233,114 @@ window.GuiaModules['module-multimedia-pro'] = (function() {
 </div>
 
 <div id="m-mm-prompts" class="ag-content">
-  <div class="section-card animate-in">
-    <h3 style="margin-top:0;">🧠 Prompts Maestros para producción visual</h3>
-    <p style="color:#cbd5e1;">Estas plantillas sirven como punto de partida profesional. Cambia el tema, la audiencia y el tono, pero mantén la lógica.</p>
-    <div class="m-mm-grid-2" style="margin-top:18px;">
-      <div class="m-mm-card">
-        <h4 style="margin-top:0; color:#fff;">Portada de presentación</h4>
-        <div style="font-size:0.76rem; color:#f5d0fe; line-height:1.8;" id="mm-master-cover">Crea una imagen conceptual para una presentacion sobre [tema], orientada a [audiencia], con composicion limpia, foco visual unico, estilo moderno y profesional, sin texto incrustado, iluminacion cinematografica suave, formato horizontal 16:9, alta definicion.</div>
-        <button class="m-mm-gen-btn" style="width:100%;" onclick="mMmCopyPrompt(this, document.getElementById('mm-master-cover').innerText)">📋 Copiar prompt</button>
+  <div class="section-card animate-in m-mm-master-shell">
+    <div class="m-mm-master-intro">
+      <div>
+        <div class="m-mm-kicker">Biblioteca premium</div>
+        <h3 style="margin:0; color:#fff;">🧠 Prompts Maestros para producción visual</h3>
       </div>
-      <div class="m-mm-card">
-        <h4 style="margin-top:0; color:#fff;">Mini campaña institucional</h4>
-        <div style="font-size:0.76rem; color:#f5d0fe; line-height:1.8;" id="mm-master-campaign">Disena una escena principal para una campana sobre [tema], con tono [tono], orientada a [publico], paleta coherente con comunicacion institucional, imagen clara y confiable, composicion preparada para usar en banner o post, sin tipografia incrustada, version cuadrada 1:1 y version horizontal 16:9.</div>
-        <button class="m-mm-gen-btn" style="width:100%;" onclick="mMmCopyPrompt(this, document.getElementById('mm-master-campaign').innerText)">📋 Copiar prompt</button>
+      <div class="m-mm-master-tip">Cambia tema, audiencia y tono. Conserva intención, formato y dirección de arte.</div>
+    </div>
+    <p class="m-mm-master-copy">Cada plantilla ya viene pensada para producir piezas útiles, no imágenes genéricas. Están escritas para comunicar mejor en contextos de presentación, campaña, video y venta.</p>
+    <div class="m-mm-grid-2 m-mm-master-grid" style="margin-top:18px;">
+      <div class="m-mm-card m-mm-master-card">
+        <div class="m-mm-master-top">
+          <span class="m-mm-master-badge">Presentaciones</span>
+          <span class="m-mm-master-format">16:9</span>
+        </div>
+        <h4 class="m-mm-master-title">Portada de presentación</h4>
+        <p class="m-mm-master-desc">Para abrir clases, propuestas o informes con una imagen fuerte y limpia.</p>
+        <div class="m-mm-master-prompt" id="mm-master-cover">Crea una imagen conceptual para una presentacion sobre [tema], orientada a [audiencia], con composicion limpia, foco visual unico, estilo moderno y profesional, sin texto incrustado, iluminacion cinematografica suave, formato horizontal 16:9, alta definicion.</div>
+        <button class="m-mm-gen-btn m-mm-master-btn" onclick="mMmCopyPrompt(this, document.getElementById('mm-master-cover').innerText)">📋 Copiar prompt</button>
       </div>
-      <div class="m-mm-card">
-        <h4 style="margin-top:0; color:#fff;">Storyboard de video</h4>
-        <div style="font-size:0.76rem; color:#f5d0fe; line-height:1.8;" id="mm-master-storyboard">Genera un storyboard visual de 4 escenas para un video corto sobre [tema]. Mantén mismo estilo cinematografico, misma paleta de color y coherencia de personajes. Escena 1: apertura. Escena 2: problema. Escena 3: solucion. Escena 4: cierre inspirador.</div>
-        <button class="m-mm-gen-btn" style="width:100%;" onclick="mMmCopyPrompt(this, document.getElementById('mm-master-storyboard').innerText)">📋 Copiar prompt</button>
+      <div class="m-mm-card m-mm-master-card">
+        <div class="m-mm-master-top">
+          <span class="m-mm-master-badge">Institucional</span>
+          <span class="m-mm-master-format">1:1 + 16:9</span>
+        </div>
+        <h4 class="m-mm-master-title">Mini campaña institucional</h4>
+        <p class="m-mm-master-desc">Útil para banners, convocatorias, piezas internas o comunicación pública.</p>
+        <div class="m-mm-master-prompt" id="mm-master-campaign">Disena una escena principal para una campana sobre [tema], con tono [tono], orientada a [publico], paleta coherente con comunicacion institucional, imagen clara y confiable, composicion preparada para usar en banner o post, sin tipografia incrustada, version cuadrada 1:1 y version horizontal 16:9.</div>
+        <button class="m-mm-gen-btn m-mm-master-btn" onclick="mMmCopyPrompt(this, document.getElementById('mm-master-campaign').innerText)">📋 Copiar prompt</button>
       </div>
-      <div class="m-mm-card">
-        <h4 style="margin-top:0; color:#fff;">Mockup de producto o servicio</h4>
-        <div style="font-size:0.76rem; color:#f5d0fe; line-height:1.8;" id="mm-master-mockup">Crea un mockup visual para presentar [producto o servicio], con ambiente realista, composicion elegante, foco en uso practico, iluminacion premium, alto nivel de detalle, aspecto comercial y limpio, listo para propuesta o pieza de venta.</div>
-        <button class="m-mm-gen-btn" style="width:100%;" onclick="mMmCopyPrompt(this, document.getElementById('mm-master-mockup').innerText)">📋 Copiar prompt</button>
+      <div class="m-mm-card m-mm-master-card">
+        <div class="m-mm-master-top">
+          <span class="m-mm-master-badge">Video</span>
+          <span class="m-mm-master-format">4 escenas</span>
+        </div>
+        <h4 class="m-mm-master-title">Storyboard de video</h4>
+        <p class="m-mm-master-desc">Sirve para preproducción rápida, reels, campañas o guiones visuales.</p>
+        <div class="m-mm-master-prompt" id="mm-master-storyboard">Genera un storyboard visual de 4 escenas para un video corto sobre [tema]. Mantén mismo estilo cinematografico, misma paleta de color y coherencia de personajes. Escena 1: apertura. Escena 2: problema. Escena 3: solucion. Escena 4: cierre inspirador.</div>
+        <button class="m-mm-gen-btn m-mm-master-btn" onclick="mMmCopyPrompt(this, document.getElementById('mm-master-storyboard').innerText)">📋 Copiar prompt</button>
+      </div>
+      <div class="m-mm-card m-mm-master-card">
+        <div class="m-mm-master-top">
+          <span class="m-mm-master-badge">Comercial</span>
+          <span class="m-mm-master-format">Alta fidelidad</span>
+        </div>
+        <h4 class="m-mm-master-title">Mockup de producto o servicio</h4>
+        <p class="m-mm-master-desc">Pensado para propuestas, fichas de venta o validación visual temprana.</p>
+        <div class="m-mm-master-prompt" id="mm-master-mockup">Crea un mockup visual para presentar [producto o servicio], con ambiente realista, composicion elegante, foco en uso practico, iluminacion premium, alto nivel de detalle, aspecto comercial y limpio, listo para propuesta o pieza de venta.</div>
+        <button class="m-mm-gen-btn m-mm-master-btn" onclick="mMmCopyPrompt(this, document.getElementById('mm-master-mockup').innerText)">📋 Copiar prompt</button>
       </div>
     </div>
   </div>
 </div>
 
-<div id="m-mm-antipatterns" class="ag-content">
+<div id="m-mm-estrategia" class="ag-content">
+  <div class="section-card animate-in">
+    <div class="kit-header">
+      <div class="kit-badge">🧪 ESTRATEGIA REAL · Multimedia Pro</div>
+      <p class="kit-title">Operación: Identidad de Evento Institucional</p>
+      <p class="kit-sub">📋 Situación: Necesitas crear todo el material visual para el "Congreso IA 2025" de tu entidad. Un diseñador tardaría 3 días en los bocetos. Con IA, tendrás 10 direcciones de arte en 15 minutos.</p>
+    </div>
+
+    <h4 style="color:#ec4899; margin: 20px 0 10px;">🧳 Maletín de Activos Visuales</h4>
+    <div class="kit-assets">
+      <div class="kit-asset">
+        <span class="kit-asset-icon">🎨</span>
+        <div class="kit-asset-body">
+          <p class="kit-asset-name">Prompt Maestro: Portada de Congreso</p>
+          <p class="kit-asset-desc">Estilo corporativo-futurista de alta gama.</p>
+        </div>
+        <button class="kit-copy-btn" onclick="mMmCopyPrompt(this, 'Diseño de portada para Congreso de IA, estilo minimalista corporativo, paleta azul cobalto y plata, iluminación volumétrica, 8k, composición de espacio negativo para texto, formato 16:9.')">📋 Copiar Prompt</button>
+      </div>
+    </div>
+
+    <h4 style="color:#ec4899; margin: 20px 0 10px;">✅ Ejecuta la Estrategia Paso a Paso</h4>
+    <ul class="kit-steps" id="mm-steps">
+      <li class="kit-step" onclick="mMmCheckStep(this, 0, 40)">
+        <div class="kit-step-check">✓</div>
+        <div class="kit-step-body">
+          <p class="kit-step-title">Genera el Concepto Base en el Simulador</p>
+          <p class="kit-step-detail">Usa la pestaña "Generador Studio" para mezclar los parámetros de iluminación y lente.</p>
+        </div>
+        <span class="kit-step-xp">+40 XP</span>
+      </li>
+      <li class="kit-step" onclick="mMmCheckStep(this, 1, 50)">
+        <div class="kit-step-check">✓</div>
+        <div class="kit-step-body">
+          <p class="kit-step-title">Refina el Prompt con el "Maletín de Activos"</p>
+          <p class="kit-step-detail">Copia el prompt maestro y pégalo en DALL-E 3 o Midjourney.</p>
+        </div>
+        <span class="kit-step-xp">+50 XP</span>
+      </li>
+      <li class="kit-step" onclick="mMmCheckStep(this, 2, 60)">
+        <div class="kit-step-check">✓</div>
+        <div class="kit-step-body">
+          <p class="kit-step-title">Crea variaciones de Storyboard</p>
+          <p class="kit-step-detail">Pide 3 variaciones manteniendo la consistencia de personajes (Seed/Referencia).</p>
+        </div>
+        <span class="kit-step-xp">+60 XP</span>
+      </li>
+    </ul>
+    
+    <div class="kit-xp-total" id="mm-xp-total">
+      <span>🏆 XP de Estrategia Multimedia</span>
+      <span id="mm-xp-count">0 / 150 XP</span>
+    </div>
+  </div>
+</div>
   <div class="section-card animate-in">
     <h3 style="margin-top:0;">🚫 Errores comunes al usar IA visual</h3>
     <div class="m-mm-grid-3" style="margin-top:18px;">
@@ -310,33 +378,21 @@ window.GuiaModules['module-multimedia-pro'] = (function() {
     <div class="reward-tag" style="margin-top:15px;">+150 XP · Insignia: Director de Arte 🎨</div>
     <button class="gl-btn gl-btn-primary complete-module-btn" data-module="module-multimedia-pro" style="width:100%;margin-top:15px;background:linear-gradient(90deg, #ec4899, #8b5cf6);color:#fff;border:none;">✅ Misión Completada — Reclamar Insignia</button>
   </div>
-</div>
+`;
 
-<div class="module-nav">
-  <button class="gl-btn gl-btn-primary" data-goto="welcome">← Volver al Menú Bonus</button>
-</div>
+  const mediaInstance = {
+    init: function(app) {
+      console.log('[Module] Multimedia Pro initialized');
+      const target = document.getElementById('module-multimedia-pro');
+      if (target && !target.querySelector('.module-header')) {
+        target.insertAdjacentHTML('afterbegin', mediaHTML);
+        setupMediaHandlers(target);
+      }
+    }
+  };
 
-<script>
-  setTimeout(() => {
-    const parent = document.getElementById('module-multimedia-pro');
-    if(!parent) return;
-    const tabs = parent.querySelectorAll('.tab-btn');
-    const contents = parent.querySelectorAll('.ag-content');
-    
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            contents.forEach(c => c.classList.remove('active'));
-            tab.classList.add('active');
-            const targetId = tab.dataset.tab;
-            const content = parent.querySelector('#' + targetId);
-            if (content) content.classList.add('active');
-        });
-    });
-    
-    // Inicializar prompt por defecto
+  function setupMediaHandlers(parent) {
     if(window.mMmUpdatePrompt) window.mMmUpdatePrompt();
-  }, 300);
 
   window.mMmUpdatePrompt = function() {
     const s1 = document.getElementById('mm-sujeto');
@@ -345,7 +401,7 @@ window.GuiaModules['module-multimedia-pro'] = (function() {
     const s4 = document.getElementById('mm-camara');
     if(!s1) return;
     
-    const p = \`\${s1.value} \${s2.value}, \${s3.value}, \${s4.value}\`;
+    const p = s1.value + ' ' + s2.value + ', ' + s3.value + ', ' + s4.value;
     document.getElementById('mm-final-text').innerText = p;
   };
 
@@ -361,51 +417,69 @@ window.GuiaModules['module-multimedia-pro'] = (function() {
     }, 2500);
     if(window.app) window.app.addXP(5);
   };
-  window.mMmGenerate = function() {
-    if(mmIsGen) return;
-    mmIsGen = true;
-    
-    const loader = document.getElementById('mm-loader');
-    const fill = document.getElementById('mm-pfill');
-    const res = document.getElementById('mm-result');
-    const sujetoP = document.getElementById('mm-sujeto').value;
-    
-    res.classList.remove('active');
-    loader.classList.add('active');
-    fill.style.width = '0%';
-    
-    let p = 0;
-    const intv = setInterval(() => {
-      p += 10;
-      fill.style.width = p + '%';
+    window.mMmGenerate = function() {
+      if(mmIsGen) return;
+      mmIsGen = true;
       
-      if(p >= 100) {
-        clearInterval(intv);
-        loader.classList.remove('active');
+      const loader = document.getElementById('mm-loader');
+      const fill = document.getElementById('mm-pfill');
+      const res = document.getElementById('mm-result');
+      const sujetoP = document.getElementById('mm-sujeto').value;
+      
+      res.classList.remove('active');
+      loader.classList.add('active');
+      fill.style.width = '0%';
+      
+      let p = 0;
+      const intv = setInterval(() => {
+        p += 10;
+        fill.style.width = p + '%';
         
-        // Simular imagen basada en el contexto
-        if(sujetoP.includes('astronauta')) {
-          res.style.background = 'url("https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80") center/cover';
-          res.innerText = '';
-        } else if(sujetoP.includes('lobo')) {
-          res.style.background = 'url("https://images.unsplash.com/photo-1541336032412-2048a678540d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80") center/cover'; // Cyber wolf sim
-          res.innerText = '\\n\\n(Lobo Cibernético Generado)';
-        } else {
-          res.style.background = 'url("https://images.unsplash.com/photo-1533050487297-09b450131914?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80") center/cover';
-          res.innerText = '\\n\\n(Castillo Generado)';
+        if(p >= 100) {
+          clearInterval(intv);
+          loader.classList.remove('active');
+          
+          if(sujetoP.includes('astronauta')) {
+            res.style.background = 'url("https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80") center/cover';
+            res.innerText = '';
+          } else if(sujetoP.includes('lobo')) {
+            res.style.background = 'url("https://images.unsplash.com/photo-1541336032412-2048a678540d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80") center/cover';
+            res.innerText = '\n\n(Lobo Cibernético Generado)';
+          } else {
+            res.style.background = 'url("https://images.unsplash.com/photo-1533050487297-09b450131914?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80") center/cover';
+            res.innerText = '\n\n(Castillo Generado)';
+          }
+          res.classList.add('active');
+          mmIsGen = false;
+          if(window.app) window.app.addXP(40);
         }
-        res.classList.add('active');
-        mmIsGen = false;
-        if(window.app) window.app.addXP(40);
-      }
-    }, 150);
-  };
-</script>
-`;
+      }, 150);
+    };
 
-  const target = document.getElementById('module-multimedia-pro');
-  if (target) {
-    target.innerHTML = mediaHTML;
+    window.mMmCheckStep = function(li, index, xp) {
+      if (li.classList.contains('completed')) return;
+      li.classList.add('completed');
+      li.style.borderLeft = '4px solid #ec4899';
+      li.style.background = 'rgba(236,72,153,0.05)';
+      if (window.app) window.app.addXP(xp);
+      
+      const check = li.querySelector('.kit-step-check');
+      if (check) {
+        check.style.background = '#ec4899';
+        check.style.borderColor = '#ec4899';
+        check.style.color = '#fff';
+      }
+
+      const countElem = document.getElementById('mm-xp-count');
+      if (countElem) {
+        const current = parseInt(countElem.innerText.split(' / ')[0]) + xp;
+        countElem.innerText = current + ' / 150 XP';
+      }
+    };
+
   }
-  return { init: function(app) { console.log('Initialized module-multimedia-pro.js'); } };
+
+  window.GuiaModules = window.GuiaModules || {};
+  window.GuiaModules['module-multimedia-pro'] = mediaInstance;
+  return mediaInstance;
 })();

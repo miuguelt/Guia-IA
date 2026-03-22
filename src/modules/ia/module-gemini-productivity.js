@@ -1,41 +1,11 @@
 /* MÓDULO BONUS: Gemini 2025 - Ecosistema Google Total */
-(function() {
+window.GuiaModules = window.GuiaModules || {};
+window.GuiaModules['module-gemini-productivity'] = (function() {
   const geminiHTML = `
 <style>
-  :root { --gm-primary:#8e2de2; --gm-secondary:#4a00e0; --gm-accent:#b388ff; --gm-card:#0b0b15; --gm-border:#221b39; --gm-soft:#94a3b8; }
-  .m-gm-container { color:#f1f5f9; font-family:'Inter',sans-serif; }
-  .m-gm-card { background:var(--gm-card); border:1px solid var(--gm-border); border-radius:16px; padding:22px; margin-bottom:18px; }
-  .premium-tab-gm { background:none; border:none; padding:10px 14px; color:#64748b; cursor:pointer; border-bottom:2px solid transparent; transition:0.3s; font-weight:700; white-space:nowrap; }
-  .premium-tab-gm.active { color:var(--gm-accent); border-bottom-color:var(--gm-accent); background:rgba(142,45,226,0.04); }
-  .gm-btn-glow { background:linear-gradient(135deg,#8e2de2 0%,#4a00e0 100%); color:#fff; border:none; padding:12px 22px; border-radius:8px; font-weight:700; cursor:pointer; }
-  .m-gm-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-  .m-gm-grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-  .m-gm-note { font-size:0.79rem; color:var(--gm-soft); line-height:1.7; }
-  .m-gm-copy { background:rgba(142,45,226,0.12); border:1px solid rgba(179,136,255,0.28); color:var(--gm-accent); padding:5px 12px; border-radius:6px; font-size:0.72rem; font-weight:700; cursor:pointer; }
-  .m-gm-meter { height:10px; background:#111; border-radius:5px; overflow:hidden; margin-top:15px; border:1px solid #333; }
-  .m-gm-meter-fill { height:100%; width:0%; background:linear-gradient(90deg,#8e2de2,#4a00e0); transition:width 1s ease; }
-  .m-gm-hero { background:radial-gradient(circle at top left,rgba(179,136,255,0.18),transparent 45%),linear-gradient(135deg,rgba(142,45,226,0.12),rgba(10,10,20,0.95)); border:1px solid rgba(179,136,255,0.22); border-radius:20px; padding:22px; margin-bottom:18px; }
-  .m-gm-chip-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
-  .m-gm-chip { padding:8px 12px; border-radius:999px; background:rgba(255,255,255,0.04); border:1px solid rgba(179,136,255,0.16); color:#ddd6fe; font-size:0.74rem; font-weight:700; }
-  .m-gm-step { position:relative; padding:18px 18px 18px 58px; border-radius:14px; border:1px solid rgba(179,136,255,0.16); background:rgba(255,255,255,0.02); }
-  .m-gm-step-badge { position:absolute; left:16px; top:16px; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.74rem; font-weight:800; color:#fff; background:linear-gradient(135deg,#8e2de2,#4a00e0); }
-  .m-gm-matrix { display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr; gap:1px; background:rgba(179,136,255,0.18); border-radius:16px; overflow:hidden; margin-top:18px; }
-  .m-gm-matrix > div { background:#0a0a14; padding:14px; font-size:0.77rem; line-height:1.6; color:var(--gm-soft); }
-  .m-gm-matrix .is-head { background:rgba(142,45,226,0.15); color:#ede9fe; font-weight:800; }
-  .m-gm-route { border-radius:16px; padding:18px; border:1px solid rgba(179,136,255,0.16); background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01)); }
-  .m-gm-route h4 { margin:0 0 8px; color:#fff; }
-  .m-gm-route-line { font-size:0.78rem; color:#cbd5e1; line-height:1.8; }
-  .m-gm-highlight { color:#f5d0fe; font-weight:800; }
-  .m-gm-surface { border-radius:16px; padding:16px; border:1px solid rgba(179,136,255,0.14); background:rgba(255,255,255,0.02); min-height:140px; }
-  .m-gm-surface-icon { font-size:1.4rem; margin-bottom:10px; }
-  .m-gm-mini { font-size:0.72rem; color:#cbd5e1; line-height:1.7; }
-  .m-gm-promptbox { background:#070710; border:1px solid #31225e; border-radius:14px; padding:16px; }
-  .m-gm-tier { border-radius:16px; padding:18px; border:1px solid rgba(179,136,255,0.14); background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01)); }
-  .m-gm-tier-label { display:inline-block; padding:4px 10px; border-radius:999px; font-size:0.68rem; font-weight:800; letter-spacing:0.04em; margin-bottom:10px; }
-  .m-gm-play { border-radius:16px; padding:18px; border:1px solid rgba(179,136,255,0.16); background:rgba(255,255,255,0.02); }
-  .m-gm-play h4 { margin:0 0 8px; color:#fff; }
-  @media (max-width:900px){ .m-gm-grid-2,.m-gm-grid-3 { grid-template-columns:1fr; } }
-  @media (max-width:900px){ .m-gm-matrix { grid-template-columns:1fr; } }
+  .m-gm-steps-list { margin: 12px 0; padding: 0; list-style: none; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px; }
+  .m-gm-step-item { display: flex; gap: 8px; margin-bottom: 6px; font-size: 0.78rem; color: #94a3b8; align-items: flex-start; }
+  .m-gm-step-num { color: var(--gm-primary); font-weight: 800; min-width: 14px; }
 </style>
 
 <div class="m-gm-container">
@@ -60,24 +30,25 @@
   </div>
 
   <div class="ag-tabs game-tabs" style="display:flex; overflow-x:auto; gap:5px; margin-bottom:20px; border-bottom:1px solid #222;">
-    <button class="tab-btn premium-tab-gm active" data-tab="m-gm-map">🌐 Mapa</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-decider">🧭 Decisor</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-workspace">💼 Workspace</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-multimodal">🎙️ Multimodal</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-gemas">💎 Gemas</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-build">🧪 AI Studio / Vertex</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-profiles">🧑‍💼 Perfiles</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-plays">🎯 Playbooks</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-flows">⚙️ Flujos</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-ecosystem">🧩 Ecosistema Vivo</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-cases">🧭 Casos Prácticos</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-hidden">⚡ Usos Poco Obvios</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-prompts">🧠 Prompts Maestros</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-architectures">🏗️ Arquitecturas</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-maturity">📈 Madurez</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-antipatterns">🚫 Anti-Patrones</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-estrategia">🎯 Estrategia Real</button>
-    <button class="tab-btn premium-tab-gm" data-tab="m-gm-mission">🏆 Reto Final</button>
+    <button class="tab-btn active" data-tab="m-gm-map">🌐 Mapa</button>
+    <button class="tab-btn" data-tab="m-gm-decider">🧭 Decisor</button>
+    <button class="tab-btn" data-tab="m-gm-workspace">💼 Workspace</button>
+    <button class="tab-btn" data-tab="m-gm-multimodal">🎙️ Multimodal</button>
+    <button class="tab-btn" data-tab="m-gm-gemas">💎 Gemas</button>
+    <button class="tab-btn" data-tab="m-gm-build">🧪 AI Studio / Vertex</button>
+    <button class="tab-btn" data-tab="m-gm-profiles">🧑‍💼 Perfiles</button>
+    <button class="tab-btn" data-tab="m-gm-plays">🎯 Playbooks</button>
+    <button class="tab-btn" data-tab="m-gm-flows">⚙️ Flujos</button>
+    <button class="tab-btn" data-tab="m-gm-ecosystem">🧩 Ecosistema Vivo</button>
+    <button class="tab-btn" data-tab="m-gm-cases">🧭 Casos Prácticos</button>
+    <button class="tab-btn" data-tab="m-gm-hidden">⚡ Usos Poco Obvios</button>
+    <button class="tab-btn" data-tab="m-gm-prompts">🧠 Prompts Maestros</button>
+    <button class="tab-btn" data-tab="m-gm-architectures">🏗️ Arquitecturas</button>
+    <button class="tab-btn" data-tab="m-gm-maturity">📈 Madurez</button>
+    <button class="tab-btn" data-tab="m-gm-antipatterns">🚫 Anti-Patrones</button>
+    <button class="tab-btn" data-tab="m-gm-estrategia">🎯 Estrategia Real</button>
+    <button class="tab-btn" data-tab="m-gm-exercises">💻 Ejercicios</button>
+    <button class="tab-btn" data-tab="m-gm-mission">🏆 Reto Final</button>
   </div>
 
   <div id="m-gm-map" class="ag-content active">
@@ -735,6 +706,133 @@ Total,667000000,743300000,-76300000</pre>
     </div>
   </div>
 
+  <div id="m-gm-exercises" class="ag-content">
+    <div class="m-gm-card">
+      <h3 style="margin:0 0 10px; color:#fff;">Ejercicios Prácticos con Google Workspace</h3>
+      <p class="m-gm-note">Pon en práctica la teoría con estos 5 ejercicios comprobados. Son usos críticos donde Gemini reduce drásticamente la fricción diaria. Haz clic en "Simular" para ganar XP.</p>
+      
+      <div class="m-gm-grid-2" style="margin-top:16px;">
+        <div class="m-gm-card" style="margin:0; background:rgba(66, 133, 244, 0.05); border-color:rgba(66, 133, 244, 0.3);">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <span style="font-size:1.5rem;">📄</span>
+            <h4 style="margin:0; color:#fff;">Google Docs: De Ideas a Propuesta</h4>
+          </div>
+          <p class="m-gm-note">Escribe 4 viñetas sueltas sobre una nueva app. En Gemini usa "Ayúdame a escribir" para convertirlas en una propuesta formal con intro, desarrollo y cierre. Luego presiona "Refinar/Alargar".</p>
+          <div class="m-gm-steps-list">
+            <div class="m-gm-step-item"><span class="m-gm-step-num">1.</span> Abre Google Docs y escribe 4 ideas rápidas.</div>
+            <div class="m-gm-step-item"><span class="m-gm-step-num">2.</span> Selecciona el texto y clic en el lápiz "Ayúdame a escribir".</div>
+            <div class="m-gm-step-item"><span class="m-gm-step-num">3.</span> Usa el botón "Refinar" y selecciona "Alargar".</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.3); padding:10px; border-radius:8px; margin-bottom:12px; font-size:0.8rem; color:#93c5fd;">Objetivo: Gemini te ahorra la parálisis de la página en blanco cruzando viñetas.</div>
+          <button class="gl-btn-neon" style="width:100%; border-color:#4285f4; color:#93c5fd; font-size:0.8rem;" onclick="gmCheck(this,10,30)">▷ Simular Generación Docs (+30 XP)</button>
+        </div>
+        
+        <div class="m-gm-card" style="margin:0; background:rgba(15, 157, 88, 0.05); border-color:rgba(15, 157, 88, 0.3);">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <span style="font-size:1.5rem;">📊</span>
+            <h4 style="margin:0; color:#fff;">Google Sheets: Anomalías Visibles</h4>
+          </div>
+          <p class="m-gm-note">En una hoja con gastos de todo el año, usa el panel derecho de Gemini y escribe: "Identifica en viñetas qué categoría consumió más y propón un gráfico para mostrarlo en reuniones".</p>
+          <div class="m-gm-steps-list">
+            <div class="m-gm-step-item"><span class="m-gm-step-num">1.</span> Abre una hoja con datos y clic en el icono Gemini (arriba der).</div>
+            <div class="m-gm-step-item"><span class="m-gm-step-num">2.</span> Escribe: "Encuentra anomalías y categorías críticas".</div>
+            <div class="m-gm-step-item"><span class="m-gm-step-num">3.</span> Sigue la sugerencia para insertar un gráfico automático.</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.3); padding:10px; border-radius:8px; margin-bottom:12px; font-size:0.8rem; color:#6ee7b7;">Objetivo: Interrogar tu tabla completa en segundos sin usar formulas estáticas.</div>
+          <button class="gl-btn-neon" style="width:100%; border-color:#0f9d58; color:#6ee7b7; font-size:0.8rem;" onclick="gmCheck(this,11,40)">▷ Detectar Anomalía Sheets (+40 XP)</button>
+        </div>
+      </div>
+
+      <div class="m-gm-grid-2" style="margin-top:16px;">
+        <div class="m-gm-card" style="margin:0; background:rgba(244, 180, 0, 0.05); border-color:rgba(244, 180, 0, 0.3);">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <span style="font-size:1.5rem;">🎞️</span>
+            <h4 style="margin:0; color:#fff;">Slides: Arquitectura Rápida</h4>
+          </div>
+          <p class="m-gm-note">Crea una presentación nueva. Pregúntale a Gemini: "Genera una estructura de 5 láminas basada en el documento @Resumen2024". Generará texto, títulos e imágenes de acompañamiento.</p>
+          <div class="m-gm-steps-list">
+            <div class="m-gm-step-item"><span class="m-gm-step-num">1.</span> En Slides nueva, abre el panel Gemini -> "Crear estructura".</div>
+            <div class="m-gm-step-item"><span class="m-gm-step-num">2.</span> Usa el símbolo <b>@</b> para vincular un documento de Docs.</div>
+            <div class="m-gm-step-item"><span class="m-gm-step-num">3.</span> Clic en "Crear láminas" y elige los estilos de imagen.</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.3); padding:10px; border-radius:8px; margin-bottom:12px; font-size:0.8rem; color:#fcd34d;">Condición: Funciona mejor si el Docs asociado tiene buena jerarquía (Títulos claros).</div>
+          <button class="gl-btn-neon" style="width:100%; border-color:#f4b400; color:#fcd34d; font-size:0.8rem;" onclick="gmCheck(this,12,35)">▷ Estructurar Slides (+35 XP)</button>
+        </div>
+
+        <div class="m-gm-card" style="margin:0; background:rgba(249, 115, 22, 0.05); border-color:rgba(249, 115, 22, 0.3);">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <span style="font-size:1.5rem;">🧑‍💻</span>
+            <h4 style="margin:0; color:#fff;">Google Colab: Análisis EDA</h4>
+          </div>
+          <p class="m-gm-note">Dentro de Colab abre la varita de Gemini. Solicita: "Genera el código en Python para hacer un análisis exploratorio (EDA) de este CSV cargado y grafica nulos".</p>
+          <div class="m-gm-steps-list">
+            <div class="m-gm-step-item"><span class="m-gm-step-num">1.</span> En Google Colab, clic en la varita de Gemini (barra superior).</div>
+            <div class="m-gm-step-item"><span class="m-gm-step-num">2.</span> Pide: "Genera código para ver la relación entre variables".</div>
+            <div class="m-gm-step-item"><span class="m-gm-step-num">3.</span> Ejecuta la celda para procesar el CSV automáticamente.</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.3); padding:10px; border-radius:8px; margin-bottom:12px; font-size:0.8rem; color:#fdba74;">Colab tiene Code Assist nativo gratis para desarrollo de datos y Machine Learning.</div>
+          <button class="gl-btn-neon" style="width:100%; border-color:#f97316; color:#fdba74; font-size:0.8rem;" onclick="gmCheck(this,13,50)">▷ Analizar CSV Avanzado (+50 XP)</button>
+        </div>
+      </div>
+
+      <div class="m-gm-card" style="margin-top:16px; background:rgba(142,45,226,0.05); border-color:rgba(142,45,226,0.3);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+           <span style="font-size:1.5rem;">🗂️</span>
+           <h4 style="margin:0; color:#fff;">Google Drive: Chat Múltiple</h4>
+        </div>
+        <p class="m-gm-note">Abre drive.google.com. Selecciona varios contratos sin abrirlos. Abre el panel de Gemini lateral y pide: "¿En qué cláusulas difieren estos 3 documentos sobre confidencialidad?" Gemini cruzará la data y entregará un listado único.</p>
+        <div class="m-gm-steps-list">
+          <div class="m-gm-step-item"><span class="m-gm-step-num">1.</span> En Drive, mantén <b>Shift</b> y selecciona 2 o 3 archivos.</div>
+          <div class="m-gm-step-item"><span class="m-gm-step-num">2.</span> Haz clic en el icono Gemini del panel lateral derecho.</div>
+          <div class="m-gm-step-item"><span class="m-gm-step-num">3.</span> Pregunta sobre similitudes o diferencias sin abrir los archivos.</div>
+        </div>
+        <button class="gl-btn-neon" style="width:100%; border-color:#8e2de2; color:#d8b4fe; font-size:0.8rem;" onclick="gmCheck(this,14,45)">▷ Conversar con Panel Drive (+45 XP)</button>
+      </div>
+
+      <div class="m-gm-grid-2" style="margin-top:16px;">
+        <div class="m-gm-card" style="margin:0; background:rgba(219, 68, 55, 0.05); border-color:rgba(219, 68, 55, 0.3);">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <span style="font-size:1.5rem;">📧</span>
+            <h4 style="margin:0; color:#fff;">Gmail: Transformación de Tono</h4>
+          </div>
+          <p class="m-gm-note">Toma un borrador enojado o demasiado informal. En Gemini (panel lateral) pide: "Convierte este borrador en una respuesta diplomática, firme pero profesional, manteniendo los puntos clave".</p>
+          <div class="m-gm-steps-list">
+            <div class="m-gm-step-item"><span class="m-gm-step-num">1.</span> Escribe un borrador rápido en Gmail.</div>
+            <div class="m-gm-step-item"><span class="m-gm-step-num">2.</span> Clic en "Ayúdame a escribir" -> "Refinar".</div>
+            <div class="m-gm-step-item"><span class="m-gm-step-num">3.</span> Pide: "Tono profesional y diplomático".</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.3); padding:10px; border-radius:8px; margin-bottom:12px; font-size:0.8rem; color:#f87171;">Objetivo: Evitar conflictos y mejorar la comunicación corporativa instantáneamente.</div>
+          <button class="gl-btn-neon" style="width:100%; border-color:#db4437; color:#f87171; font-size:0.8rem;" onclick="gmCheck(this,15,30)">▷ Simular Respuesta Gmail (+30 XP)</button>
+        </div>
+        
+        <div class="m-gm-card" style="margin:0; background:rgba(26, 115, 232, 0.05); border-color:rgba(26, 115, 232, 0.3);">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <span style="font-size:1.5rem;">🎥</span>
+            <h4 style="margin:0; color:#fff;">Meet: Minuta Inteligente</h4>
+          </div>
+          <p class="m-gm-note">Al finalizar una videollamada grabada, abre el panel de Gemini y solicita: "Resume los acuerdos de esta reunión en una tabla de Responsable | Tarea | Fecha Límite".</p>
+          <div class="m-gm-steps-list">
+            <div class="m-gm-step-item"><span class="m-gm-step-num">1.</span> Tras una reunión grabada, abre el panel Gemini en Meet.</div>
+            <div class="m-gm-step-item"><span class="m-gm-step-num">2.</span> Pide: "Genera tabla de compromisos y responsables".</div>
+            <div class="m-gm-step-item"><span class="m-gm-step-num">3.</span> Copia el resultado directamente a tu documento de acta.</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.3); padding:10px; border-radius:8px; margin-bottom:12px; font-size:0.8rem; color:#60a5fa;">Objetivo: Pasar de 60 min de video a 30 segundos de lectura accionable.</div>
+          <button class="gl-btn-neon" style="width:100%; border-color:#1a73e8; color:#60a5fa; font-size:0.8rem;" onclick="gmCheck(this,16,40)">▷ Generar Minuta Meet (+40 XP)</button>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:16px; margin-top:20px; backdrop-filter:blur(10px);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <span style="font-weight:800; color:#fff; font-size:0.9rem;">🏆 NIVEL DE MAESTRÍA GOOGLE</span>
+          <span id="gm-xp-count" data-current="0" style="font-family:'Space Grotesk',monospace; color:#10b981; font-weight:800;">0 / 250 XP</span>
+        </div>
+        <div style="height:8px; background:rgba(255,255,255,0.05); border-radius:4px; overflow:hidden; border:1px solid rgba(255,255,255,0.05);">
+          <div id="gm-xp-progress" style="width:0%; height:100%; background:linear-gradient(90deg, #8e2de2, #4facfe, #00f2fe, #10b981); transition:width 0.5s cubic-bezier(0.4, 0, 0.2, 1); box-shadow:0 0 15px rgba(16,185,129,0.4);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="m-gm-mission" class="ag-content">
     <div class="m-gm-card">
       <h3 style="margin:0 0 10px; color:#fff;">Reto Final: Orquesta Google Completa</h3>
@@ -755,34 +853,66 @@ Total,667000000,743300000,-76300000</pre>
     </div>
   </div>
 
-  <div class="module-nav"><button class="gl-btn gl-btn-primary" data-goto="welcome">← Volver al Menú</button></div>
-</div>
+  </div>
+`;
 
-<script>
-  window.gmCopy = function(btn, type) {
-    const ids = { csv:'gm-csv', p1:'gm-p1', p2:'gm-p2', gmail:'gm-gmail', docs:'gm-docs', sheets:'gm-sheets', slides:'gm-slides', meet:'gm-meet', multimodal:'gm-multimodal', gema:'gm-gema', build:'gm-build', flows:'gm-flows', 'master-gmail':'gm-master-gmail', 'master-docs':'gm-master-docs', 'master-sheets':'gm-master-sheets', 'master-meet':'gm-master-meet', 'master-app':'gm-master-app', 'master-build':'gm-master-build', final:'gm-final' };
-    const text = document.getElementById(ids[type])?.innerText || '';
-    navigator.clipboard.writeText(text).catch(() => {});
-    const orig = btn.textContent; btn.textContent = '✅ Copiado'; btn.style.color = '#10b981';
-    setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 2500);
-    if (window.app) window.app.addXP(5);
+  const geminiInstance = {
+    init: function(app) {
+      console.log('[Module] Gemini Ecosistema Google initialized');
+      const target = document.getElementById('module-gemini-productivity');
+      if (target && !target.querySelector('.module-header')) {
+        target.insertAdjacentHTML('afterbegin', geminiHTML);
+        setupGeminiHandlers(target);
+      }
+    }
   };
-  let gmCheckDone = [false,false,false,false]; let gmTotalXP = 0;
-  window.gmCheck = function(el, idx, xp) {
-    if (gmCheckDone[idx]) return; gmCheckDone[idx] = true;
-    el.style.borderColor='rgba(16,185,129,0.4)'; el.style.background='rgba(16,185,129,0.05)';
-    const chk = el.querySelector('div'); if (chk) { chk.style.background='#10b981'; chk.style.borderColor='#10b981'; chk.style.color='#fff'; }
-    gmTotalXP += xp; if (window.app) window.app.addXP(xp);
-    const c = document.getElementById('gm-xp-count'); if (c) c.textContent = gmTotalXP + ' / 200 XP';
+
+  function setupGeminiHandlers(parent) {
+    // Basic tabs handled by app.js global handler
+  }
+
+  window.gmCheck = (btn, id, xp) => {
+    if (btn.classList.contains('completed')) return;
+    btn.classList.add('completed');
+    btn.innerHTML = '✅ Completado (+' + xp + ' XP)';
+    btn.style.borderColor = '#10b981';
+    btn.style.color = '#10b981';
+    if (window.app && window.app.addXP) window.app.addXP(xp);
+    let xpCount = document.getElementById('gm-xp-count');
+    let xpBar = document.getElementById('gm-xp-progress');
+    if (xpCount) {
+        let max = 250;
+        let current = parseInt(xpCount.getAttribute('data-current') || 0) + xp;
+        xpCount.setAttribute('data-current', current);
+        xpCount.innerText = current + ' / ' + max + ' XP';
+        if (xpBar) {
+            let pct = Math.min((current/max) * 100, 100);
+            xpBar.style.width = pct + '%';
+            if (pct >= 100) {
+                xpBar.style.boxShadow = '0 0 30px rgba(16,185,129,0.8)';
+                setTimeout(() => {
+                    alert('🔥 ¡NIVEL MÁXIMO ALCANZADO! Has dominado el ecosistema Google 2025.');
+                }, 600);
+            }
+        }
+    }
   };
-  setTimeout(() => {
-    const parent = document.getElementById('module-gemini-productivity'); if (!parent) return;
-    const tabs = parent.querySelectorAll('.premium-tab-gm'); const contents = parent.querySelectorAll('.ag-content');
-    tabs.forEach(t => t.addEventListener('click', () => {
-      tabs.forEach(x => x.classList.remove('active')); contents.forEach(x => x.classList.remove('active'));
-      t.classList.add('active'); const target = parent.querySelector('#' + t.dataset.tab); if (target) target.classList.add('active');
-    }));
-  }, 300);
+
+  window.gmCopy = (btn, id) => {
+    let textNode = document.getElementById('gm-' + id);
+    let text = textNode ? textNode.innerText : '';
+    if (!textNode && id === 'csv') {
+      textNode = document.getElementById('gm-csv');
+      text = textNode ? textNode.innerText : '';
+    }
+    if (!text) return;
+    navigator.clipboard.writeText(text).then(() => {
+      let original = btn.innerHTML;
+      btn.innerHTML = '✅ Copiado';
+      setTimeout(() => btn.innerHTML = original, 2000);
+    });
+  };
+
   let gmBusy = false;
   window.mGmSimulate = (type) => {
     if (gmBusy) return; gmBusy = true;
@@ -796,9 +926,7 @@ Total,667000000,743300000,-76300000</pre>
       alert('¡Maestro del Ecosistema Google! +220 XP'); if (window.app) window.app.addXP(220); document.querySelector('.complete-module-btn')?.click();
     } else { alert('Pista: no se trata de una sola herramienta, sino de elegir el punto de entrada según la tarea.'); }
   };
-</script>
-`;
-  const target = document.getElementById('module-gemini-productivity');
-  if (target) target.innerHTML = geminiHTML;
-  return { init: function() { console.log('Gemini Ecosistema Google loaded'); } };
+  window.GuiaModules = window.GuiaModules || {};
+  window.GuiaModules['module-gemini-productivity'] = geminiInstance;
+  return geminiInstance;
 })();

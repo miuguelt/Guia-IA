@@ -6,184 +6,12 @@ window.GuiaModules['module-notion'] = (function() {
      ═══════════════════════════════════════════ */
 
   const notionHTML = `
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap');
 
-  :root {
-    --notion-bg: rgba(255, 255, 255, 0.03);
-    --notion-text: #e2e8f0;
-    --notion-accent: #a972ff;
-    --notion-glass: rgba(15, 23, 42, 0.8);
-    --notion-border: rgba(255, 255, 255, 0.1);
-    --font-premium: 'Outfit', sans-serif;
-    --font-mono: 'Space Grotesk', monospace;
-  }
-
-  .m-notion-container {
-    perspective: 1000px;
-    margin-bottom: 30px;
-    color: var(--notion-text);
-    font-family: var(--font-premium);
-  }
-
-  .m-notion-card {
-    background: var(--notion-glass);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--notion-border);
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-  }
-
-  .m-notion-hero {
-    background: linear-gradient(135deg, rgba(169,114,255,0.12), rgba(255,255,255,0.03));
-    border: 1px solid rgba(169,114,255,0.18);
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 22px;
-  }
-
-  .m-notion-chip-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
-  .m-notion-chip { padding:7px 12px; border-radius:999px; background:rgba(255,255,255,0.05); border:1px solid rgba(169,114,255,0.14); color:#e9d5ff; font-size:0.72rem; font-weight:700; }
-  .m-notion-grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
-  .m-notion-grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-  .m-notion-panel { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:18px; }
-  .m-notion-panel h4 { margin:0 0 8px; color:#fff; }
-  .m-notion-note { font-size:0.8rem; color:#cbd5e1; line-height:1.8; }
-  .m-notion-step { position:relative; padding:16px 16px 16px 52px; border-radius:12px; border:1px solid rgba(169,114,255,0.16); background:rgba(255,255,255,0.02); }
-  .m-notion-step-badge { position:absolute; left:14px; top:14px; width:24px; height:24px; border-radius:50%; background:#a972ff; color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:0.72rem; }
-
-  /* Editor Magic */
-  .m-notion-editor {
-    border: 1px solid var(--notion-border);
-    border-radius: 8px;
-    padding: 20px;
-    min-height: 200px;
-    position: relative;
-    background: #fff;
-    cursor: text;
-  }
-
-  .m-notion-block {
-    min-height: 1.5em;
-    outline: none;
-  }
-
-  .m-notion-block:empty::before {
-    content: attr(data-placeholder);
-    color: #9ca3af;
-  }
-
-  /* Scenario chips */
-  .m-notion-scenarios {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 15px;
-  }
-
-  .scenario-chip {
-    padding: 6px 14px;
-    border-radius: 20px;
-    background: #f3f4f6;
-    font-size: 0.8rem;
-    cursor: pointer;
-    border: 1px solid transparent;
-    transition: 0.2s;
-  }
-
-  .scenario-chip.active {
-    background: #eff6ff;
-    color: #2563eb;
-    border-color: #bfdbfe;
-    font-weight: 700;
-  }
-
-  /* Floating Menu AI */
-  .m-notion-menu {
-    position: absolute;
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-    width: 240px;
-    z-index: 100;
-    display: none;
-    padding: 8px;
-  }
-
-  .m-notion-menu.active {
-    display: block;
-    animation: popIn 0.2s ease;
-  }
-
-  @keyframes popIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-  }
-
-  .m-notion-menu-item {
-    padding: 8px 12px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    transition: 0.2s;
-  }
-
-  .m-notion-menu-item:hover {
-    background: #f9fafb;
-  }
-
-  .m-notion-menu-item .icon { font-size: 1.1rem; }
-
-  /* AI Results Formats */
-  .m-notion-result-ai {
-    background: #fbfaff;
-    border-left: 3px solid #a972ff;
-    padding: 15px;
-    margin-top: 10px;
-    border-bottom-right-radius: 8px;
-    border-top-right-radius: 8px;
-  }
-
-  .m-notion-result-ai h4 { margin-top: 0; color: #7c3aed; }
-
-  /* DB Simulation */
-  .m-notion-table { width: 100%; border-collapse: collapse; }
-  .m-notion-table th, .m-notion-table td { padding: 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
-  .m-notion-tag { padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
-
-  /* Loading AI */
-  .m-notion-loading {
-    display: none;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.85rem;
-    color: #4b5563;
-  }
-
-  .m-notion-loading.active { display: flex; }
-
-  .m-notion-spinner {
-    width: 16px; height: 16px;
-    border: 2px solid #e5e7eb;
-    border-top-color: #a972ff;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-
-  @keyframes spin { to { transform: rotate(360deg); } }
-  @media (max-width:900px){ .m-notion-grid-2,.m-notion-grid-3 { grid-template-columns:1fr; } }
-</style>
-
-<div class="m-notion-container">
-  <div class="module-header premium-header" style="background: rgba(169,114,255,0.02);">
-    <div class="module-number gamer-badge" style="background:#a972ff;color:#fff;">BONUS: PRODUCTIVIDAD</div>
-    <h2 class="module-title glow-text" style="color:#7c3aed;">🐘 Notion AI: El Cerebro Digital</h2>
-    <p class="module-description">No uses Notion para guardar notas. Úsalo para que escriban y piensen por ti.</p>
+<div class="m-notion-container animate-in">
+  <div class="module-header premium-header animate-in">
+    <div class="badge-titan" style="margin-bottom: 20px;">BONUS: PRODUCTIVIDAD</div>
+    <h2 class="module-title text-gradient-primary">🐘 Notion AI: El Cerebro Digital</h2>
+    <p class="m-pa-note">No uses Notion para guardar notas. Úsalo para que escriban y piensen por ti.</p>
   </div>
 
   <div class="m-notion-hero">
@@ -200,20 +28,43 @@ window.GuiaModules['module-notion'] = (function() {
   </div>
 
   <div class="ag-tabs game-tabs" style="margin-bottom:28px;">
-    <button class="tab-btn active" data-tab="m-no-editor">🪄 Editor Mágico</button>
+    <button class="tab-btn active" data-tab="m-no-stepbystep">🛤️ Paso a Paso</button>
+    <button class="tab-btn" data-tab="m-no-editor">🪄 Editor Mágico</button>
     <button class="tab-btn" data-tab="m-no-concept">📚 Conceptos</button>
     <button class="tab-btn" data-tab="m-no-decider">🧭 Cuándo Usarlo</button>
     <button class="tab-btn" data-tab="m-no-db">🗃️ Autofill DB</button>
     <button class="tab-btn" data-tab="m-no-qa">🔎 Ask Notion</button>
     <button class="tab-btn" data-tab="m-no-cases">🧭 Casos Prácticos</button>
+    <button class="tab-btn" data-tab="m-no-guided">🥷 Ejercicios Guiados</button>
     <button class="tab-btn" data-tab="m-no-prompts">🧠 Prompts</button>
     <button class="tab-btn" data-tab="m-no-antipatterns">🚫 Errores</button>
     <button class="tab-btn" data-tab="m-no-templates">💎 Plantillas Pro</button>
+    <button class="tab-btn" data-tab="m-no-advanced">⚙️ Tips Avanzados</button>
     <button class="tab-btn" data-tab="m-no-mission">🏆 Reto Final</button>
   </div>
 
+  <div class="m-notion-tabs-content">
+
+  <!-- TAB 0: PASO A PASO -->
+  <div id="m-no-stepbystep" class="ag-content active">
+    <div class="section-card animate-in">
+      <h3>🛤️ Ruta de Maestría: Notion AI</h3>
+      <p class="m-pa-note">Sigue estos pasos para convertir Notion en tu centro de operaciones inteligente.</p>
+      <div class="m-tm-grid-3" style="margin-top:20px;">
+        <div class="m-tm-step"><div class="m-tm-step-badge">1</div><h4 style="color:#fff;">Prepara el Espacio</h4><p class="m-notion-note">Crea una página nueva y organiza tus bloques básicos. Sin orden, la IA es menos efectiva.</p></div>
+        <div class="m-tm-step"><div class="m-tm-step-badge">2</div><h4 style="color:#fff;">Activa /AI</h4><p class="m-notion-note">Usa la barra espaciadora o <code>/ai</code> para desplegar el menú de comandos en cualquier bloque vacío.</p></div>
+        <div class="m-tm-step"><div class="m-tm-step-badge">3</div><h4 style="color:#fff;">Estructura Cruda</h4><p class="m-notion-note">Pega notas sin formato y pide a la IA que las convierta en una minuta o tabla de tareas.</p></div>
+      </div>
+      <div class="m-tm-grid-3" style="margin-top:16px;">
+        <div class="m-tm-step"><div class="m-tm-step-badge">4</div><h4 style="color:#fff;">Bases de Datos</h4><p class="m-notion-note">Configura propiedades de "AI Autofill" para resumir o clasificar feedback automáticamente.</p></div>
+        <div class="m-tm-step"><div class="m-tm-step-badge">5</div><h4 style="color:#fff;">Ask Notion</h4><p class="m-notion-note">Usa <code>Ctrl + J</code> para preguntar sobre cualquier duda cruzando datos de todo tu espacio.</p></div>
+        <div class="m-tm-step"><div class="m-tm-step-badge">6</div><h4 style="color:#fff;">Audita y Refina</h4><p class="m-notion-note">No aceptes la primera respuesta. Pide tonos diferentes o más detalles para perfeccionar la salida.</p></div>
+      </div>
+    </div>
+  </div>
+
   <!-- TAB 1: EDITOR MAGICO -->
-  <div id="m-no-editor" class="ag-content active">
+  <div id="m-no-editor" class="ag-content">
     <div class="m-notion-card animate-in">
       <h3>🎭 Elige tu Escenario:</h3>
       <div class="m-notion-scenarios">
@@ -224,8 +75,8 @@ window.GuiaModules['module-notion'] = (function() {
 
       <div style="margin-bottom:15px; font-size:0.9rem;">
         <span id="notion-title" style="font-weight:800; color:#374151;">Minuta: Lanzamiento Q2</span>
-        <div id="notion-context" style="background:#f9fafb; padding:12px; border-radius:8px; margin-top:8px; font-size:0.8rem; color:#6b7280; border:1px dashed #d1d5db;">
-          <strong>Notas Crudas:</strong><br>Presupuesto: 5k usd. Fecha: 15 de Abril. Responsables: Luis (Web), Ana (Catering), Juan (Prensa). Faltan permisos de alcaldía. Necesitamos influencers.
+        <div id="notion-context" class="glass-card" style="padding:15px; border-radius:12px; margin-top:10px; font-size:0.85rem; color:#cbd5e1; border:1px dashed rgba(255,255,255,0.1); line-height:1.6;">
+          <strong style="color:var(--primary-light);">NOTAS CRUDAS:</strong><br>Presupuesto: 5k usd. Fecha: 15 de Abril. Responsables: Luis (Web), Ana (Catering), Juan (Prensa). Faltan permisos de alcaldía. Necesitamos influencers.
         </div>
       </div>
 
@@ -371,7 +222,7 @@ window.GuiaModules['module-notion'] = (function() {
           <p style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 12px;">Convierte un caos de notas sueltas en una estructura formal compartible en segundos.</p>
           <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.6; margin-bottom: 15px; border-left: 2px solid #a972ff; padding-left: 10px;">
             1. Pega notas sin formato.<br>
-            2. Selecciona texto + `/ai`.<br>
+            2. Selecciona texto + <code>/ai</code>.<br>
             3. Prompt: "Extrae acta, accionables y fechas".<br>
             4. <b>Resultado:</b> Documento ejecutivo impecable.
           </div>
@@ -418,6 +269,74 @@ window.GuiaModules['module-notion'] = (function() {
             4. <b>Resultado:</b> Dashboard que se actualiza solo.
           </div>
           <button class="gl-btn gl-btn-outline" style="width:100%; border-color: #f59e0b; color: #f59e0b; font-size: 0.75rem;" onclick="mNotionCopyText(this, 'Genera un resumen ejecutivo de máximo 3 bullets que resuma los avances, riesgos detectados y el porcentaje de completitud estimado basándote en las notas de esta página.')">📋 Copiar Prompt Dashboard</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: EJERCICIOS GUIADOS -->
+  <div id="m-no-guided" class="ag-content">
+    <div class="section-card animate-in" style="background: var(--notion-glass); border: 1px solid var(--notion-border); border-radius: 16px; padding: 24px;">
+      <h3 style="font-family: var(--font-mono); color: #a972ff;"><span class="icon">🥷</span> Entrenamiento de Élite: Ejercicios Paso a Paso</h3>
+      <p style="color: #94a3b8; font-size: 0.9rem;">Domina Notion IA construyendo sistemas reales desde cero. Haz clic en "Simular" para validar tu progreso.</p>
+      
+      <div class="m-tm-grid-2" style="margin-top:20px; gap: 20px;">
+        <div class="glass-exercise-card" style="padding: 20px; border: 1px solid rgba(169,114,255,0.2); border-radius: 12px; background: rgba(169,114,255,0.05);">
+          <h4 style="color: #fff;">🛠️ Ejercicio 1: El CRM Inteligente</h4>
+          <p style="font-size: 0.85rem; color: #cbd5e1;">Configura una base de datos que lea correos y asigne sentimientos/prioridades automáticamente.</p>
+          <div style="margin: 15px 0; border-top: 1px solid rgba(169,114,255,0.1); padding-top: 10px;">
+            <p style="font-size: 0.75rem; color: #a972ff; font-weight: 800; text-transform: uppercase;">Pasos Críticos:</p>
+            <ol style="font-size: 0.8rem; color: #94a3b8; padding-left: 20px; line-height: 1.6;">
+              <li>Base de Datos "Clientes" + Propiedad "Cuerpo del Correo".</li>
+              <li>Añade propiedad <b>AI Autofill</b> -> Opción "Personalizada".</li>
+              <li>Prompt: <i>"Extrae la intención (Positivo/Negativo) y el sentimiento."</i></li>
+            </ol>
+          </div>
+          <button class="gl-btn-neon" style="width:100%; border-color:#a972ff; color:#d8b4fe; font-size:0.8rem;" onclick="mNoSimulate(this, 'crm', 40)">▷ Simular Procesamiento CRM (+40 XP)</button>
+        </div>
+
+        <div class="glass-exercise-card" style="padding: 20px; border: 1px solid rgba(16,185,129,0.2); border-radius: 12px; background: rgba(16,185,129,0.05);">
+          <h4 style="color: #fff;">📚 Ejercicio 2: Wikipedia de Equipo</h4>
+          <p style="font-size: 0.85rem; color: #cbd5e1;">Crea un sistema de consulta donde "Ask Notion" sea el buscador de políticas interno.</p>
+          <div style="margin: 15px 0; border-top: 1px solid rgba(16,185,129,0.1); padding-top: 10px;">
+            <p style="font-size: 0.75rem; color: #10b981; font-weight: 800; text-transform: uppercase;">Pasos Críticos:</p>
+            <ol style="font-size: 0.8rem; color: #94a3b8; padding-left: 20px; line-height: 1.6;">
+              <li>Carga políticas en "/Wiki-Empresa".</li>
+              <li>Usa <code>/ai</code> -> "Crear tabla de contenidos".</li>
+              <li>Prueba <b>Ask Notion (Ctrl+J)</b> con preguntas sobre vacaciones.</li>
+            </ol>
+          </div>
+          <button class="gl-btn-neon" style="width:100%; border-color:#10b981; color:#6ee7b7; font-size:0.8rem;" onclick="mNoSimulate(this, 'wiki', 45)">▷ Simular Consulta Wiki (+45 XP)</button>
+        </div>
+      </div>
+
+      <div class="m-tm-grid-2" style="margin-top:20px; gap: 20px;">
+        <div class="glass-exercise-card" style="padding: 20px; border: 1px solid rgba(245,158,11,0.2); border-radius: 12px; background: rgba(245,158,11,0.05);">
+          <h4 style="color: #fff;">🧠 Ejercicio 3: Second Brain Architect</h4>
+          <p style="font-size: 0.85rem; color: #cbd5e1;">Implementa el sistema P.A.R.A usando propiedades de IA para clasificación de notas.</p>
+          <div style="margin: 15px 0; border-top: 1px solid rgba(245,158,11,0.1); padding-top: 10px;">
+            <p style="font-size: 0.75rem; color: #f59e0b; font-weight: 800; text-transform: uppercase;">Pasos Críticos:</p>
+            <ol style="font-size: 0.8rem; color: #94a3b8; padding-left: 20px; line-height: 1.6;">
+              <li>Crea propiedad "Clasificación P.A.R.A" (AI).</li>
+              <li>Configura prompt: "Determina si es Proyecto, Área, Recurso o Archivo".</li>
+              <li>Vincula notas de voz transcritas a la base principal.</li>
+            </ol>
+          </div>
+          <button class="gl-btn-neon" style="width:100%; border-color:#f59e0b; color:#fde68a; font-size:0.8rem;" onclick="mNoSimulate(this, 'para', 50)">▷ Clasificar con P.A.R.A (+50 XP)</button>
+        </div>
+
+        <div class="glass-exercise-card" style="padding: 20px; border: 1px solid rgba(59,130,246,0.2); border-radius: 12px; background: rgba(59,130,246,0.05);">
+          <h4 style="color: #fff;">📊 Ejercicio 4: Reportes de Estado Automáticos</h4>
+          <p style="font-size: 0.85rem; color: #cbd5e1;">Genera resúmenes ejecutivos que se actualizan solos al cambiar el contenido de la página.</p>
+          <div style="margin: 15px 0; border-top: 1px solid rgba(59,130,246,0.1); padding-top: 10px;">
+            <p style="font-size: 0.75rem; color: #3b82f6; font-weight: 800; text-transform: uppercase;">Pasos Críticos:</p>
+            <ol style="font-size: 0.8rem; color: #94a3b8; padding-left: 20px; line-height: 1.6;">
+              <li>Inserta bloque "/AI Resume".</li>
+              <li>Configura "Longitud: Breve, Formato: Lista".</li>
+              <li>Sincroniza este bloque en tu Dashboard principal.</li>
+            </ol>
+          </div>
+          <button class="gl-btn-neon" style="width:100%; border-color:#3b82f6; color:#93c5fd; font-size:0.8rem;" onclick="mNoSimulate(this, 'summary', 40)">▷ Generar Reporte Dinámico (+40 XP)</button>
         </div>
       </div>
     </div>
@@ -520,6 +439,37 @@ window.GuiaModules['module-notion'] = (function() {
     </div>
   </div>
 
+  <!-- TAB: TIPS AVANZADOS -->
+  <div id="m-no-advanced" class="ag-content">
+    <div class="section-card animate-in" style="background: var(--notion-glass); border: 1px solid var(--notion-border); border-radius: 16px; padding: 24px;">
+      <h3 style="font-family: var(--font-mono); color: #f59e0b;"><span class="icon">⚙️</span> Configuración Soberana: Tips Avanzados</h3>
+      <p style="color: #94a3b8; font-size: 0.9rem;">Hackea tu flujo de trabajo para que Notion IA haga el 80% del esfuerzo operativo.</p>
+
+      <div class="m-tm-grid-3" style="margin-top:20px;">
+        <div class="m-notion-panel">
+          <h4 style="color: #f59e0b;">🧬 Bloques AI en Plantillas</h4>
+          <p class="m-notion-note">Configura una plantilla de Base de Datos que incluya un bloque de IA configurado para "Resumir página". Cada vez que abras una nota de reunión, el resumen se generará con un clic.</p>
+        </div>
+        <div class="m-notion-panel">
+          <h4 style="color: #f59e0b;">🤖 Automatizaciones + IA</h4>
+          <p class="m-notion-note">Usa las Automatizaciones de Notion para que: si una tarea se marca como "Completada", la IA genere un reporte de cierre en la propiedad de Comentarios.</p>
+        </div>
+        <div class="m-notion-panel">
+          <h4 style="color: #f59e0b;">🔗 Relaciones e IA</h4>
+          <p class="m-notion-note">La IA puede leer datos de páginas relacionales. Si vinculas un Cliente con sus Tickets, puedes pedirle que encuentre patrones de insatisfacción cruzados.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px; padding: 20px; background: rgba(245,158,11,0.05); border: 1px solid rgba(245,158,11,0.2); border-radius: 12px;">
+        <h4 style="color: #fff; margin-top: 0;">💎 El Secreto de las Variables AI:</h4>
+        <p style="font-size: 0.85rem; color: #cbd5e1;">En el menú de AI Autofill, puedes usar el signo <code>@</code> para mencionar otras propiedades. Ejemplo:</p>
+        <code style="display: block; background: #000; padding: 12px; border-radius: 6px; color: #f59e0b; font-size: 0.8rem; margin-top: 8px;">
+          "Actúa como analista financiero. Toma el @Presupuesto y compáralo con el @Gasto_Real. Reporta el ROI y dime si estamos en riesgo."
+        </code>
+      </div>
+    </div>
+  </div>
+
   <!-- TAB 7: RETO FINAL -->
   <div id="m-no-mission" class="ag-content">
     <div class="exercise-box mission-card animate-in" style="background: var(--notion-glass); border: 1px solid var(--notion-border); backdrop-filter: blur(20px); padding: 30px; border-radius: 20px;">
@@ -534,15 +484,15 @@ window.GuiaModules['module-notion'] = (function() {
         <div style="font-size:0.9rem; line-height:1.8; color:#cbd5e1;">
           <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px;">
             <input type="checkbox" id="check-1" style="margin-top: 6px;">
-            <label for="check-1">Crea una página "Cerebro Central" y usa `/ai` para generar un índice de proyecto basado en estas notas: <i>[Lanzamiento Q3, Core Engine v2.0, API Docs, User Feedback]</i>.</label>
+            <label for="check-1">1. Crea "Cerebro Central" -> <code>/ai</code> -> Generar índice: [Lanzamiento Q3, Core Engine].</label>
           </div>
           <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px;">
             <input type="checkbox" id="check-2" style="margin-top: 6px;">
-            <label for="check-2">Configura una base de datos con una propiedad de <b>Resumen AI</b> que analice automáticamente el contenido de cada página de feedback.</label>
+            <label for="check-2">2. Base de Datos -> AI Autofill de Resumen -> Pegar 3 feedbacks distintos.</label>
           </div>
           <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px;">
             <input type="checkbox" id="check-3" style="margin-top: 6px;">
-            <label for="check-3">Realiza una consulta a <b>Ask Notion</b> para saber: "¿Cuáles son los 3 mayores dolores del cliente este mes?" basándote en la base anterior.</label>
+            <label for="check-3">3. Ctrl+J (Ask Notion) -> Pregunta: "¿Mayor queja del cliente este mes?".</label>
           </div>
         </div>
       </div>
@@ -563,24 +513,19 @@ window.GuiaModules['module-notion'] = (function() {
 </div>
 `;
 
-  return {
+  const notionInstance = {
     init: function(app) {
-      const parent = document.getElementById('module-notion');
-      if (!parent) return;
-      parent.innerHTML = notionHTML;
+      console.log('[Module] Notion AI initialized');
+      const target = document.getElementById('module-notion');
+      if (target && !target.querySelector('.module-header')) {
+        target.insertAdjacentHTML('afterbegin', notionHTML);
+        setupNotionHandlers(target);
+      }
+    }
+  };
 
-      // Tabs logic
-      const tabs = parent.querySelectorAll('.tab-btn');
-      const contents = parent.querySelectorAll('.ag-content');
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          tabs.forEach(t => t.classList.remove('active'));
-          contents.forEach(c => c.classList.remove('active'));
-          tab.classList.add('active');
-          const target = parent.querySelector('#' + tab.dataset.tab);
-          if (target) target.classList.add('active');
-        });
-      });
+  function setupNotionHandlers(parent) {
+      // Basic tabs handled by app.js, but we can ensure initial state here if needed
 
       // Scenarios data
       const scenarios = {
@@ -685,7 +630,7 @@ window.GuiaModules['module-notion'] = (function() {
           }
           res += '</div>';
           block.innerHTML = res;
-          if (app) app.addXP(40);
+          if (window.app) window.app.addXP(40);
         }, 1500);
       };
 
@@ -716,7 +661,7 @@ window.GuiaModules['module-notion'] = (function() {
             btn.style.background = "linear-gradient(135deg, #10b981, #059669)";
             btn.style.opacity = "1";
             btn.style.boxShadow = "0 0 20px rgba(16, 185, 129, 0.4)";
-            if (app) app.addXP(50);
+            if (window.app) window.app.addXP(50);
           }, 1200);
         }, 2000);
       };
@@ -739,7 +684,7 @@ window.GuiaModules['module-notion'] = (function() {
           } else {
             res.innerHTML = "✨ <b>Notion AI:</b><br>Basado en tu espacio de trabajo actual, la información más relevante indica que el proyecto de lanzamiento tiene un presupuesto de 5,000 USD.";
           }
-          if (app) app.addXP(25);
+          if (window.app) window.app.addXP(25);
         }, 1500);
       };
 
@@ -752,10 +697,42 @@ window.GuiaModules['module-notion'] = (function() {
           btn.textContent = orig;
           btn.style.color = '#a972ff';
         }, 2500);
-        if (app) app.addXP(5);
+        if (window.app) window.app.addXP(5);
       };
 
-      console.log('Initialized module-notion.js with V31.4 Sovereign Engine');
-    }
-  };
+      window.mNoSimulate = function(btn, type, xp) {
+        if (btn.disabled) return;
+        btn.disabled = true;
+        const origText = btn.innerHTML;
+        btn.innerHTML = '⏳ Simulando...';
+        btn.style.opacity = '1';
+
+        setTimeout(() => {
+          btn.innerHTML = '✅ Completado';
+          btn.style.background = 'rgba(16,185,129,0.2)';
+          btn.style.borderColor = '#10b981';
+          btn.style.color = '#34d399';
+          btn.style.opacity = '1';
+          if (window.app) window.app.addXP(xp);
+          
+          // Efecto de partículas o mensaje de éxito
+          const msg = document.createElement('div');
+          msg.style.position = 'absolute';
+          msg.style.top = '-20px';
+          msg.style.left = '50%';
+          msg.style.transform = 'translateX(-50%)';
+          msg.style.color = '#10b981';
+          msg.style.fontSize = '0.7rem';
+          msg.style.fontWeight = '800';
+          msg.innerText = '+' + xp + ' XP!';
+          btn.parentElement.style.position = 'relative';
+          btn.parentElement.appendChild(msg);
+          
+          setTimeout(() => msg.remove(), 2100);
+        }, 1500);
+      };
+
+  }
+
+  return notionInstance;
 })();

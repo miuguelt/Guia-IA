@@ -2,57 +2,9 @@
    MÓDULO BONUS: Teams y Meet con IA
    Versión Enriquecida — Simulador de Videollamada (Copilot)
    ═══════════════════════════════════════════ */
-(function() {
+window.GuiaModules = window.GuiaModules || {};
+window.GuiaModules['module-teams-meet'] = (function() {
   const teamsHTML = `
-<style>
-  .m-tm-card { background: #1f1f1f; border: 1px solid #333; border-radius: 12px; padding: 15px; position: relative; overflow: hidden; margin-bottom: 20px;}
-  .m-tm-hero { background: linear-gradient(135deg, rgba(70,78,184,0.12), rgba(255,255,255,0.03)); border: 1px solid rgba(70,78,184,0.24); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
-  .m-tm-chip-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
-  .m-tm-chip { padding:7px 12px; border-radius:999px; background:rgba(70,78,184,0.08); border:1px solid rgba(70,78,184,0.18); color:#c7d2fe; font-size:0.72rem; font-weight:700; }
-  .m-tm-grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
-  .m-tm-grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-  .m-tm-panel { background:rgba(255,255,255,0.03); border:1px solid rgba(70,78,184,0.14); border-radius:12px; padding:18px; }
-  .m-tm-panel h4 { margin:0 0 8px; color:#fff; }
-  .m-tm-note { font-size:0.8rem; color:#cbd5e1; line-height:1.8; }
-  .m-tm-step { position:relative; padding:16px 16px 16px 52px; border-radius:12px; border:1px solid rgba(70,78,184,0.16); background:rgba(255,255,255,0.02); }
-  .m-tm-step-badge { position:absolute; left:14px; top:14px; width:24px; height:24px; border-radius:50%; background:#464eb8; color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:0.72rem; }
-  
-  .m-tm-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; height: 350px; }
-  
-  /* Panel de Control (Llamada) */
-  .m-tm-call { background: #000; border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; position: relative;}
-  
-  .m-tm-video-grid { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding: 5px;}
-  .m-tm-person { background: #222; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden;}
-  .m-tm-person.active { border: 2px solid #a972ff; }
-  .m-tm-avatar { width: 50px; height: 50px; border-radius: 50%; background: #444; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;}
-  .m-tm-pname { position: absolute; bottom: 5px; left: 5px; background: rgba(0,0,0,0.6); color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem;}
-  
-  .m-tm-subtitles { position: absolute; bottom: 60px; left: 10px; right: 10px; text-align: center; font-size: 0.85rem; color: #fff; text-shadow: 1px 1px 2px #000; background: rgba(0,0,0,0.5); padding: 5px; border-radius: 4px; opacity: 0; transition: opacity 0.3s;}
-  .m-tm-subtitles.active { opacity: 1; }
-  
-  .m-tm-controls { height: 50px; background: #292929; display: flex; justify-content: center; align-items: center; gap: 15px; }
-  .m-tm-ctrl-btn { width: 35px; height: 35px; border-radius: 50%; background: #444; display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; transition: 0.2s; border: none;}
-  .m-tm-ctrl-btn:hover { background: #555; }
-  .m-tm-ctrl-btn.danger { background: #c5221f; }
-  .m-tm-ctrl-btn.copilot { background: linear-gradient(135deg, #a972ff, #0854c7); border:1px solid #a972ff;}
-  
-  /* Panel de Copilot (Derecha) */
-  .m-tm-copilot { background: #1a1a1a; border-radius: 8px; display: flex; flex-direction: column; border: 1px solid #333; }
-  .m-tm-cp-header { padding: 10px; border-bottom: 1px solid #333; display: flex; align-items: center; gap: 8px; font-weight: 700; color: #fff; font-size: 0.85rem;}
-  .m-tm-cp-logo { font-size: 1.2rem; }
-  .m-tm-cp-body { flex: 1; padding: 10px; overflow-y: auto; font-size: 0.8rem; color: #ccc; display: flex; flex-direction: column; gap: 10px;}
-  .m-tm-cp-prompt { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding: 10px; border-top: 1px solid #333;}
-  .m-tm-p-btn { background: #333; color: #fff; border: 1px solid #444; border-radius: 4px; padding: 6px; font-size: 0.7rem; cursor: pointer; transition: 0.2s;}
-  .m-tm-p-btn:hover { background: #444; border-color: #a972ff; }
-  
-  .m-tm-msg { padding: 8px; border-radius: 6px; background: #222; }
-  .m-tm-msg-title { color: #a972ff; font-weight: 700; margin-bottom: 5px; display:flex; align-items:center; gap:5px;}
-  .m-tm-pulse { width: 8px; height: 8px; background: #a972ff; border-radius: 50%; display: inline-block; animation: pulse 1.5s infinite;}
-  
-  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(169,114,255,0.7); } 70% { box-shadow: 0 0 0 5px rgba(169,114,255,0); } 100% { box-shadow: 0 0 0 0 rgba(169,114,255,0); } }
-  @media (max-width:900px){ .m-tm-grid-2,.m-tm-grid-3 { grid-template-columns:1fr; } }
-</style>
 
 <div class="module-header premium-header" style="background: linear-gradient(135deg, rgba(70,78,184,0.1), rgba(10,10,10,0.5)); border: 1px solid rgba(70,78,184,0.3);">
   <div class="module-number gamer-badge" style="background:#464eb8;color:#fff;">BONUS: COMUNICACIONES</div>
@@ -84,8 +36,10 @@
   <button class="tab-btn" data-tab="m-tm-lab">✨ Simulador de Llamada</button>
   <button class="tab-btn" data-tab="m-tm-cases">🧭 Casos Prácticos</button>
   <button class="tab-btn" data-tab="m-tm-prompts">🧠 Prompts</button>
+  <button class="tab-btn" data-tab="m-tm-stepbystep">⚙️ Activar y Descargar</button>
   <button class="tab-btn" data-tab="m-tm-antipatterns">🚫 Errores</button>
   <button class="tab-btn" data-tab="m-tm-estrategia">🎯 Estrategia Real</button>
+  <button class="tab-btn" data-tab="m-tm-gemas">💎 Gemas Especializadas</button>
   <button class="tab-btn" data-tab="m-tm-mission">🏆 Reto Final</button>
 </div>
 
@@ -253,233 +207,293 @@
   </div>
 </div>
 
-<div id="m-tm-antipatterns" class="ag-content">
+<div id="m-tm-stepbystep" class="ag-content">
   <div class="section-card animate-in">
-    <h3 style="color:#a5b4fc; margin-top:0;">🚫 Errores que vuelven inútil la IA en reuniones</h3>
-    <div class="m-tm-grid-3" style="margin-top:18px;">
-      <div class="m-tm-panel"><h4>No activar la transcripción</h4><p class="m-tm-note">Sin texto base, el copiloto tiene muy poco con qué trabajar.</p></div>
-      <div class="m-tm-panel"><h4>No verbalizar responsables</h4><p class="m-tm-note">Si nadie dice quién hace qué, la IA no puede inventar buena gobernanza.</p></div>
-      <div class="m-tm-panel"><h4>No cerrar fechas</h4><p class="m-tm-note">“Luego lo vemos” produce actas bonitas pero poco accionables.</p></div>
-      <div class="m-tm-panel"><h4>Pedir solo resumen</h4><p class="m-tm-note">A veces lo importante no es resumir, sino extraer compromisos y riesgos.</p></div>
-      <div class="m-tm-panel"><h4>No revisar el acta</h4><p class="m-tm-note">La IA acelera mucho, pero sigue valiendo la pena una validación rápida del facilitador.</p></div>
-      <div class="m-tm-panel"><h4>No convertir salida en seguimiento</h4><p class="m-tm-note">Una buena minuta sin tareas ni mensajes posteriores se enfría demasiado rápido.</p></div>
+    <h3 style="color:#a5b4fc; margin-top:0;">⚙️ Guía Práctica: Activar y Descargar Transcripciones</h3>
+    <div class="m-tm-grid-2" style="margin-top:18px;">
+      
+      <!-- TEAMS -->
+      <div style="background:rgba(70,78,184,0.06); border:1px solid rgba(70,78,184,0.3); border-radius:12px; padding:18px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+          <div style="background:#5B5FC7; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:1.1rem;">T</div>
+          <h4 style="margin:0; color:#fff;">Microsoft Teams</h4>
+        </div>
+        
+        <p style="font-size:0.8rem; font-weight:bold; color:#a5b4fc; margin-bottom:4px;">▶️ Cómo Activarla en 2026</p>
+        <ol style="font-size:0.8rem; color:#cbd5e1; padding-left:20px; margin-top:0; line-height:1.6; margin-bottom:16px;">
+          <li>Durante la reunión, clic en <strong>"Más" (...)</strong>.</li>
+          <li><strong>"Grabar y transcribir"</strong> → <strong>"Iniciar transcripción"</strong>.</li>
+          <li>Idioma: <strong>Español</strong>.</li>
+        </ol>
+
+        <p style="font-size:0.8rem; font-weight:bold; color:#a5b4fc; margin-bottom:4px;">📥 Cómo Descargarla</p>
+        <ol style="font-size:0.8rem; color:#cbd5e1; padding-left:20px; margin-top:0; line-height:1.6;">
+          <li>Ve al <strong>Chat de la reunión</strong> o <strong>Calendario</strong>.</li>
+          <li>Pestaña <strong>"Grabaciones y transcripciones"</strong>.</li>
+          <li>Descargar como <strong>.docx (Word)</strong>.</li>
+        </ol>
+      </div>
+
+      <!-- MEET -->
+      <div style="background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.3); border-radius:12px; padding:18px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+          <div style="background:#0F9D58; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:1.1rem;">M</div>
+          <h4 style="margin:0; color:#fff;">Google Meet</h4>
+        </div>
+        
+        <p style="font-size:0.8rem; font-weight:bold; color:#34d399; margin-bottom:4px;">▶️ Cómo Activarla en 2026</p>
+        <ol style="font-size:0.8rem; color:#cbd5e1; padding-left:20px; margin-top:0; line-height:1.6; margin-bottom:16px;">
+          <li>Clic en <strong>"Actividades"</strong> (formas geométricas).</li>
+          <li><strong>"Transcripciones"</strong> → <strong>"Iniciar"</strong>.</li>
+        </ol>
+
+        <p style="font-size:0.8rem; font-weight:bold; color:#34d399; margin-bottom:4px;">📥 Cómo Descargarla</p>
+        <ol style="font-size:0.8rem; color:#cbd5e1; padding-left:20px; margin-top:0; line-height:1.6;">
+          <li>El organizador recibe un <strong>Google Doc</strong> por correo.</li>
+          <li>También vive en Drive en <strong>"Meet Recordings"</strong>.</li>
+        </ol>
+      </div>
+    
     </div>
   </div>
 </div>
 
-<!-- TAB 4: ESTRATEGIA REAL -->
+<div id="m-tm-antipatterns" class="ag-content">
+  <div class="section-card animate-in">
+    <h3 style="color:#a5b4fc; margin-top:0;">🚫 Errores Comunes</h3>
+    <div class="m-tm-grid-3" style="margin-top:18px;">
+      <div class="m-tm-panel"><h4>No activar transcripción</h4><p class="m-tm-note">Sin texto, no hay IA funcional.</p></div>
+      <div class="m-tm-panel"><h4>Silencio de compromisos</h4><p class="m-tm-note">Debes decir quién hace qué en voz alta.</p></div>
+      <div class="m-tm-panel"><h4>Ignorar el acta final</h4><p class="m-tm-note">La IA ayuda, el humano valida.</p></div>
+    </div>
+  </div>
+</div>
+
 <div id="m-tm-estrategia" class="ag-content">
   <div class="section-card animate-in">
-    <div style="background:linear-gradient(135deg,rgba(70,78,184,0.15),transparent); border:1px solid rgba(70,78,184,0.35); border-radius:12px; padding:18px; margin-bottom:18px;">
-      <div style="background:#464eb8; color:#fff; padding:3px 12px; border-radius:20px; font-size:0.7rem; font-weight:800; display:inline-block; margin-bottom:8px;">🧪 ESTRATEGIA REAL · Teams Meet</div>
-      <p style="font-size:1rem; font-weight:800; color:#a5b4fc; margin:0 0 6px;">Operación: La Reunión Sin Minuta</p>
-      <p style="font-size:0.82rem; color:#94a3b8; margin:0;">📋 Situación: Tu equipo tuvo una reunión de crisis de 45 minutos. Nadie tomó notas. Hay 6 compromisos sin registrar y el lunes preguntan quién se comprometió a qué. Copilot tiene la solución.</p>
+    <div style="background:rgba(70,78,184,0.15); border:1px solid rgba(70,78,184,0.35); border-radius:12px; padding:18px; margin-bottom:18px;">
+      <p style="font-size:1rem; font-weight:800; color:#a5b4fc; margin:0 0 6px;">🧪 ESTRATEGIA: La Reunión Sin Minuta</p>
+      <p style="font-size:0.82rem; color:#94a3b8; margin:0;">Copia la transcripción de muestra abajo y usa los prompts para practicar.</p>
     </div>
-
-    <h4 style="color:#a5b4fc; margin:0 0 10px;">🧳 Tu Maletín de Trabajo</h4>
 
     <!-- Transcripción simulada -->
     <div style="margin-bottom:14px;">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-        <span style="font-size:0.8rem; font-weight:700; color:#a5b4fc;">📝 Transcripción real de reunión (para simular)</span>
-        <button style="background:rgba(70,78,184,0.15); border:1px solid rgba(70,78,184,0.4); color:#818cf8; padding:5px 12px; border-radius:6px; font-size:0.72rem; font-weight:700; cursor:pointer;" onclick="tmCopy(this, 'transcript')">📋 Copiar</button>
+        <span style="font-size:0.8rem; font-weight:700; color:#a5b4fc;">📝 Transcripción de Muestra</span>
+        <button class="m-tm-btn-lite" onclick="tmCopy(this, 'transcript')">📋 Copiar</button>
       </div>
-      <div style="background:#0f0f1a; border:1px solid #1e1e3a; border-radius:8px; padding:14px; font-size:0.78rem; color:#94a3b8; line-height:1.7;" id="tm-transcript">
-        <b style="color:#6366f1;">Ana [10:02]:</b> Bien, el servidor 2 colapsó anoche. Perdimos 4 horas de datos de producción.<br>
-        <b style="color:#f59e0b;">Carlos [10:04]:</b> Confirmó. El backup no ejecutó. Necesito acceso root para revisar el cron job. Luis, ¿me puedes dar permisos antes del mediodía?<br>
-        <b style="color:#10b981;">Luis [10:05]:</b> Hecho. Te lo envío por ticket a las 11:30.<br>
-        <b style="color:#6366f1;">Jefe [10:07]:</b> Ok. ¿Quién hace el informe para jurídica?<br>
-        <b style="color:#f59e0b;">Carlos [10:08]:</b> Ana puede redactarlo, ella tiene el historial de incidentes.<br>
-        <b style="color:#6366f1;">Ana [10:09]:</b> Perfecto. Lo entrego el miércoles a las 3pm.<br>
-        <b style="color:#ef4444;">Jefe [10:10]:</b> Bien. Y Marina, necesito que contactes al proveedor de la CDN hoy mismo. Que explique el tiempo de inactividad.<br>
-        <b style="color:#a78bfa;">Marina [10:11]:</b> Entendido, lo llamo antes de las 2pm.
+      <div style="background:#0f0f1a; border:1px solid #1e1e3a; border-radius:8px; padding:14px; font-size:0.78rem; color:#94a3b8;" id="tm-transcript">
+        <b>Ana:</b> El servidor colapsó. Luis, ¿me das acceso root?<br><b>Luis:</b> Claro, a las 11:30.<br><b>Carlos:</b> Yo hago el reporte el miércoles.<br><b>Jefe:</b> Ok. Marina, llama al proveedor de CDN hoy.
       </div>
     </div>
 
-    <!-- Prompts de Copilot -->
+    <!-- Prompts -->
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px;">
-      <div style="background:rgba(70,78,184,0.06); border:1px solid rgba(70,78,184,0.2); border-radius:8px; padding:12px;">
-        <p style="font-size:0.78rem; font-weight:700; color:#a5b4fc; margin:0 0 6px;">🤖 Prompt #1 — Tabla de Compromisos</p>
-        <p style="font-size:0.72rem; color:#64748b; margin:0 0 8px;">Genera el acta completa en formato tabla.</p>
-        <button style="background:rgba(70,78,184,0.15); border:1px solid rgba(70,78,184,0.4); color:#818cf8; padding:4px 10px; border-radius:5px; font-size:0.7rem; font-weight:700; cursor:pointer; width:100%;" onclick="tmCopy(this, 'p1')">📋 Copiar Prompt</button>
-      </div>
-      <div style="background:rgba(70,78,184,0.06); border:1px solid rgba(70,78,184,0.2); border-radius:8px; padding:12px;">
-        <p style="font-size:0.78rem; font-weight:700; color:#a5b4fc; margin:0 0 6px;">🤖 Prompt #2 — Resumen de Crisis</p>
-        <p style="font-size:0.72rem; color:#64748b; margin:0 0 8px;">Texto ejecutivo de 3 líneas para el director.</p>
-        <button style="background:rgba(70,78,184,0.15); border:1px solid rgba(70,78,184,0.4); color:#818cf8; padding:4px 10px; border-radius:5px; font-size:0.7rem; font-weight:700; cursor:pointer; width:100%;" onclick="tmCopy(this, 'p2')">📋 Copiar Prompt</button>
-      </div>
+      <button class="m-tm-p-lite" onclick="tmCopy(this, 'p1')">📋 Prompt: Tabla de Tareas</button>
+      <button class="m-tm-p-lite" onclick="tmCopy(this, 'p2')">📋 Prompt: Resumen Directivo</button>
     </div>
 
-    <!-- Hidden data for copy -->
     <div id="tm-copy-data" style="display:none;">
-      <span id="tm-p1">Lee la siguiente transcripción de una reunión de crisis. Genera una tabla de compromisos con estas columnas: Responsable | Tarea | Fecha Límite | Estado. Saca TODOS los compromisos explícitos mencionados. Transcripción:\n[PEGAR TRANSCRIPCIÓN AQUÍ]</span>
-      <span id="tm-p2">En base a esta transcripción, redacta un resumen ejecutivo de máximo 3 líneas para el director técnico explicando: (1) qué sucedió, (2) quién está tomando acción, (3) cuándo se resolverá. Transcripción:\n[PEGAR TRANSCRIPCIÓN AQUÍ]</span>
-    </div>
-
-    <!-- Checklist -->
-    <h4 style="color:#a5b4fc; margin:0 0 10px;">✅ Ejecuta la Estrategia</h4>
-    <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
-      <li style="display:flex; gap:12px; padding:12px; border:1px solid rgba(255,255,255,0.06); border-radius:8px; cursor:pointer;" onclick="tmCheck(this,0,30)">
-        <div style="width:20px; height:20px; border:2px solid #475569; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.65rem; margin-top:2px;">✓</div>
-        <div style="flex:1;"><p style="font-weight:700; font-size:0.85rem; color:#e2e8f0; margin:0 0 4px;">Activa la transcripción en tu próxima reunión de Teams</p><p style="font-size:0.78rem; color:#64748b; margin:0;">En Teams: Botón <b>"Más acciones" (...)</b> → <b>"Iniciar transcripción"</b>. O en Google Meet: <b>Actividades → Transcripción</b>.</p><div style="font-size:0.72rem; background:rgba(70,78,184,0.08); border-left:2px solid #464eb8; padding:4px 8px; border-radius:0 4px 4px 0; color:#818cf8; margin-top:6px;">💡 No requiere licencia Copilot. La transcripción básica es gratuita en Teams y Meet.</div></div>
-        <span style="font-size:0.7rem; font-weight:800; color:#10b981; flex-shrink:0;">+30 XP</span>
-      </li>
-      <li style="display:flex; gap:12px; padding:12px; border:1px solid rgba(255,255,255,0.06); border-radius:8px; cursor:pointer;" onclick="tmCheck(this,1,40)">
-        <div style="width:20px; height:20px; border:2px solid #475569; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.65rem; margin-top:2px;">✓</div>
-        <div style="flex:1;"><p style="font-weight:700; font-size:0.85rem; color:#e2e8f0; margin:0 0 4px;">Copia la transcripción de muestra del Maletín</p><p style="font-size:0.78rem; color:#64748b; margin:0;">Este texto simula exactamente una reunión real con la que practicarás los prompts. Copia con el botón de arriba.</p></div>
-        <span style="font-size:0.7rem; font-weight:800; color:#10b981; flex-shrink:0;">+40 XP</span>
-      </li>
-      <li style="display:flex; gap:12px; padding:12px; border:1px solid rgba(255,255,255,0.06); border-radius:8px; cursor:pointer;" onclick="tmCheck(this,2,60)">
-        <div style="width:20px; height:20px; border:2px solid #475569; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.65rem; margin-top:2px;">✓</div>
-        <div style="flex:1;"><p style="font-weight:700; font-size:0.85rem; color:#e2e8f0; margin:0 0 4px;">Pega el Prompt #1 en Copilot (Teams) o en ChatGPT/Gemini</p><p style="font-size:0.78rem; color:#64748b; margin:0;">Reemplaza <code>[PEGAR TRANSCRIPCIÓN]</code> con el texto copiado. El resultado esperado es una tabla con 4 compromisos identificados (Carlos, Luis, Ana, Marina).</p><div style="font-size:0.72rem; background:rgba(70,78,184,0.08); border-left:2px solid #464eb8; padding:4px 8px; border-radius:0 4px 4px 0; color:#818cf8; margin-top:6px;">💡 Si no tienes Copilot, usa Gemini o ChatGPT con la transcripción. El resultado es igual de válido.</div></div>
-        <span style="font-size:0.7rem; font-weight:800; color:#10b981; flex-shrink:0;">+60 XP</span>
-      </li>
-      <li style="display:flex; gap:12px; padding:12px; border:1px solid rgba(255,255,255,0.06); border-radius:8px; cursor:pointer;" onclick="tmCheck(this,3,70)">
-        <div style="width:20px; height:20px; border:2px solid #475569; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.65rem; margin-top:2px;">✓</div>
-        <div style="flex:1;"><p style="font-weight:700; font-size:0.85rem; color:#e2e8f0; margin:0 0 4px;">Genera el resumen ejecutivo con el Prompt #2 y compártelo</p><p style="font-size:0.78rem; color:#64748b; margin:0;">El texto generado debe ser tan limpio que puedas pegarlo directamente en un correo al director sin editarlo. Si no lo es, añade al prompt: <i>"Más formal y conciso"</i>.</p></div>
-        <span style="font-size:0.7rem; font-weight:800; color:#10b981; flex-shrink:0;">+70 XP</span>
-      </li>
-    </ul>
-
-    <div style="background:linear-gradient(135deg,#10b981,#059669); color:#fff; border-radius:8px; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; margin-top:16px; font-weight:800;">
-      <span>🏆 XP Ganado en esta Estrategia</span>
-      <span id="tm-xp-count">0 / 200 XP</span>
+      <span id="tm-p1">Lee esta transcripción y genera una tabla con: Responsable | Tarea | Fecha Límite | Riesgo.</span>
+      <span id="tm-p2">Resume esta crisis en 3 líneas: qué pasó, quién actúa y cuándo se resuelve.</span>
     </div>
   </div>
 </div>
 
-<!-- TAB 5: RETO FINAL -->
+<div id="m-tm-gemas" class="ag-content">
+  <div class="section-card animate-in">
+    <div class="m-tm-gem-shell">
+      <div class="m-tm-gem-header">
+        <div>
+          <div class="m-tm-gem-kicker">💎 Gema especializada</div>
+          <h4 class="m-tm-gem-title">Actas y Reuniones Ejecutivas</h4>
+          <p class="m-tm-gem-lead">Diseñada para convertir transcripciones caóticas en minutas claras, decisiones verificables y seguimiento accionable.</p>
+        </div>
+        <div class="m-tm-gem-badges">
+          <span class="m-tm-gem-badge">Acta formal</span>
+          <span class="m-tm-gem-badge">Resumen directivo</span>
+          <span class="m-tm-gem-badge">Tabla de compromisos</span>
+        </div>
+      </div>
+
+      <div class="m-tm-grid-3" style="margin-top:18px;">
+        <div class="m-tm-gem-mini">
+          <span class="m-tm-gem-mini-label">Entrada ideal</span>
+          <p>Transcripción, notas sueltas o chat de reunión con nombres, fechas y decisiones parciales.</p>
+        </div>
+        <div class="m-tm-gem-mini">
+          <span class="m-tm-gem-mini-label">Qué corrige</span>
+          <p>Ambigüedad, tareas sin dueño, acuerdos escondidos y ruido que suele contaminar las minutas.</p>
+        </div>
+        <div class="m-tm-gem-mini">
+          <span class="m-tm-gem-mini-label">Salida esperada</span>
+          <p>Resumen ejecutivo, acuerdos, riesgos, pendientes y tabla de seguimiento lista para compartir.</p>
+        </div>
+      </div>
+
+      <div class="m-tm-gem-prompt-box">
+        <div class="m-tm-gem-prompt-top">
+          <span class="m-tm-gem-prompt-label">Prompt inmutable para Gemini</span>
+          <button class="m-tm-btn-lite" onclick="tmCopy(this, 'gem-prompt')">📋 Copiar prompt</button>
+        </div>
+        <div id="tm-gem-prompt" class="m-tm-gem-prompt-text">Actúa como Analista Senior de Actas y Reuniones Ejecutivas. Tu trabajo es transformar transcripciones, notas o audios transcritos en un acta profesional, precisa y accionable.
+
+Reglas obligatorias:
+1. No inventes hechos, decisiones, fechas ni responsables.
+2. Si falta un dato crítico, marca "No definido en la reunión".
+3. Diferencia claramente entre decisión tomada, propuesta y tarea pendiente.
+4. Identifica responsables por nombre propio; si no existe responsable explícito, escribe "Responsable no asignado".
+5. Resume con lenguaje ejecutivo, concreto y sin relleno.
+6. Elimina muletillas, repeticiones y ruido conversacional.
+7. Conserva riesgos, bloqueos, dependencias y fechas límite mencionadas.
+
+Formato de salida obligatorio:
+## Resumen ejecutivo
+- Objetivo de la reunión
+- Decisiones clave
+- Riesgos o bloqueos
+
+## Acta estructurada
+| Tema | Acuerdo o decisión | Responsable | Fecha compromiso | Estado/Observación |
+
+## Pendientes abiertos
+Lista solo lo que quedó sin cerrar.
+
+## Próximos pasos
+Enumera acciones en orden de prioridad.
+
+Antes de responder, valida que cada acción tenga dueño, verbo y plazo. Si alguno falta, repórtalo al final en una sección llamada "Vacíos por definir".</div>
+      </div>
+
+      <div class="m-tm-gem-actions">
+        <button class="m-tm-p-lite" onclick="tmCopy(this, 'gem-command-1')">📋 Comando: convertir a minuta</button>
+        <button class="m-tm-p-lite" onclick="tmCopy(this, 'gem-command-2')">📋 Comando: extraer tareas</button>
+        <button class="m-tm-p-lite" onclick="tmCopy(this, 'gem-command-3')">📋 Comando: resumen para jefe</button>
+      </div>
+
+      <div class="m-tm-gem-tip">
+        <strong>Uso real:</strong> primero pega la transcripción completa, luego pide una segunda pasada solo para revisar vacíos, responsables y fechas antes de compartir el acta final.
+      </div>
+    </div>
+
+    <div style="display:none;">
+      <span id="tm-gem-command-1">Convierte esta transcripción en una minuta formal siguiendo tu formato obligatorio. Prioriza acuerdos, responsables y fechas.</span>
+      <span id="tm-gem-command-2">Extrae únicamente los compromisos de esta reunión en una tabla con Responsable | Acción | Fecha límite | Riesgo por incumplimiento.</span>
+      <span id="tm-gem-command-3">Resume esta reunión para dirección en máximo 6 viñetas: objetivo, decisiones, bloqueos, riesgos y siguientes pasos.</span>
+    </div>
+  </div>
+</div>
+
 <div id="m-tm-mission" class="ag-content">
   <div class="exercise-box mission-card animate-in">
-    <div class="exercise-header"><span class="exercise-icon">📹</span><span class="exercise-title">Reto Final: La Reunión que Nadie Documentó</span></div>
-    <div class="mission-instructions" style="background:rgba(70,78,184,0.1);padding:20px;border-radius:12px;border-left:4px solid #464eb8;margin:20px 0;">
-      <strong>🎯 Tu Desafío Real:</strong>
-      <ol style="margin-top:12px;font-size:0.85rem;line-height:2;">
-        <li>Activa la transcripción en una reunión real o usa la transcripción de ejemplo del módulo.</li>
-        <li>Genera una tabla de compromisos con responsables y fechas.</li>
-        <li>Redacta un resumen ejecutivo de máximo 3 líneas para el director.</li>
-        <li>Deja ambos entregables listos para pegar en correo o Teams.</li>
-      </ol>
-    </div>
-    <textarea class="premium-textarea" placeholder="Escribe aquí el mayor riesgo de no documentar una reunión y qué te parece más útil: la tabla de compromisos o el resumen ejecutivo..."></textarea>
-    <div class="reward-tag" style="margin-top:15px;">+100 XP · Insignia: Facilitador de Sesiones 🎯</div>
-    <button class="gl-btn gl-btn-primary complete-module-btn" data-module="module-teams-meet" style="width:100%;margin-top:15px;background:#464eb8;color:#fff;">✅ Misión Completada — Reclamar Insignia</button>
+    <h3>🏆 Misión Final</h3>
+    <p>Aplica la IA en tu próxima reunión. ¿Qué te resultó más útil: la tabla o el resumen?</p>
+    <textarea class="premium-textarea" placeholder="Tu reflexión aquí..."></textarea>
+    <button class="gl-btn gl-btn-primary complete-module-btn" data-module="module-teams-meet" style="width:100%;margin-top:15px;">✅ Misión Completada</button>
   </div>
 </div>
 
 <div class="module-nav">
-  <button class="gl-btn gl-btn-primary" data-goto="welcome">← Volver al Menú Bonus</button>
+  <button class="gl-btn gl-btn-primary" data-goto="welcome">← Volver</button>
 </div>
 
-<script>
-  // Tabs logic
-  setTimeout(() => {
-    const parent = document.getElementById('module-teams-meet');
-    if(!parent) return;
-    const tabs = parent.querySelectorAll('.tab-btn');
-    const contents = parent.querySelectorAll('.ag-content');
-    
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            contents.forEach(c => c.classList.remove('active'));
-            tab.classList.add('active');
-            const targetId = tab.dataset.tab;
-            const content = parent.querySelector('#' + targetId);
-            if (content) content.classList.add('active');
-        });
-    });
-  }, 300);
+<!-- ESTILOS LOCALES PARA EL MODULO -->
+<style>
+.m-tm-p-lite { background:rgba(70,78,184,0.1); border:1px solid rgba(70,78,184,0.3); color:#a5b4fc; padding:10px; border-radius:8px; cursor:pointer; font-size:0.75rem; text-align:left; }
+.m-tm-btn-lite { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#fff; padding:4px 8px; border-radius:6px; font-size:0.7rem; cursor:pointer; }
+</style>
+`;
 
-  // Teams Estrategia Real
+  const teamsInstance = {
+    init: function(app) {
+      console.log('[Module] Teams & Meet initialized - Sincronía v32.5');
+      const target = document.getElementById('module-teams-meet');
+      if (target && !target.querySelector('.module-header')) {
+        target.insertAdjacentHTML('afterbegin', teamsHTML);
+        if(app && typeof app.triggerAnimations === 'function') {
+            setTimeout(() => app.triggerAnimations(), 100);
+        }
+      }
+    }
+  };
+
+  // Helper copy function globalized for simple onclicks
   window.tmCopy = function(btn, type) {
-    let text = '';
-    if(type === 'transcript') text = document.getElementById('tm-transcript')?.innerText || '';
-    else if(type === 'p1') text = document.getElementById('tm-p1')?.innerText || '';
-    else if(type === 'p2') text = document.getElementById('tm-p2')?.innerText || '';
-    navigator.clipboard.writeText(text).catch(() => {});
-    const orig = btn.textContent;
-    btn.textContent = '✅ Copiado'; btn.style.color = '#10b981';
-    setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 2500);
-    if(window.app) window.app.addXP(5);
-  };
-  let tmDone = [false,false,false,false];
-  let tmTotalXP = 0;
-  window.tmCheck = function(el, idx, xp) {
-    if(tmDone[idx]) return;
-    tmDone[idx] = true;
-    el.style.borderColor = 'rgba(16,185,129,0.4)';
-    el.style.background = 'rgba(16,185,129,0.05)';
-    const chk = el.querySelector('div');
-    if(chk) { chk.style.background='#10b981'; chk.style.borderColor='#10b981'; chk.style.color='#fff'; }
-    tmTotalXP += xp;
-    if(window.app) window.app.addXP(xp);
-    const c = document.getElementById('tm-xp-count');
-    if(c) c.textContent = tmTotalXP + ' / 200 XP';
+    let text = document.getElementById('tm-' + type)?.innerText || '';
+    navigator.clipboard.writeText(text).then(() => {
+        const o = btn.textContent; btn.textContent = '✅';
+        setTimeout(() => btn.textContent = o, 1500);
+    });
   };
 
-  // Funciones Interactivas
-  const dialogs = [
-    { p: 'p-ana', txt: 'Bien equipo, la migración es urgente para esta semana.' },
-    { p: 'p-carlos', txt: 'Coincido. El servidor 2 está al límite. Me encargo de la limpieza previa.' },
-    { p: 'p-inv1', txt: 'Perfecto Carlos. Te doy de plazo hasta el jueves al mediodía.' },
-    { p: 'p-carlos', txt: 'Entendido.' },
-    { p: 'p-ana', txt: 'Oigan, ¿Alguien sabe si el jefe aprobó el presupuesto adicional?' }
+  // --- SIMULATION LOGIC ---
+  let simulationInterval = null;
+  const simulationSteps = [
+    { id: 'ana', text: 'Ana: "Debemos priorizar la migración de la base de datos para esta semana."' },
+    { id: 'carlos', text: 'Carlos: "¿Y qué pasará con el soporte de legacy? No podemos dejarlo así."' },
+    { id: 'ana', text: 'Ana: "Luis dice que a las 11:30 nos da acceso root para el cambio."' },
+    { id: 'inv1', text: 'Jefe: "Marina, lo más importante es que llames al proveedor de CDN hoy."' },
+    { id: 'user', text: 'Tú: "Entendido, ya tengo la lista de tareas pendientes."' }
   ];
-  
-  let callInterval = null;
-  let dialogIndex = 0;
 
   window.mTmPlayCall = function() {
-    if(callInterval) return;
+    const btn = document.querySelector('.m-tm-ctrl-btn.copilot');
     const subs = document.getElementById('tm-subs');
+    if (simulationInterval) {
+      clearInterval(simulationInterval);
+      simulationInterval = null;
+      btn.classList.remove('active');
+      subs.classList.remove('active');
+      document.querySelectorAll('.m-tm-person').forEach(p => p.classList.remove('active'));
+      return;
+    }
+
+    btn.classList.add('active');
     subs.classList.add('active');
-    
-    callInterval = setInterval(() => {
-      // Remover activos
-      document.querySelectorAll('.m-tm-person').forEach(el => el.classList.remove('active'));
+    let step = 0;
+
+    const runStep = () => {
+      const data = simulationSteps[step];
+      document.querySelectorAll('.m-tm-person').forEach(p => p.classList.remove('active'));
+      const speaker = document.getElementById(`p-${data.id}`);
+      if (speaker) speaker.classList.add('active');
+      subs.innerText = data.text;
       
-      const d = dialogs[dialogIndex];
-      document.getElementById(d.p).classList.add('active');
-      subs.innerText = d.txt;
-      
-      dialogIndex++;
-      if (dialogIndex >= dialogs.length) {
-         clearInterval(callInterval);
-         setTimeout(() => subs.innerText = "La sala está en silencio...", 2000);
-      }
-    }, 3000);
+      step = (step + 1) % simulationSteps.length;
+    };
+
+    runStep();
+    simulationInterval = setInterval(runStep, 3500);
   };
 
   window.mTmCopilotQuery = function(type) {
     const chat = document.getElementById('cp-chat');
-    
-    const userM = document.createElement('div');
-    userM.className = 'm-tm-msg';
-    userM.style.borderLeft = '3px solid #ccc';
-    userM.innerHTML = type === 'recap' ? "Usuario: Enséñame un resumen de lo hablado hasta ahora." : "Usuario: Lista los compromisos asignados.";
-    chat.appendChild(userM);
-    chat.scrollTop = chat.scrollHeight;
-    
-    setTimeout(() => {
-      const ai = document.createElement('div');
-      ai.className = 'm-tm-msg';
-      ai.style.borderLeft = '3px solid #a972ff';
-      if(type === 'recap') {
-        ai.innerHTML = '<span style="color:#a972ff;font-weight:700;">✨ Resumen:</span><br>Se acordó priorizar la migración de la DB (marcada como urgencia). Luego surgieron dudas financieras pero el enfoque principal es descargar el servidor principal.';
-      } else {
-        ai.innerHTML = '<span style="color:#a972ff;font-weight:700;">✨ Tareas extraídas:</span><br>- <b>Limpieza del servidor 2</b> (Asignado a: Carlos) [Fecha: Jueves a mediodía].';
-      }
-      chat.appendChild(ai);
-      chat.scrollTop = chat.scrollHeight;
-      if(window.app) window.app.addXP(20);
-    }, 1500);
-  };
-</script>
-`;
+    if (!chat) return;
 
-  const target = document.getElementById('module-teams-meet');
-  if (target) {
-    target.innerHTML = teamsHTML;
-  }
+    const msg = document.createElement('div');
+    msg.className = 'm-tm-msg animate-in';
+    
+    if (type === 'recap') {
+      msg.innerHTML = `
+        <div class="m-tm-msg-title">✨ Resumen del Copilot</div>
+        <div style="color:#d1fae5;">Se ha discutido la prioridad de la migración de DB. El acceso root será a las 11:30. El Jefe solicitó llamar al CDN hoy.</div>
+      `;
+    } else {
+      msg.innerHTML = `
+        <div class="m-tm-msg-title">✅ Tareas Identificadas</div>
+        <ul style="margin:5px 0 0 15px; padding:0; color:#d1fae5;">
+          <li>Llamar proveedor CDN (Responsable: Marina)</li>
+          <li>Acceso Root a las 11:30 (Luis)</li>
+          <li>Reporte el miércoles (Carlos)</li>
+        </ul>
+      `;
+    }
+
+    chat.appendChild(msg);
+    chat.scrollTop = chat.scrollHeight;
+  };
+
+  window.GuiaModules = window.GuiaModules || {};
+  window.GuiaModules['module-teams-meet'] = teamsInstance;
+  return teamsInstance;
 })();

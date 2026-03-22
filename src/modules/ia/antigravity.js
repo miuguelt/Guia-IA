@@ -39,77 +39,7 @@ export const AntigravityModule = {
                 </div>
             </div>
 
-            <style>
-                .antigravity-hub {
-                    padding: 2rem;
-                    color: white;
-                    font-family: 'Outfit', sans-serif;
-                }
-                .glass-header h1 {
-                    font-size: 2.5rem;
-                    background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                }
-                .badge-v7 {
-                    font-size: 0.8rem;
-                    background: rgba(79, 172, 254, 0.2);
-                    padding: 4px 10px;
-                    border-radius: 20px;
-                    border: 1px solid #4facfe;
-                    vertical-align: middle;
-                }
-                .progress-track {
-                    display: flex;
-                    justify-content: space-between;
-                    margin: 2rem 0;
-                    padding: 10px;
-                    background: rgba(255, 255, 255, 0.05);
-                    border-radius: 15px;
-                }
-                .track-step {
-                    opacity: 0.5;
-                    font-size: 0.9rem;
-                    padding: 8px 15px;
-                    border-radius: 10px;
-                    transition: all 0.3s;
-                }
-                .track-step.active {
-                    opacity: 1;
-                    background: rgba(79, 172, 254, 0.3);
-                    box-shadow: 0 0 15px rgba(79, 172, 254, 0.5);
-                }
-                .glass-card {
-                    background: rgba(255, 255, 255, 0.03);
-                    backdrop-filter: blur(15px);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    padding: 2rem;
-                    border-radius: 24px;
-                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-                }
-                .btn-premium {
-                    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-                    border: none;
-                    color: white;
-                    padding: 12px 30px;
-                    border-radius: 12px;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: transform 0.2s, box-shadow 0.2s;
-                }
-                .btn-premium:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
-                }
-                .mini-telemetry {
-                    display: flex;
-                    gap: 20px;
-                    margin-top: 2rem;
-                    font-size: 0.8rem;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                }
-            </style>
+
         `;
     },
     init: () => {

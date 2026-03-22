@@ -1,0 +1,14 @@
+{
+    "total_tokens": 32385611.0,
+    "distribution": {
+        "gpu_local": 1878046.0,
+        "deepseek_l3": 323801.0,
+        "gemini_l4": 30178264.0
+    },
+    "expenses_usd": 2.09,
+    "balance_usd": 7.90,
+    "api_requests": 690,
+    "last_update": "2026-03-22T10:11:23.000000",
+    "version": "32.4",
+    "status": "GOLD_STANDARD_FINAL"
+}

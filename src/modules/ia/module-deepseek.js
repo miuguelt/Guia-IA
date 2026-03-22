@@ -1,9 +1,9 @@
 /* ═══════════════════════════════════════════
    MÓDULO BONUS: DeepSeek R1 (El Cerebro)
-   Versión "Titan Brain" — DNA v31.4
+   Versión "Titan Brain" — DNA v32.4
    ═══════════════════════════════════════════ */
-(function() {
-  const dseekHTML = `
+window.GuiaModules = window.GuiaModules || {};
+window.GuiaModules['module-deepseek'] = (function() {
   const dseekHTML = `
 <div class="m-ds-container" style="--ds-primary: var(--primary); --ds-bg: var(--bg-dark); --ds-border: var(--glass-border);">
   <div class="module-header premium-header">
@@ -25,17 +25,17 @@
     </div>
   </div>
 
-  <div class="ag-tabs">
-    <button class="premium-tab active" data-tab="m-ds-arch">🏗️ Arquitectura RL</button>
-    <button class="premium-tab" data-tab="m-ds-decider">🧭 Cuándo Usarlo</button>
-    <button class="premium-tab" data-tab="m-ds-local">🏠 Inferencia GPU</button>
-    <button class="premium-tab" data-tab="m-ds-prompt">✍️ Prompting CoT</button>
-    <button class="premium-tab" data-tab="m-ds-lab">⚡ Lab Pensamiento</button>
-    <button class="premium-tab" data-tab="m-ds-cases">🧭 Casos Prácticos</button>
-    <button class="premium-tab" data-tab="m-ds-prompts">🧠 Prompts Maestros</button>
-    <button class="premium-tab" data-tab="m-ds-antipatterns">🚫 Errores</button>
-    <button class="premium-tab" data-tab="m-ds-estrategia">🎯 Estrategia Real</button>
-    <button class="premium-tab" data-tab="m-ds-mission">🏆 Reto Final</button>
+  <div class="ag-tabs game-tabs">
+    <button class="tab-btn active" data-tab="m-ds-arch">🏗️ Arquitectura RL</button>
+    <button class="tab-btn" data-tab="m-ds-decider">🧭 Cuándo Usarlo</button>
+    <button class="tab-btn" data-tab="m-ds-local">🏠 Inferencia GPU</button>
+    <button class="tab-btn" data-tab="m-ds-prompt">✍️ Prompting CoT</button>
+    <button class="tab-btn" data-tab="m-ds-lab">⚡ Lab Pensamiento</button>
+    <button class="tab-btn" data-tab="m-ds-cases">🧭 Casos Prácticos</button>
+    <button class="tab-btn" data-tab="m-ds-prompts">🧠 Prompts Maestros</button>
+    <button class="tab-btn" data-tab="m-ds-antipatterns">🚫 Errores</button>
+    <button class="tab-btn" data-tab="m-ds-estrategia">🎯 Estrategia Real</button>
+    <button class="tab-btn" data-tab="m-ds-mission">🏆 Reto Final</button>
   </div>
 
   <!-- TAB 1: ARCHITECTURE -->
@@ -120,27 +120,36 @@
   <!-- TAB 4: LABORATORIO -->
   <div id="m-ds-lab" class="ag-content">
     <div class="section-card animate-in">
-        <h3 style="margin-top:0;">⚡ Simulador de Cadena de Pensamiento</h3>
-        <p style="font-size:0.85rem; color:#94a3b8;">Observa cómo R1 deconstruye un problema matemático complejo.</p>
+        <h3 style="margin-top:0; color:var(--ds-primary);">⚡ Lab de Pensamiento: Motor R1</h3>
+        <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:20px;">Observa en tiempo real cómo la IA deconstruye un problema complejo usando el bloque informativo de razonamiento.</p>
         
-        <div class="m-ds-terminal">
-            <div class="m-ds-t-header">
-                <div style="font-weight:bold; color:var(--ds-primary);">DEEPSEEK-R1 ENGINE [ON]</div>
+        <div class="m-ds-titan-shell">
+            <div class="m-ds-t-header" style="justify-content:space-between; display:flex; align-items:center;">
+                <div style="font-weight:bold; color:var(--ds-primary); font-size:0.75rem;">DEEPSEEK-R1-TITAN-ENGINE [READY]</div>
+                <div id="ds-status-indicator" class="ds-status-idle">IDLE</div>
             </div>
             <div class="m-ds-t-body" id="ds-lab-body">
-                <div style="color:#64748b;">Esperando prompt de razonamiento...</div>
+                <div class="m-ds-thought-line" style="color:#475569;">[PROMPT_AWAIT] Esperando parámetros de razonamiento...</div>
             </div>
         </div>
-        <div style="margin-top:15px; display:flex; gap:10px;">
-            <select id="ds-scenario" class="premium-textarea" style="height:45px; width:250px;">
-                <option value="math">Problema de Probabilidad</option>
-                <option value="logic">El Dilema del Prisionero</option>
-                <option value="code">Refactorización de Código</option>
-            </select>
-            <button class="ds-btn-glow" onclick="mDsRunCoT()">Iniciar Razonamiento</button>
+
+        <div class="m-ds-controls">
+            <div class="m-ds-control-group">
+                <label style="display:block; font-size:0.7rem; color:#64748b; margin-bottom:5px; font-weight:700;">SELECCIONAR ESCENARIO</label>
+                <select id="ds-scenario" class="ds-premium-select">
+                    <option value="math">Problema de Probabilidad (Bayes)</option>
+                    <option value="logic">Teoría de Juegos (Prisionero)</option>
+                    <option value="code">Optimización de Algoritmo (Python)</option>
+                </select>
+            </div>
+            <button id="ds-run-btn" class="ds-btn-glow-titan" onclick="mDsRunCoT()">
+                <span class="btn-icon">⚡</span> INICIAR RAZONAMIENTO
+            </button>
         </div>
     </div>
   </div>
+
+
 
   <div id="m-ds-cases" class="ag-content">
     <div class="section-card animate-in">
@@ -152,19 +161,43 @@
           <div style="font-size:0.72rem; font-weight:800; color:#a5b4fc; margin-bottom:8px;">CASO 1 · DEBUGGING</div>
           <h4 style="margin:0 0 8px; color:#fff;">Encontrar un bug lógico</h4>
           <p style="font-size:0.78rem; color:#94a3b8; margin:0 0 10px;">Ideal cuando el código corre pero entrega resultados incorrectos y nadie sabe por qué.</p>
-          <div style="font-size:0.76rem; color:#cbd5e1; line-height:1.8;">1. Pega el código.<br>2. Pide revisar variable por variable.<br>3. Solicita líneas exactas del error.<br>4. Compara con un valor esperado.</div>
+          <div style="margin: 12px 0; border-top: 1px solid rgba(99,102,241,0.1); padding-top: 10px;">
+            <p style="font-size: 0.72rem; color: #818cf8; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Guía de Ejecución:</p>
+            <div style="font-size:0.76rem; color:#cbd5e1; line-height:1.8;">
+              1. Pega el código completo.<br>
+              2. Pide revisar la lógica variable por variable.<br>
+              3. Solicita las líneas exactas del error.<br>
+              4. Compara el resultado con un valor esperado.
+            </div>
+          </div>
         </div>
         <div class="m-ds-card" style="border-top:3px solid #818cf8;">
           <div style="font-size:0.72rem; font-weight:800; color:#a5b4fc; margin-bottom:8px;">CASO 2 · DECISIÓN</div>
-          <h4 style="margin:0 0 8px; color:#fff;">Elegir entre varias opciones con criterios</h4>
-          <p style="font-size:0.78rem; color:#94a3b8; margin:0 0 10px;">Útil para comparar proveedores, escenarios o alternativas cuando hay varias variables al tiempo.</p>
-          <div style="font-size:0.76rem; color:#cbd5e1; line-height:1.8;">1. Pega la tabla.<br>2. Define costo, riesgo y tiempo.<br>3. Pide matriz comparativa.<br>4. Exige recomendación justificada.</div>
+          <h4 style="margin:0 0 8px; color:#fff;">Elegir entre varias opciones</h4>
+          <p style="font-size:0.78rem; color:#94a3b8; margin:0 0 10px;">Útil para comparar proveedores, escenarios o alternativas con múltiples variables.</p>
+          <div style="margin: 12px 0; border-top: 1px solid rgba(99,102,241,0.1); padding-top: 10px;">
+            <p style="font-size: 0.72rem; color: #818cf8; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Guía de Ejecución:</p>
+            <div style="font-size:0.76rem; color:#cbd5e1; line-height:1.8;">
+              1. Pega la tabla o lista de opciones.<br>
+              2. Define criterios (costo, riesgo, tiempo).<br>
+              3. Pide una matriz comparativa detallada.<br>
+              4. Exige una recomendación final justificada.
+            </div>
+          </div>
         </div>
         <div class="m-ds-card" style="border-top:3px solid #10b981;">
           <div style="font-size:0.72rem; font-weight:800; color:#a5b4fc; margin-bottom:8px;">CASO 3 · MEJORA</div>
-          <h4 style="margin:0 0 8px; color:#fff;">Reescribir un procedimiento confuso</h4>
-          <p style="font-size:0.78rem; color:#94a3b8; margin:0 0 10px;">Funciona bien para instrucciones mal redactadas, procesos ambiguos o reglas poco claras.</p>
-          <div style="font-size:0.76rem; color:#cbd5e1; line-height:1.8;">1. Pega el procedimiento actual.<br>2. Pide ambigüedades y huecos.<br>3. Solicita versión mejorada.<br>4. Cierra con checklist de control.</div>
+          <h4 style="margin:0 0 8px; color:#fff;">Reescribir un procedimiento</h4>
+          <p style="font-size:0.78rem; color:#94a3b8; margin:0 0 10px;">Funciona bien para instrucciones confusas, procesos ambiguos o reglas poco claras.</p>
+          <div style="margin: 12px 0; border-top: 1px solid rgba(99,102,241,0.1); padding-top: 10px;">
+            <p style="font-size: 0.72rem; color: #818cf8; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Guía de Ejecución:</p>
+            <div style="font-size:0.76rem; color:#cbd5e1; line-height:1.8;">
+              1. Pega el procedimiento o manual actual.<br>
+              2. Pide identificar ambigüedades y huecos.<br>
+              3. Solicita una versión optimizada y clara.<br>
+              4. Cierra con un checklist de control de calidad.
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -306,7 +339,7 @@ for e in empleados:
         </li>
       </ul>
 
-      <div style="background:linear-gradient(135deg,#10b981,#059669); color:#fff; border-radius:8px; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; margin-top:16px; font-weight:800;">
+      <div class="kit-xp-total" id="ds-xp-total">
         <span>🏆 XP Ganado en esta Estrategia</span>
         <span id="ds-xp-count">0 / 200 XP</span>
       </div>
@@ -338,23 +371,39 @@ for e in empleados:
   <div class="module-nav">
     <button class="gl-btn gl-btn-primary" data-goto="welcome">← Volver al Menú</button>
   </div>
-</div>
+  </div>
+`;
 
-<script>
-  // -- Tabs logic --
-  setTimeout(() => {
-    const parent = document.getElementById('module-deepseek');
-    if(!parent) return;
-    const tabs = parent.querySelectorAll('.premium-tab-ds');
-    const contents = parent.querySelectorAll('.ag-content');
-    tabs.forEach(t => t.addEventListener('click', () => {
-      tabs.forEach(x => x.classList.remove('active'));
-      contents.forEach(x => x.classList.remove('active'));
-      t.classList.add('active');
-      const target = parent.querySelector('#' + t.dataset.tab);
-      if(target) target.classList.add('active');
-    }));
-  }, 500);
+  const deepseekInstance = {
+    init: function(app) {
+      console.log('DeepSeek Titan Brain v31.4 loaded');
+      const target = document.getElementById('module-deepseek');
+      if (target && !target.querySelector('.module-header')) {
+        target.insertAdjacentHTML('afterbegin', dseekHTML);
+        setupDeepseekHandlers(target);
+      }
+    }
+  };
+
+  function setupDeepseekHandlers(parent) {
+      const tabs = parent.querySelectorAll('.tab-btn');
+      const contents = parent.querySelectorAll('.ag-content');
+      tabs.forEach(t => t.addEventListener('click', () => {
+        if (!t.dataset.tab) return;
+        tabs.forEach(x => x.classList.remove('active'));
+        contents.forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        const targetSelection = parent.querySelector('#' + t.dataset.tab);
+        if(targetSelection) targetSelection.classList.add('active');
+        
+        if (t.dataset.tab === 'm-ds-lab') {
+            const body = document.getElementById('ds-lab-body');
+            if (body && body.children.length <= 1) {
+                 // Reset if fresh
+            }
+        }
+      }));
+  }
 
   // Kit Estrategia Real DeepSeek
   window.dsCopyCode = function(btn) {
@@ -392,9 +441,17 @@ for e in empleados:
   window.mDsRunCoT = () => {
     if(dsBusy) return;
     dsBusy = true;
+    
     const body = document.getElementById('ds-lab-body');
+    const status = document.getElementById('ds-status-indicator');
+    const runBtn = document.getElementById('ds-run-btn');
     const scenario = document.getElementById('ds-scenario').value;
-    body.innerHTML = '<div style="color:var(--ds-primary);">[SYSTEM] Inicializando Kernels de Razonamiento v2.0...</div>';
+    
+    if (status) { status.innerText = 'REASONING...'; status.className = 'ds-status-busy'; }
+    if (runBtn) { runBtn.disabled = true; runBtn.innerHTML = '<span class="btn-icon">⏳</span> PENSANDO...'; }
+    
+    body.innerHTML = '<div class="m-ds-thought-line" style="color:var(--ds-primary); font-weight:bold;">[SYSTEM] Inicializando Kernels de Razonamiento v2.0...</div>' +
+                     '<div class="m-ds-thought-line" style="color:#6366f1;">[INFO] Cargando Escenario: ' + scenario + '</div>';
 
     let thoughts = [];
     if(scenario === 'math') {
@@ -444,6 +501,8 @@ for e in empleados:
         } else {
             clearInterval(intv);
             dsBusy = false;
+            if (status) { status.innerText = 'IDLE'; status.className = 'ds-status-idle'; }
+            if (runBtn) { runBtn.disabled = false; runBtn.innerHTML = '<span class="btn-icon">⚡</span> INICIAR RAZONAMIENTO'; }
             if(window.app) window.app.addXP(40);
         }
     }, 600);
@@ -457,9 +516,7 @@ for e in empleados:
           document.querySelector('.complete-module-btn')?.click();
       } else { alert("Pista: Empieza con R... L..."); }
   };
-</script>
-`;
-  const target = document.getElementById('module-deepseek');
-  if (target) { target.innerHTML = dseekHTML; }
-  return { init: function() { console.log('DeepSeek Titan Brain v31.4 loaded'); } };
+  window.GuiaModules = window.GuiaModules || {};
+  window.GuiaModules['module-deepseek'] = deepseekInstance;
+  return deepseekInstance;
 })();

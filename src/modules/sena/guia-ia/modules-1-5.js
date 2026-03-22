@@ -1,5 +1,6 @@
 window.GuiaModules = window.GuiaModules || {};
-window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaModules['module-3'] = window.GuiaModules['module-4'] = window.GuiaModules['module-5'] = (function() {
+window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaModules['module-3'] = window.GuiaModules['module-4'] = window.GuiaModules['module-5'] = 
+window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hygiene'] = window.GuiaModules['module-verification'] = window.GuiaModules['module-privacy-daily'] = (function() {
 /* Modules 1-5 Content Injection — Modularized */
 
     const modules = {
@@ -46,7 +47,7 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
               </tbody>
             </table>
           </div>
-          <p style="margin-top: 15px;">La IA es como un <strong>pasante genio</strong> que ha leído toda la biblioteca del mundo pero necesita instrucciones claras.</p>
+          <p class="m-pa-note" style="margin-top: 20px;">La IA es como un <strong>pasante genio</strong> que ha leído toda la biblioteca del mundo pero necesita instrucciones claras.</p>
         </div>
       </div>
 
@@ -56,23 +57,23 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
           <h3><span class="icon">⚡</span> Solución Paso a Paso: Tu Mañana en 5 Minutos</h3>
           <p>Sigue esta ruta para resolver el caos de la "Crónica de Oficina" de forma inmediata. No necesitas saber técnica, solo saber qué pedir.</p>
 
-          <div class="workflow-wizard" style="margin-top: 25px;">
+          <div class="workflow-wizard" style="margin-top: 30px;">
             <!-- PASO 1: CORREOS -->
-            <div class="workflow-step glass-card elegant-transition" style="--accent-step: var(--primary);">
+            <div class="workflow-step glass-card-premium animate-in" style="--accent-step: var(--primary); margin-bottom: 20px;">
               <div class="step-number-bg">1</div>
               <h4 class="step-title">
-                <span class="step-badge">1</span>
+                <span class="badge-titan" style="background: var(--primary); color: #fff;">1</span>
                 Domar los 50 Correos
               </h4>
-              <p style="font-size: 0.85rem; opacity: 0.8;"><b>El Truco:</b> No leas uno por uno. Copia los asuntos de tus correos y dáselos a la IA.</p>
-              <div class="action-box" style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; margin: 15px 0;">
-                <p style="font-size: 0.8rem; margin-bottom: 10px; color: var(--primary-light);">🎯 <b>Paso a paso:</b></p>
+              <p class="m-pa-note" style="margin-top: 8px;"><b>El Truco:</b> No leas uno por uno. Copia los asuntos de tus correos y dáselos a la IA.</p>
+              <div class="action-box m-pa-panel-card" style="margin: 20px 0;">
+                <p class="text-gradient-primary" style="font-size: 0.9rem; margin-bottom: 12px;">🎯 Paso a paso:</p>
                 <ol style="font-size: 0.75rem; padding-left: 20px; line-height: 1.6;">
                   <li>Abre tu correo y selecciona los asuntos de los 50 correos pendientes.</li>
                   <li>Pégalos en ChatGPT o Gemini.</li>
                   <li>Usa esta instrucción (Pruébala abajo):</li>
                 </ol>
-                <div class="prompt-pill" style="background: #0d1117; padding: 10px; border-radius: 6px; font-style: italic; font-size: 0.8rem; border-left: 3px solid var(--primary); margin-top: 10px;">
+                <div class="prompt-pill m-pa-codebox" style="border-left: 4px solid var(--primary);">
                   "Tengo estos 50 correos pendientes. Organízalos en una lista por importancia: Urgentes (acción hoy), Informativos (leer después) y Spam/Otros. Resume de qué trata el grupo más importante."
                 </div>
               </div>
@@ -80,21 +81,21 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
             </div>
 
             <!-- PASO 2: INFORMES -->
-            <div class="workflow-step glass-card elegant-transition" style="--accent-step: #10b981;">
+            <div class="workflow-step glass-card-premium animate-in" style="--accent-step: #10b981; margin-bottom: 20px;">
               <div class="step-number-bg">2</div>
               <h4 class="step-title">
-                <span class="step-badge" style="background: #10b981;">2</span>
+                <span class="badge-titan" style="background: #10b981; color: #fff;">2</span>
                 Extraer el Jugo de los Informes
               </h4>
-              <p style="font-size: 0.85rem; opacity: 0.8;"><b>El Truco:</b> No resumas "todo". Dile a la IA quién eres para que filtre lo que TE importa.</p>
-              <div class="action-box" style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; margin: 15px 0;">
-                <p style="font-size: 0.8rem; margin-bottom: 10px; color: #10b981;">🎯 <b>Paso a paso:</b></p>
+              <p class="m-pa-note" style="margin-top: 8px;"><b>El Truco:</b> No resumas "todo". Dile a la IA quién eres para que filtre lo que TE importa.</p>
+              <div class="action-box m-pa-panel-card" style="margin: 20px 0;">
+                <p class="text-gradient-primary" style="font-size: 0.9rem; margin-bottom: 12px; color: #10b981;">🎯 Paso a paso:</p>
                 <ol style="font-size: 0.75rem; padding-left: 20px; line-height: 1.6;">
                   <li>Sube tu PDF de 200 páginas a Claude o Gemini (el ícono del clip 📎).</li>
                   <li>Dile tu cargo (ej: "Soy el coordinador de talento humano").</li>
                   <li>Usa esta instrucción:</li>
                 </ol>
-                <div class="prompt-pill" style="background: #0d1117; padding: 10px; border-radius: 6px; font-style: italic; font-size: 0.8rem; border-left: 3px solid #10b981; margin-top: 10px;">
+                <div class="prompt-pill m-pa-codebox" style="border-left: 4px solid #10b981;">
                   "Analiza este informe y extrae solo los puntos que afectan a mi área. Hazme una lista de las 3 acciones más importantes que debo ejecutar basándome en este documento."
                 </div>
               </div>
@@ -281,63 +282,44 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
 
       <!-- 2. LABORATORIO (SANDBOX) -->
       <div id="m2-lab-sandbox" class="ag-content">
-        <div class="section-card animate-in glass-card" style="padding: 0; overflow: hidden; border: 1px solid rgba(var(--primary-rgb), 0.2);">
-          <div class="card-header-premium" style="background: linear-gradient(90deg, rgba(var(--primary-rgb), 0.1) 0%, transparent 100%); padding: 25px; border-bottom: 1px solid var(--glass-border);">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-              <div>
-                <span class="badge-premium" style="background: var(--primary); color: #fff; margin-bottom: 10px;">PROMPT REFINER v32.4</span>
-                <h3 style="margin: 0;"><span class="icon">🧠</span> Laboratorio de Alquimia</h3>
-                <p style="margin: 5px 0 0; opacity: 0.8; font-size: 0.9rem;">El "Copiloto" analizará los 4 vectores de tu instrucción usando el Método CREA.</p>
-              </div>
-              <div class="quality-gauge-premium" style="text-align: right;">
-                <div style="font-size: 0.7rem; font-weight: 800; color: var(--primary-light); letter-spacing: 1px; margin-bottom: 5px;">POTENCIA DE PROMPT</div>
-                <div id="promptQualityValue" style="font-size: 2rem; font-weight: 900; color: var(--primary);">0%</div>
-                <div class="gauge-track" style="width: 100px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; margin-top: 5px;">
-                  <div id="promptQualityBar" class="gauge-fill" style="width: 0%; height: 100%; background: var(--primary); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);"></div>
-                </div>
-              </div>
-            </div>
+        <div class="section-card animate-in glass-card">
+          <div class="card-header-premium">
+            <span class="badge-premium">LAB</span>
+            <h3><span class="icon">🧪</span> Laboratorio de Prompts</h3>
+            <p>Experimenta aquí antes de ir a las herramientas reales. La IA analizará la calidad de tu instrucción.</p>
           </div>
           
-          <div class="sandbox-inner" style="padding: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div class="input-zone">
-              <label class="premium-label" style="display: flex; align-items: center; gap: 8px; margin-bottom: 15px;">
-                <span style="background: var(--primary); width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #fff;">1</span>
-                TÚ ESCRIBES:
-              </label>
-              <div class="input-glow-wrapper" style="position: relative;">
-                <textarea id="sandboxInput" class="premium-textarea" style="width: 100%; min-height: 250px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 15px; color: #fff; padding: 20px; font-family: 'Inter', sans-serif; resize: none; transition: 0.3s;" placeholder="Ej: Hola, hazme un resumen de este texto para mi jefe..."></textarea>
-                <div class="textarea-actions" style="position: absolute; bottom: 15px; right: 15px; display: flex; gap: 10px;">
-                   <button id="clearSandboxBtn" class="gl-btn small" style="background: rgba(255,255,255,0.1); border: none;">🧹 Limpiar</button>
-                   <button id="testPromptBtn" class="gl-btn gl-btn-primary gl-btn-lux small" style="padding: 8px 20px;">
-                     <span class="btn-icon">🚀</span> Analizar
-                   </button>
-                </div>
+          <div class="sandbox-container-premium">
+            <div class="input-glow-wrapper">
+              <label class="premium-label">TU PROMPT:</label>
+              <textarea id="sandboxInput" class="premium-textarea" placeholder="Escribe aquí tu instrucción... (Ej: Hola, hazme un resumen de este texto)"></textarea>
+            </div>
+            
+            <div class="sandbox-controls">
+              <button id="testPromptBtn" class="gl-btn gl-btn-primary gl-btn-lux" type="button">
+                <span class="btn-icon">🚀</span> Analizar y Mejorar
+              </button>
+              <button id="clearSandboxBtn" class="gl-btn gl-btn-danger-soft" type="button">
+                <span class="btn-icon">🧹</span> Limpiar
+              </button>
+            </div>
+            
+            <div class="quality-gauge-container">
+              <div class="gauge-header">
+                <span class="gauge-label">POTENCIA DE PROMPT</span>
+                <span id="promptQualityValue" class="gauge-value">0%</span>
+              </div>
+              <div class="gauge-track">
+                <div id="promptQualityBar" class="gauge-fill" style="width: 0%"></div>
               </div>
             </div>
-
-            <div class="output-zone">
-              <label class="premium-label" style="display: flex; align-items: center; gap: 8px; margin-bottom: 15px;">
-                <span style="background: var(--secondary); width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #fff;">2</span>
-                ANÁLISIS DEL COPILOTO:
-              </label>
-              <div id="sandboxOutput" class="output-premium-display" style="width: 100%; min-height: 250px; background: rgba(255,255,255,0.02); border: 1px dashed var(--glass-border); border-radius: 15px; padding: 20px; display: flex; align-items: center; justify-content: center; overflow-y: auto;">
-                <div class="empty-state" style="text-align: center; opacity: 0.4;">
-                  <span style="font-size: 3rem; display: block; margin-bottom: 15px;">🧪</span>
-                  <p>Inyecta una instrucción para recibir feedback técnico real</p>
-                </div>
+            
+            <div class="output-premium-wrapper">
+              <label class="premium-label-muted">RESULTADO DEL ANÁLISIS:</label>
+              <div id="sandboxOutput" class="sandbox-output-display">
+                <div class="empty-state-text">El resultado del "Copiloto" aparecerá aquí...</div>
               </div>
             </div>
-          </div>
-
-          <div class="sandbox-footer" style="background: rgba(255,255,255,0.02); padding: 15px 25px; border-top: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; gap: 20px;">
-              <span style="font-size: 0.75rem;"><b style="color:var(--primary);">C</b>ontexto</span>
-              <span style="font-size: 0.75rem;"><b style="color:var(--secondary);">R</b>ol</span>
-              <span style="font-size: 0.75rem;"><b style="color:#10b981;">E</b>specificación</span>
-              <span style="font-size: 0.75rem;"><b style="color:#f59e0b;">A</b>cción</span>
-            </div>
-            <div style="font-size: 0.7rem; opacity: 0.6; font-style: italic;">Potenciado por Antigravity Engine v3.1</div>
           </div>
         </div>
       </div>
@@ -370,25 +352,23 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
               </div>
             </div>
 
-            <div class="builder-preview holographic-card" style="background: rgba(16,185,129,0.05); border: 2px dashed #10b981; padding: 20px; border-radius: 12px; position: relative;">
-              <div style="font-size: 0.75rem; font-weight: bold; color: #10b981; margin-bottom: 15px; letter-spacing: 1px;">PREVISUALIZACIÓN DEL PROMPT:</div>
-              <div id="prompt-preview-text" style="font-size: 1rem; font-style: italic; color: #e5e7eb; line-height: 1.5; min-height: 60px;">Cargando configuración...</div>
-              <button class="gl-btn gl-btn-primary" style="background: #10b981; margin-top: 20px; width: 100%;" onclick="const txt = document.getElementById('prompt-preview-text').innerText; navigator.clipboard.writeText(txt); window.showToast('¡Prompt copiado al portapapeles!', 'success');">📋 Copiar Prompt Maestro</button>
+            <div class="builder-preview glass-card-premium" style="border: 1px solid var(--primary); padding: 24px; position: relative;">
+              <div class="badge-titan" style="margin-bottom: 15px;">PROMPT GENERADO</div>
+              <div id="prompt-preview-text" class="m-pa-codebox" style="min-height: 80px;">Cargando configuración...</div>
+              <button class="gl-btn gl-btn-primary" style="margin-top: 20px; width: 100%;" onclick="const txt = document.getElementById('prompt-preview-text').innerText; navigator.clipboard.writeText(txt); window.showToast('¡Prompt copiado al portapapeles!', 'success');">📋 Copiar Prompt Maestro</button>
             </div>
           </div>
         </div>
 
-        <!-- ⚖️ COMPARISON MATRIX (BEFORE VS AFTER) -->
-        <div class="section-card animate-in" style="margin-top: 30px; border: 1px solid rgba(var(--primary-rgb), 0.2); background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.05) 0%, transparent 100%); overflow: hidden;">
-          <div style="position: absolute; top: -10px; right: -10px; font-size: 4rem; opacity: 0.05; transform: rotate(15deg);">⚖️</div>
+        <div class="section-card animate-in glass-card-premium" style="margin-top: 35px; border: 1px solid rgba(var(--primary-rgb), 0.3);">
           <h3><span class="icon">⚖️</span> Duelo de Titanes: Antes vs Después</h3>
           <p class="narrative-text">Mira cómo cambia el resultado de la IA cuando aplicas lo aprendido en este nivel.</p>
           
           <div class="comparison-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
             <!-- Before -->
-            <div class="comp-status-box" style="padding: 20px; background: rgba(239,68,68,0.03); border-radius: 12px; border: 1px solid rgba(239,68,68,0.15); display: flex; flex-direction: column;">
-              <div style="color: #ef4444; font-weight: bold; font-size: 0.75rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
-                <span style="background: #ef4444; color: white; padding: 2px 8px; border-radius: 4px;">ANTERIOR</span> PROMPT COMÚN
+            <div class="m-pa-panel-card" style="background: rgba(239,68,68,0.03); border: 1px solid rgba(239,68,68,0.2);">
+              <div style="margin-bottom: 15px;">
+                <span class="badge-titan" style="background: #ef4444; color: white; border-color: #ef4444;">ANTERIOR</span> <span style="font-size: 0.75rem; font-weight: 800; color: #ef4444;">PROMPT COMÚN</span>
               </div>
               <div style="font-style: italic; font-size: 0.9rem; margin-bottom: 15px; color: #9ca3af;">"Haz un resumen del Plan de Desarrollo Municipal de este año."</div>
               <div style="margin-top: auto; padding-top: 15px; border-top: 1px solid rgba(239,68,68,0.1);">
@@ -398,9 +378,9 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
             </div>
 
             <!-- After -->
-            <div class="comp-status-box holographic-glare" style="padding: 20px; background: rgba(16,185,129,0.03); border-radius: 12px; border: 1px solid rgba(16,185,129,0.2); display: flex; flex-direction: column; box-shadow: 0 10px 30px -10px rgba(16,185,129,0.15);">
-              <div style="color: #10b981; font-weight: bold; font-size: 0.75rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
-                <span style="background: #10b981; color: white; padding: 2px 8px; border-radius: 4px;">NUEVO</span> PROMPT MAESTRO
+            <div class="m-pa-panel-card holographic-glare" style="background: rgba(16,185,129,0.03); border: 1px solid rgba(16,185,129,0.3); box-shadow: 0 10px 30px -10px rgba(16,185,129,0.2);">
+              <div style="margin-bottom: 15px;">
+                <span class="badge-titan" style="background: #10b981; color: white; border-color: #10b981;">NUEVO</span> <span style="font-size: 0.75rem; font-weight: 800; color: #10b981;">PROMPT MAESTRO</span>
               </div>
               <div style="font-style: italic; font-size: 0.9rem; margin-bottom: 15px; color: #fff;">"Actúa como analista senior de planeación. Resume el Plan de Desarrollo Municipal enfocado en los 5 proyectos de infraestructura. Presenta en tabla comparativa: Proyecto, Estado, Presupuesto y KPI."</div>
               <div style="margin-top: auto; padding-top: 15px; border-top: 1px solid rgba(16,185,129,0.1);">
@@ -519,18 +499,18 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
         </div>
       </div>
 
-      <div id="m3-progress-container" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); border-radius:12px; padding:15px; margin-bottom:25px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <span style="font-size:0.8rem; font-weight:700; opacity:0.8;">Progreso de Alquimia</span>
-          <span id="m3-progress-text" style="font-size:0.8rem; font-weight:900; color:var(--primary-light);">Nivel 1/5</span>
+      <div id="m3-progress-container" class="glass-card-premium" style="padding:15px; margin-bottom:25px; border-radius: 16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <span style="font-size:0.75rem; font-weight:800; opacity:0.7; letter-spacing:1px; font-family: 'Space Grotesk';">PROGRESO DE ALQUIMIA</span>
+          <span id="m3-progress-text" class="badge-titan" style="font-size:0.7rem; padding: 4px 10px;">Nivel 1/5</span>
         </div>
-        <div style="height:6px; background:rgba(0,0,0,0.3); border-radius:10px; overflow:hidden;">
-          <div id="m3-progress-fill" style="width:20%; height:100%; background:linear-gradient(90deg, var(--primary), var(--secondary)); transition:width 0.4s ease;"></div>
+        <div style="height:8px; background:rgba(0,0,0,0.4); border-radius:10px; overflow:hidden; border: 1px solid rgba(255,255,255,0.05);">
+          <div id="m3-progress-fill" style="width:20%; height:100%; background:linear-gradient(90deg, var(--primary), var(--secondary)); box-shadow: 0 0 10px var(--primary); transition:width 0.4s ease;"></div>
         </div>
       </div>
 
       <div class="ag-tabs game-tabs">
-        <button class="tab-btn active" data-level="1" onclick="m3ShowLevel(1)">1. Anatomía<br><small>El Método CREA</small></button>
+        <button class="tab-btn active" data-level="1" id="m3-tab-1" onclick="m3ShowLevel(1)">1. Anatomía<br><small>El Método CREA</small></button>
         <button class="tab-btn locked" data-level="2" id="m3-tab-2" onclick="m3ShowLevel(2)">2. Técnicas<br><small>Elite Prompting</small></button>
         <button class="tab-btn locked" data-level="3" id="m3-tab-3" onclick="m3ShowLevel(3)">3. Biblioteca<br><small>Ejemplos Reales</small></button>
         <button class="tab-btn locked" data-level="4" id="m3-tab-4" onclick="m3ShowLevel(4)">4. Constructor<br><small>Dynamic Builder</small></button>
@@ -543,30 +523,30 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
           <h3><span class="icon">🏗️</span> La Fórmula Maestra: CREA</h3>
           <p>Un prompt excelente no es suerte, es ingeniería. Desglosa cualquier tarea en estos 4 pilares:</p>
           
-          <div class="crea-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-top: 20px;">
-            <div class="crea-card">
-              <div class="crea-letter" style="color:var(--primary);">C</div>
-              <h4 style="color:var(--primary);">Contexto</h4>
-              <p style="font-size:0.85rem; opacity:0.8;">Explica la situación. ¿Por qué haces esto? ¿Quién leerá el resultado?</p>
-              <div class="prompt-pill" style="font-size:0.75rem; background: rgba(99,102,241,0.05);">"Estamos cerrando el trimestre y necesito reportar gastos..."</div>
+          <div class="crea-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 25px;">
+            <div class="crea-card glass-card-premium" style="padding: 25px; border-radius: 20px; transition: transform 0.3s ease;">
+              <div class="crea-letter" style="color:var(--primary); font-size: 3rem; font-weight: 900; text-shadow: 0 0 15px rgba(99,102,241,0.4);">C</div>
+              <h4 style="color:var(--primary); font-family: 'Space Grotesk'; margin: 10px 0;">Contexto</h4>
+              <p style="font-size:0.85rem; opacity:0.8; line-height: 1.6;">Explica la situación. ¿Por qué haces esto? ¿Quién leerá el resultado?</p>
+              <div class="prompt-pill" style="font-size:0.75rem; background: rgba(99,102,241,0.1); border-color: rgba(99,102,241,0.3);">"Estamos cerrando el trimestre y necesito reportar gastos..."</div>
             </div>
-            <div class="crea-card">
-              <div class="crea-letter" style="color:#10b981;">R</div>
-              <h4 style="color:#10b981;">Rol</h4>
-              <p style="font-size:0.85rem; opacity:0.8;">Asigna una personalidad. Dale un oficio y años de experiencia.</p>
-              <div class="prompt-pill" style="font-size:0.75rem; border-color:#10b981; background: rgba(16,185,129,0.05);">"Actúa como un Auditor Senior de la Contraloría..."</div>
+            <div class="crea-card glass-card-premium" style="padding: 25px; border-radius: 20px;">
+              <div class="crea-letter" style="color:#10b981; font-size: 3rem; font-weight: 900; text-shadow: 0 0 15px rgba(16,185,129,0.4);">R</div>
+              <h4 style="color:#10b981; font-family: 'Space Grotesk'; margin: 10px 0;">Rol</h4>
+              <p style="font-size:0.85rem; opacity:0.8; line-height: 1.6;">Asigna una personalidad. Dale un oficio y años de experiencia.</p>
+              <div class="prompt-pill" style="font-size:0.75rem; border-color:#10b981; background: rgba(16,185,129,0.1);">"Actúa como un Auditor Senior de la Contraloría..."</div>
             </div>
-            <div class="crea-card">
-              <div class="crea-letter" style="color:#f59e0b;">E</div>
-              <h4 style="color:#f59e0b;">Especificación</h4>
-              <p style="font-size:0.85rem; opacity:0.8;">La tarea concreta. Sé directo y usa verbos de acción fuertes.</p>
-              <div class="prompt-pill" style="font-size:0.75rem; border-color:#f59e0b; background: rgba(245,158,11,0.05);">"Identifica 3 irregularidades en este balance contable..."</div>
+            <div class="crea-card glass-card-premium" style="padding: 25px; border-radius: 20px;">
+              <div class="crea-letter" style="color:#f59e0b; font-size: 3rem; font-weight: 900; text-shadow: 0 0 15px rgba(245,158,11,0.4);">E</div>
+              <h4 style="color:#f59e0b; font-family: 'Space Grotesk'; margin: 10px 0;">Especificación</h4>
+              <p style="font-size:0.85rem; opacity:0.8; line-height: 1.6;">La tarea concreta. Sé directo y usa verbos de acción fuertes.</p>
+              <div class="prompt-pill" style="font-size:0.75rem; border-color:#f59e0b; background: rgba(245,158,11,0.1);">"Identifica 3 irregularidades en este balance contable..."</div>
             </div>
-            <div class="crea-card">
-              <div class="crea-letter" style="color:#ef4444;">A</div>
-              <h4 style="color:#ef4444;">Acción/Formato</h4>
-              <p style="font-size:0.85rem; opacity:0.8;">¿Cómo quieres el resultado? (Tabla, Lista, PDF, Tono formal).</p>
-              <div class="prompt-pill" style="font-size:0.75rem; border-color:#ef4444;">"Dame una tabla Markdown con: Hallazgo, Gravedad y Solución."</div>
+            <div class="crea-card glass-card-premium" style="padding: 25px; border-radius: 20px;">
+              <div class="crea-letter" style="color:#ef4444; font-size: 3rem; font-weight: 900; text-shadow: 0 0 15px rgba(239,68,68,0.4);">A</div>
+              <h4 style="color:#ef4444; font-family: 'Space Grotesk'; margin: 10px 0;">Acción/Formato</h4>
+              <p style="font-size:0.85rem; opacity:0.8; line-height: 1.6;">¿Cómo quieres el resultado? (Tabla, Lista, PDF, Tono formal).</p>
+              <div class="prompt-pill" style="font-size:0.75rem; border-color:#ef4444; background: rgba(239,68,68,0.1);">"Dame una tabla Markdown con: Hallazgo, Gravedad y Solución."</div>
             </div>
           </div>
           
@@ -583,7 +563,7 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
           <div class="technique-grid" style="display: grid; gap: 20px; margin-top: 25px;">
             
             <!-- FEW-SHOT -->
-            <div class="ag-step-card" style="border-left: 4px solid #6366f1; padding: 20px; background: rgba(99,102,241,0.05); border-radius: 12px; position: relative;">
+            <div class="ag-step-card glass-card-premium animate-in" style="border-left: 4px solid #6366f1; padding: 25px; position: relative;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                 <h4 style="margin: 0; color: #6366f1; display: flex; align-items: center; gap: 10px;"><span style="font-size: 1.5rem;">🎭</span> Aprendizaje con Ejemplos</h4>
                 <div class="ag-badge" style="background: rgba(99,102,241,0.2); color: #6366f1; border: 1px solid #6366f1;">FEW-SHOT</div>
@@ -599,7 +579,7 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
             </div>
 
             <!-- CHAIN-OF-THOUGHT -->
-            <div class="ag-step-card" style="border-left: 4px solid #10b981; padding: 20px; background: rgba(16,185,129,0.05); border-radius: 12px; position: relative;">
+            <div class="ag-step-card glass-card-premium animate-in" style="border-left: 4px solid #10b981; padding: 25px; position: relative;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                 <h4 style="margin: 0; color: #10b981; display: flex; align-items: center; gap: 10px;"><span style="font-size: 1.5rem;">🧠</span> Pensamiento Paso a Paso</h4>
                 <div class="ag-badge" style="background: rgba(16,185,129,0.2); color: #10b981; border: 1px solid #10b981;">CHAIN-OF-THOUGHT</div>
@@ -612,7 +592,7 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
             </div>
 
             <!-- NEGATIVE PROMPTS -->
-            <div class="ag-step-card" style="border-left: 4px solid #ef4444; padding: 20px; background: rgba(239,68,68,0.05); border-radius: 12px; position: relative;">
+            <div class="ag-step-card glass-card-premium animate-in" style="border-left: 4px solid #ef4444; padding: 25px; position: relative;">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                 <h4 style="margin: 0; color: #ef4444; display: flex; align-items: center; gap: 10px;"><span style="font-size: 1.5rem;">🚫</span> Lo Prohibido</h4>
                 <div class="ag-badge" style="background: rgba(239,68,68,0.2); color: #ef4444; border: 1px solid #ef4444;">NEGATIVE PROMPTS</div>
@@ -640,23 +620,23 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
           <h3><span class="icon">📚</span> Biblioteca de Prompts de Élite</h3>
           <p>Prompts listos para copiar y usar en tu día a día institucional.</p>
           
-          <div class="library-container" style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
-            <div class="ag-prompt-card">
-              <div style="font-weight:bold; font-size:0.75rem; margin-bottom:5px; color:#10b981;">JURÍDICO</div>
-              <p style="font-size:0.85rem; margin-bottom:10px;">"Actúa como abogado experto en derecho administrativo. Revisa este borrador de resolución y señala posibles vicios de legalidad según la Ley 1437. Presenta en lista de puntos críticos."</p>
-              <button class="gl-btn small" onclick="navigator.clipboard.writeText('Actúa como abogado experto en derecho administrativo. Revisa este borrador de resolución y señala posibles vicios de legalidad según la Ley 1437. Presenta en lista de puntos críticos.'); window.showToast('Prompt Jurídico copiado', 'success');">📋 Copiar Prompt</button>
+          <div class="library-container" style="display: flex; flex-direction: column; gap: 20px; margin-top: 25px;">
+            <div class="ag-prompt-card glass-card-premium" style="border-left: 4px solid #10b981; padding: 20px;">
+              <div style="font-weight:800; font-size:0.75rem; margin-bottom:10px; color:#10b981; font-family: 'Space Grotesk'; letter-spacing:1px;">JURÍDICO</div>
+              <p style="font-size:0.9rem; margin-bottom:15px; line-height:1.6; color: #e4e4e7;">"Actúa como abogado experto en derecho administrativo. Revisa este borrador de resolución y señala posibles vicios de legalidad según la Ley 1437. Presenta en lista de puntos críticos."</p>
+              <button class="gl-btn small gl-btn-primary" onclick="navigator.clipboard.writeText('Actúa como abogado experto en derecho administrativo. Revisa este borrador de resolución y señala posibles vicios de legalidad según la Ley 1437. Presenta en lista de puntos críticos.'); window.showToast('Prompt Jurídico copiado', 'success');">📋 Copiar Prompt</button>
             </div>
             
-            <div class="ag-prompt-card" style="border-color:#f59e0b;">
-              <div style="font-weight:bold; font-size:0.75rem; margin-bottom:5px; color:#f59e0b;">PLANEACIÓN / DATOS</div>
-              <p style="font-size:0.85rem; margin-bottom:10px;">"Eres un analista de datos senior. Mira esta tabla de ejecución presupuestal. Identifica los 3 rubros con mayor desviación y sugiere 2 medidas correctivas basadas en eficiencia del gasto."</p>
-              <button class="gl-btn small" style="border-color:#f59e0b; color:#f59e0b;" onclick="navigator.clipboard.writeText('Eres un analista de datos senior. Mira esta tabla de ejecución presupuestal. Identifica los 3 rubros con mayor desviación y sugiere 2 medidas correctivas basadas en eficiencia del gasto.'); window.showToast('Prompt de Planeación copiado', 'success');">📋 Copiar Prompt</button>
+            <div class="ag-prompt-card glass-card-premium" style="border-left: 4px solid #f59e0b; padding: 20px;">
+              <div style="font-weight:800; font-size:0.75rem; margin-bottom:10px; color:#f59e0b; font-family: 'Space Grotesk'; letter-spacing:1px;">PLANEACIÓN / DATOS</div>
+              <p style="font-size:0.9rem; margin-bottom:15px; line-height:1.6; color: #e4e4e7;">"Eres un analista de datos senior. Mira esta tabla de ejecución presupuestal. Identifica los 3 rubros con mayor desviación y sugiere 2 medidas correctivas basadas en eficiencia del gasto."</p>
+              <button class="gl-btn small gl-btn-primary" style="background: rgba(245,158,11,0.2); border-color:#f59e0b; color:#f59e0b;" onclick="navigator.clipboard.writeText('Eres un analista de datos senior. Mira esta tabla de ejecución presupuestal. Identifica los 3 rubros con mayor desviación y sugiere 2 medidas correctivas basadas en eficiencia del gasto.'); window.showToast('Prompt de Planeación copiado', 'success');">📋 Copiar Prompt</button>
             </div>
             
-            <div class="ag-prompt-card" style="border-color:#6366f1;">
-              <div style="font-weight:bold; font-size:0.75rem; margin-bottom:5px; color:#6366f1;">ATENCIÓN AL CIUDADANO</div>
-              <p style="font-size:0.85rem; margin-bottom:10px;">"Actúa como profesional de servicio al ciudadano. Redacta una respuesta a esta PQR usando un tono sumamente empático, resolutivo y profesional. Evita promesas que no podamos cumplir legalmente."</p>
-              <button class="gl-btn small" style="border-color:#6366f1; color:#6366f1;" onclick="navigator.clipboard.writeText('Actúa como profesional de servicio al ciudadano. Redacta una respuesta a esta PQR usando un tono sumamente empático, resolutivo y profesional. Evita promesas que no podamos cumplir legalmente.'); window.showToast('Prompt de PQR copiado', 'success');">📋 Copiar Prompt</button>
+            <div class="ag-prompt-card glass-card-premium" style="border-left: 4px solid #6366f1; padding: 20px;">
+              <div style="font-weight:800; font-size:0.75rem; margin-bottom:10px; color:#6366f1; font-family: 'Space Grotesk'; letter-spacing:1px;">ATENCIÓN AL CIUDADANO</div>
+              <p style="font-size:0.9rem; margin-bottom:15px; line-height:1.6; color: #e4e4e7;">"Actúa como profesional de servicio al ciudadano. Redacta una respuesta a esta PQR usando un tono sumamente empático, resolutivo y profesional. Evita promesas que no podamos cumplir legalmente."</p>
+              <button class="gl-btn small gl-btn-primary" style="background: rgba(99,102,241,0.2); border-color:#6366f1; color:#6366f1;" onclick="navigator.clipboard.writeText('Actúa como profesional de servicio al ciudadano. Redacta una respuesta a esta PQR usando un tono sumamente empático, resolutivo y profesional. Evita promesas que no podamos cumplir legalmente.'); window.showToast('Prompt de PQR copiado', 'success');">📋 Copiar Prompt</button>
             </div>
           </div>
           
@@ -667,7 +647,7 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
       <!-- NIVEL 4: CONSTRUCTOR -->
       <div id="m3-level-4" class="ag-content">
         <div class="section-card animate-in glass-card">
-          <h3><span class="icon">🧩</span> Constructor Dinámico CREA</h3>
+          <h3><span class="icon">⚡</span> Constructor Dinámico CREA</h3>
           <p>Sincroniza las piezas para generar un prompt de alta potencia al instante.</p>
           
           <div class="builder-columns" style="display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 20px;">
@@ -697,14 +677,19 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
               </select>
             </div>
 
-            <div class="builder-preview">
-              <div style="font-size: 0.7rem; font-weight: 800; color: var(--primary-light); margin-bottom: 18px; letter-spacing: 2px; text-transform: uppercase;">PROMPT GENERADO (CREA):</div>
-              <div id="m3-builder-output" style="font-size: 1.1rem; font-family: 'Inter', sans-serif; font-weight: 500; color: #fff; line-height: 1.6; min-height: 100px; padding: 10px 0; border-left: 2px solid var(--primary-light); padding-left: 20px;">Sincronizando componentes...</div>
-              <button class="gl-btn-premium" style="width: 100%; margin-top:25px;" onclick="navigator.clipboard.writeText(document.getElementById('m3-builder-output').innerText); window.showToast('Prompt Maestro copiado', 'success');">📋 Copiar Prompt Maestro</button>
+            <div class="builder-preview glass-card-ultra" style="padding: 24px; margin-top: 24px;">
+              <div class="text-sleek-label" style="margin-bottom: 16px;">PROMPT GENERADO (CREA):</div>
+              <div id="m3-builder-output" class="glass-card-premium" style="font-size: 1.1rem; font-weight: 500; color: #fff; line-height: 1.7; min-height: 140px; padding: 20px; border-left: 3px solid #f59e0b; position: relative; overflow: hidden; font-family: 'Outfit', sans-serif; background: rgba(255,255,255,0.02);">
+                <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(135deg, rgba(245,158,11,0.05), transparent); pointer-events: none;"></div>
+                <span style="position:relative; z-index:2;">Sincronizando componentes...</span>
+              </div>
+              <div style="margin-top: 16px;">
+                <button class="gl-btn btn-titan-gold" style="width: 100%;" onclick="navigator.clipboard.writeText(document.getElementById('m3-builder-output').innerText); window.showToast('Prompt Maestro copiado', 'success');">📋 Copiar Prompt Maestro</button>
+              </div>
             </div>
           </div>
           
-          <button class="gl-btn gl-btn-outline" style="width:100%; margin-top:20px; border-color:#10b981; color:#10b981;" onclick="m3UnlockLevel(5)">Finalizar y Certificar →</button>
+          <button class="gl-btn btn-titan-primary animate-pulse" style="width:100%; margin-top:32px;" onclick="m3UnlockLevel(5)">Finalizar y Certificar →</button>
         </div>
       </div>
 
@@ -729,13 +714,30 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
               <p style="font-size: 0.8rem; margin-bottom: 0; opacity: 0.9;">Antes de iniciar, repasa la metodología CREA en la pestaña 'Anatomía' para asegurar que tu prompt cumpla todos los criterios.</p>
             </div>
             <div class="exercise-header"><span class="exercise-icon">🔥</span><span class="exercise-title">Misión 3: El Alquimista Soberano</span></div>
-            <p>Escribe un prompt completo usando CREA para resolver una tarea de tu oficina que actualmente te tome más de 1 hora.</p>
-            <textarea id="m3-mission-input" placeholder="Ej: C: Estamos preparando el informe anual... R: Actúa como experto en redacción... E: Resume estas cifras... A: Formato tabla..."></textarea>
-            <div class="reward-tag">+150 XP y Insignia Crystal Prompt</div>
-            <button class="gl-btn gl-btn-primary complete-module-btn" style="width:100%; margin-top:15px;" data-module="module-3" onclick="m3FinalizeModule()">Finalizar Módulo y Reclamar Insignia</button>
+              <p>Documenta una misión completa con CREA para una tarea real de tu oficina y deja claro cómo validarás la salida.</p>
+              <div class="learning-mission-grid" style="display:grid; gap:12px; margin-top:16px;">
+                <div>
+                  <label for="m3-mission-context" style="display:block; font-weight:700; margin-bottom:6px;">1. Contexto y tarea crítica</label>
+                  <textarea id="m3-mission-context" placeholder="Explica qué proceso quieres acelerar, quién recibirá el resultado y qué te está frenando hoy."></textarea>
+                </div>
+                <div>
+                  <label for="m3-mission-role" style="display:block; font-weight:700; margin-bottom:6px;">2. Rol y resultado esperado</label>
+                  <textarea id="m3-mission-role" placeholder="Define el rol experto que debe asumir la IA y el entregable exacto que esperas."></textarea>
+                </div>
+                <div>
+                  <label for="m3-mission-prompt" style="display:block; font-weight:700; margin-bottom:6px;">3. Prompt final usando CREA</label>
+                  <textarea id="m3-mission-prompt" placeholder="Redacta tu prompt final con contexto, rol, estructura y acción."></textarea>
+                </div>
+                <div>
+                  <label for="m3-mission-verification" style="display:block; font-weight:700; margin-bottom:6px;">4. Verificación y mejora</label>
+                  <textarea id="m3-mission-verification" placeholder="Indica cómo vas a revisar el resultado, qué error podrías encontrar y qué ajustarías en una segunda iteración."></textarea>
+                </div>
+              </div>
+              <div class="reward-tag">+150 XP y Insignia Crystal Prompt</div>
+              <button class="gl-btn gl-btn-primary complete-module-btn" style="width:100%; margin-top:15px;" data-module="module-3" onclick="m3FinalizeModule()">Finalizar Módulo y Reclamar Insignia</button>
+            </div>
           </div>
         </div>
-      </div>
 
       <div class="module-nav">
         <button class="gl-btn" data-goto="module-2">← Anterior</button>
@@ -819,33 +821,33 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
                   <div class="audit-card glass-card subtle-border elegant-transition" onclick="app.checkAudit(this, false)">
                     <strong>#01: Reducción de viáticos:</strong> "Según el decreto de austeridad, los viajes de servidores públicos al exterior deben priorizar clase económica en vuelos de más de 4 horas."
                   </div>
-                  <div class="audit-card glass-card subtle-border elegant-transition" onclick="app.checkAudit(this, true)">
+                  <div class="audit-card glass-card-premium animate-in" onclick="app.checkAudit(this, true)" style="margin-bottom: 12px; cursor: pointer;">
                     <strong>#02: Impuesto digital:</strong> "La reforma establece un impuesto del 5% por cada correo electrónico institucional enviado después de las 6:00 PM para desincentivar el trabajo extra."
                   </div>
-                  <div class="audit-card glass-card subtle-border elegant-transition" onclick="app.checkAudit(this, false)">
+                  <div class="audit-card glass-card-premium animate-in" onclick="app.checkAudit(this, false)" style="margin-bottom: 12px; cursor: pointer;">
                     <strong>#03: Planta de personal:</strong> "Está prohibida la creación de nuevos cargos en las entidades públicas a menos que exista una viabilidad fiscal previa del Ministerio."
                   </div>
                </div>
-               <div id="audit-feedback" class="audit-feedback-box" style="margin-top: 20px;"></div>
+               <div id="audit-feedback" class="m-pa-note" style="margin-top: 20px; font-weight: bold;"></div>
              </div>
           </div>
         </div>
 
         <!-- Comparison Engine Simulator -->
-        <div class="section-card animate-in glass-card" style="margin-top: 30px;">
-           <h4 style="margin-bottom: 20px;"><span class="icon">⚖️</span> Motor de Comparación</h4>
-           <div class="comparison-engine">
-              <div class="engine-column glass-card subtle-glass elegant-transition">
-                 <div class="engine-title"><span>🔎 Perplexity AI</span> <small>Fase: Búsqueda</small></div>
-                 <div style="font-size: 0.8rem; opacity: 0.8; color: var(--accent);">
+        <div class="section-card animate-in glass-card-premium" style="margin-top: 35px;">
+           <h4 class="text-gradient-primary" style="margin-bottom: 20px;"><span class="icon">⚖️</span> Motor de Comparación</h4>
+           <div class="comparison-engine" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div class="m-pa-panel-card animate-in">
+                 <div class="badge-titan" style="margin-bottom: 10px;">🔎 PERPLEXITY AI · BUSQUEDA</div>
+                 <div class="m-pa-codebox" style="color: var(--primary-light);">
                     <span style="opacity: 0.5;">></span> Buscando Decreto_81_2024 EN VIVO...<br>
                     <span style="opacity: 0.5;">></span> Encontrado en portal.gov.co ✅<br>
                     <span style="opacity: 0.5;">></span> Cita: "Art. 1 establece límites..."
                  </div>
               </div>
-              <div class="engine-column glass-card subtle-glass elegant-transition">
-                 <div class="engine-title"><span>✍️ Claude AI</span> <small>Fase: Síntesis</small></div>
-                 <div style="font-size: 0.8rem; opacity: 0.8; color: var(--warning);">
+              <div class="m-pa-panel-card animate-in">
+                 <div class="badge-titan" style="margin-bottom: 10px; background: var(--warning); border-color: var(--warning); color: #000;">✍️ CLAUDE AI · SÍNTESIS</div>
+                 <div class="m-pa-codebox" style="color: var(--warning);">
                     <span style="opacity: 0.5;">></span> Leyendo 4.500 palabras...<br>
                     <span style="opacity: 0.5;">></span> Hallazgo: Contradicción con Decreto 2023.<br>
                     <span style="opacity: 0.5;">></span> Propuesta: "En virtud de..."
@@ -857,60 +859,77 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
 
       <!-- 💡 BLUEPRINT LAB - NUEVA SECCIÓN -->
       <div id="m4-blueprints" class="ag-content">
-         <div class="section-card animate-in glass-card">
-            <h3><span class="icon">💡</span> Blueprint Lab: Estructuras Maestras</h3>
-            <p>Copia estos "Blueprints" para que la IA genere documentos perfectos.</p>
-            <div class="blueprint-grid">
-               <div class="blueprint-card" onclick="app.showBlueprint('resolution')">
-                  <span style="font-size: 2rem;">📜</span>
-                  <h5>Resolución</h5>
+         <div class="section-card animate-in glass-card-premium">
+            <h3 class="text-gradient-primary"><span class="icon">💡</span> Blueprint Lab: Estructuras Maestras</h3>
+            <p class="m-pa-note">Copia estos "Blueprints" para que la IA genere documentos perfectos.</p>
+            <div class="blueprint-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px;">
+               <div class="m-pa-panel-card" style="text-align: center; cursor: pointer; transition: 0.3s;" onclick="app.showBlueprint('resolution')">
+                  <span style="font-size: 2.5rem; display: block; margin-bottom: 10px;">📜</span>
+                  <h5 style="margin: 0; color: #fff;">Resolución</h5>
                </div>
-               <div class="blueprint-card" onclick="app.showBlueprint('memo')">
-                  <span style="font-size: 2rem;">📧</span>
-                  <h5>Memorando</h5>
+               <div class="m-pa-panel-card" style="text-align: center; cursor: pointer; transition: 0.3s;" onclick="app.showBlueprint('memo')">
+                  <span style="font-size: 2.5rem; display: block; margin-bottom: 10px;">📧</span>
+                  <h5 style="margin: 0; color: #fff;">Memorando</h5>
                </div>
-               <div class="blueprint-card" onclick="app.showBlueprint('report')">
-                  <span style="font-size: 2rem;">📊</span>
-                  <h5>Acta Técnica</h5>
+               <div class="m-pa-panel-card" style="text-align: center; cursor: pointer; transition: 0.3s;" onclick="app.showBlueprint('report')">
+                  <span style="font-size: 2.5rem; display: block; margin-bottom: 10px;">📊</span>
+                  <h5 style="margin: 0; color: #fff;">Acta Técnica</h5>
                </div>
             </div>
-            <div id="blueprint-viewer" style="margin-top: 25px; display: none;" class="animate-in">
-               <div class="code-header" style="display: flex; justify-content: space-between;">
-                  <span id="blueprint-title" style="font-weight: bold; color: var(--primary-light);"></span>
-                  <button class="nav-btn small" onclick="app.copyBlueprint()">Copiar Blueprint</button>
+            <div id="blueprint-viewer" style="margin-top: 30px; display: none;" class="animate-in">
+               <div class="m-pa-panel-card" style="border: 1px solid var(--primary); padding: 0; overflow: hidden;">
+                  <div class="code-header" style="background: rgba(var(--primary-rgb), 0.1); padding: 12px 20px; border-bottom: 1px solid var(--primary); display: flex; justify-content: space-between; align-items: center;">
+                    <span id="blueprint-title" class="text-gradient-primary" style="font-weight: bold; font-family: 'Space Grotesk';"></span>
+                    <button class="gl-btn-outline small" style="padding: 6px 12px;" onclick="app.copyBlueprint()">📋 Copiar</button>
+                  </div>
+                  <pre id="blueprint-content" class="m-pa-codebox" style="margin: 0; border: none; border-radius: 0; padding: 20px; font-size: 0.9rem; line-height: 1.6;"></pre>
                </div>
-               <pre id="blueprint-content" style="background: rgba(0,0,0,0.4); padding: 15px; border-radius: 8px; font-size: 0.8rem; margin-top: 10px; border: 1px solid var(--border);"></pre>
             </div>
          </div>
       </div>
 
       <!-- ⚔️ MISIÓN: SCRIPTUM -->
       <div id="m4-mission" class="ag-content">
-        <div class="exercise-box mission-card animate-in luxury">
-          <div class="preparation-step" style="background: rgba(var(--primary-rgb), 0.1); border: 1px solid var(--primary); padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid var(--primary);">
-            <h4 style="margin-top: 0; color: var(--primary); font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">🛠️ Preparación de la Plataforma</h4>
-            <p style="font-size: 0.8rem; margin-bottom: 0; opacity: 0.9;">Antes de iniciar, abre Perplexity AI en una pestaña separada y ten a mano el nombre de tu departamento o área.</p>
+        <div class="exercise-box mission-card animate-in glass-card-premium" style="padding: 30px;">
+          <div class="preparation-step" style="background: rgba(var(--primary-rgb), 0.1); border: 1px solid var(--primary); padding: 20px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid var(--primary); backdrop-filter: blur(10px);">
+            <h4 class="text-gradient-primary" style="margin-top: 0; font-size: 1rem; display: flex; align-items: center; gap: 10px;">🛠️ Preparación de la Plataforma</h4>
+            <p class="m-pa-note" style="margin-bottom: 0; color: #fff;">Antes de iniciar, abre Perplexity AI en una pestaña separada y ten a mano el nombre de tu departamento o área.</p>
           </div>
           <div class="exercise-header">
             <span class="exercise-icon">🛡️</span>
             <span class="exercise-title">Operación: Scriptum</span>
           </div>
-          <p>Tu reto final: Localiza una fuente oficial. Usa <b>Perplexity</b> para encontrar el último decreto de austeridad o una directiva presidencial reciente.</p>
+          <p class="m-pa-note">Tu reto final: Localiza una fuente oficial. Usa <b>Perplexity</b> para encontrar el último decreto de austeridad o una directiva presidencial reciente.</p>
           
-          <div class="mission-instructions" style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; border-left: 4px solid var(--primary-light); margin: 20px 0;">
-            <ul style="margin: 0; padding-left: 20px; font-size: 0.85rem; line-height: 1.8;">
+          <div class="mission-instructions" style="background: rgba(var(--primary-rgb), 0.05); padding: 24px; border-radius: 12px; border-left: 4px solid var(--primary); margin: 24px 0;">
+            <ul style="margin: 0; padding-left: 20px; font-size: 0.95rem; line-height: 2; color: var(--text-secondary);">
               <li>Introduce como prompt en Perplexity: "¿Cuál es el último decreto de austeridad del gasto nacional en Colombia?"</li>
               <li>Verifica que la fuente sea un portal gubernamental (.gov.co).</li>
               <li>Pega el enlace oficial aquí abajo para validar tu investigación.</li>
             </ul>
           </div>
 
-          <div class="input-glow-wrapper">
-             <textarea id="m4-mission-input" placeholder="Pega el enlace .gov.co aquí..." class="premium-textarea"></textarea>
-          </div>
+            <div class="learning-mission-grid" style="display:grid; gap:12px; margin-top:20px;">
+              <div class="input-glow-wrapper">
+                <label for="m4-mission-source" style="display:block; font-weight:700; margin-bottom:6px;">1. Fuente o documento base</label>
+                <textarea id="m4-mission-source" placeholder="Pega el enlace .gov.co o describe el documento oficial que analizaste." class="premium-textarea" style="min-height: 90px;"></textarea>
+              </div>
+              <div class="input-glow-wrapper">
+                <label for="m4-mission-summary" style="display:block; font-weight:700; margin-bottom:6px;">2. Resumen ejecutivo</label>
+                <textarea id="m4-mission-summary" placeholder="Resume en pocas líneas de qué trata el documento y por qué importa." class="premium-textarea" style="min-height: 100px;"></textarea>
+              </div>
+              <div class="input-glow-wrapper">
+                <label for="m4-mission-risk" style="display:block; font-weight:700; margin-bottom:6px;">3. Riesgo o hallazgo crítico</label>
+                <textarea id="m4-mission-risk" placeholder="Describe el principal riesgo, inconsistencia o alerta que detectaste." class="premium-textarea" style="min-height: 90px;"></textarea>
+              </div>
+              <div class="input-glow-wrapper">
+                <label for="m4-mission-action" style="display:block; font-weight:700; margin-bottom:6px;">4. Acción y verificación</label>
+                <textarea id="m4-mission-action" placeholder="Explica qué decisión tomarías y cómo verificarías que el hallazgo sí está soportado por la fuente." class="premium-textarea" style="min-height: 100px;"></textarea>
+              </div>
+            </div>
           
-          <div class="reward-tag">+150 XP • Insignia Analista Soberano</div>
-          <button class="gl-btn gl-btn-primary luxury-btn complete-module-btn" data-module="module-4" style="width: 100%; margin-top: 15px;" onclick="app.finalizeM4Mission()">Finalizar e Indexar Módulo 4</button>
+          <div class="reward-tag" style="margin-top: 25px; background: rgba(169, 114, 255, 0.1); border: 1px solid rgba(169, 114, 255, 0.3); color: #a972ff;">+150 XP • Insignia Analista Soberano</div>
+          <button class="gl-btn gl-btn-primary complete-module-btn" data-module="module-4" style="width: 100%; margin-top: 20px; padding: 16px;" onclick="app.finalizeM4Mission()">Finalizar e Indexar Módulo 4</button>
         </div>
       </div>
 
@@ -920,11 +939,11 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
       </div>
         `,
         'module-5': `
-      <div class="module-header premium-header">
-        <div class="module-number gamer-badge">Nivel 5: El Analista</div>
-        <h2 class="module-title glow-text">📊 IA para Datos y Excel: Maestría Analítica</h2>
-        <p class="module-description">Desde la limpieza básica hasta el análisis predictivo y automatización avanzada con VBA + IA.</p>
-        <div class="module-meta">
+      <div class="module-header premium-header animate-in">
+        <div class="badge-titan" style="margin-bottom: 20px;">Nivel 5: El Analista</div>
+        <h2 class="module-title text-gradient-primary">📊 IA para Datos y Excel: Maestría Analítica</h2>
+        <p class="m-pa-note">Desde la limpieza básica hasta el análisis predictivo y automatización avanzada con VBA + IA.</p>
+        <div class="module-meta" style="margin-top: 20px; display: flex; gap: 20px; font-family: 'Space Grotesk'; font-size: 0.85rem;">
           <span class="module-meta-item">⏱️ 40 min</span>
           <span class="module-meta-item">💎 150 XP</span>
           <span class="module-meta-item">🏆 Insignia: Alquimista de Datos</span>
@@ -932,13 +951,13 @@ window.GuiaModules['module-1'] = window.GuiaModules['module-2'] = window.GuiaMod
       </div>
 
       <!-- ══ BARRA DE PROGRESO INTERNA ══ -->
-      <div id="m5-progress-container" style="background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:12px;padding:1rem 1.5rem;margin-bottom:1.5rem;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;">
-          <span style="font-weight:700;font-size:.9rem;">Tu Progreso Analítico</span>
-          <span id="m5-progress-label" style="color:var(--primary-light);font-weight:700;">Nivel 1 de 5</span>
+      <div id="m5-progress-container" class="glass-card-premium" style="padding: 24px; margin-bottom: 30px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <span class="text-gradient-primary" style="font-weight:700; font-size: 1rem;">Tu Progreso Analítico</span>
+          <span id="m5-progress-label" class="badge-titan">Nivel 1 de 5</span>
         </div>
-        <div style="background:rgba(255,255,255,0.1);border-radius:20px;height:8px;overflow:hidden;">
-          <div id="m5-progress-fill" style="background:linear-gradient(90deg,var(--primary),var(--secondary));height:100%;width:0%;transition:width .5s ease;border-radius:20px;"></div>
+        <div style="background:rgba(255,255,255,0.05); border-radius:20px; height:10px; overflow:hidden; border: 1px solid var(--border);">
+          <div id="m5-progress-fill" style="background:linear-gradient(90deg,var(--primary),var(--secondary)); height:100%; width:0%; transition:width 0.6s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 15px var(--primary-glow);"></div>
         </div>
       </div>
 
@@ -1001,12 +1020,12 @@ MAria G; NULL; 1/1/24
       </div>
 
       <div id="m5-level-3" class="ag-content animate-in">
-        <div class="section-card glass-card">
-            <div class="card-header-premium">
-              <span class="badge-premium">LABORATORIO SOBERANO</span>
-              <h3><span class="icon">🔍</span> Auditoría de Datos v32.1</h3>
+        <div class="section-card glass-card-premium">
+            <div class="card-header-premium" style="margin-bottom: 20px;">
+              <div class="badge-titan" style="margin-bottom: 10px;">LABORATORIO SOBERANO</div>
+              <h3 class="text-gradient-primary" style="margin: 0;"><span class="icon">🔍</span> Auditoría de Datos v32.1</h3>
             </div>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">
+            <p class="m-pa-note" style="font-size: 1rem; color: #fff;">
               El ojo humano falla ante miles de datos. La IA detecta anomalías estadísticas en nanosegundos. 
               Activa el <b>Sovereign Scan</b> para auditar esta tabla de ejecución presupuestal.
             </p>
@@ -1047,15 +1066,15 @@ MAria G; NULL; 1/1/24
               </div>
             </div>
 
-            <div id="m5-audit-report" class="animate-in" style="display: none; margin-top: 25px; padding: 20px; border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.05);">
-              <div style="display: flex; gap: 15px; align-items: flex-start;">
-                <span style="font-size: 2rem;">🚨</span>
+            <div id="m5-audit-report" class="animate-in" style="display: none; margin-top: 30px; padding: 24px; border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.08); backdrop-filter: blur(10px);">
+              <div style="display: flex; gap: 20px; align-items: flex-start;">
+                <span style="font-size: 2.5rem;">🚨</span>
                 <div>
-                  <h4 style="color: #ef4444; margin: 0 0 5px;">ANOMALÍA DETECTADA: Error de Magnitud</h4>
-                  <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                  <h4 style="color: #ef4444; margin: 0 0 8px;">ANOMALÍA DETECTADA: Error de Magnitud</h4>
+                  <p class="m-pa-note" style="color: #fff; margin: 0;">
                     Se ha identificado una inconsistencia estadística en la sede <b>Medellín</b>. El incremento del 900.0% respecto al periodo anterior supera los umbrales institucionales permitidos sin justificación técnica adjunta.
                   </p>
-                  <div class="xp-bonus-tag" style="margin-top: 10px;">+50 XP • Agente Auditor</div>
+                  <div class="badge-titan" style="margin-top: 15px; background: rgba(169, 114, 255, 0.1); border-color: rgba(169, 114, 255, 0.3); color: #a972ff;">+50 XP • Agente Auditor</div>
                 </div>
               </div>
             </div>
@@ -1120,15 +1139,33 @@ End Sub
             </div>
         </div>
 
-        <div id="m5-victory-panel" class="section-card storytelling" style="text-align: center; display:none; margin-top:20px;">
-            <div style="font-size: 3rem; margin-bottom: 20px;">🏆</div>
-            <h3>Hito Alcanzado: Alquimista de Datos</h3>
-            <div class="badge-display animate-bounce" style="display: inline-block; background: #f59e0b; color: #000; padding: 10px 20px; border-radius: 20px; font-weight: bold; margin-top: 10px; margin-bottom:15px;">
-                INSIGNIA: CEREBRO ANALÍTICO
+        <div id="m5-victory-panel" class="section-card animate-in glass-card-premium" style="text-align: center; display:none; margin-top:30px; border: 1px solid var(--primary);">
+          <div style="font-size: 4rem; margin-bottom: 25px; filter: drop-shadow(0 0 15px var(--primary-glow));">🏆</div>
+          <h3 class="text-gradient-primary">Hito Alcanzado: Alquimista de Datos</h3>
+          <div class="badge-titan animate-bounce" style="display: inline-block; background: var(--primary); color: #fff; padding: 12px 24px; font-weight: 800; margin-top: 20px; margin-bottom:25px; font-size: 1rem;">
+              INSIGNIA: CEREBRO ANALÍTICO
+          </div>
+          <div class="learning-mission-grid" style="display:grid; gap:12px; text-align:left; margin: 0 auto 20px; max-width: 860px;">
+            <div>
+              <label for="m5-mission-problem" style="display:block; font-weight:700; margin-bottom:6px;">1. Problema de datos</label>
+              <textarea id="m5-mission-problem" class="premium-textarea" style="min-height: 90px;" placeholder="Describe el archivo, el error principal y el impacto operativo del problema."></textarea>
             </div>
-            <button class="gl-btn gl-btn-outline complete-module-btn" style="width:100%;" data-module="module-5">☐ Reclamar Victoria Final (+150 XP)</button>
+            <div>
+              <label for="m5-mission-formula" style="display:block; font-weight:700; margin-bottom:6px;">2. Fórmula o enfoque propuesto</label>
+              <textarea id="m5-mission-formula" class="premium-textarea" style="min-height: 90px;" placeholder="Escribe la fórmula, prompt o paso técnico que usarías para corregir o analizar la información."></textarea>
+            </div>
+            <div>
+              <label for="m5-mission-result" style="display:block; font-weight:700; margin-bottom:6px;">3. Resultado esperado</label>
+              <textarea id="m5-mission-result" class="premium-textarea" style="min-height: 80px;" placeholder="Explica cómo debería verse la salida correcta después de aplicar tu solución."></textarea>
+            </div>
+            <div>
+              <label for="m5-mission-validation" style="display:block; font-weight:700; margin-bottom:6px;">4. Validación y privacidad</label>
+              <textarea id="m5-mission-validation" class="premium-textarea" style="min-height: 90px;" placeholder="Indica cómo comprobarías el resultado y qué dato sensible ocultarías antes de usar IA pública."></textarea>
+            </div>
+          </div>
+          <button class="gl-btn gl-btn-primary complete-module-btn" style="width:100%; padding: 16px;" data-module="module-5">✅ Reclamar Victoria Final (+150 XP)</button>
+          </div>
         </div>
-      </div>
 
       <div class="module-nav">
         <button class="gl-btn" data-goto="module-4">← Anterior</button>
@@ -1163,7 +1200,7 @@ End Sub
       if (!resp || !rolSelect) return;
       const rol = rolSelect.value;
       
-      resp.innerHTML = '<span style="color:#e3b341;">Generando respuesta...</span>';
+      resp.innerHTML = '<span class="text-gradient-primary">Generando respuesta...</span>';
       
       setTimeout(() => {
         if(rol === 'corporativo') {
@@ -1324,7 +1361,7 @@ End Sub
       if (progressText) progressText.innerText = 'Nivel ' + level + '/5';
 
       // Scroll to top of the tabs
-      const tabsNav = document.querySelector('.m3-levels-nav');
+      const tabsNav = container.querySelector('.ag-tabs');
       if (tabsNav) {
         const yOffset = -80;
         const y = tabsNav.getBoundingClientRect().top + window.pageYOffset + yOffset;
@@ -1368,9 +1405,13 @@ End Sub
     };
 
     window.m3FinalizeModule = function() {
-      const input = document.getElementById('m3-mission-input');
-      if (!input || input.value.length < 20) {
-        window.showToast('Por favor, desarrolla un prompt más completo usando CREA.', 'warning');
+      const context = document.getElementById('m3-mission-context')?.value.trim() || '';
+      const role = document.getElementById('m3-mission-role')?.value.trim() || '';
+      const prompt = document.getElementById('m3-mission-prompt')?.value.trim() || '';
+      const verification = document.getElementById('m3-mission-verification')?.value.trim() || '';
+      const hasCreaSignals = /contexto|rol|estructura|accion|acción|crea|c:|r:|e:|a:/i.test(prompt);
+      if (context.length < 20 || role.length < 15 || prompt.length < 40 || verification.length < 20 || !hasCreaSignals) {
+        window.showToast('Completa los cuatro bloques y deja visible tu estructura CREA antes de cerrar el módulo.', 'warning');
         return;
       }
       const nextBtn = document.getElementById('m3-next-btn');
@@ -1459,37 +1500,45 @@ End Sub
     };
 
     window.app.finalizeM4Mission = function() {
-      const input = document.getElementById('m4-mission-input');
-      if (!input || !input.value.trim()) {
-        window.showToast('Debes ingresar un enlace para validar.', 'warning');
+      const source = document.getElementById('m4-mission-source')?.value.trim() || '';
+      const summary = document.getElementById('m4-mission-summary')?.value.trim() || '';
+      const risk = document.getElementById('m4-mission-risk')?.value.trim() || '';
+      const action = document.getElementById('m4-mission-action')?.value.trim() || '';
+      if (!source || !summary || !risk || !action) {
+        window.showToast('Debes completar la fuente, el resumen, el hallazgo y el plan de verificación.', 'warning');
         return;
       }
       
-      const url = input.value.toLowerCase();
-      if (!url.includes('.gov.co')) {
-        window.showToast('⚠️ La fuente debe ser un portal oficial (.gov.co)', 'error');
+      const loweredSource = source.toLowerCase();
+      if (!loweredSource.includes('.gov.co') && !/decreto|resolucion|resolución|manual|informe|contrato|expediente/.test(loweredSource)) {
+        window.showToast('Incluye un enlace oficial .gov.co o identifica claramente el documento institucional analizado.', 'error');
         return;
       }
 
-      window.showToast('¡Misión Completada! Insignia Analista Soberano Ganada. +150 XP', 'success');
-      if (typeof window.app.addXP === 'function') {
-        window.app.addXP(150);
+      if (action.length < 20 || !/verific|fuente|pagina|página|contraste|revis/i.test(action.toLowerCase())) {
+        window.showToast('Explica la acción y cómo verificarías el hallazgo con la fuente.', 'warning');
+        return;
       }
-      
-      // Simulate module completion state
-      const btn = document.querySelector('[data-module="module-4"].complete-module-btn');
-      if (btn) {
-        btn.innerText = '🏆 Módulo 4 Indexado';
-        btn.disabled = true;
-        btn.style.background = 'var(--success)';
-      }
+
+      window.showToast('Misión lista para evaluación. Ya puedes cerrar el módulo y reclamar la insignia.', 'success');
     };
     // ----------------------------
 
-    // Inject all modules
+    // Inject all modules safely
     for (const [id, html] of Object.entries(modules)) {
         const el = document.getElementById(id);
-        if (el) el.innerHTML = html;
+        if (el && !el.querySelector('.module-header')) {
+            el.insertAdjacentHTML('afterbegin', html);
+        }
     }
-  return { init: function(app) { console.log('Initialized modules-1-5.js'); } };
+  return { init: function(app) { 
+        console.log('Initialized modules-1-5.js'); 
+        // Restore m3 levels
+        const maxLevel = parseInt(localStorage.getItem('m3-max-level') || 1);
+        for(let i=1; i<=maxLevel; i++) {
+            const tab = document.getElementById(`m3-tab-${i}`);
+            if(tab) tab.classList.remove('locked');
+        }
+        if (typeof window.m3UpdateBuilder === 'function') window.m3UpdateBuilder();
+    } };
 })();

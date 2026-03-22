@@ -1,5 +1,5 @@
 window.GuiaModules = window.GuiaModules || {};
-window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaModules['module-18'] = (function() {
+window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaModules['module-18'] = window.GuiaModules['module-personal-ai'] = (function() {
   // --- MÓDULO 16: Lógica Centralizada ---
   window.m16GenFormula = function() {
     const val = document.getElementById('m16-excel-req')?.value;
@@ -189,19 +189,6 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
    MÓDULO 16 — IA PARA CÓDIGO Y NO-CODE
    ══════════════════════════════════════════════════════════════ */
 'module-16': `
-<style>
-  .m16-code-window { background: #0d1117; border: 1px solid #333; border-radius: 12px; overflow: hidden; margin-top: 20px; font-family: monospace; }
-  .m16-code-header { background: #1a1a2e; padding: 10px 15px; display: flex; gap: 8px; border-bottom: 1px solid #333; }
-  .m16-dot { width: 12px; height: 12px; border-radius: 50%; }
-  .m16-dot.r { background: #ef4444; } .m16-dot.y { background: #f59e0b; } .m16-dot.g { background: #10b981; }
-  .m16-code-body { padding: 20px; font-size: 0.85rem; color: #a5b4fc; line-height: 1.6; position: relative; }
-  .m16-cursor { display: inline-block; width: 8px; height: 15px; background: #60a5fa; animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 2px; }
-  @keyframes blink { 0%, 100% {opacity:1;} 50% {opacity:0;} }
-  .m16-excel-grid { display: grid; grid-template-columns: 40px auto auto auto; gap: 1px; background: #333; border: 1px solid #333; margin-top: 15px; border-radius: 8px; overflow: hidden; }
-  .m16-cel, .m16-th { background: #0d1117; padding: 10px; font-size: 0.8rem; }
-  .m16-th { background: #1a1a2e; text-align: center; font-weight: 700; color: #cbd5e1; }
-  .m16-cel.hl { background: rgba(16,185,129,0.1); border: 1px solid #10b981; }
-</style>
 
 <div class="module-header premium-header" style="background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(29,78,216,0.15)); border: 1px solid rgba(37,99,235,0.2);">
   <div class="module-number gamer-badge" style="background:#2563eb;color:#fff;">Módulo 16 — Nivel Experto</div>
@@ -337,13 +324,6 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
    MÓDULO 17 — IA LOCAL Y PRIVADA (OLLAMA)
    ══════════════════════════════════════════════════════════════ */
 'module-17': `
-<style>
-  .m17-terminal { background: #000; color: #10b981; font-family: monospace; border-radius: 8px; padding: 20px; border: 1px solid #333; margin-top: 15px; min-height: 150px; position:relative;}
-  .m17-lock { font-size: 3rem; text-align: center; color: #10b981; text-shadow: 0 0 20px rgba(16,185,129,0.5); }
-  .m17-arch { display: flex; align-items: center; justify-content: center; gap: 20px; margin: 30px 0; }
-  .m17-box { padding: 15px; border-radius: 12px; border: 2px solid; text-align: center; width: 150px; }
-  .m17-arrow { font-size: 1.5rem; color: #64748b; }
-</style>
 
 <div class="module-header premium-header" style="background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(5,150,105,0.15)); border: 1px solid rgba(16,185,129,0.2);">
   <div class="module-number gamer-badge" style="background:#10b981;color:#000;">Módulo 17 — Nivel Ciberseguridad</div>
@@ -447,41 +427,6 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
    MÓDULO 18 — ANÁLISIS ROI MODELOS PREMIUM
    ══════════════════════════════════════════════════════════════ */
 'module-18': `
-<style>
-  .m18-royalty-card { padding: 25px; border-radius: 14px; position: relative; overflow: hidden; background: #0d1117; border: 1px solid rgba(139,92,246,0.3); }
-  .m18-royalty-card::before { content:''; position:absolute; top:0; left:0; width:100%; height:5px; background: linear-gradient(90deg, #8b5cf6, #d946ef); }
-  .m18-result-box { transition: all 0.25s ease; }
-  .m18-result-box.is-poor { background: rgba(239,68,68,0.08) !important; border-color: rgba(239,68,68,0.45) !important; }
-  .m18-result-box.is-fair { background: rgba(245,158,11,0.08) !important; border-color: rgba(245,158,11,0.45) !important; }
-  .m18-result-box.is-strong { background: rgba(16,185,129,0.08) !important; border-color: rgba(16,185,129,0.45) !important; }
-  .m18-result-box.is-excellent { background: rgba(59,130,246,0.1) !important; border-color: rgba(59,130,246,0.45) !important; }
-  .m18-verdict-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 12px;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.3px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    border: 1px solid transparent;
-  }
-  .m18-verdict-badge.is-poor { background: rgba(239,68,68,0.15); color: #fca5a5; border-color: rgba(239,68,68,0.35); }
-  .m18-verdict-badge.is-fair { background: rgba(245,158,11,0.15); color: #fcd34d; border-color: rgba(245,158,11,0.35); }
-  .m18-verdict-badge.is-strong { background: rgba(16,185,129,0.15); color: #86efac; border-color: rgba(16,185,129,0.35); }
-  .m18-verdict-badge.is-excellent { background: rgba(59,130,246,0.15); color: #93c5fd; border-color: rgba(59,130,246,0.35); }
-  .m18-summary-note {
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px solid rgba(255,255,255,0.08);
-  }
-  @media (max-width: 900px) {
-    .m18-roi-grid-2,
-    .m18-roi-grid-4,
-    .m18-roi-grid-verdict { grid-template-columns: 1fr !important; }
-  }
-</style>
 
 <div class="module-header premium-header" style="background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(124,58,237,0.15)); border: 1px solid rgba(139,92,246,0.2);">
   <div class="module-number gamer-badge" style="background:#8b5cf6;color:#fff;">Módulo 18 — Impacto Económico</div>
@@ -670,9 +615,12 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
 `
   };
 
+  // Inject safely
   for (const [id, html] of Object.entries(modules)) {
     const el = document.getElementById(id);
-    if (el) el.innerHTML = html;
+    if (el && !el.querySelector('.module-header')) {
+      el.insertAdjacentHTML('afterbegin', html);
+    }
   }
   return { init: function(app) { console.log('Initialized modules-16-18.js'); } };
 })();

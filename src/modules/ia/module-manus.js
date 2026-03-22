@@ -2,63 +2,15 @@
    MÓDULO BONUS: Manus AI (Agente Investigador)
    Versión "Titan Investigator" — DNA v31.4
    ═══════════════════════════════════════════ */
-(function() {
+window.GuiaModules = window.GuiaModules || {};
+window.GuiaModules['module-manus'] = (function() {
   const manusHTML = `
-<style>
-  :root {
-    --ma-primary: #f43f5e;
-    --ma-secondary: #fb7185;
-    --ma-bg: #09090b;
-    --ma-border: #27272a;
-  }
 
-  .m-ma-container { color: #e4e4e7; font-family: 'Inter', sans-serif; }
-  .m-ma-card { background: var(--ma-bg); border: 1px solid var(--ma-border); border-radius: 16px; padding: 25px; margin-bottom: 20px; position: relative; overflow: hidden; }
-  .m-ma-header-bg { position: absolute; top:0; left:0; width:100%; height:100px; background: linear-gradient(180deg, rgba(244,63,94,0.1) 0%, transparent 100%); pointer-events:none; }
-  .m-ma-hero { background: linear-gradient(135deg, rgba(244,63,94,0.12), rgba(251,113,133,0.05)); border: 1px solid rgba(244,63,94,0.26); border-radius: 18px; padding: 22px; margin-bottom: 22px; }
-  .m-ma-chip-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
-  .m-ma-chip { background: rgba(255,255,255,0.04); border: 1px solid rgba(244,63,94,0.22); color:#fecdd3; border-radius:999px; padding:8px 12px; font-size:0.75rem; font-weight:700; }
-  .m-ma-grid-3 { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:15px; }
-  .m-ma-panel { background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:18px; }
-  .m-ma-note { background: rgba(244,63,94,0.08); border-left:3px solid var(--ma-primary); border-radius:10px; padding:12px 14px; color:#fda4af; font-size:0.8rem; line-height:1.7; }
-  .m-ma-step { display:flex; gap:12px; align-items:flex-start; padding:12px 0; border-top:1px solid rgba(255,255,255,0.05); }
-  .m-ma-step:first-child { border-top:none; padding-top:0; }
-  .m-ma-step-badge { width:28px; height:28px; border-radius:999px; background:rgba(244,63,94,0.18); border:1px solid rgba(244,63,94,0.35); color:#fb7185; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:800; flex-shrink:0; }
-
-  /* Tabs Bar */
-  .premium-tab-ma { background: none; border: none; padding: 10px 15px; color: #71717a; cursor: pointer; border-bottom: 2px solid transparent; transition: 0.3s; font-weight: 600; white-space: nowrap; }
-  .premium-tab-ma.active { color: var(--ma-primary); border-bottom-color: var(--ma-primary); }
-
-  /* Agent UI */
-  .m-ma-agent-window { border: 1px solid var(--ma-border); border-radius: 12px; background: #000; overflow: hidden; margin-top: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-  .m-ma-win-header { background: #18181b; padding: 10px 15px; border-bottom: 1px solid var(--ma-border); display: flex; justify-content: space-between; align-items: center; }
-  
-  .m-ma-viewport { display: grid; grid-template-columns: 1fr 280px; height: 350px; }
-  .m-ma-browser-view { background: #fff; position: relative; border-right: 1px solid var(--ma-border); overflow: hidden; }
-  .m-ma-logs-view { background: #09090b; padding: 15px; overflow-y: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #a1a1aa; }
-  
-  .m-ma-thought { display: flex; gap: 8px; margin-bottom: 10px; opacity: 0; transform: translateX(-10px); transition: 0.4s; }
-  .m-ma-thought.show { opacity: 1; transform: translateX(0); }
-  .m-ma-t-icon { color: var(--ma-primary); font-weight: bold; }
-
-  /* Grid 2 */
-  .m-ma-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-  @media (max-width: 900px) { .m-ma-grid-3 { grid-template-columns:1fr; } }
-  @media (max-width: 768px) { .m-ma-grid { grid-template-columns: 1fr; } }
-
-  .ma-btn-glow { 
-    background: linear-gradient(135deg, #f43f5e 0%, #fb7185 100%); 
-    color: white; border: none; padding: 12px 24px; border-radius: 8px;
-    font-weight: 700; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(244,63,94,0.3);
-  }
-  .ma-btn-glow:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(244,63,94,0.5); }
-</style>
-
-<div class="m-ma-container">
-  <div class="module-header premium-header" style="border: 1px solid rgba(244,63,94,0.3); background: rgba(244,63,94,0.02);">
-    <div class="module-number gamer-badge" style="background:var(--ma-primary);color:#fff;">BONUS: INVESTIGADOR SOBERANO</div>
-    <h2 class="module-title glow-text" style="color:#fb7185;">🐙 <span style="color:#f43f5e;">Manus AI:</span> El Oráculo Digital</h2>
-    <p class="module-description">Domina el arte de la investigación autónoma. Manus no solo busca, <b>navega, extrae y sintetiza</b> el conocimiento del mundo real.</p>
+<div class="m-ma-container animate-in">
+  <div class="module-header premium-header animate-in">
+    <div class="badge-titan" style="margin-bottom: 20px;">BONUS: INVESTIGADOR SOBERANO</div>
+    <h2 class="module-title text-gradient-primary">🐙 Manus AI: El Oráculo Digital</h2>
+    <p class="m-pa-note">Domina el arte de la investigación autónoma. Manus no solo busca, <b>navega, extrae y sintetiza</b> el conocimiento del mundo real.</p>
   </div>
 
   <div class="m-ma-hero">
@@ -190,8 +142,9 @@
             </div>
             <div class="m-ma-viewport">
                 <div class="m-ma-browser-view" id="ma-browser-v">
-                    <div style="display:flex; height:100%; align-items:center; justify-content:center; color:#18181b; font-weight:700; text-align:center;">
-                        Ready for Investigation...
+                    <div style="display:flex; height:100%; align-items:center; justify-content:center; color:#fff; font-weight:700; text-align:center; flex-direction: column; gap:15px;">
+                        <div class="m-ma-t-icon" style="font-size: 2rem;">🐙</div>
+                        <div style="font-family: 'Space Grotesk'; opacity: 0.7;">Ready for Investigation...</div>
                     </div>
                 </div>
                 <div class="m-ma-logs-view" id="ma-logs-v">
@@ -215,21 +168,45 @@
           <div style="font-size:0.72rem; font-weight:800; color:#fb7185; margin-bottom:8px;">CASO 1 · MONITOREO</div>
           <h4 style="margin:0 0 8px; color:#fff;">Vigilar una web oficial</h4>
           <p style="font-size:0.78rem; color:#a1a1aa;">Diario Oficial, SECOP, convocatorias o portales regulatorios.</p>
-          <div style="font-size:0.76rem; color:#d4d4d8; line-height:1.8; margin-top:10px;">1. Elige una fuente oficial.<br>2. Define palabras clave.<br>3. Pide extracción en tabla.<br>4. Exige fecha y enlace por hallazgo.</div>
+          <div style="margin: 12px 0; border-top: 1px solid rgba(244,63,94,0.1); padding-top: 10px;">
+            <p style="font-size: 0.72rem; color: #fb7185; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Guía de Ejecución:</p>
+            <div style="font-size:0.76rem; color:#d4d4d8; line-height:1.8;">
+              1. Identifica la URL de la fuente oficial.<br>
+              2. Define palabras clave (ej: "SENA", "Resolución").<br>
+              3. Pide a Manus extraer los resultados en una tabla.<br>
+              4. Solicita fecha y enlace directo de cada hallazgo.
+            </div>
+          </div>
           <div style="font-size:0.72rem; color:#fb7185; margin-top:8px;">Resultado esperado: boletín semanal con novedades accionables.</div>
         </div>
         <div class="m-ma-card">
           <div style="font-size:0.72rem; font-weight:800; color:#fb7185; margin-bottom:8px;">CASO 2 · INVESTIGACIÓN</div>
           <h4 style="margin:0 0 8px; color:#fff;">Rastrear tendencias y evidencia</h4>
           <p style="font-size:0.78rem; color:#a1a1aa;">Sirve para comparar qué dicen expertos, medios o usuarios sobre un tema nuevo.</p>
-          <div style="font-size:0.76rem; color:#d4d4d8; line-height:1.8; margin-top:10px;">1. Formula una pregunta concreta.<br>2. Limita el universo de fuentes.<br>3. Separa hechos, opiniones y señales.<br>4. Pide conclusiones con soporte.</div>
+          <div style="margin: 12px 0; border-top: 1px solid rgba(244,63,94,0.1); padding-top: 10px;">
+            <p style="font-size: 0.72rem; color: #fb7185; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Guía de Ejecución:</p>
+            <div style="font-size:0.76rem; color:#d4d4d8; line-height:1.8;">
+              1. Formula una pregunta de investigación clara.<br>
+              2. Indica a Manus qué tipo de fuentes priorizar.<br>
+              3. Pide separar hechos de opiniones en el informe.<br>
+              4. Cierra solicitando conclusiones con soporte citado.
+            </div>
+          </div>
           <div style="font-size:0.72rem; color:#fb7185; margin-top:8px;">Resultado esperado: panorama con hallazgos, desacuerdos y riesgos.</div>
         </div>
         <div class="m-ma-card">
           <div style="font-size:0.72rem; font-weight:800; color:#fb7185; margin-bottom:8px;">CASO 3 · COMPARATIVA</div>
-          <h4 style="margin:0 0 8px; color:#fff;">Extraer datos de varios sitios y consolidarlos</h4>
-          <p style="font-size:0.78rem; color:#a1a1aa;">Ideal para tablas comparativas de precios, convocatorias, programas o normativas.</p>
-          <div style="font-size:0.76rem; color:#d4d4d8; line-height:1.8; margin-top:10px;">1. Define columnas comparables.<br>2. Indica fuentes permitidas.<br>3. Pide homogeneizar unidades.<br>4. Cierra con una recomendación razonada.</div>
+          <h4 style="margin:0 0 8px; color:#fff;">Extraer datos de varios sitios</h4>
+          <p style="font-size:0.78rem; color:#a1a1aa;">Ideal para tablas comparativas de precios, convocatorias o normativas.</p>
+          <div style="margin: 12px 0; border-top: 1px solid rgba(244,63,94,0.1); padding-top: 10px;">
+            <p style="font-size: 0.72rem; color: #fb7185; font-weight: 800; text-transform: uppercase; margin-bottom: 8px;">Guía de Ejecución:</p>
+            <div style="font-size:0.76rem; color:#d4d4d8; line-height:1.8;">
+              1. Define las columnas de tu tabla ideal.<br>
+              2. Entrega el listado de URLs a investigar.<br>
+              3. Pide normalizar los datos (fechas, monedas).<br>
+              4. Valida la tabla final contra una fuente origen.
+            </div>
+          </div>
           <div style="font-size:0.72rem; color:#fb7185; margin-top:8px;">Resultado esperado: tabla lista para presentar y defender.</div>
         </div>
       </div>
@@ -383,10 +360,32 @@
   <div class="module-nav">
     <button class="gl-btn gl-btn-primary" data-goto="welcome">← Volver al Menú</button>
   </div>
-</div>
+`;
 
-<script>
-  // Manus Estrategia Real
+  const manusInstance = {
+    init: function(app) {
+      console.log('Manus Titan Investigator v31.4 loaded');
+      const target = document.getElementById('module-manus');
+      if (target && !target.querySelector('.module-header')) {
+        target.insertAdjacentHTML('afterbegin', manusHTML);
+        setupManusHandlers(target);
+      }
+    }
+  };
+
+  function setupManusHandlers(parent) {
+      const tabs = parent.querySelectorAll('.premium-tab-ma');
+      const contents = parent.querySelectorAll('.ag-content');
+      tabs.forEach(t => t.addEventListener('click', () => {
+        tabs.forEach(x => x.classList.remove('active'));
+        contents.forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        const target = parent.querySelector('#' + t.dataset.tab);
+        if(target) target.classList.add('active');
+      }));
+  }
+
+  // Global functions for the module
   window.maCopy = function(btn, type) {
     let text = type;
     if(type === 'agent_prompt') text = document.getElementById('ma-agent-prompt')?.innerText || '';
@@ -398,6 +397,7 @@
     setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 2500);
     if(window.app) window.app.addXP(5);
   };
+
   let maCDone = [false,false,false,false]; let maCXP = 0;
   window.maCheck = function(el, idx, xp) {
     if(maCDone[idx]) return; maCDone[idx] = true;
@@ -407,22 +407,6 @@
     const c=document.getElementById('ma-xp-count'); if(c) c.textContent=maCXP+' / 200 XP';
   };
 
-  // -- Tabs logic --
-  setTimeout(() => {
-    const parent = document.getElementById('module-manus');
-    if(!parent) return;
-    const tabs = parent.querySelectorAll('.premium-tab-ma');
-    const contents = parent.querySelectorAll('.ag-content');
-    tabs.forEach(t => t.addEventListener('click', () => {
-      tabs.forEach(x => x.classList.remove('active'));
-      contents.forEach(x => x.classList.remove('active'));
-      t.classList.add('active');
-      const target = parent.querySelector('#' + t.dataset.tab);
-      if(target) target.classList.add('active');
-    }));
-  }, 500);
-
-  // -- Simulator --
   let maBusy = false;
   window.mMaRunAgent = () => {
     if(maBusy) return;
@@ -431,6 +415,8 @@
     const browser = document.getElementById('ma-browser-v');
     const urlBar = document.getElementById('ma-win-url');
     
+    if (!logs || !browser || !urlBar) { maBusy = false; return; }
+
     logs.innerHTML = '';
     browser.innerHTML = '<div style="color:#000; padding:20px;">Cargando motor de navegación...</div>';
     
@@ -447,16 +433,16 @@
         if(i < steps.length) {
             const d = document.createElement('div');
             d.className = 'm-ma-thought';
-            d.innerHTML = \`<span class="m-ma-t-icon">\${steps[i].t}</span> \${steps[i].m}\`;
+            d.innerHTML = '<span class="m-ma-t-icon">' + steps[i].t + '</span> ' + steps[i].m;
             logs.appendChild(d);
             setTimeout(() => d.classList.add('show'), 10);
             
             urlBar.innerText = steps[i].url;
-            browser.innerHTML = \`<div style="color:#18181b; padding:20px;">
-                <h4 style="margin:0;">Sitio: \${steps[i].url}</h4>
-                <p style="font-size:0.8rem;">Manus está analizando esta zona visual...</p>
-                <div style="width:10px; height:10px; background:red; border-radius:50%; position:relative; top:\${Math.random()*50}px; left:\${Math.random()*50}px;"></div>
-            </div>\`;
+            browser.innerHTML = '<div style="color:#18181b; padding:20px;">' +
+                '<h4 style="margin:0;">Sitio: ' + steps[i].url + '</h4>' +
+                '<p style="font-size:0.8rem;">Manus está analizando esta zona visual...</p>' +
+                '<div style="width:10px; height:10px; background:red; border-radius:50%; position:relative; top:' + (Math.random()*50) + 'px; left:' + (Math.random()*50) + 'px;"></div>' +
+            '</div>';
 
             logs.scrollTop = logs.scrollHeight;
             i++;
@@ -470,7 +456,8 @@
 
   window.mMaSimScenario = (s) => {
       alert("Cambiando a escenario: " + s + ". Ve a la pestaña 'Simulador' para ejecutar.");
-      document.querySelector('[data-tab="m-ma-lab"]').click();
+      const tab = document.querySelector('[data-tab="m-ma-lab"]');
+      if (tab) tab.click();
   };
 
   window.mMaFinalV = () => {
@@ -481,9 +468,6 @@
           document.querySelector('.complete-module-btn')?.click();
       } else { alert("Pista: Empieza con C y tiene 'Use'"); }
   };
-</script>
-`;
-  const target = document.getElementById('module-manus');
-  if (target) { target.innerHTML = manusHTML; }
-  return { init: function() { console.log('Manus Titan Investigator v31.4 loaded'); } };
+
+  return manusInstance;
 })();

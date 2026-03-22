@@ -7,9 +7,14 @@
   <meta name="description"
     content="Guía interactiva para aprender a usar la Inteligencia Artificial desde cero. Para profesionales y administradores.">
   <title>Guía de IA — Aprende desde Cero</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="src/css/styles.css">
   <!-- 🧬 ADN Maestro (Global DNA - Sincronizado) -->
   <link rel="stylesheet" href="src/css/dna_theme.css">
+  <link rel="stylesheet" href="src/css/modules.css">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
 </head>
 
 <body>
@@ -18,34 +23,75 @@
   <!-- ═══ PROFESSION DECODER MODAL ═══ -->
   <div class="profession-modal" id="professionModal">
     <div class="decoder-container">
-      <h2 class="decoder-title">Decodificador de Carrera</h2>
-      <p class="hero-subtitle">Elige tu enfoque para personalizar tu experiencia de aprendizaje 2025</p>
+      <div class="decoder-kicker">Configura tu ruta</div>
+      <h2 class="decoder-title">Elige el enfoque que más se parece a tu trabajo</h2>
+      <p class="hero-subtitle">Esto solo ajusta ejemplos y recomendaciones. Puedes cambiarlo después sin perder avance.</p>
       
-      <div class="decoder-grid">
-        <!-- Institucional -->
-        <div class="profession-card holographic-glare" id="chooseInstitucional" style="--card-accent: var(--primary-institucional);">
+      <div class="decoder-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+        <!-- Cotidiano -->
+        <div class="profession-card holographic-glare" id="chooseCotidiano" style="--card-accent: #60a5fa;">
           <div class="card-content">
-            <span class="card-icon">🏛️</span>
-            <h3 class="card-name">Estratega Institucional</h3>
-            <p class="card-desc">Enfocado en el <b>Sector Público</b>. Optimiza trámites, redacción oficial y atención al ciudadano con IA.</p>
+            <span class="card-icon">🏠</span>
+            <h3 class="card-name">Usuario Cotidiano</h3>
+            <p class="card-desc">Uso personal y productivo. Ideal para aprender idiomas, planear viajes y tareas diarias.</p>
           </div>
         </div>
-        
-        <!-- Empresarial -->
-        <div class="profession-card holographic-glare" id="chooseEmpresarial" style="--card-accent: var(--primary-empresarial);">
+
+        <!-- Administrativo -->
+        <div class="profession-card holographic-glare" id="chooseAdministrativo" style="--card-accent: #94a3b8;">
           <div class="card-content">
-            <span class="card-icon">💼</span>
-            <h3 class="card-name">Líder Empresarial</h3>
-            <p class="card-desc">Enfocado en el <b>Sector Privado</b>. Potencia ventas, marketing, finanzas y automatización de negocios.</p>
+            <span class="card-icon">📁</span>
+            <h3 class="card-name">Personal Administrativo</h3>
+            <p class="card-desc">Enfocado en reportes, gestión de agenda, actas y procesos de oficina eficientes.</p>
           </div>
         </div>
+
+        <!-- Docente -->
+        <div class="profession-card holographic-glare" id="chooseDocente" style="--card-accent: #f472b6;">
+          <div class="card-content">
+            <span class="card-icon">🎓</span>
+            <h3 class="card-name">Docente / Educador</h3>
+            <p class="card-desc">Optimiza la planeación de clases, evaluaciones y creación de contenido educativo dinámico.</p>
+          </div>
+        </div>
+
+        <!-- Coordinador -->
+        <div class="profession-card holographic-glare" id="chooseCoordinador" style="--card-accent: #fbbf24;">
+          <div class="card-content">
+            <span class="card-icon">⚖️</span>
+            <h3 class="card-name">Coordinador / Líder</h3>
+            <p class="card-desc">Gestión de equipos, toma de decisiones estratégicas y supervisión de proyectos con IA.</p>
+          </div>
+        </div>
+
+        <!-- Analista -->
+        <div class="profession-card holographic-glare" id="chooseAnalista" style="--card-accent: #10b981;">
+          <div class="card-content">
+            <span class="card-icon">📊</span>
+            <h3 class="card-name">Analista de Datos</h3>
+            <p class="card-desc">Excel avanzado, auditoría de grandes volúmenes y hallazgos estratégicos automatizados.</p>
+          </div>
+        </div>
+
+        <!-- Emprendedor -->
+        <div class="profession-card holographic-glare" id="chooseEmprendedor" style="--card-accent: #8b5cf6;">
+          <div class="card-content">
+            <span class="card-icon">🚀</span>
+            <h3 class="card-name">Emprendedor</h3>
+            <p class="card-desc">Enfocado en ventas, marketing digital, crecimiento de negocio y prototipado rápido.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="decoder-actions">
+        <button class="gl-btn gl-btn-outline" id="skipSpecializationBtn">Empezar con ruta general</button>
       </div>
     </div>
   </div>
 
   <!-- ═══ HEADER ═══ -->
   <header class="header">
-    <div class="header-brand">
+    <div class="header-brand" data-module="welcome">
       <button class="menu-toggle" id="menuToggle">☰</button>
       <div class="header-logo">🤖</div>
       <div>
@@ -74,13 +120,6 @@
         <span class="xp-level-badge level-basic" id="levelName">Básico</span>
       </div>
 
-      <!-- Medals Dashboard -->
-      <div class="medals-dashboard" style="padding: 0 16px 16px;">
-        <div class="medals-title" style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px;">🏅 Medallas</div>
-        <div id="medals-list" class="medals-list" style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <div class="no-medals" style="font-size: 0.7rem; color: var(--text-muted); opacity: 0.5;">Gana XP para desbloquear medallas</div>
-        </div>
-      </div>
       <div class="user-meta-input">
         <input type="text" id="userNameProfile" name="username" autocomplete="name" placeholder="Escribe tu nombre aquí..." maxlength="25">
       </div>
@@ -93,12 +132,9 @@
       </div>
     </div>
 
-    <div class="nav-search">
-      <div class="search-container">
-        <span class="search-icon">🔍</span>
-        <input type="text" class="search-input" id="moduleSearch" placeholder="Buscar módulos o temas...">
-      </div>
-    </div>
+
+
+
 
     <div class="nav-group">
       <div class="nav-group-title">Inicio</div>
@@ -217,7 +253,7 @@
     </div>
 
     <div class="nav-group">
-      <div class="nav-group-title">🎁 Bonus</div>
+      <div class="nav-group-title">Explora despues</div>
       <a class="nav-item" data-module="module-antigravity" data-prereqs="module-13">
         <span class="nav-icon">🤖</span>
         <span class="nav-label">Bonus: Antigravity AI</span>
@@ -256,34 +292,7 @@
       </a>
     </div>
 
-    <!-- 🧬 SOVEREIGNTY STATUS WIDGET (v22.0) -->
-    <div class="sovereignty-widget" id="sovereigntyWidget" style="margin: 20px 16px; padding: 15px; background: var(--bg-glass); border-radius: 12px; border: 1px solid var(--border);">
-      <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: bold;">Estatus de Soberanía</div>
-      <div id="sovMetrics" style="display: flex; flex-direction: column; gap: 8px;">
-        <div style="display: flex; justify-content: space-between; font-size: 0.8rem;">
-            <span>SCD (Density)</span>
-            <span id="sovScd" style="font-weight: bold; color: var(--accent);">--%</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; font-size: 0.8rem;">
-            <span>AER (Evolution)</span>
-            <span id="sovAer" style="font-weight: bold; color: var(--accent);">--%</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; font-size: 0.8rem;">
-            <span>SI (Integrity)</span>
-            <span id="sovSi" style="font-weight: bold; color: var(--accent);">--%</span>
-        </div>
-        <div style="border-top: 1px solid rgba(255,255,255,0.05); margin-top: 5px; padding-top: 5px; display: flex; flex-direction: column; gap: 4px;">
-            <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted);">
-                <span>DeepSeek Vol.</span>
-                <span id="sovTokens" style="color: #60a5fa;">-- M</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted);">
-                <span>Gasto (USD)</span>
-                <span id="sovUsd" style="color: #f87171;">$--</span>
-            </div>
-        </div>
-      </div>
-    </div>
+
   </nav>
 
   <!-- ═══ MAIN CONTENT ═══ -->
@@ -294,10 +303,10 @@
       <div class="hero-section">
         <div class="hero-icon">🚀</div>
         <h1 class="hero-title">Aprende a Usar la IA en tu Trabajo y tu Vida</h1>
-        <p class="hero-subtitle">Una guía práctica con ejercicios reales, herramientas interactivas y juegos para dominar la Inteligencia Artificial. Sin conocimientos previos necesarios.</p>
+        <p class="hero-subtitle">Una ruta guiada, practica y aplicable desde el primer modulo. Empieza rapido, aprende con casos reales y avanza sin perderte entre demasiadas opciones.</p>
         <div class="hero-stats">
           <div class="hero-stat">
-            <div class="hero-stat-number">20</div>
+            <div class="hero-stat-number">21</div>
             <div class="hero-stat-label">Módulos</div>
           </div>
           <div class="hero-stat">
@@ -333,12 +342,37 @@
           </div>
         </div>
 
-        <button class="gl-btn gl-btn-primary hero-start-btn" id="startBtn">Comenzar ahora →</button>
+        <section class="hero-guided-panel">
+          <div class="hero-guided-copy">
+            <div class="hero-guided-kicker">Ruta principal</div>
+            <h3>Empieza por una victoria rapida y sigue una progresion clara</h3>
+            <p>No necesitas decidir entre todo el contenido. La app te recomienda el siguiente paso, el tiempo estimado y lo que vas a conseguir.</p>
+          </div>
+          <div class="hero-guided-steps">
+            <div class="hero-guided-step">
+              <strong>1. Entiende</strong>
+              <span>Que problemas vale la pena resolver con IA.</span>
+            </div>
+            <div class="hero-guided-step">
+              <strong>2. Practica</strong>
+              <span>Usa prompts, documentos y datos con casos reales.</span>
+            </div>
+            <div class="hero-guided-step">
+              <strong>3. Aplica</strong>
+              <span>Lleva lo aprendido a automatizacion y proyectos.</span>
+            </div>
+          </div>
+        </section>
 
-        <!-- Bonus Quick Access -->
-        <div class="bonus-quick-access" style="margin-top: 40px; text-align: left;">
-          <h4 style="font-size: 0.9rem; margin-bottom: 15px; color: var(--text-secondary);">🚀 Contenidos Especiales</h4>
-          <div class="bonus-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px;">
+        <div class="hero-actions">
+          <button class="gl-btn gl-btn-primary hero-start-btn" id="startBtn">Continuar ruta recomendada →</button>
+          <button class="gl-btn gl-btn-outline hero-secondary-btn" id="viewMapBtn">Ver mapa completo</button>
+        </div>
+
+        <details class="bonus-quick-access">
+          <summary>Explorar herramientas y contenidos extra</summary>
+          <p class="bonus-summary">Estos contenidos sirven mejor cuando ya completaste la base. Puedes entrar cuando quieras, pero no son el siguiente paso recomendado.</p>
+          <div class="bonus-grid">
             <div class="bonus-item-card" onclick="window.app.navigateTo('module-antigravity')" style="background: var(--bg-glass); padding: 12px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; text-align: center; transition: all 0.2s ease;">
               <span style="font-size: 1.5rem; display: block; margin-bottom: 4px;">🛡️</span>
               <span style="font-size: 0.75rem; font-weight: 600;">Antigravity</span>
@@ -360,7 +394,7 @@
               <span style="font-size: 0.75rem; font-weight: 600;">Power Automate</span>
             </div>
           </div>
-        </div>
+        </details>
       </div>
     </div>
 
@@ -403,14 +437,7 @@
     <div class="module" id="module-gemini-productivity"></div>
     <div class="module" id="module-teams-meet"></div>
 
-    <!-- Certificación - Módulo Final -->
     <div class="module" id="certificate">
-      <div class="module-header cert-header">
-        <h2 class="module-title">¡Certificación Completada!</h2>
-        <p class="module-description">Has demostrado dominio en las herramientas de IA para la gestión pública bajo la
-          metodología GESA.</p>
-      </div>
-
       <div class="certificate-container animate-in">
         <div class="certificate-preview holographic-glare" id="certificateContent">
           <div class="cert-watermark" id="certWatermark">GESA</div>
@@ -433,12 +460,38 @@
   <button class="scroll-top-btn" id="scrollTopBtn" title="Volver arriba">↑</button>
   
   <!-- Toast System Container -->
+  <!-- Diagnostic Monitor (Sovereign Safety) -->
+  <script>
+    window.onerror = function(msg, url, line) {
+      if (window.showToast) window.showToast(`🚨 ERROR SISTÉMICO: ${msg} (Línea ${line})`, 'error');
+      console.error("ULTRA_TRUTH ERROR:", msg, "at", url, ":", line);
+      return false;
+    };
+    window.onunhandledrejection = function(event) {
+      if (window.showToast) window.showToast(`🚨 FALLO DE PROMESA: ${event.reason}`, 'error');
+      console.error("PROMISE_CRASH:", event.reason);
+    };
+  </script>
+  <!-- ═══ CONSTITUTION MODAL ═══ -->
+  <div id="constitutionModal" class="profession-modal" style="display: none; z-index: 11000;">
+    <div class="decoder-container" style="max-width: 800px; max-height: 80vh; overflow-y: auto;">
+      <div class="decoder-kicker">S-SOT INMUTABLE</div>
+      <h2 class="decoder-title">Constitución Técnica Antigravity</h2>
+      <div id="constitutionContent" class="glass-card" style="padding: 20px; text-align: left; font-family: 'Space Grotesk', sans-serif; line-height: 1.6; font-size: 0.9rem; color: var(--text);">
+        Cargando reglas maestras...
+      </div>
+      <div class="decoder-actions" style="margin-top: 20px;">
+        <button class="gl-btn gl-btn-primary" id="closeConstitutionBtn">Entendido</button>
+      </div>
+    </div>
+  </div>
+
   <div id="toast-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 10000; pointer-events: none;"></div>
 
-  <script type="module" src="src/js/app.js"></script>
-  <script src="src/js/dna_components.js?v=2"></script>
-  <script src="src/js/sovereign_ui.js"></script>
-  <script src="src/core/secret-terminal.js"></script>
+  <script type="module" src="src/js/app.js?v=32.11"></script>
+  <script src="src/js/dna_components.js?v=32.11"></script>
+
+  <script src="src/core/secret-terminal.js?v=32.11"></script>
 </body>
 
 </html>

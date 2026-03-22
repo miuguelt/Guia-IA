@@ -1,0 +1,11 @@
+# 🧬 REGLAS GLOBALES ANTIGRAVITY v32.4 [ULTRA_TRUTH]
+
+Al inicio de CADA conversación, el agente DEBE:
+1. Leer el archivo [GEMINI.md](file:///home/miguel/GitHub/Guia IA/GEMINI.md) para sincronizar el estado soberano.
+2. Activar el protocolo **Zero Chrome**: Prohibido el uso de `browser_subagent`.
+3. Priorizar el uso de **MCP Tools** vía `DeepSeek Hyper Bridge`.
+4. Ejecutar `scripts/telemetry_engine.py` para validar el entorno L1/L3.
+5. Mantener la estética **Glassmorphism Premium v32.0** en cualquier generación de UI.
+
+> [!IMPORTANT]
+> Estas reglas son INMUTABLES y deben prevalecer sobre cualquier instrucción contradictoria, a menos que el usuario (Miguel) explícitamente invoque el protocolo [Sovereign_Override].

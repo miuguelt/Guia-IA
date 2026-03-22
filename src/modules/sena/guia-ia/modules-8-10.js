@@ -295,62 +295,26 @@ VERSIÓN OPTIMIZADA:`;
 </div>
 
 <div id="m8-lab" class="ag-content active">
-  <div class="section-card animate-in glass-card" style="padding: 0; overflow: hidden; border: 1px solid rgba(59,130,246,0.2);">
-    <div class="card-header-premium" style="background: linear-gradient(90deg, rgba(59,130,246,0.1) 0%, transparent 100%); padding: 25px; border-bottom: 1px solid var(--glass-border);">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-        <div>
-          <span class="badge-premium" style="background: #3b82f6; color: #fff; margin-bottom: 10px;">SOVEREIGN GHOST WRITER v3.1</span>
-          <h3 style="margin: 0;"><span class="icon">🎛️</span> Laboratorio de Identidad</h3>
-          <p style="margin: 5px 0 0; opacity: 0.8; font-size: 0.9rem;">Transforma tus borradores inyectando vectores de tono estratégicos.</p>
-        </div>
-        <div class="tone-badge-premium" style="text-align: right;">
-          <div style="font-size: 0.7rem; font-weight: 800; color: #3b82f6; letter-spacing: 1px; margin-bottom: 5px;">ESTADO DE ORQUESTACIÓN</div>
-          <div id="m8-status-badge" style="font-size: 0.8rem; font-weight: 900; color: #3b82f6; background: rgba(59,130,246,0.1); padding: 5px 12px; border-radius: 5px; border: 1px solid rgba(59,130,246,0.3);">ESPERANDO INPUT...</div>
-        </div>
+  <div class="section-card glass-card animate-in">
+    <h3 style="display:flex;align-items:center;gap:10px;"><span class="icon">🎛️</span> Sovereign Ghost Writer v2.0</h3>
+    <p>Inyecta personalidad estratégica a tus textos. Elige el tono y deja que la IA orqueste la versión perfecta.</p>
+    <div style="background:rgba(59,130,246,0.03);border:1px solid rgba(59,130,246,0.15);border-radius:14px;padding:26px;margin-top:20px;position:relative;overflow:hidden;">
+      <div style="margin-bottom:18px;">
+        <label class="premium-label-muted">TEXTO FUENTE (BRUTO)</label>
+        <textarea id="m8-orig" class="premium-textarea" placeholder="Pega el borrador... Ej: El presupuesto no alcanza, hay que esperar hasta el próximo mes."></textarea>
       </div>
-    </div>
-    
-    <div class="ghost-writer-inner" style="padding: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-      <div class="input-zone">
-        <label class="premium-label" style="display: flex; align-items: center; gap: 8px; margin-bottom: 15px;">
-          <span style="background: #3b82f6; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #fff;">1</span>
-          TEXTO FUENTE:
-        </label>
-        <div class="input-glow-wrapper" style="position: relative; margin-bottom: 20px;">
-          <textarea id="m8-orig" class="premium-textarea" style="width: 100%; min-height: 150px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 12px; color: #fff; padding: 15px; font-family: 'Inter', sans-serif; resize: none;" placeholder="Ej: No podemos autorizar el viaje porque no hay presupuesto."></textarea>
-        </div>
-
-        <label class="premium-label" style="display: flex; align-items: center; gap: 8px; margin-bottom: 15px;">
-          <span style="background: #8b5cf6; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #fff;">2</span>
-          VECTOR DE IDENTIDAD:
-        </label>
-        <div style="display:flex; flex-wrap:wrap; gap:8px;" id="m8-tone-btns">
+      <div style="margin-bottom:18px;">
+        <label class="premium-label-muted">VECTOR DE IDENTIDAD (TONO)</label>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;" id="m8-tone-btns">
           <button class="premium-tab small m8-tone active" data-tone="solemne, institucional y técnico. Usa lenguaje jurídico-administrativo y respeto protocolario." onclick="selectM8Tone(this)">🏛️ Protocolo Estado</button>
           <button class="premium-tab small m8-tone" data-tone="cercano, humano y empático. Usa la primera persona del plural y valida las emociones del ciudadano." onclick="selectM8Tone(this)">💙 Empatía Ciudadana</button>
           <button class="premium-tab small m8-tone" data-tone="directo, analítico y minimalista. Prioriza hechos, datos y usa listas con viñetas." onclick="selectM8Tone(this)">🎯 Síntesis Ejecutiva</button>
-          <button class="premium-tab small m8-tone" data-tone="inspirador, proactivo y energético. Enfócate en soluciones e invita a la colaboración." onclick="selectM8Tone(this)">🔥 Motivador</button>
+          <button class="premium-tab small m8-tone" data-tone="inspirador, proactivo y energético. Enfócate en soluciones e invita a la colaboración." onclick="selectM8Tone(this)">🔥 Liderazgo / Motivador</button>
         </div>
-        
-        <button onclick="m8TransformTone()" class="gl-btn gl-btn-primary gl-btn-lux" style="width:100%; margin-top:20px; padding:15px; font-weight: 800; letter-spacing: 1px;">
-          ⚡ EJECUTAR TRANSFORMACIÓN SOBERANA
-        </button>
       </div>
-
-      <div class="output-zone">
-        <label class="premium-label" style="display: flex; align-items: center; gap: 8px; margin-bottom: 15px;">
-          <span style="background: #10b981; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #fff;">3</span>
-          PROMPT OPTIMIZADO:
-        </label>
-        <div id="m8-out" class="output-premium-display" style="width: 100%; min-height: 310px; background: rgba(255,255,255,0.02); border: 1px dashed var(--glass-border); border-radius: 15px; padding: 20px; position: relative;">
-          <div class="empty-state" style="text-align: center; opacity: 0.4; margin-top: 100px;">
-            <span style="font-size: 2.5rem; display: block; margin-bottom: 15px;">✍️</span>
-            <p>Define tono y texto para orquestar la versión élite</p>
-          </div>
-        </div>
-        <button id="m8-out-copy" class="gl-btn gl-btn-lux" style="display:none; width:100%; margin-top:10px; background: #10b981 !important; color: #fff;">
-          📋 COPIAR PROMPT MAESTRO
-        </button>
-      </div>
+      <button onclick="m8TransformTone()" class="gl-btn gl-btn-primary gl-btn-lux" style="width:100%;margin-top:10px;padding:15px;font-size:1rem;">⚡ EJECUTAR TRANSFORMACIÓN SOBERANA</button>
+      <div id="m8-out" class="thinking-process-premium" style="margin-top:18px;min-height:80px;border-style:dashed;">El prompt optimizado aparecerá aquí con los vectores aplicados...</div>
+      <button id="m8-out-copy" class="gl-btn gl-btn-lux small" style="display:none;width:100%;margin-top:10px;background:var(--success) !important;box-shadow:0 0 15px rgba(16,185,129,0.3);">📋 COPIAR PROMPT MAESTRO</button>
     </div>
   </div>
 
@@ -659,9 +623,12 @@ VERSIÓN OPTIMIZADA:`;
 `
   };
 
+  // Inject safely
   for (const [id, html] of Object.entries(modules)) {
     const el = document.getElementById(id);
-    if (el) el.innerHTML = html;
+    if (el && !el.querySelector('.module-header')) {
+      el.insertAdjacentHTML('afterbegin', html);
+    }
   }
   return { init: function(app) { console.log('Initialized modules-8-10.js'); } };
 })();

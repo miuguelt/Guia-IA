@@ -171,18 +171,6 @@ window.GuiaModules['module-6'] = window.GuiaModules['module-7'] = (function() {
    MÓDULO 6 — IA PARA IMÁGENES Y DISEÑO VISUAL
    ══════════════════════════════════════════════════════════════ */
 'module-6': `
-<style>
-  .m6-prompt-studio { background: linear-gradient(135deg, rgba(16,185,129,0.05), rgba(0,0,0,0.2)); border: 1px solid #10b981; border-radius: 16px; padding: 24px; margin: 20px 0; }
-  .m6-style-pill { display: inline-block; padding: 6px 14px; border-radius: 20px; border: 1px solid #10b981; color: #10b981; font-size: 0.75rem; cursor: pointer; margin: 4px; transition: all 0.2s; }
-  .m6-style-pill:hover, .m6-style-pill.active { background: #10b981; color: #000; font-weight: 700; }
-  .m6-output-box { background: #050a0e; border: 1px dashed #10b981; border-radius: 12px; padding: 20px; min-height: 80px; margin-top: 15px; font-style: italic; font-size: 0.9rem; color: #a7f3d0; line-height: 1.6; }
-  .m6-tool-badge { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; font-size: 0.8rem; cursor: pointer; transition: all 0.25s; text-decoration: none; color: inherit; }
-  .m6-tool-badge:hover { border-color: #10b981; background: rgba(16,185,129,0.08); transform: translateY(-2px); }
-  .m6-quiz-opt { padding: 12px 18px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 10px; cursor: pointer; font-size: 0.85rem; margin: 6px 0; transition: all 0.2s; }
-  .m6-quiz-opt:hover { border-color: var(--primary); }
-  .m6-quiz-opt.correct { border-color: #10b981; background: rgba(16,185,129,0.1); color: #10b981; }
-  .m6-quiz-opt.wrong { border-color: #ef4444; background: rgba(239,68,68,0.08); color: #ef4444; }
-</style>
 
 <div class="module-header premium-header">
   <div class="module-number gamer-badge">Módulo 6 — Nivel Creativo</div>
@@ -351,15 +339,6 @@ window.GuiaModules['module-6'] = window.GuiaModules['module-7'] = (function() {
    MÓDULO 7 — IA PARA PRESENTACIONES
    ══════════════════════════════════════════════════════════════ */
 'module-7': `
-<style>
-  .m7-slide-preview { background:#1a1a2e;border:1px solid #2563eb;border-radius:12px;padding:20px;margin:10px 0;position:relative;min-height:120px; }
-  .m7-slide-num { position:absolute;top:10px;right:15px;font-size:0.7rem;opacity:0.5; }
-  .m7-slide-title { font-size:1.1rem;font-weight:700;color:#60a5fa;margin-bottom:8px; }
-  .m7-slide-body { font-size:0.8rem;opacity:0.8;line-height:1.5; }
-  .m7-tool-row { display:flex;align-items:center;gap:15px;padding:16px;border:1px solid var(--border);border-radius:12px;margin:10px 0;transition:all 0.2s;cursor:pointer; }
-  .m7-tool-row:hover { border-color:var(--primary);background:rgba(var(--primary-rgb),0.04); }
-  .m7-badge-free { background:rgba(16,185,129,0.15);color:#10b981;padding:3px 10px;border-radius:20px;font-size:0.7rem;font-weight:700; }
-</style>
 
 <div class="module-header premium-header">
   <div class="module-number gamer-badge">Módulo 7 — Presentaciones IA</div>
@@ -535,9 +514,12 @@ window.GuiaModules['module-6'] = window.GuiaModules['module-7'] = (function() {
   };
 
   // Inject modules
+  // Inject safely
   for (const [id, html] of Object.entries(modules)) {
     const el = document.getElementById(id);
-    if (el) el.innerHTML = html;
+    if (el && !el.querySelector('.module-header')) {
+      el.insertAdjacentHTML('afterbegin', html);
+    }
   }
   return { init: function(app) { console.log('Initialized modules-6-7.js'); } };
 })();

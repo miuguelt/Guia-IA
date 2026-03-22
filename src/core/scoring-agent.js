@@ -127,7 +127,6 @@ class ScoringAgent {
       </div>
     `).join('');
   }
-  }
 
   showFeedback(msg, type) {
     const container = document.getElementById('agent-feedback-container');
@@ -144,7 +143,7 @@ class ScoringAgent {
     let i = 0;
     const speed = 20; // ms per char
 
-    function typeWriter() {
+    const typeWriter = () => {
       if (i < msg.length) {
         txtElement.innerHTML += msg.charAt(i);
         i++;
@@ -155,7 +154,7 @@ class ScoringAgent {
           setTimeout(() => notification.remove(), 500);
         }, 4000);
       }
-    }
+    };
     typeWriter();
   }
 }

@@ -2,20 +2,19 @@ window.GuiaModules = window.GuiaModules || {};
 window.GuiaModules['module-antigravity'] = (function() {
   /* ═══════════════════════════════════════════
      MÓDULO BONUS: Antigravity AI (Agente Soberano)
-     Versión "Titan Supreme" — DNA v31.4 [ULTIMATE]
+     Versión "Titan Supreme" — DNA v32.4 [ULTIMATE]
      ═══════════════════════════════════════════ */
   const agHTML = `
-  const agHTML = `
-<div class="m-ag-container" style="--ag-primary: var(--primary); --ag-secondary: var(--success); --ag-accent: var(--warning);">
-  <div class="module-header premium-header">
-    <div class="module-number gamer-badge">TITAN SUPREME</div>
-    <h2 class="module-title glow-text">🛡️ <span style="color:var(--primary);">Antigravity Academy:</span> El Ojo del Titán</h2>
-    <p class="module-description">Construye orquestaciones perfectas y audita tu constitución para la soberanía total.</p>
+<div class="m-ag-container animate-in" style="--ag-primary: var(--primary); --ag-secondary: var(--success); --ag-accent: var(--warning);">
+  <div class="module-header premium-header animate-in">
+    <div class="badge-titan" style="margin-bottom: 20px;">TITAN SUPREME</div>
+    <h2 class="module-title text-gradient-primary">🛡️ Antigravity Academy: El Ojo del Titán <span class="v-badge">v32.4</span></h2>
+    <p class="m-pa-note">Construye orquestaciones perfectas y audita tu constitución para la soberanía total.</p>
   </div>
 
-  <div class="m-ag-hero glass-card">
-    <div style="font-size:0.76rem; font-weight:800; color:var(--primary-light); margin-bottom:8px;">MAPA MENTAL DEL MÓDULO</div>
-    <h3 style="margin:0 0 8px; color:#fff;">Antigravity no enseña a “hablar con IA”; enseña a gobernar agentes.</h3>
+  <div class="m-ag-hero glass-card-ultra animate-in" style="padding: 24px; border-radius: 16px; margin-bottom: 24px;">
+    <div style="font-size:0.76rem; font-weight:800; color:var(--primary); margin-bottom:10px; font-family: var(--font-mono);">MAPA MENTAL DEL MÓDULO</div>
+    <h3 style="margin:0 0 10px; color:#fff; font-family: 'Space Grotesk';">Antigravity no enseña a “hablar con IA”; enseña a gobernar agentes.</h3>
     <p style="margin:0; color:var(--text-main); line-height:1.8; opacity:0.9;">La diferencia importante es esta: un chat responde; un agente ejecuta dentro de límites, herramientas y memoria. Por eso este módulo no va de prompts bonitos, sino de constituciones, workflows, handoffs, auditoría y trazabilidad.</p>
     <div class="m-ag-chip-row">
       <span class="m-ag-chip">Constituciones</span>
@@ -28,57 +27,38 @@ window.GuiaModules['module-antigravity'] = (function() {
   </div>
 
   <div class="ag-tabs">
-    <button class="premium-tab active" data-tab="tab-stepbystep">🛤️ Paso a Paso</button>
-    <button class="premium-tab" data-tab="tab-concept">📚 Conceptos</button>
-    <button class="premium-tab" data-tab="tab-mcp">🔌 MCP Tools</button>
-    <button class="premium-tab" data-tab="tab-cases">🧭 Casos</button>
-    <button class="premium-tab" data-tab="tab-config">🗂️ Configuración</button>
-    <button class="premium-tab" data-tab="tab-vguide">🖼️ Guía Visual</button>
-    <button class="premium-tab" data-tab="tab-wb">⛓️ Constructor</button>
-    <button class="premium-tab" data-tab="tab-audit">🛡️ Auditoría</button>
-    <button class="premium-tab" data-tab="tab-handoff">🧬 Handoff</button>
-    <button class="premium-tab" data-tab="tab-lab">⚡ Laboratorio</button>
-    <button class="premium-tab" data-tab="tab-rgen">🛠️ Generador</button>
-    <button class="premium-tab" data-tab="tab-projects">🌐 Proyectos</button>
-    <button class="premium-tab" data-tab="tab-ref">📖 Referencia</button>
-    <button class="premium-tab" data-tab="tab-workshop">🏆 Reto Final</button>
-    <button class="premium-tab" data-tab="tab-estrategia">🎯 Estrategia Real</button>
-  </div>
-
-  </div>
-
-  <div class="ag-tabs">
-    <button class="premium-tab active" data-tab="tab-stepbystep">🛤️ Paso a Paso</button>
-    <button class="premium-tab" data-tab="tab-concept">📚 Conceptos</button>
-    <button class="premium-tab" data-tab="tab-mcp">🔌 MCP Tools</button>
-    <button class="premium-tab" data-tab="tab-cases">🧭 Casos</button>
-    <button class="premium-tab" data-tab="tab-config">🗂️ Configuración</button>
-    <button class="premium-tab" data-tab="tab-vguide">🖼️ Guía Visual</button>
-    <button class="premium-tab" data-tab="tab-wb">⛓️ Constructor</button>
-    <button class="premium-tab" data-tab="tab-audit">🛡️ Auditoría</button>
-    <button class="premium-tab" data-tab="tab-handoff">🧬 Handoff</button>
-    <button class="premium-tab" data-tab="tab-lab">⚡ Laboratorio</button>
-    <button class="premium-tab" data-tab="tab-rgen">🛠️ Generador</button>
-    <button class="premium-tab" data-tab="tab-projects">🌐 Proyectos</button>
-    <button class="premium-tab" data-tab="tab-ref">📖 Referencia</button>
-    <button class="premium-tab" data-tab="tab-workshop">🏆 Reto Final</button>
-    <button class="premium-tab" data-tab="tab-estrategia">🎯 Estrategia Real</button>
+    <button class="tab-btn active" data-tab="tab-stepbystep">🛤️ Paso a Paso</button>
+    <button class="tab-btn" data-tab="tab-concept">📚 Conceptos</button>
+    <button class="tab-btn" data-tab="tab-mcp">🔌 MCP Tools</button>
+    <button class="tab-btn" data-tab="tab-cases">🧭 Casos</button>
+    <button class="tab-btn" data-tab="tab-config">🗂️ Configuración</button>
+    <button class="tab-btn" data-tab="tab-vguide">🖼️ Guía Visual</button>
+    <button class="tab-btn" data-tab="tab-wb">⛓️ Constructor</button>
+    <button class="tab-btn" data-tab="tab-audit">🛡️ Auditoría</button>
+    <button class="tab-btn" data-tab="tab-handoff">🧬 Handoff</button>
+    <button class="tab-btn" data-tab="tab-lab">⚡ Laboratorio</button>
+    <button class="tab-btn" data-tab="tab-rgen">🛠️ Generador</button>
+    <button class="tab-btn" data-tab="tab-projects">🌐 Proyectos</button>
+    <button class="tab-btn" data-tab="tab-ref">📖 Referencia</button>
+    <button class="tab-btn" data-tab="tab-workshop">🏆 Reto Final</button>
+    <button class="tab-btn" data-tab="tab-estrategia">🎯 Estrategia Real</button>
+    <button class="tab-btn" data-tab="tab-practica">🚀 Proyecto Web Pro</button>
   </div>
 
   <!-- CONTENT TABS -->
   <div id="tab-stepbystep" class="ag-content active">
-    <div class="m-ag-card animate-in">
-        <h3 style="color:var(--ag-primary); display:flex; align-items:center; gap:10px;">
-            <span style="background:var(--ag-primary); color:#000; padding:2px 8px; border-radius:4px; font-size:0.7rem;">PRO</span> 
+    <div class="m-ag-card glass-card-ultra animate-in" style="padding: 24px; border-radius: 16px;">
+        <h3 style="color:var(--ag-primary); display:flex; align-items:center; gap:12px; font-family: 'Space Grotesk';">
+            <span class="badge-titan" style="font-size:0.65rem;">PRO</span> 
             Ruta de Maestría Antigravity
         </h3>
-        <p style="font-size:0.9rem; color:#8b949e;">Sigue estos 5 pasos inmutables para replicar el entorno de un agente soberano de alto rendimiento.</p>
+        <p style="font-size:0.9rem; color:#94a3b8; font-family: 'Outfit';">Sigue estos 5 pasos inmutables para replicar el entorno de un agente soberano de alto rendimiento.</p>
         
-        <div class="step-roadmap" style="position:relative; margin-top:30px; padding-left:40px; border-left:2px solid rgba(88,166,255,0.2);">
+        <div class="step-roadmap" style="position:relative; margin-top:30px; padding-left:40px; border-left:2px solid rgba(255,255,255,0.1);">
             
             <!-- Paso 1 -->
             <div class="roadmap-item" style="margin-bottom:30px; position:relative;">
-                <div style="position:absolute; left:-51px; top:0; width:20px; height:20px; background:#161b22; border:2px solid var(--ag-primary); border-radius:50%; z-index:2; display:flex; align-items:center; justify-content:center; font-size:0.6rem; font-weight:bold;">1</div>
+                <div style="position:absolute; left:-51px; top:0; width:22px; height:22px; background:var(--ma-bg); border:2px solid var(--ag-primary); border-radius:50%; z-index:2; display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:bold; color: var(--ag-primary);">1</div>
                 <h4 style="margin:0 0 10px; color:#c9d1d9;">Paso 1: El Despertar del Agente</h4>
                 <p style="font-size:0.8rem; color:#8b949e;">Entiende que Antigravity no es un chat, es un ejecutor con memoria. No le pidas cosas, asígnale tareas.</p>
                 <div style="background:rgba(255,255,255,0.02); padding:12px; border-radius:8px; border:1px solid #333; margin-top:10px;">
@@ -159,17 +139,17 @@ window.GuiaModules['module-antigravity'] = (function() {
           <p style="font-size:0.8rem; color:#8b949e; margin:0;">Tarea normal con chat: “resume este PDF”. Tarea de agente: “lee el PDF, identifica riesgos, clasifícalos por prioridad, y entrega una tabla ejecutiva siguiendo este formato y estas reglas”. Ese salto es lo que enseña este módulo.</p>
         </div>
         <div class="m-ag-grid-3" style="margin-top:16px;">
-          <div class="m-ag-panel">
-            <h4 style="margin:0 0 8px; color:#fff;">Piensa en roles</h4>
-            <p style="margin:0; font-size:0.8rem; color:#8b949e;">Un agente funciona mejor cuando sabe quién es, qué puede hacer y qué no debe tocar.</p>
+          <div class="m-ag-panel glass-card-premium">
+            <h4 style="margin:0 0 10px; color:#fff; font-family: 'Space Grotesk';">Piensa en roles</h4>
+            <p style="margin:0; font-size:0.85rem; color:#94a3b8;">Un agente funciona mejor cuando sabe quién es, qué puede hacer y qué no debe tocar.</p>
           </div>
-          <div class="m-ag-panel">
-            <h4 style="margin:0 0 8px; color:#fff;">Piensa en etapas</h4>
-            <p style="margin:0; font-size:0.8rem; color:#8b949e;">Investigar, analizar, ejecutar y cerrar no deberían mezclarse sin control.</p>
+          <div class="m-ag-panel glass-card-premium">
+            <h4 style="margin:0 0 10px; color:#fff; font-family: 'Space Grotesk';">Piensa en etapas</h4>
+            <p style="margin:0; font-size:0.85rem; color:#94a3b8;">Investigar, analizar, ejecutar y cerrar no deberían mezclarse sin control.</p>
           </div>
-          <div class="m-ag-panel">
-            <h4 style="margin:0 0 8px; color:#fff;">Piensa en pruebas</h4>
-            <p style="margin:0; font-size:0.8rem; color:#8b949e;">Si una regla no puede validarse con ejemplos reales, aún no está lista para producción.</p>
+          <div class="m-ag-panel glass-card-premium">
+            <h4 style="margin:0 0 10px; color:#fff; font-family: 'Space Grotesk';">Piensa en pruebas</h4>
+            <p style="margin:0; font-size:0.85rem; color:#94a3b8;">Si una regla no puede validarse con ejemplos reales, aún no está lista para producción.</p>
           </div>
         </div>
     </div>
@@ -179,29 +159,99 @@ window.GuiaModules['module-antigravity'] = (function() {
     <div class="m-ag-card animate-in">
         <h3>🔌 MCP: El Model Context Protocol</h3>
         <p>Los MCPs son el puente de comunicación entre el modelo y las herramientas. Gracias a ellos, el agente puede dejar de “imaginar” acciones y pasar a <b>consultar</b>, <b>leer</b>, <b>buscar</b> o <b>ejecutar</b>.</p>
+        
+        <h4 style="color:#58a6ff; margin-top:24px; font-family:'Space Grotesk';">Catálogo de MCPs Esenciales</h4>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-top:16px;">
           <div style="background:rgba(255,255,255,0.03); border:1px solid #333; border-radius:10px; padding:14px;">
-            <b style="color:#58a6ff;">Shell / Terminal</b>
+            <b style="color:#58a6ff;">💻 Shell / Terminal</b>
             <p style="font-size:0.78rem; color:#8b949e; margin:8px 0 0;">Para inspeccionar archivos, correr comandos, validar scripts o revisar un proyecto real.</p>
           </div>
           <div style="background:rgba(255,255,255,0.03); border:1px solid #333; border-radius:10px; padding:14px;">
-            <b style="color:#58a6ff;">Search / Web</b>
+            <b style="color:#58a6ff;">🔍 Search / Web</b>
             <p style="font-size:0.78rem; color:#8b949e; margin:8px 0 0;">Para buscar normativa, documentación, estados actuales o validar datos temporales.</p>
           </div>
           <div style="background:rgba(255,255,255,0.03); border:1px solid #333; border-radius:10px; padding:14px;">
-            <b style="color:#58a6ff;">Files / Workspace</b>
+            <b style="color:#58a6ff;">📁 Files / Workspace</b>
             <p style="font-size:0.78rem; color:#8b949e; margin:8px 0 0;">Para leer, editar y producir entregables con contexto real del proyecto.</p>
           </div>
+          <div style="background:rgba(255,255,255,0.03); border:1px solid #333; border-radius:10px; padding:14px;">
+            <b style="color:#10b981;">🗄️ SQLite / DBs</b>
+            <p style="font-size:0.78rem; color:#8b949e; margin:8px 0 0;">Para conectar agentes a bases de datos locales y permitirles consultar esquemas estructurales.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:1px solid #333; border-radius:10px; padding:14px;">
+            <b style="color:#f59e0b;">🧠 Memory / Persistencia</b>
+            <p style="font-size:0.78rem; color:#8b949e; margin:8px 0 0;">Motor de gráficos de conocimiento. Permite recordar usuarios, código y reglas entre sesiones.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:1px solid #333; border-radius:10px; padding:14px;">
+            <b style="color:#c9d1d9;">🌐 Puppeteer / Browser</b>
+            <p style="font-size:0.78rem; color:#8b949e; margin:8px 0 0;">Permite al agente interactuar con páginas, raspar datos y probar renders en vivo.</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03); border:1px solid #333; border-radius:10px; padding:14px;">
+            <b style="color:#a855f7;">🐙 Git / GitHub</b>
+            <p style="font-size:0.78rem; color:#8b949e; margin:8px 0 0;">Para leer repositorios completos, crear ramas, revisar PRs y hacer commits programáticos.</p>
+          </div>
         </div>
-        <div style="margin-top:16px; font-size:0.8rem; color:#c9d1d9; line-height:1.8; background:#0d1117; border:1px solid #30363d; border-radius:10px; padding:14px;">
-          <b style="color:#79c0ff;">Regla práctica:</b> si la respuesta depende de un archivo, una web o una acción real, necesitas una herramienta. Si solo depende de redactar o transformar texto ya dado, puede bastar el chat.
+
+        <div style="margin-top:24px; padding:16px; background:rgba(88,166,255,0.05); border:1px solid rgba(88,166,255,0.2); border-radius:12px;">
+            <h4 style="color:#79c0ff; margin:0 0 12px; font-family:'Space Grotesk';">🛑 Configuración de MCPs en Windows (Claude / Cursor / Cline)</h4>
+            <p style="font-size:0.85rem; color:#c9d1d9; margin-bottom:16px;">El error más frecuente en Windows es usar <code>npx</code> en lugar de <code>npx.cmd</code>.<br>Sigue estos pasos en tu archivo <code>claude_desktop_config.json</code>:</p>
+            
+            <div style="display:flex; flex-direction:column; gap:12px;">
+                <!-- SQLite -->
+                <div style="background:#010409; padding:12px; border-radius:8px; border:1px solid #30363d; position:relative;">
+                    <div style="font-size:0.75rem; font-weight:bold; color:#10b981; margin-bottom:8px;">✅ SQLite (Conexión a DB local)</div>
+                    <pre style="margin:0; font-size:0.75rem; color:#79c0ff; font-family:var(--font-mono); overflow-x:auto;">"sqlite": {
+  "command": "npx.cmd",
+  "args": ["-y", "@modelcontextprotocol/server-sqlite", "C:\\ruta\\a\\tu\\base.db"]
+}</pre>
+                    <button style="position:absolute; top:12px; right:12px; background:rgba(255,255,255,0.1); border:none; color:#fff; border-radius:4px; padding:4px 8px; font-size:0.65rem; cursor:pointer;" onclick="agCopy(this, '&quot;sqlite&quot;: {\\n  &quot;command&quot;: &quot;npx.cmd&quot;,\\n  &quot;args&quot;: [&quot;-y&quot;, &quot;@modelcontextprotocol/server-sqlite&quot;, &quot;C:\\\\\\\\ruta\\\\\\\\a\\\\\\\\tu\\\\\\\\base.db&quot;]\\n}')">📋 Copiar JSON</button>
+                </div>
+                
+                <!-- Git -->
+                <div style="background:#010409; padding:12px; border-radius:8px; border:1px solid #30363d; position:relative;">
+                    <div style="font-size:0.75rem; font-weight:bold; color:#a855f7; margin-bottom:8px;">✅ Git / Terminal Avanzada</div>
+                    <pre style="margin:0; font-size:0.75rem; color:#79c0ff; font-family:var(--font-mono); overflow-x:auto;">"git": {
+  "command": "npx.cmd",
+  "args": ["-y", "@modelcontextprotocol/server-git"]
+}</pre>
+                    <button style="position:absolute; top:12px; right:12px; background:rgba(255,255,255,0.1); border:none; color:#fff; border-radius:4px; padding:4px 8px; font-size:0.65rem; cursor:pointer;" onclick="agCopy(this, '&quot;git&quot;: {\\n  &quot;command&quot;: &quot;npx.cmd&quot;,\\n  &quot;args&quot;: [&quot;-y&quot;, &quot;@modelcontextprotocol/server-git&quot;]\\n}')">📋 Copiar JSON</button>
+                </div>
+
+                <!-- Memory -->
+                <div style="background:#010409; padding:12px; border-radius:8px; border:1px solid #30363d; position:relative;">
+                    <div style="font-size:0.75rem; font-weight:bold; color:#f59e0b; margin-bottom:8px;">✅ Memory (Persistencia CAL-P)</div>
+                    <pre style="margin:0; font-size:0.75rem; color:#79c0ff; font-family:var(--font-mono); overflow-x:auto;">"memory": {
+  "command": "npx.cmd",
+  "args": ["-y", "@modelcontextprotocol/server-memory"]
+}</pre>
+                    <button style="position:absolute; top:12px; right:12px; background:rgba(255,255,255,0.1); border:none; color:#fff; border-radius:4px; padding:4px 8px; font-size:0.65rem; cursor:pointer;" onclick="agCopy(this, '&quot;memory&quot;: {\\n  &quot;command&quot;: &quot;npx.cmd&quot;,\\n  &quot;args&quot;: [&quot;-y&quot;, &quot;@modelcontextprotocol/server-memory&quot;]\\n}')">📋 Copiar JSON</button>
+                </div>
+                
+                <!-- Brave Search -->
+                <div style="background:#010409; padding:12px; border-radius:8px; border:1px solid #30363d; position:relative;">
+                    <div style="font-size:0.75rem; font-weight:bold; color:#58a6ff; margin-bottom:8px;">✅ Brave Search (Búsqueda Web)</div>
+                    <pre style="margin:0; font-size:0.75rem; color:#79c0ff; font-family:var(--font-mono); overflow-x:auto;">"brave-search": {
+  "command": "npx.cmd",
+  "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+  "env": {
+    "BRAVE_API_KEY": "TU_API_KEY_AQUI"
+  }
+}</pre>
+                    <button style="position:absolute; top:12px; right:12px; background:rgba(255,255,255,0.1); border:none; color:#fff; border-radius:4px; padding:4px 8px; font-size:0.65rem; cursor:pointer;" onclick="agCopy(this, '&quot;brave-search&quot;: {\\n  &quot;command&quot;: &quot;npx.cmd&quot;,\\n  &quot;args&quot;: [&quot;-y&quot;, &quot;@modelcontextprotocol/server-brave-search&quot;],\\n  &quot;env&quot;: {\\n    &quot;BRAVE_API_KEY&quot;: &quot;TU_API_KEY_AQUI&quot;\\n  }\\n}')">📋 Copiar JSON</button>
+                </div>
+            </div>
+            <div style="margin-top:14px; font-size:0.75rem; color:#8b949e;">💡 <b>Pro Tip:</b> Para servidores que requieren Python (ej. fetch u otros), usa <code>"command": "uvx"</code> si tienes instalada la librería <code>uv</code>, o la ruta absoluta a Python.</div>
         </div>
-        <div class="m-ag-terminal" id="terminal-mcp-u">Esperando señal del Bridge...</div>
+
+        <div style="margin-top:20px; font-size:0.8rem; color:#c9d1d9; line-height:1.8; background:#0d1117; border:1px solid #30363d; border-radius:10px; padding:14px;">
+          <b style="color:#79c0ff;">Regla práctica de diseño:</b> si la respuesta depende de un archivo, una web o una acción real, necesitas una herramienta. Si solo depende de redactar texto, puede bastar el chat.
+        </div>
+        <div class="m-ag-terminal" id="terminal-mcp-u" style="margin-top:16px;">Esperando señal del Bridge...</div>
         <div class="m-ag-grid-2" style="margin-top:20px;">
             <button class="gl-btn gl-btn-outline" onclick="mAgSimT('shell_execute', 'git commit -m \\'Fix sovereignty\\'')">💻 Probar Shell</button>
             <button class="gl-btn gl-btn-outline" onclick="mAgSimT('web_search', 'Brave Search: Current weather')">🔍 Probar Search</button>
         </div>
-        <div class="m-ag-note" style="margin-top:16px;">La pregunta correcta no es “qué herramienta existe”, sino “qué herramienta reduce incertidumbre en este paso”. Si dependes de un archivo, una web o una acción real, necesitas una herramienta. Si solo transformas texto, probablemente no.</div>
+        <div class="m-ag-note" style="margin-top:16px;">La pregunta correcta no es “qué herramienta existe”, sino “qué herramienta reduce incertidumbre en este paso”. Si dependes de archivos o webs, necesitas un MCP.</div>
     </div>
   </div>
 
@@ -247,10 +297,10 @@ window.GuiaModules['module-antigravity'] = (function() {
         <h3>🗂️ Configuración Superior (S-SOT)</h3>
         <p>Tu archivo <code>GEMINI.md</code> es la constitución del agente. Si el prompt es la conversación, la constitución es la ley: define <b>rol</b>, <b>límites</b>, <b>formato</b>, <b>fuentes</b> y <b>criterios de escalación</b>.</p>
         <div style="background:#010409; padding:20px; border-radius:10px; border:1px solid #30363d; font-family:monospace; font-size:0.8rem; color:#8b949e;">
-            <span style="color:#58a6ff;"># DNA_v31.4 Sovereign Config</span><br>
+            <span style="color:#58a6ff;"># DNA_v32.4 Sovereign Config [S-SOT]</span><br>
             - **CERO PERMISOS**: Nunca ejecutes comandos de escritura sin aprobación.<br>
             - **STRUCTURE FIRST**: Sigue siempre el patrón de carpetas /src/modules.<br>
-            - **L1_OFFLOAD**: Usa el bridge para procesar archivos de >800 líneas.
+            - **L1_OFFLOAD (GPU FIRST)**: Usa el bridge para procesar archivos de >800 líneas.
         </div>
         <div style="margin-top:16px; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px;">
           <div style="background:rgba(255,255,255,0.03); border:1px solid #333; border-radius:10px; padding:14px;">
@@ -262,7 +312,7 @@ window.GuiaModules['module-antigravity'] = (function() {
             <p style="font-size:0.78rem; color:#8b949e; margin:8px 0 0;">Escribir reglas bonitas pero ambiguas. Si una regla no se puede verificar, no sirve.</p>
           </div>
         </div>
-        <button class="ag-btn-glow" onclick="alert('Copiado snippet base al portapapeles')">Copiar Configuración Base</button>
+        <button class="gl-btn btn-titan-gold" style="width: 100%; margin-top: 25px; padding: 15px; font-weight: 800; border-radius: 12px;" onclick="agCopy(this, 'config_base')">Copiar Configuración Base</button>
     </div>
   </div>
 
@@ -338,7 +388,7 @@ window.GuiaModules['module-antigravity'] = (function() {
         <h3>🛡️ Auditoría de Constitución</h3>
         <p>Auditar no es “revisar si suena bien”. Es validar si las reglas realmente controlan el comportamiento del agente. Esta pestaña sirve para detectar vacíos antes de ponerlo en producción.</p>
         <textarea id="audit-area-u" class="premium-textarea" style="height:150px;" placeholder="Pega tus reglas aquí..."></textarea>
-        <button class="ag-btn-glow" onclick="mAgAuditRules()">Ejecutar Auditoría</button>
+        <button class="gl-btn btn-titan-gold" style="width: 100%; margin-top: 20px; padding: 15px; font-weight: 800; border-radius: 12px;" onclick="mAgAuditRules()">Ejecutar Auditoría</button>
         <div id="audit-res-u" style="margin-top:15px; display:none;"></div>
         <div style="margin-top:16px; background:rgba(255,255,255,0.03); border:1px solid #333; border-radius:10px; padding:14px; color:#8b949e; font-size:0.8rem; line-height:1.8;">
           Revisa especialmente estas 4 cosas: <b>qué puede hacer</b>, <b>qué no puede hacer</b>, <b>cómo debe responder</b> y <b>qué hace cuando no sabe</b>.
@@ -482,7 +532,7 @@ window.GuiaModules['module-antigravity'] = (function() {
         </div>
         <p style="font-weight:bold;">Pregunta de verificación: ¿Cuál es el archivo principal de reglas inmutables?</p>
         <input type="text" id="ws-ans-u" class="premium-textarea" placeholder="Pista: GEMINI...">
-        <button class="ag-btn-glow" onclick="mAgFinalU()">FINALIZAR MAESTRÍA</button>
+        <button class="gl-btn btn-titan-gold" style="width: 100%; margin-top: 25px; padding: 18px; font-size: 1.1rem; font-weight: 900; border-radius: 14px;" onclick="mAgFinalU()">FINALIZAR MAESTRÍA</button>
     </div>
   </div>
 
@@ -560,9 +610,9 @@ Eres el Dr. [NOMBRE], abogado especialista en Derecho Administrativo y Contratac
         </li>
       </ul>
 
-      <div style="background:linear-gradient(135deg,#10b981,#059669); color:#fff; border-radius:8px; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; margin-top:16px; font-weight:800;">
-        <span>🏆 XP Ganado: Estrategia 1</span>
-        <span id="ag-xp-count">0 / 200 XP</span>
+      <div style="background:linear-gradient(135deg,#10b981,#059669); color:#fff; border-radius:12px; padding:12px 20px; display:flex; align-items:center; justify-content:space-between; margin-top:24px; font-weight:800; box-shadow: 0 4px 15px rgba(16,185,129,0.25);">
+        <span>🏆 TOTAL XP GANADO</span>
+        <span id="ag-xp-count" style="font-family: 'Space Grotesk', sans-serif;">0 / 200 XP</span>
       </div>
 
       <!-- Estrategia 2: La Tríada de Proyectos -->
@@ -588,8 +638,75 @@ Eres el Dr. [NOMBRE], abogado especialista en Derecho Administrativo y Contratac
           </div>
         </div>
 
-        <button class="ag-btn-glow" style="margin-top:0; background:linear-gradient(135deg,#f59e0b,#d97706);" onclick="mAgHandoffPro(); this.disabled=true; this.textContent='Orquestación Iniciada...'">⚡ SIMULAR ORQUESTACIÓN DE LA TRÍADA</button>
+        <button class="gl-btn btn-titan-primary animate-pulse" style="width:100%; margin-top:20px; padding:20px; font-size: 1.15rem; font-weight: 900; border-radius: 16px; letter-spacing: 1px; box-shadow: 0 10px 25px rgba(245,158,11,0.2);" onclick="mAgHandoffPro(); this.disabled=true; this.textContent='Orquestación Iniciada...'">⚡ SIMULAR ORQUESTACIÓN DE LA TRÍADA</button>
       </div>
+    </div>
+  </div>
+
+  <div id="tab-practica" class="ag-content">
+    <div class="m-ag-card animate-in">
+      <div style="background:linear-gradient(135deg,rgba(168,85,247,0.1),transparent); border:1px solid rgba(168,85,247,0.3); border-radius:10px; padding:16px; margin-bottom:18px;">
+        <div style="background:var(--ag-accent); color:#000; padding:3px 12px; border-radius:20px; font-size:0.7rem; font-weight:800; display:inline-block; margin-bottom:8px;">🚀 EJERCICIO AVANZADO · Nivel 1</div>
+        <p style="font-size:1rem; font-weight:800; color:#a855f7; margin:0 0 6px;">Orquestación de Proyecto Web Multifile</p>
+        <p style="font-size:0.82rem; color:#8b949e; margin:0;">📋 Situación: Has dejado de ser un principiante. Ahora vas a construir un ecosistema web real: con **diseño separado de la lógica** y **generación de imágenes profesionales**. Este ejercicio te enseña a manejar una estructura de archivos profesional (HTML, CSS, JS) y a usar placeholders de alta calidad para que tu web parezca hecha por una agencia de diseño.</p>
+      </div>
+
+      <h4 style="color:#a855f7; margin:0 0 12px;">🏗️ La Tríada del Desarrollador: El "Mega-Prompt" de Arquitectura</h4>
+      <p style="font-size:0.8rem; color:#8b949e; margin-bottom:14px;">Este prompt no solo pide código; pide una **Arquitectura de Proyecto**. Define la separación de responsabilidades y la integración de recursos externos dinámicos.</p>
+      
+      <div style="margin-bottom:14px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span style="font-size:0.8rem; font-weight:700; color:#c9d1d9;">📝 Prompt de Proyecto Profesional</span>
+          <button style="background:rgba(168,85,247,0.1); border:1px solid rgba(168,85,247,0.3); color:#a855f7; padding:5px 12px; border-radius:6px; font-size:0.72rem; font-weight:700; cursor:pointer;" onclick="agCopy(this,'prompt_web_practica')">📋 Copiar Prompt de Proyecto</button>
+        </div>
+        <pre id="ag-prompt-web" style="background:#010409; border:1px solid #30363d; border-radius:8px; padding:14px; font-size:0.73rem; color:#3fb950; line-height:1.7; overflow-x:auto; margin:0; white-space:pre-wrap;">Actúa como un Senior Full-Stack AI Architect. Diseña un proyecto web profesional (Multi-Archivo) para mi marca personal.
+
+REGLAS ESTRUCTURALES:
+1. Divide el código en 3 bloques CLAROS: (A) index.html, (B) style.css, (C) main.js.
+2. En el HTML, vincula correctamente los archivos externos mediante etiquetas '&lt;link rel="stylesheet" href="style.css"&gt;' y '&lt;script src="main.js" defer&gt;&lt;/script&gt;'.
+3. DISEÑO: Estilo Dark Glassmorphism Premium. Usa gradientes profundos, bordes semitransparentes y desenfoque (blur 20px).
+4. IMÁGENES: Usa la API de Unsplash (https://images.unsplash.com/photo-...) con parámetros de búsqueda automáticos para: (1) Un avatar profesional de gestión, (2) Una imagen de fondo de oficina moderna y (3) Iconos de servicios tecnológicos.
+
+SECCIONES REQUERIDAS (MÁXIMO DETALLE):
+- Hero: Con mi nombre, cargo y un efecto de degradado animado en el texto.
+- Sobre mí: Con una imagen lateral estilo 'circular-glass mask'.
+- Habilidades (Skills): Barras de progreso interactivas con colores neón.
+- Testimonios: Mínimo 2 tarjetas con opacidad degradada y fotos de personas ficticias.
+- Formulario de Contacto: Con inputs modernos que brillan al enfocarlos.
+- Footer: Con enlaces sociales simulados y copyright dinámico.
+
+LÓGICA (JavaScript):
+- Implementa un 'Smooth Scroll' para la navegación.
+- Agrega un observador de intersección (Intersection Observer) para que las secciones aparezcan con un efecto 'Fade-In Up' conforme bajo por la página.
+- El formulario debe tener una validación sencilla que muestre un mensaje de '¡Enviado con éxito!' usando una alerta personalizada estilo Toast.
+
+Entrega los 3 bloques de código de forma impecable y listos para ser guardados en una carpeta común.</pre>
+      </div>
+
+      <h4 style="color:#a855f7; margin:20px 0 10px;">✅ Ejecución de Proyecto (Nivel Pro)</h4>
+      <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+        <li style="display:flex; gap:12px; padding:12px; border:1px solid rgba(255,255,255,0.06); border-radius:8px; cursor:pointer;" onclick="agkCheck(this,100,50)">
+          <div style="width:20px; height:20px; border:2px solid #475569; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.65rem; margin-top:2px;">✓</div>
+          <div style="flex:1; color:#8b949e;"><p style="font-weight:700; font-size:0.85rem; color:#c9d1d9; margin:0 0 4px;">Paso 1: Genera el Ecosistema</p><p style="font-size:0.78rem; margin:0;">Pega el Mega-Prompt en tu IA favorita. Asegúrate de que te entregue los 3 bloques de código por separado.</p></div>
+          <span style="font-size:0.7rem; font-weight:800; color:#10b981; flex-shrink:0;">+50 XP</span>
+        </li>
+        <li style="display:flex; gap:12px; padding:12px; border:1px solid rgba(255,255,255,0.06); border-radius:8px; cursor:pointer;" onclick="agkCheck(this,101,60)">
+          <div style="width:20px; height:20px; border:2px solid #475569; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.65rem; margin-top:2px;">✓</div>
+          <div style="flex:1; color:#8b949e;"><p style="font-weight:700; font-size:0.85rem; color:#c9d1d9; margin:0 0 4px;">Paso 2: Organiza tu carpeta de Producción</p><p style="font-size:0.78rem; margin:0;">Crea una carpeta nueva en tu escritorio llamada <code>proyecto-guia-ia</code>. Dentro, crea 3 archivos de texto (Bloc de notas) con los nombres exactos: <code>index.html</code>, <code>style.css</code> y <code>main.js</code>.</p></div>
+          <span style="font-size:0.7rem; font-weight:800; color:#10b981; flex-shrink:0;">+60 XP</span>
+        </li>
+        <li style="display:flex; gap:12px; padding:12px; border:1px solid rgba(255,255,255,0.06); border-radius:8px; cursor:pointer;" onclick="agkCheck(this,102,70)">
+          <div style="width:20px; height:20px; border:2px solid #475569; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.65rem; margin-top:2px;">✓</div>
+          <div style="flex:1; color:#8b949e;"><p style="font-weight:700; font-size:0.85rem; color:#c9d1d9; margin:0 0 4px;">Paso 3: Ensamblaje y Despliegue Local</p><p style="font-size:0.78rem; margin:0;">Pega cada bloque de código en su archivo correspondiente y guarda. <b style="color:#58a6ff">¡Asegúrate de que las extensiones sean reales (nada de .txt)!</b> Abre <code>index.html</code> en tu navegador y disfruta de una web dinámica que busca sus propias imágenes en internet.</p></div>
+          <span style="font-size:0.7rem; font-weight:800; color:#10b981; flex-shrink:0;">+70 XP</span>
+        </li>
+      </ul>
+      
+      <div style="margin-top:14px; background:rgba(168,85,247,0.05); border:1px solid rgba(168,85,247,0.2); border-radius:10px; padding:14px;">
+        <b style="color:#a855f7;">Aprendizaje Estratégico</b>
+        <p style="font-size:0.78rem; color:#c9d1d9; margin:8px 0 0;">Has pasado de "pedir un favor a un chat" a **dirigir una infraestructura tecnológica**. Separar archivos permite que el agente trabaje mejor cada módulo, reduce errores y te prepara para integrar herramientas más complejas (APIs, Bases de Datos, Servidores). Has dejado de ser un usuario para convertirte en un **Orquestador**.</p>
+      </div>
+
     </div>
   </div>
 
@@ -599,14 +716,21 @@ Eres el Dr. [NOMBRE], abogado especialista en Derecho Administrativo y Contratac
 </div>
 `;
 
-  return {
+  const antigravityInstance = {
     init: function(app) {
-      const parent = document.getElementById('module-antigravity');
-      if (!parent) return;
-      parent.innerHTML = agHTML;
+      console.log('Antigravity Sovereign v32.4 [TITAN_SYNCED]');
+      const target = document.getElementById('module-antigravity');
+      if (target && !target.querySelector('.module-header')) {
+        target.insertAdjacentHTML('afterbegin', agHTML);
+        setupAgHandlers(target);
+      }
+    }
+  };
+
+  function setupAgHandlers(parent) {
 
       // Tabs Logic
-      const tabs = parent.querySelectorAll('.premium-tab');
+      const tabs = parent.querySelectorAll('.tab-btn');
       const contents = parent.querySelectorAll('.ag-content');
       tabs.forEach(t => t.addEventListener('click', () => {
         tabs.forEach(x => x.classList.remove('active'));
@@ -614,13 +738,33 @@ Eres el Dr. [NOMBRE], abogado especialista en Derecho Administrativo y Contratac
         t.classList.add('active');
         const target = parent.querySelector('#' + t.dataset.tab);
         if (target) target.classList.add('active');
+
+        // NEW: Load GEMINI.md from global app state
+        if (t.dataset.tab === 'tab-audit') {
+          const area = document.getElementById('audit-area-u');
+          if (area && !area.value) {
+            area.value = window.app?.constitution || '';
+          }
+        }
       }));
 
       // Kit Antigravity Estrategia Real
       window.agCopy = function(btn, type) {
         let text = type;
-        if (type === 'gemini_tpl') text = document.getElementById('ag-gemini-tpl')?.innerText || '';
-        navigator.clipboard.writeText(text).catch(() => {});
+        if (type === 'gemini_tpl' || type === 'config_base' || type === 'prompt_web_practica') {
+          if (type === 'config_base') {
+            navigator.clipboard.writeText(window.app?.constitution || '');
+          } else if (type === 'prompt_web_practica') {
+             text = document.getElementById('ag-prompt-web')?.innerText || '';
+             navigator.clipboard.writeText(text);
+          } else {
+             text = document.getElementById('ag-gemini-tpl')?.innerText || '';
+             navigator.clipboard.writeText(text);
+          }
+        } else {
+          navigator.clipboard.writeText(text);
+        }
+        
         const orig = btn.textContent;
         btn.textContent = '✅ Copiado';
         btn.style.color = '#10b981';
@@ -628,14 +772,22 @@ Eres el Dr. [NOMBRE], abogado especialista en Derecho Administrativo y Contratac
           btn.textContent = orig;
           btn.style.color = '';
         }, 2500);
-        if (app) app.addXP(5);
+        if (window.app) window.app.addXP(5);
       };
 
-      let agkDone = new Set();
-      let agkXP = 0;
       window.agkCheck = function(el, idx, xp) {
-        if (agkDone.has(idx)) return;
-        agkDone.add(idx);
+        const moduleId = 'module-antigravity';
+        // We use a prefix for sub-tasks in Antigravity to avoid collision if desired, 
+        // or just use completedModules for the module itself. 
+        // For sub-tasks, we'll use a local storage key linked to the app.
+        const subTaskKey = `ag-task-${idx}`;
+        const doneTasks = JSON.parse(localStorage.getItem('ag-subtasks-v32') || '[]');
+        
+        if (doneTasks.includes(subTaskKey)) return;
+        
+        doneTasks.push(subTaskKey);
+        localStorage.setItem('ag-subtasks-v32', JSON.stringify(doneTasks));
+
         el.style.borderColor = 'rgba(16,185,129,0.4)';
         el.style.background = 'rgba(16,185,129,0.05)';
         const chk = el.querySelector('div');
@@ -645,7 +797,7 @@ Eres el Dr. [NOMBRE], abogado especialista en Derecho Administrativo y Contratac
           chk.style.color = '#fff';
         }
         agkXP += xp;
-        if (app) app.addXP(xp);
+        if (window.app) window.app.addXP(xp);
         const c = document.getElementById('ag-xp-count');
         if (c) c.textContent = agkXP + ' / 200 XP';
       };
@@ -675,7 +827,7 @@ Eres el Dr. [NOMBRE], abogado especialista en Derecho Administrativo y Contratac
         if (!area || !res) return;
         const val = area.value;
         res.style.display = 'block';
-        res.innerHTML = val.includes('DNA') ? '<p style="color:#3fb950;">✅ Constitución sólida. Eres un experto.</p>' : '<p style="color:#f85149;">❌ Error: Falta declaración DNA v31.4.</p>';
+        res.innerHTML = val.includes('v32.4') ? '<p style="color:#3fb950;">✅ Constitución sólida. Eres un experto.</p>' : '<p style="color:#f85149;">❌ Error: Falta declaración DNA v32.4.</p>';
       };
 
       window.mAgHandoffPro = function() {
@@ -695,7 +847,7 @@ Eres el Dr. [NOMBRE], abogado especialista en Derecho Administrativo y Contratac
           setTimeout(() => {
             ast.innerText = "✅ Listo.";
             a.style.borderColor = '#333';
-            if (app) app.addXP(100);
+            if (window.app) window.app.addXP(100);
           }, 1000);
         }, 1500);
       };
@@ -706,14 +858,14 @@ Eres el Dr. [NOMBRE], abogado especialista en Derecho Administrativo y Contratac
         const v = ans.value.toLowerCase();
         if (v.includes('gemini.md')) {
           alert("¡MAESTRO DEL TITÁN! +450 XP");
-          if (app) app.addXP(450);
+          if (window.app) window.app.addXP(450);
           document.querySelector('.complete-module-btn')?.click();
         } else {
           alert("Pista: Empieza por G y termina en .md");
         }
       };
 
-      console.log('Antigravity Ultimate v31.4 loaded via init()');
-    }
-  };
+  }
+
+  return antigravityInstance;
 })();

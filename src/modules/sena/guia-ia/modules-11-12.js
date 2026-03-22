@@ -200,12 +200,12 @@ window.GuiaModules['module-11'] = window.GuiaModules['module-12'] = (function() 
   };
 
   window.m12EscapeHtml = function(value) {
-    return String(value)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
+    const s = String(value);
+    return s.split('&').join('&amp;')
+            .split('<').join('&lt;')
+            .split('>').join('&gt;')
+            .split('"').join('&quot;')
+            .split("'").join('&#39;');
   };
 
   window.m12NormalizeText = function(value) {
@@ -314,8 +314,7 @@ window.GuiaModules['module-11'] = window.GuiaModules['module-12'] = (function() 
       const quadrantTasks = window.m12Tasks.filter(t => t.q === q);
       container.innerHTML = quadrantTasks.length
         ? quadrantTasks.map(t => `
-          <div class="m12-task-pill animate-in" style="animation-delay: 0.1s;">
-            <div class="m12-task-main">
+          <div class="m12-task-pill animate-in" style="transition-delay: 0.1s;"><div class="m12-task-main">
               <div class="m12-task-topline">
                 <span class="m12-task-pin">📌</span>
                 <span class="m12-task-text">${window.m12EscapeHtml(t.text)}</span>
@@ -391,15 +390,6 @@ Por favor, analiza mi lista y:
    MÓDULO 11 — ANÁLISIS PROFUNDO CON IA
    ══════════════════════════════════════════════════════════════ */
 'module-11': `
-<style>
-  .m11-drop-zone { border: 2px dashed rgba(16,185,129,0.5); border-radius: 12px; padding: 30px; text-align: center; background: rgba(16,185,129,0.02); transition: all 0.3s; cursor: default; margin-top:15px; }
-  .m11-drop-zone.active { border-color: #10b981; background: rgba(16,185,129,0.1); transform: scale(1.02); }
-  .m11-pdf-icon { font-size: 3rem; margin-bottom: 15px; color: #10b981; }
-  .m11-tool-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 14px; padding: 20px; transition: all 0.25s; }
-  .m11-tool-card:hover { border-color: var(--primary); transform: translateY(-3px); }
-  .m11-chat-bubble { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; margin-bottom: 10px; font-size: 0.85rem; }
-  .m11-chat-bubble.ai { background: rgba(37,99,235,0.1); border-left: 3px solid #2563eb; }
-</style>
 
 <div class="module-header premium-header">
   <div class="module-number gamer-badge">Módulo 11 — Nivel Experto</div>
@@ -559,11 +549,28 @@ Por favor, analiza mi lista y:
         <li>Opcional: Prueba la herramienta de "Audio Overview" para que la IA cree un podcast sobre tu documento.</li>
       </ol>
     </div>
-    <textarea class="premium-textarea" placeholder="Nombra el documento que subiste y describe brevemente qué extrajo la IA que te sorprendió o te resultó útil..."></textarea>
-    <div class="reward-tag" style="margin-top:15px;">+150 XP · Insignia: Analista Maestro 🕵️</div>
-    <button class="gl-btn gl-btn-primary complete-module-btn" data-module="module-11" style="width:100%;margin-top:15px;">✅ Misión Completada — Reclamar Insignia</button>
+      <div class="learning-mission-grid" style="display:grid; gap:12px; margin-top:16px;">
+        <div>
+          <label for="m11-mission-doc" style="display:block; font-weight:700; margin-bottom:6px;">1. Documento analizado</label>
+          <textarea id="m11-mission-doc" class="premium-textarea" placeholder="Indica el nombre o tipo de documento y por qué lo elegiste."></textarea>
+        </div>
+        <div>
+          <label for="m11-mission-question" style="display:block; font-weight:700; margin-bottom:6px;">2. Pregunta clave</label>
+          <textarea id="m11-mission-question" class="premium-textarea" placeholder="Escribe la pregunta exacta que hiciste a la IA para extraer valor del documento."></textarea>
+        </div>
+        <div>
+          <label for="m11-mission-answer" style="display:block; font-weight:700; margin-bottom:6px;">3. Hallazgo o respuesta útil</label>
+          <textarea id="m11-mission-answer" class="premium-textarea" placeholder="Resume la respuesta que obtuviste y por qué fue relevante para tu caso."></textarea>
+        </div>
+        <div>
+          <label for="m11-mission-evidence" style="display:block; font-weight:700; margin-bottom:6px;">4. Evidencia y decisión</label>
+          <textarea id="m11-mission-evidence" class="premium-textarea" placeholder="Anota la página, cita, sección o fuente usada y qué decisión o siguiente acción tomarías con ese hallazgo."></textarea>
+        </div>
+      </div>
+      <div class="reward-tag" style="margin-top:15px;">+150 XP · Insignia: Analista Maestro 🕵️</div>
+      <button class="gl-btn gl-btn-primary complete-module-btn" data-module="module-11" style="width:100%;margin-top:15px;">✅ Misión Completada — Reclamar Insignia</button>
+    </div>
   </div>
-</div>
 
 <div class="module-nav">
   <button class="gl-btn" data-goto="module-10">← Anterior</button>
@@ -575,17 +582,6 @@ Por favor, analiza mi lista y:
    MÓDULO 12 — PROYECTOS Y CRONOGRAMAS
    ══════════════════════════════════════════════════════════════ */
 'module-12': `
-<style>
-  .m12-wbs-card { background: rgba(255,255,255,0.02); border: 1px solid #333; border-left: 4px solid #f59e0b; border-radius: 8px; padding: 12px 16px; margin: 8px 0; font-size: 0.85rem; }
-  .m12-wbs-title { font-weight: 700; color: #fcd34d; margin-bottom: 4px; }
-  .m12-subtask { margin-left: 20px; border-left: 1px solid #444; padding-left: 12px; margin-top: 6px; color: #cbd5e1; }
-  .m12-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-  .m12-quadrant { border-radius: 12px; padding: 15px; min-height: 120px; transition: all 0.2s; }
-  .m12-q1 { background: rgba(239,68,68,0.1); border: 1px solid #ef4444; }
-  .m12-q2 { background: rgba(16,185,129,0.1); border: 1px solid #10b981; }
-  .m12-q3 { background: rgba(245,158,11,0.1); border: 1px solid #f59e0b; }
-  .m12-q4 { background: rgba(100,116,139,0.1); border: 1px solid #64748b; }
-</style>
 
 <div class="module-header premium-header">
   <div class="module-number gamer-badge">Módulo 12 — Nivel PRO</div>
@@ -686,106 +682,6 @@ Responder correos pendientes"
       <div id="m12-summary" class="m12-summary"></div>
     </div>
 
-    <style>
-      .m12-helper-row { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px; }
-      .m12-example-chip {
-        border: 1px solid rgba(255,255,255,0.1);
-        background: rgba(255,255,255,0.04);
-        color: #cbd5e1;
-        border-radius: 999px;
-        padding: 8px 12px;
-        font-size: 0.76rem;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-      .m12-example-chip:hover { background: rgba(99,102,241,0.14); border-color: rgba(99,102,241,0.28); color: #fff; }
-      .m12-toolbar { display:flex; justify-content:space-between; align-items:center; gap:14px; margin-bottom: 18px; flex-wrap:wrap; }
-      .m12-input-tip { color:#94a3b8; font-size:0.78rem; }
-      .m12-summary { display:flex; flex-wrap:wrap; gap:8px; }
-      .m12-summary-chip {
-        padding: 6px 10px;
-        border-radius: 999px;
-        font-size: 0.74rem;
-        font-weight: 700;
-        border: 1px solid rgba(255,255,255,0.08);
-        background: rgba(255,255,255,0.04);
-      }
-      .m12-summary-chip.danger { color:#fca5a5; }
-      .m12-summary-chip.success { color:#86efac; }
-      .m12-summary-chip.warning { color:#fcd34d; }
-      .m12-summary-chip.neutral { color:#a5b4fc; }
-      .m12-matrix-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; perspective: 1000px; }
-      .m12-quadrant-lux { 
-        background: rgba(15, 23, 42, 0.6); 
-        backdrop-filter: blur(20px); 
-        border: 1px solid rgba(255, 255, 255, 0.08); 
-        border-radius: 20px; 
-        padding: 20px; 
-        min-height: 220px; 
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        position: relative;
-        overflow: hidden;
-      }
-      .m12-quadrant-lux:hover { transform: translateY(-5px) scale(1.02); border-color: rgba(255,255,255,0.2); }
-      
-      .m12-q1-lux { border-top: 4px solid #ef4444; }
-      .m12-q1-lux:hover { box-shadow: 0 10px 30px rgba(239, 68, 68, 0.2); }
-      
-      .m12-q2-lux { border-top: 4px solid #10b981; }
-      .m12-q2-lux:hover { box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2); }
-      
-      .m12-q3-lux { border-top: 4px solid #f59e0b; }
-      .m12-q3-lux:hover { box-shadow: 0 10px 30px rgba(245, 158, 11, 0.2); }
-      
-      .m12-q4-lux { border-top: 4px solid #6366f1; }
-      .m12-q4-lux:hover { box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2); }
-      
-      .m12-task-pill { 
-        background: rgba(255,255,255,0.05); 
-        border: 1px solid rgba(255,255,255,0.1); 
-        border-radius: 12px; 
-        padding: 12px; 
-        margin-bottom: 10px; 
-        font-size: 0.8rem; 
-        display: block; 
-        animation: slideInRight 0.3s ease-out forwards;
-      }
-      .m12-task-main { display:flex; flex-direction:column; gap:8px; }
-      .m12-task-topline { display:flex; align-items:flex-start; gap:8px; }
-      .m12-task-text { flex: 1; color: #e2e8f0; line-height:1.45; }
-      .m12-task-meta { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
-      .m12-task-badge {
-        display:inline-flex;
-        align-items:center;
-        padding: 4px 8px;
-        border-radius: 999px;
-        background: rgba(255,255,255,0.06);
-        color:#cbd5e1;
-        font-size:0.68rem;
-        font-weight:800;
-        text-transform:uppercase;
-        letter-spacing:0.4px;
-      }
-      .m12-task-reason { color:#94a3b8; font-size:0.72rem; line-height:1.4; }
-      .m12-task-action { color:#e2e8f0; font-size:0.74rem; line-height:1.45; }
-      .m12-task-remove { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.1rem; opacity: 0.4; transition: 0.2s; }
-      .m12-task-remove:hover { opacity: 1; transform: scale(1.2); }
-      .m12-empty-state {
-        color:#64748b;
-        font-size:0.8rem;
-        border: 1px dashed rgba(255,255,255,0.08);
-        border-radius: 12px;
-        padding: 14px;
-        margin-top: 8px;
-      }
-      
-      @keyframes slideInRight { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
-      
-      .q-icon { font-size: 1.2rem; margin-bottom: 10px; display: block; }
-      @media (max-width: 900px) {
-        .m12-matrix-grid { grid-template-columns: 1fr; }
-      }
-    </style>
 
     <div class="m12-matrix-grid">
       <!-- Q1 -->
@@ -886,9 +782,12 @@ Responder correos pendientes"
 `
   };
 
+  // Inject safely
   for (const [id, html] of Object.entries(modules)) {
     const el = document.getElementById(id);
-    if (el) el.innerHTML = html;
+    if (el && !el.querySelector('.module-header')) {
+      el.insertAdjacentHTML('afterbegin', html);
+    }
   }
   return { init: function(app) { console.log('Initialized modules-11-12.js'); } };
 })();

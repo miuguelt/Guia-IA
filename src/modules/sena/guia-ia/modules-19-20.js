@@ -14,7 +14,7 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
                    "Por medio de la presente se certifica que el Usuario\n"+
                    "ha completado satisfactoriamente los 20 Módulos del\n"+
                    "Programa Avanzado de Productividad AI Institucional.\n\n"+
-                   "Puntos Obtenidos: " + (window.app ? window.app.state.xp : "2850") + " XP\n"+
+                   "Puntos Obtenidos: " + (window.app ? (window.app.xp || window.app.state?.xp || 2850) : "2850") + " XP\n"+
                    "Competencias: CREA, RAG, Privacidad Local, Automatizacion.\n\n"+
                    "Emitido por el Sistema Antigravity Guia IA.\n"+
                    "Fecha: " + new Date().toLocaleDateString() + "\n";
@@ -28,18 +28,86 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
     }, 1500);
   };
 
+  // Ranking Logic
+  window.renderSovereignRanking = async function() {
+    const container = document.getElementById('m20-leaderboard-container');
+    if (!container) return;
+
+    try {
+      // Dynamic API URL detection: If served by Live Server (5500), point to Node Backend (8080)
+      const API_URL = window.location.port === '5500' ? `http://${window.location.hostname}:8080` : '';
+      const resp = await fetch(`${API_URL}/api/leaderboard`);
+      if (!resp.ok) throw new Error('No se pudo conectar con el Ledger');
+      const data = await resp.json();
+      
+      const currentUserName = localStorage.getItem('guia-ia-username');
+
+      let htmlContents = '';
+      data.forEach((user, index) => {
+        const isUser = user.name === currentUserName;
+        const rankClass = index < 3 ? 'rank-' + (index + 1) : '';
+        const userHighlight = isUser ? 'border: 1px solid #eab308; background: rgba(234,179,8,0.05);' : '';
+        
+        htmlContents += `
+          <div class="m20-lb-row ${rankClass}" style="${userHighlight}">
+            <div class="m20-lb-rank">${index + 1}</div>
+            <div class="m20-lb-avatar">${user.avatar || '👤'}</div>
+            <div class="m20-lb-info">
+              <div class="m20-lb-name">${user.name} ${isUser ? '(Tú)' : ''}</div>
+              <div class="m20-lb-title">${user.title || 'Operador'}</div>
+            </div>
+            <div class="m20-lb-score" style="${isUser ? 'color:#eab308;' : ''}">${user.xp} XP</div>
+          </div>
+        `;
+      });
+      container.innerHTML = htmlContents;
+    } catch (e) {
+      console.warn('Backend unavailable, using local simulation');
+      const currentUserName = localStorage.getItem('guia-ia-username') || 'Tú (El Funcionario Elite)';
+      const currentXP = (window.app?.xp || window.app?.state?.xp || 2850);
+      
+      container.innerHTML = `
+        <div class="m20-lb-row rank-1">
+          <div class="m20-lb-rank">1</div>
+          <div class="m20-lb-avatar">🐉</div>
+          <div class="m20-lb-info">
+            <div class="m20-lb-name">Miguel L. (Antigravity Director)</div>
+            <div class="m20-lb-title">Arquitecto Supramind Nivel 99</div>
+          </div>
+          <div class="m20-lb-score">9999 XP</div>
+        </div>
+        <div class="m20-lb-row rank-2" style="border: 1px solid #eab308; background: rgba(234,179,8,0.05);">
+          <div class="m20-lb-rank">2</div>
+          <div class="m20-lb-avatar">👨‍💻</div>
+          <div class="m20-lb-info">
+            <div class="m20-lb-name">${currentUserName}</div>
+            <div class="m20-lb-title">Operador IA Avanzado</div>
+          </div>
+          <div class="m20-lb-score" style="color:#eab308;">${currentXP} XP</div>
+        </div>
+      `;
+    }
+  };
+
   // Observador para actualizar estadísticas finales
   const m20Updater = setInterval(() => {
     const xpEl = document.getElementById('final-total-xp');
     const scoreEl = document.getElementById('m20-user-score');
     const modulesEl = document.getElementById('final-modules-done');
+    const appState = window.app || window.app?.state;
     
-    if (xpEl && window.app && window.app.state) {
-      xpEl.innerText = window.app.state.xp;
-      if (scoreEl) scoreEl.innerText = window.app.state.xp + ' XP';
-      if (modulesEl) modulesEl.innerText = window.app.state.completedModules.length + '/20';
-      // Una vez actualizado, podríamos limpiar el intervalo si no cambia, 
-      // pero mejor dejarlo por si el usuario gana más XP en la misma sesión.
+    if (xpEl && appState) {
+      const currentXP = window.app?.xp || window.app?.state?.xp || 0;
+      xpEl.innerText = currentXP;
+      if (scoreEl) scoreEl.innerText = currentXP + ' XP';
+      if (modulesEl) {
+          const done = window.app?.completedModules?.size || window.app?.state?.completedModules?.length || 0;
+          modulesEl.innerText = done + '/21';
+      }
+    }
+
+    if (typeof window.renderCompetencyReport === 'function' && document.getElementById('m20-strongest')) {
+      window.renderCompetencyReport();
     }
   }, 1000);
 
@@ -49,14 +117,6 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
    MÓDULO 19 — ROLES DEL FUTURO
    ══════════════════════════════════════════════════════════════ */
 'module-19': `
-<style>
-  .m19-role-card { background: rgba(255,255,255,0.02); border: 1px solid #333; border-radius: 12px; padding: 20px; margin-bottom: 15px; position: relative; overflow: hidden; transition: all 0.3s; }
-  .m19-role-card:hover { transform: translateX(5px); border-color: #3b82f6; background: rgba(59,130,246,0.05); }
-  .m19-role-title { font-size: 1.1rem; font-weight: 700; color: #60a5fa; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-  .m19-role-desc { font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin-bottom: 10px; }
-  .m19-role-skill { display: inline-block; background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; color: #94a3b8; margin-right: 5px; margin-bottom: 5px; }
-  .m19-salary { position: absolute; top: 20px; right: 20px; font-family: monospace; color: #10b981; font-weight: 700; background: rgba(16,185,129,0.1); padding: 4px 8px; border-radius: 6px; }
-</style>
 
 <div class="module-header premium-header" style="background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(37,99,235,0.15)); border: 1px solid rgba(59,130,246,0.2);">
   <div class="module-number gamer-badge" style="background:#3b82f6;color:#fff;">Módulo 19 — Visión</div>
@@ -190,28 +250,6 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
    MÓDULO 20 — LEADERBOARD Y CEREMONIA FINAL
    ══════════════════════════════════════════════════════════════ */
 'module-20': `
-<style>
-  .m20-glory-box { background: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23dots)"/></svg>') #050a0e; border: 2px solid #eab308; border-radius: 20px; padding: 40px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 0 40px rgba(234,179,8,0.1); }
-  .m20-glory-box::before { content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%; background:radial-gradient(circle, rgba(234,179,8,0.15) 0%, transparent 50%); animation: rotate 20s linear infinite; pointer-events:none; }
-  @keyframes rotate { 100% { transform: rotate(360deg); } }
-  .m20-stat { display: inline-block; padding: 15px 30px; background: rgba(0,0,0,0.5); border: 1px solid #333; border-radius: 12px; margin: 10px; backdrop-filter: blur(10px); }
-  .m20-stat-num { font-size: 2.5rem; font-weight: 800; color: #fde047; text-shadow: 0 0 10px rgba(234,179,8,0.5); font-family: monospace; }
-  .m20-stat-label { font-size: 0.8rem; color: #cbd5e1; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
-  .m20-leaderboard { margin-top: 30px; text-align: left; background: rgba(0,0,0,0.5); border-radius: 12px; padding: 20px; }
-  .m20-lb-row { display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #333; transition: all 0.2s; }
-  .m20-lb-row:hover { background: rgba(255,255,255,0.02); }
-  .m20-lb-row:last-child { border: none; }
-  .m20-lb-rank { font-size: 1.5rem; font-weight: 800; width: 50px; text-align: center; }
-  .m20-lb-avatar { width: 40px; height: 40px; background: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-right: 15px; }
-  .m20-lb-info { flex: 1; }
-  .m20-lb-name { font-weight: 700; color: #fff; font-size: 1rem; }
-  .m20-lb-title { font-size: 0.75rem; color: #94a3b8; }
-  .m20-lb-score { font-family: monospace; font-size: 1.2rem; color: #10b981; font-weight: 700; }
-  
-  .rank-1 .m20-lb-rank { color: #eab308; } .rank-1 .m20-lb-avatar { background: rgba(234,179,8,0.2); border: 1px solid #eab308; }
-  .rank-2 .m20-lb-rank { color: #94a3b8; } .rank-2 .m20-lb-avatar { background: rgba(148,163,184,0.2); border: 1px solid #94a3b8; }
-  .rank-3 .m20-lb-rank { color: #b45309; } .rank-3 .m20-lb-avatar { background: rgba(180,83,9,0.2); border: 1px solid #b45309; }
-</style>
 
 <div class="m20-glory-box animate-in">
   <div style="font-size:4rem;margin-bottom:10px;text-shadow: 0 0 20px rgba(255,255,255,0.5);">👑</div>
@@ -231,8 +269,12 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
       <div class="m20-stat-label">Puntos de Experiencia (XP)</div>
     </div>
     <div class="m20-stat">
-      <div class="m20-stat-num" id="final-modules-done">20/20</div>
+      <div class="m20-stat-num" id="final-modules-done">0/21</div>
       <div class="m20-stat-label">Módulos Completados</div>
+    </div>
+    <div class="m20-stat">
+      <div class="m20-stat-num" id="m20-user-score">0 XP</div>
+      <div class="m20-stat-label">Dominio Actual</div>
     </div>
   </div>
 
@@ -245,9 +287,33 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
 </div>
 
 <div class="section-card animate-in" style="margin-top:30px;">
-  <h3><span class="icon">🏆</span> Salón de la Fama (Ranking Global Institucional)</h3>
-  <p>Así es como te comparas con el resto de funcionarios que tomaron este curso interactivo.</p>
-  
+  <h3><span class="icon">🧭</span> Reporte Final de Competencias</h3>
+  <p>Este cierre ya no mide solo XP. Resume fortalezas, brechas y en qué módulos conviene repasar antes de la fase final.</p>
+
+  <div class="m20-report-grid">
+    <div class="m20-report-card">
+      <h4>Fortalezas actuales</h4>
+      <div id="m20-strongest"></div>
+      <p class="m20-report-note">Estas son las competencias donde tu evidencia y tu progreso son más sólidos.</p>
+    </div>
+
+    <div class="m20-report-card">
+      <h4>Competencias a reforzar</h4>
+      <div id="m20-weakest"></div>
+      <p class="m20-report-note">No es un fallo; es tu mapa de repaso antes de cerrar el programa.</p>
+    </div>
+
+    <div class="m20-report-card">
+      <h4>Repaso recomendado</h4>
+      <div id="m20-review" class="m20-review-actions"></div>
+      <p class="m20-report-note">Vuelve a estos módulos si quieres llegar mejor preparado a Operación Centauro.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section-card animate-in" style="margin-top:30px;">
+  <h3><span class="icon">🏆</span> Salón de la Fama (Referencia Motivacional)</h3>
+  <p>La comparación con otros usuarios queda como elemento secundario. Lo principal ahora es tu perfil competencial.</p>
   <div class="m20-leaderboard" id="m20-leaderboard-container">
     <div style="padding:40px; text-align:center; color:#94a3b8;">
       <div class="loading-spinner" style="margin-bottom:15px; font-size:2rem;">🧬</div>
@@ -256,70 +322,6 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
   </div>
 </div>
 
-<script>
-  // Dynamic Leaderboard Logic
-  window.renderSovereignRanking = async function() {
-    const container = document.getElementById('m20-leaderboard-container');
-    if (!container) return;
-
-    try {
-      const resp = await fetch('/api/leaderboard');
-      if (!resp.ok) throw new Error('No se pudo conectar con el Ledger');
-      const data = await resp.json();
-      
-      const currentUserName = localStorage.getItem('guia-ia-username');
-
-      let html = '';
-      data.forEach((user, index) => {
-        const isUser = user.name === currentUserName;
-        const rankClass = index < 3 ? 'rank-' + (index + 1) : '';
-        const userHighlight = isUser ? 'border: 1px solid #eab308; background: rgba(234,179,8,0.05);' : '';
-        
-        html += `
-          <div class="m20-lb-row ${rankClass}" style="${userHighlight}">
-            <div class="m20-lb-rank">${index + 1}</div>
-            <div class="m20-lb-avatar">${user.avatar || '👤'}</div>
-            <div class="m20-lb-info">
-              <div class="m20-lb-name">${user.name} ${isUser ? '(Tú)' : ''}</div>
-              <div class="m20-lb-title">${user.title || 'Operador'}</div>
-            </div>
-            <div class="m20-lb-score" style="${isUser ? 'color:#eab308;' : ''}">${user.xp} XP</div>
-          </div>
-        `;
-      });
-      container.innerHTML = html;
-    } catch (e) {
-      console.warn('Backend unavailable, using local simulation');
-      // Fallback in case of local file access without node server
-      container.innerHTML = \`
-        <div class="m20-lb-row rank-1">
-          <div class="m20-lb-rank">1</div>
-          <div class="m20-lb-avatar">🐉</div>
-          <div class="m20-lb-info">
-            <div class="m20-lb-name">Miguel L. (Antigravity Director)</div>
-            <div class="m20-lb-title">Arquitecto Supramind Nivel 99</div>
-          </div>
-          <div class="m20-lb-score">9999 XP</div>
-        </div>
-        <div class="m20-lb-row rank-2" style="border: 1px solid #eab308; background: rgba(234,179,8,0.05);">
-          <div class="m20-lb-rank">2</div>
-          <div class="m20-lb-avatar">👨‍💻</div>
-          <div class="m20-lb-info">
-            <div class="m20-lb-name">\${localStorage.getItem('guia-ia-username') || 'Tú (El Funcionario Elite)'}</div>
-            <div class="m20-lb-title">Operador IA Avanzado</div>
-          </div>
-          <div class="m20-lb-score" style="color:#eab308;">\${window.app?.xp || 2850} XP</div>
-        </div>
-      \`;
-    }
-  };
-
-  // Auto-init on load if Module 20 is already active
-  if (document.getElementById('module-20')?.classList.contains('active')) {
-    window.renderSovereignRanking();
-  }
-</script>
-
 <div style="text-align:center;margin-top:40px;padding-bottom:50px;">
   <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Sena_colombia_logo.svg" alt="SENA" width="100" style="opacity:0.5;filter:grayscale(100%);">
   <p style="font-size:0.8rem;color:#64748b;margin-top:15px;">Módulo Didáctico desarrollado por la Tecnología de Gestión. Antigravity Systems © 2026.</p>
@@ -327,9 +329,18 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
 `
   };
   
+  // Inject safely
   for (const [id, html] of Object.entries(modules)) {
     const el = document.getElementById(id);
-    if (el) el.innerHTML = html;
+    if (el && !el.querySelector('.section-card')) {
+      el.insertAdjacentHTML('afterbegin', html);
+    }
   }
-  return { init: function(app) { console.log('Initialized modules-19-20.js'); } };
+  return { init: function(app) { 
+      console.log('Initialized modules-19-20.js'); 
+      if (document.getElementById('module-20')?.classList.contains('active')) {
+        window.renderSovereignRanking();
+        window.renderCompetencyReport?.();
+      }
+  } };
 })();
