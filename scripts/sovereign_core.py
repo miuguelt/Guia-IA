@@ -6,7 +6,7 @@ import datetime
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 # GLOBAL S-SOT PATH (ULTRA_TRUTH PERSISTENCE)
-ECONOMY_PATH = "/home/miguel/.gemini/antigravity/token_economy.json"
+ECONOMY_PATH = os.path.join(PROJECT_ROOT, "src/data/token_economy.json")
 STATUS_PATH = os.path.join(PROJECT_ROOT, "src/js/sovereign_status.json")
 SESSION_LOG_PATH = os.path.join(PROJECT_ROOT, "src/data/history/session_usage.json")
 
