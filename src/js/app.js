@@ -2339,7 +2339,7 @@ class GuiaIA {
       }
 
       const script = document.createElement('script');
-      script.src = `src/${path}?v=${Date.now()}`;
+      script.src = `/src/${path}?v=${Date.now()}`;
       script.async = true;
       
       script.onload = () => {
