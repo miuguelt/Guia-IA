@@ -17,7 +17,8 @@ if (!fs.existsSync(dataDir)) {
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(__dirname)); // Serve static files from root
+app.use('/src', express.static(path.join(__dirname, 'src'))); // Explicitly serve src
+app.use(express.static(__dirname)); // Fallback static serving from root
 
 let db;
 
