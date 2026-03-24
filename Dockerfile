@@ -24,11 +24,12 @@ COPY . .
 RUN mkdir -p src/data
 
 # Expose the API and Web port
-EXPOSE 8000
+EXPOSE 8020
+ENV PORT=8020
 
 # Healthcheck for Coolify
 HEALTHCHECK --interval=30s --timeout=3s \
-  CMD curl -f http://localhost:8000/health || exit 1
+  CMD curl -f http://localhost:8020/health || exit 1
 
 # Start the Node.js server
 CMD ["npm", "start"]
