@@ -24,7 +24,7 @@
     --neon-glow: 0 0 25px hsla(239, 84%, 67%, 0.4);
     --trans-premium: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
     --trans-subtle: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --blur-std: blur(24px);
+    --blur-std: blur(20px);
     --glass-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
@@ -58,7 +58,7 @@ body {
 }
 
 .subtle-border {
-    border: 0.5px solid var(--glass-border);
+    border: 1px solid var(--glass-border);
 }
 
 .hover-lift {
@@ -75,7 +75,7 @@ body {
     background: var(--glass-bg);
     backdrop-filter: var(--blur-std);
     -webkit-backdrop-filter: var(--blur-std);
-    border: 0.5px solid var(--glass-border);
+    border: 1px solid var(--glass-border);
     border-radius: 20px;
     box-shadow: var(--shadow-lux);
     transition: var(--trans-premium);
@@ -1311,4 +1311,53 @@ body {
 .pedagogy-grid > .section-card {
     margin: 0 !important;
     height: 100%;
+}
+
+/* 🧭 Learning Brief Card (Ruta Formativa) Compact Styles */
+.learning-brief-card {
+    padding: 16px 20px !important;
+    margin-bottom: 30px !important;
+    background: rgba(var(--primary-rgb), 0.05) !important;
+    border-color: rgba(var(--primary-rgb), 0.2) !important;
+}
+
+.learning-brief-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.learning-brief-label {
+    font-size: 0.65rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--primary-light);
+    margin-bottom: 5px;
+}
+
+.learning-brief-grid p {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.learning-brief-badge {
+    font-size: 0.6rem;
+    padding: 3px 10px;
+    background: var(--primary);
+    border-radius: 50px;
+}
+
+.learning-brief-score {
+    font-size: 0.75rem;
+    font-weight: 800;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .learning-brief-grid {
+        grid-template-columns: 1fr;
+    }
 }

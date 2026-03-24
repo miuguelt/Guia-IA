@@ -16,11 +16,21 @@ window.GuiaModules['module-11'] = window.GuiaModules['module-12'] = (function() 
 
   window.m11Ask = function() {
     const sel = document.getElementById('m11-query');
+    const input = document.getElementById('m11-custom-query');
     const hist = document.getElementById('m11-chat-history');
     if (!sel || !hist) return;
     
-    const qText = sel.options[sel.selectedIndex].text;
-    const qVal = sel.value;
+    let qText = '';
+    let qVal = '';
+    
+    if (input && input.value.trim() !== '') {
+      qText = input.value.trim();
+      qVal = 'custom';
+      input.value = '';
+    } else {
+      qText = sel.options[sel.selectedIndex].text;
+      qVal = sel.value;
+    }
     
     hist.innerHTML += '<div class="m11-chat-bubble"><b>Tú:</b> ' + qText + '</div>';
     
@@ -30,6 +40,7 @@ window.GuiaModules['module-11'] = window.GuiaModules['module-12'] = (function() 
       else if(qVal==='q2') ans = 'Según la sección de Riesgos Financieros (Pág 210), el principal riesgo es el recorte de transferencias nacionales, seguido por la fluctuación de la TRM en compras tecnológicas internacionales.';
       else if(qVal==='q3') ans = 'Encontré 4 menciones sobre "teletrabajo":<br>- Pág 12: Como estrategia de bienestar.<br>- Pág 88: Meta de llegar al 30% del personal administrativo.<br>- Pág 140: Presupuesto para dotación de equipos.<br>- Pág 201: Indicador de reducción de huella de carbono.';
       else if(qVal==='q4') ans = 'La Meta 3.1 (Modernización) cuenta con $500M presupuestados y responsables directos (Área TI). La Meta 5.2 (Capacitación en datos) tiene $120M y depende de Talento Humano. Ambas apuntan al Eje Digital, pero operan en diferentes áreas misionales.';
+      else ans = 'Analizando tu pregunta específica basada en los documentos... Entiendo que buscas detalles sobre "' + qText + '". El documento menciona que el 40% de los procesos actuales serán digitalizados para el 2026 bajo el marco del Plan Nacional de Desarrollo.';
       
       hist.innerHTML += '<div class="m11-chat-bubble ai"><b>Asistente IA:</b> ' + ans + ' <br><br><small style="color:#10b981;">[Fuente: Páginas analizadas en 0.4s]</small></div>';
       hist.scrollTop = hist.scrollHeight;
@@ -58,7 +69,7 @@ window.GuiaModules['module-11'] = window.GuiaModules['module-12'] = (function() 
       return;
     }
     const c = m11QuizData[m11Cur];
-    container.innerHTML = '<div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:20px;"><div style="font-size:0.7rem;opacity:0.6;margin-bottom:10px;">Escenario '+(m11Cur+1)+'/'+m11QuizData.length+'</div><p style="font-size:0.95rem;font-weight:500;margin-bottom:20px;">'+c.sc+'</p><div style="display:flex;flex-direction:column;gap:10px;">'+c.opts.map(o=>'<button onclick="chkM11(this,\''+o+'\')" class="gl-btn gl-btn-outline" style="text-align:left;">'+o+'</button>').join('')+'</div><div id="m11-exp" style="display:none;margin-top:15px;padding:12px;background:rgba(37,99,235,0.1);border-radius:8px;font-size:0.85rem;"></div></div>';
+    container.innerHTML = '<div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:20px;"><div style="font-size:0.7rem;opacity:0.6;margin-bottom:10px;">Escenario '+(m11Cur+1)+'/'+m11QuizData.length+'</div><p style="font-size:0.95rem;font-weight:500;margin-bottom:20px;">'+c.sc+'</p><div style="display:flex;flex-direction:column;gap:10px;">'+c.opts.map(o=>'<button onclick="window.chkM11(this,\''+o+'\')" class="gl-btn gl-btn-outline" style="text-align:left;">'+o+'</button>').join('')+'</div><div id="m11-exp" style="display:none;margin-top:15px;padding:12px;background:rgba(37,99,235,0.1);border-radius:8px;font-size:0.85rem;"></div></div>';
   }
 
   window.chkM11 = function(el, ans) {
@@ -69,15 +80,16 @@ window.GuiaModules['module-11'] = window.GuiaModules['module-12'] = (function() 
       el.style.background = 'rgba(16,185,129,0.1)';
       m11Score++;
       window.m11Score = m11Score; // Sync with global
-      window.showToast('+30 XP ¡Correcto!', 'success');
+      window.showToast('¡Correcto! ' + c.ans + ' es la mejor opción.', 'success');
     } else {
       el.style.borderColor = '#ef4444';
       el.style.background = 'rgba(239,68,68,0.1)';
+      window.showToast('No es exacto. Revisa la explicación técnica.', 'error');
     }
     const exp = document.getElementById('m11-exp');
     if (exp) {
       exp.style.display = 'block';
-      exp.innerHTML = '💡 ' + c.exp + '<br><br><button class="gl-btn small" style="margin-top:8px;" onclick="m11Next()">Siguiente →</button>';
+      exp.innerHTML = '💡 ' + c.exp + '<br><br><button class="gl-btn small" style="margin-top:8px;" onclick="window.m11Next()">Siguiente →</button>';
     }
   };
 
@@ -100,36 +112,49 @@ window.GuiaModules['module-11'] = window.GuiaModules['module-12'] = (function() 
     if (loader) loader.innerHTML = '<div style="text-align:center;padding:20px;color:#f59e0b;">Analizando dependencias y generando fases... ⚙️</div>';
     
     setTimeout(() => {
+      let phases = [
+        { t: "Fase 1: Configuración", d: "Definición de objetivos y alcance inicial." },
+        { t: "Fase 2: Ejecución", d: "Desarrollo de las actividades principales." },
+        { t: "Fase 3: Control", d: "Seguimiento de hitos y calidad." },
+        { t: "Fase 4: Cierre", d: "Entrega final y lecciones aprendidas." }
+      ];
+
+      const pLower = proj.toLowerCase();
+      if (pLower.includes('evento') || pLower.includes('feria') || pLower.includes('capacitacion')) {
+        phases = [
+          { t: "Fase 1: Logística y Scouting", d: "Reserva de espacios y confirmación de ponentes." },
+          { t: "Fase 2: Comunicación y Registro", d: "Difusión masiva y apertura de inscripciones." },
+          { t: "Fase 3: Operación del Evento", d: "Montaje técnico y ejecución de la agenda." },
+          { t: "Fase 4: Post-Evento", d: "Encuestas de satisfacción y reporte de impacto." }
+        ];
+      } else if (pLower.includes('software') || pLower.includes('app') || pLower.includes('sistema')) {
+        phases = [
+          { t: "Fase 1: Requerimientos", d: "Entrevistas con usuarios y definición de flujos." },
+          { t: "Fase 2: Desarrollo/Configuración", d: "Construcción de módulos y base de datos." },
+          { t: "Fase 3: Pruebas (QA)", d: "Testeo de errores y validación de seguridad." },
+          { t: "Fase 4: Despliegue", d: "Capacitación a usuarios y salida a producción." }
+        ];
+      } else if (pLower.includes('auditoria') || pLower.includes('revision') || pLower.includes('control')) {
+        phases = [
+          { t: "Fase 1: Notificación y Datos", d: "Solicitud de información y cronograma de visitas." },
+          { t: "Fase 2: Trabajo de Campo", d: "Entrevistas y recolección de evidencias." },
+          { t: "Fase 3: Hallazgos", d: "Análisis de desviaciones y redacción de pre-informe." },
+          { t: "Fase 4: Informe Final", d: "Recomendaciones y plan de mejoramiento." }
+        ];
+      }
+
       m12PromptRaw = 'Actúa como Project Manager (PMP). Necesito hacer el proyecto: "' + proj + '". Tenemos ' + time + ' y el equipo es: ' + team + '. Divide el proyecto en 4 fases principales. Para cada fase escribe 3 tareas específicas. Entrégalo en formato de lista clara.';
       
       if (loader) {
-        loader.innerHTML = `
-          <div class="m12-wbs-card">
-            <div class="m12-wbs-title">Fase 1: Planificación Inicial</div>
-            <div class="m12-subtask">1.1. Reunión de Kick-off y alineación de objetivos</div>
-            <div class="m12-subtask">1.2. Aprobación de presupuesto estimado</div>
-            <div class="m12-subtask">1.3. Asignación de roles al equipo: ${team}</div>
+        loader.innerHTML = phases.map((p, i) => `
+          <div class="m12-wbs-card" style="border-left:4px solid var(--accent);">
+            <div class="m12-wbs-title">${p.t}</div>
+            <div style="font-size:0.75rem; color:#94a3b8; margin-bottom:8px;">${p.d}</div>
+            <div class="m12-subtask">${i+1}.1. Definir responsables: ${team}</div>
+            <div class="m12-subtask">${i+1}.2. Hito clave del periodo (${time})</div>
+            <div class="m12-subtask">${i+1}.3. Validación de calidad</div>
           </div>
-          <div class="m12-wbs-card">
-            <div class="m12-wbs-title">Fase 2: Ejecución y Logística</div>
-            <div class="m12-subtask">2.1. Contratación de proveedores clave</div>
-            <div class="m12-subtask">2.2. Diseño de materiales y comunicaciones</div>
-            <div class="m12-subtask">2.3. Verificación de infraestructura técnica</div>
-          </div>
-          <div class="m12-wbs-card">
-            <div class="m12-wbs-title">Fase 3: Control y Pruebas</div>
-            <div class="m12-subtask">3.1. Revisión de entregables contra cronograma</div>
-            <div class="m12-subtask">3.2. Simulacro o prueba en seco</div>
-            <div class="m12-subtask">3.3. Resolución de cuellos de botella finales</div>
-          </div>
-          <div class="m12-wbs-card">
-            <div class="m12-wbs-title">Fase 4: Lanzamiento y Cierre</div>
-            <div class="m12-subtask">4.1. Ejecución del proyecto: ${proj}</div>
-            <div class="m12-subtask">4.2. Recopilación de métricas e indicadores</div>
-            <div class="m12-subtask">4.3. Informe final y lecciones aprendidas</div>
-          </div>
-          <div style="font-size:0.8rem;margin-top:10px;color:#10b981;">✅ Simulación completada. El prompt maestro ha sido generado.</div>
-        `;
+        `).join('') + '<div style="font-size:0.8rem;margin-top:10px;color:#10b981;">✅ Personalización dinámica aplicada. El prompt maestro ha sido generado.</div>';
       }
       window.app && window.app.addXP(30);
     }, 1200);
@@ -318,7 +343,7 @@ window.GuiaModules['module-11'] = window.GuiaModules['module-12'] = (function() 
               <div class="m12-task-topline">
                 <span class="m12-task-pin">📌</span>
                 <span class="m12-task-text">${window.m12EscapeHtml(t.text)}</span>
-                <button onclick="m12RemoveTask(${t.id})" class="m12-task-remove" aria-label="Eliminar tarea">×</button>
+                <button onclick="window.m12RemoveTask(${t.id})" class="m12-task-remove" aria-label="Eliminar tarea">×</button>
               </div>
               <div class="m12-task-meta">
                 <span class="m12-task-badge">${quadrantLabels[q]}</span>
@@ -384,6 +409,35 @@ Por favor, analiza mi lista y:
     window.app && window.app.addXP(25);
   };
 
+  window.m12ExportToNotion = function() {
+    if (window.m12Tasks.length === 0) {
+      window.showToast('Primero agrega algunas tareas', 'warning');
+      return;
+    }
+    
+    let md = "# Matriz de Priorización Eisenhower\n\n";
+    const quadrants = {
+      q1: "🔴 1. HACER (Urgente e Importante)",
+      q2: "🟢 2. PROGRAMAR (Importante pero no Urgente)",
+      q3: "🟡 3. DELEGAR (Urgente pero no Importante)",
+      q4: "🔵 4. ELIMINAR (Ni Urgente ni Importante)"
+    };
+    
+    Object.keys(quadrants).forEach(q => {
+      const qTasks = window.m12Tasks.filter(t => t.q === q);
+      md += `## ${quadrants[q]}\n`;
+      if (qTasks.length > 0) {
+        qTasks.forEach(t => md += `- [ ] ${t.text}\n  - *Razón:* ${t.reason}\n  - *Acción:* ${t.action}\n`);
+      } else {
+        md += "- No hay tareas en este cuadrante.\n";
+      }
+      md += "\n";
+    });
+    
+    navigator.clipboard.writeText(md);
+    window.showToast('Markdown para Notion copiado ✨', 'success');
+  };
+
   const modules = {
 
 /* ══════════════════════════════════════════════════════════════
@@ -417,7 +471,7 @@ Por favor, analiza mi lista y:
     <h3><span class="icon">📑</span> Simulador: Chateando con Documentos</h3>
     <p>Experimenta cómo funciona NotebookLM o Claude al subir un PDF largo.</p>
     
-    <div id="m11-drop" class="m11-drop-zone" onclick="m11LoadPDF()">
+    <div id="m11-drop" class="m11-drop-zone" onclick="window.m11LoadPDF()">
       <div class="m11-pdf-icon">📄</div>
       <h4 style="margin:0 0 8px;">Plan_Desarrollo_2024_2028.pdf (250 pág.)</h4>
       <p style="font-size:0.8rem;opacity:0.7;margin:0;">Haz clic para "subir" el documento al simulador</p>
@@ -431,18 +485,23 @@ Por favor, analiza mi lista y:
       <div id="m11-chat-history" style="padding:20px;height:250px;overflow-y:auto;background:#0d1117;">
         <div class="m11-chat-bubble ai"><b>Asistente IA:</b> He analizado el "Plan de Desarrollo 2024-2028". El documento contiene 5 ejes estratégicos, 120 metas y un presupuesto proyectado. ¿Qué te gustaría saber?</div>
       </div>
-      <div style="padding:15px;background:#1a1a2e;border-top:1px solid #333;display:flex;gap:10px;">
-        <select id="m11-query" style="flex:1;padding:10px;background:#050a0e;border:1px solid #444;border-radius:8px;color:#fff;font-size:0.85rem;">
-          <option value="q1">Resume el eje estratégico de Tecnología</option>
-          <option value="q2">¿Cuáles son los riesgos asociados al presupuesto?</option>
-          <option value="q3">Encuentra todas las menciones sobre "teletrabajo"</option>
-          <option value="q4">Compara la meta 3.1 con la meta 5.2</option>
-        </select>
-        <button class="gl-btn gl-btn-primary" onclick="m11Ask()">Preguntar</button>
+      <div style="padding:15px;background:#1a1a2e;border-top:1px solid #333;display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;gap:10px;align-items:center;">
+          <select id="m11-query" style="flex:1;padding:10px;background:#050a0e;border:1px solid #444;border-radius:8px;color:#fff;font-size:0.85rem;">
+            <option value="q1">Resume el eje estratégico de Tecnología</option>
+            <option value="q2">¿Cuáles son los riesgos asociados al presupuesto?</option>
+            <option value="q3">Encuentra todas las menciones sobre "teletrabajo"</option>
+            <option value="q4">Compara la meta 3.1 con la meta 5.2</option>
+          </select>
+          <span style="color:#64748b;font-size:0.7rem;">O</span>
+          <input type="text" id="m11-custom-query" placeholder="Escribe tu propia pregunta..." style="flex:1.5;padding:10px;background:#050a0e;border:1px solid #444;border-radius:8px;color:#fff;font-size:0.85rem;">
+          <button class="gl-btn gl-btn-primary" onclick="window.m11Ask()">Preguntar</button>
+        </div>
+        <p style="font-size:0.65rem;color:#64748b;margin:0;text-align:center;">💡 Tip: Puedes elegir una pregunta prediseñada o escribir una nueva para que la IA la analice.</p>
       </div>
     </div>
     <div class="pista-ia" style="margin-top:20px;">
-      💡 <strong>Aplicación Real:</strong> Herramientas como <b>NotebookLM de Google</b> (gratis) hacen exactamente esto. Sube hasta 50 PDFs y haz preguntas cruzadas sobre todos ellos a la vez.
+      💡 <strong>Aplicación Real:</strong> Herramientas como <b><a href="https://notebooklm.google.com" target="_blank" style="color:var(--primary); text-decoration:underline;">NotebookLM de Google</a></b> (gratis) hacen exactamente esto. Sube hasta 50 PDFs y haz preguntas cruzadas sobre todos ellos a la vez.
     </div>
 
   </div>
@@ -452,7 +511,7 @@ Por favor, analiza mi lista y:
 <div id="m11-claude-projects" class="ag-content">
   <div class="section-card animate-in">
     <h3 style="color:#f59e0b;">🎭 Claude Projects: Tu Biblioteca Inteligente</h3>
-    <p>Mientras que las Gemas son "agentes rápidos", los <b>Proyectos de Claude</b> son bibliotecas de conocimiento. Puedes subir hasta 30 MB de documentos y la IA solo responderá basándose en ellos.</p>
+    <p>Mientras que las Gemas son "agentes rápidos", los <b><a href="https://claude.ai" target="_blank" style="color:#f59e0b; text-decoration:underline;">Proyectos de Claude</a></b> son bibliotecas de conocimiento. Puedes subir hasta 30 MB de documentos y la IA solo responderá basándose en ellos.</p>
     
     <div style="background:rgba(245,158,11,0.05); border:1px solid rgba(245,158,11,0.2); border-radius:12px; padding:20px; margin:20px 0;">
       <h4 style="color:#f59e0b; margin-top:0;">🚀 Ejercicio: El Auditor de Expedientes</h4>
@@ -477,22 +536,22 @@ Por favor, analiza mi lista y:
     <h3><span class="icon">🧰</span> Tu Arsenal de Investigación</h3>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;margin-top:20px;">
       <div class="m11-tool-card" onclick="window.open('https://notebooklm.google.com','_blank')">
-        <h4 style="margin:0 0 8px;color:#2563eb;font-size:1.1rem;">📓 Google NotebookLM</h4>
+        <h4 style="margin:0 0 8px;color:#2563eb;font-size:1.1rem;"><a href="https://notebooklm.google.com" target="_blank" style="color:inherit; text-decoration:underline;">📓 Google NotebookLM</a></h4>
         <p style="font-size:0.8rem;opacity:0.8;">Sube PDFs, txt o URLs. La IA responde basándose <b>únicamente</b> en tus documentos. Cero alucinaciones.</p>
         <span class="m6-tool-badge" style="margin-top:10px;display:inline-block;padding:4px 10px;background:#2563eb22;color:#60a5fa;">100% Gratis</span>
       </div>
       <div class="m11-tool-card" onclick="window.open('https://perplexity.ai','_blank')">
-        <h4 style="margin:0 0 8px;color:#10b981;font-size:1.1rem;">🔍 Perplexity AI</h4>
+        <h4 style="margin:0 0 8px;color:#10b981;font-size:1.1rem;"><a href="https://perplexity.ai" target="_blank" style="color:inherit; text-decoration:underline;">🔍 Perplexity AI</a></h4>
         <p style="font-size:0.8rem;opacity:0.8;">Motor de búsqueda moderno. Encuentra leyes, noticias y datos fiscales con <b>citas exactas</b> y enlaces a las fuentes.</p>
         <span class="m6-tool-badge" style="margin-top:10px;display:inline-block;padding:4px 10px;background:#10b98122;color:#34d399;">Gratis / Pro</span>
       </div>
       <div class="m11-tool-card" onclick="window.open('https://claude.ai','_blank')">
-        <h4 style="margin:0 0 8px;color:#f59e0b;font-size:1.1rem;">🧠 Claude (Anthropic)</h4>
+        <h4 style="margin:0 0 8px;color:#f59e0b;font-size:1.1rem;"><a href="https://claude.ai" target="_blank" style="color:inherit; text-decoration:underline;">🧠 Claude (Anthropic)</a></h4>
         <p style="font-size:0.8rem;opacity:0.8;">La IA con mayor capacidad de lectura. Sube un libro entero o un contrato largo de 100 páginas y lo analizará perfectamente.</p>
         <span class="m6-tool-badge" style="margin-top:10px;display:inline-block;padding:4px 10px;background:#f59e0b22;color:#fbbf24;">Freemium</span>
       </div>
       <div class="m11-tool-card" onclick="window.open('https://chat.deepseek.com','_blank')">
-        <h4 style="margin:0 0 8px;color:#8b5cf6;font-size:1.1rem;">🟣 DeepSeek R1</h4>
+        <h4 style="margin:0 0 8px;color:#8b5cf6;font-size:1.1rem;"><a href="https://chat.deepseek.com" target="_blank" style="color:inherit; text-decoration:underline;">🟣 DeepSeek R1</a></h4>
         <p style="font-size:0.8rem;opacity:0.8;">Motor de razonamiento lógico. Ideal para cruzar datos financieros, analizar normativas complejas o encontrar errores lógicos.</p>
         <span class="m6-tool-badge" style="margin-top:10px;display:inline-block;padding:4px 10px;background:#8b5cf622;color:#a78bfa;">Gratis</span>
       </div>
@@ -527,7 +586,7 @@ Por favor, analiza mi lista y:
     <h3><span class="icon">🎮</span> Investigación Rápida</h3>
     <p>¿Qué herramienta o técnica usarías en estos escenarios laborales?</p>
     <div id="m11-quiz" style="margin-top:20px;">
-      <button class="gl-btn gl-btn-primary" style="width:100%" onclick="initM11Quiz()">🔎 Iniciar Reto</button>
+      <button class="gl-btn gl-btn-primary" style="width:100%" onclick="window.initM11Quiz()">🔎 Iniciar Reto</button>
     </div>
   </div>
 </div>
@@ -538,12 +597,12 @@ Por favor, analiza mi lista y:
     <div class="exercise-header"><span class="exercise-icon">🕵️</span><span class="exercise-title">Misión 11: El Analista Maestro</span></div>
     <div class="preparation-step" style="background: rgba(37,99,235,0.1); border: 1px solid #2563eb; padding: 15px; border-radius: 10px; margin-top: 20px; border-left: 4px solid #2563eb;">
       <h4 style="margin-top: 0; color: #2563eb; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">🛠️ Preparación de la Plataforma</h4>
-      <p style="font-size: 0.8rem; margin-bottom: 0; opacity: 0.9;">Antes de iniciar, abre <b>NotebookLM</b> (notebooklm.google.com) y prepara un documento oficial de tu área (no sensible) en formato PDF.</p>
+      <p style="font-size: 0.8rem; margin-bottom: 0; opacity: 0.9;">Antes de iniciar, abre <b><a href="https://notebooklm.google.com" target="_blank" style="color:#2563eb; text-decoration:underline;">NotebookLM</a></b> (notebooklm.google.com) y prepara un documento oficial de tu área (no sensible) en formato PDF.</p>
     </div>
     <div class="mission-instructions" style="background:rgba(37,99,235,0.05);padding:20px;border-radius:12px;border-left:4px solid #2563eb;margin:20px 0;">
       <strong>🎯 Tu Desafío:</strong>
       <ol style="margin-top:12px;font-size:0.85rem;line-height:2;">
-        <li>Abre <b>NotebookLM</b> (notebooklm.google.com).</li>
+        <li>Abre <b><a href="https://notebooklm.google.com" target="_blank" style="color:#2563eb; text-decoration:underline;">NotebookLM</a></b> (notebooklm.google.com).</li>
         <li>Sube un documento real de tu trabajo (un manual, un decreto, un informe largo) que no sea confidencial.</li>
         <li>Usa el prompt de "Análisis de Riesgos" o "Resumen Ejecutivo".</li>
         <li>Opcional: Prueba la herramienta de "Audio Overview" para que la IA cree un podcast sobre tu documento.</li>
@@ -630,25 +689,47 @@ Por favor, analiza mi lista y:
         </div>
       </div>
       
-      <button onclick="m12GenWBS()" class="gl-btn gl-btn-primary" style="width:100%;background:#f59e0b;color:#000;font-weight:700;">🪄 Autogenerar Estructura (WBS)</button>
+      <button onclick="window.m12GenWBS()" class="gl-btn gl-btn-primary" style="width:100%;background:#f59e0b;color:#000;font-weight:700;">🪄 Autogenerar Estructura (WBS)</button>
     </div>
 
     <div id="m12-wbs-output" style="display:none;margin-top:20px;">
       <h4 style="margin-bottom:15px;">📑 Propuesta de Desglose Generada:</h4>
       <div id="m12-wbs-list"></div>
-      <button class="gl-btn" style="width:100%;margin-top:15px;border-color:#f59e0b;color:#f59e0b;" onclick="m12CopyWBS()">📋 Copiar para pegar en Excel/Project</button>
+      <button class="gl-btn" style="width:100%;margin-top:15px;border-color:#f59e0b;color:#f59e0b;" onclick="window.m12CopyWBS()">📋 Copiar para pegar en Excel/Project</button>
     </div>
   </div>
 </div>
 
 <!-- TAB 2: MATRIZ EISENHOWER + IA [SOVEREIGN v31.4] -->
 <div id="m12-matrix" class="ag-content">
-  <div class="section-card animate-in" style="background: rgba(13, 17, 23, 0.4); border: 1px solid rgba(255, 255, 255, 0.05);">
+  <div class="section-card animate-in" style="background: rgba(13, 17, 23, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); border-radius: 20px;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
       <h3 style="margin:0;"><span class="icon">🧭</span> Matriz de Priorización Sensitiva</h3>
+      
+      <!-- Mini-intro Eisenhower (Glass v32.0 Refinement) -->
+      <div style="display:flex; flex-wrap:wrap; gap:12px; margin: 15px 0; background:rgba(255,255,255,0.03); padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,0.08); backdrop-filter: blur(10px);">
+        <div style="flex:1; min-width:120px; text-align:center; padding: 4px;">
+          <div style="color:#ef4444; font-weight:800; font-size:0.75rem; letter-spacing:0.5px;">1. HAZLO YA</div>
+          <div style="font-size:0.6rem; color:#94a3b8; margin-top:2px;">Urgente + Impacto</div>
+        </div>
+        <div style="flex:1; min-width:120px; text-align:center; padding: 4px; border-left:1px solid rgba(255,255,255,0.1);">
+          <div style="color:#10b981; font-weight:800; font-size:0.75rem; letter-spacing:0.5px;">2. PROGRÁMALO</div>
+          <div style="font-size:0.6rem; color:#94a3b8; margin-top:2px;">No Urgente + Impacto</div>
+        </div>
+        <div style="flex:1; min-width:120px; text-align:center; padding: 4px; border-left:1px solid rgba(255,255,255,0.1);">
+          <div style="color:#f59e0b; font-weight:800; font-size:0.75rem; letter-spacing:0.5px;">3. DELÉGALO</div>
+          <div style="font-size:0.6rem; color:#94a3b8; margin-top:2px;">Urgente + Poco Impacto</div>
+        </div>
+        <div style="flex:1; min-width:120px; text-align:center; padding: 4px; border-left:1px solid rgba(255,255,255,0.1);">
+          <div style="color:#6366f1; font-weight:800; font-size:0.75rem; letter-spacing:0.5px;">4. ELIMÍNALO</div>
+          <div style="font-size:0.6rem; color:#94a3b8; margin-top:2px;">Ni Urgente ni Impacto</div>
+        </div>
+      </div>
+
       <div style="display: flex; gap: 8px;">
-        <button class="gl-btn small" style="border-color: #f59e0b; color: #f59e0b;" onclick="m12CopyEisenhowerPrompt()">🚀 Forjar Prompt Maestro</button>
-        <button class="gl-btn small" style="opacity: 0.6;" onclick="m12ResetMatrix()">🗑️ Reiniciar</button>
+        <button class="gl-btn small" style="border-color: #f59e0b; color: #f59e0b;" onclick="window.m12CopyEisenhowerPrompt()">🚀 Forjar Prompt Maestro</button>
+        <button class="gl-btn small" style="border-color: #6366f1; color: #818cf8;" onclick="window.m12ExportToNotion()">📝 Exportar Notion/Markdown</button>
+        <button class="gl-btn small" style="opacity: 0.6;" onclick="window.m12ResetMatrix()">🗑️ Reiniciar</button>
       </div>
     </div>
     
@@ -657,10 +738,10 @@ Por favor, analiza mi lista y:
     </p>
 
     <div class="m12-helper-row">
-      <button class="m12-example-chip" onclick="m12AddExampleTask('Entregar informe financiero al director mañana a las 8 a.m.')">Informe urgente</button>
-      <button class="m12-example-chip" onclick="m12AddExampleTask('Planear cronograma del proyecto del próximo mes')">Planificación</button>
-      <button class="m12-example-chip" onclick="m12AddExampleTask('Responder correos operativos pendientes')">Correos</button>
-      <button class="m12-example-chip" onclick="m12AddExampleTask('Revisar redes sociales')">Distracción</button>
+      <button class="m12-example-chip" onclick="window.m12AddExampleTask('Entregar informe financiero al director mañana a las 8 a.m.')">Informe urgente</button>
+      <button class="m12-example-chip" onclick="window.m12AddExampleTask('Planear cronograma del proyecto del próximo mes')">Planificación</button>
+      <button class="m12-example-chip" onclick="window.m12AddExampleTask('Responder correos operativos pendientes')">Correos</button>
+      <button class="m12-example-chip" onclick="window.m12AddExampleTask('Revisar redes sociales')">Distracción</button>
     </div>
     
     <div class="m12-input-group" style="position: relative; margin-bottom: 18px;">
@@ -670,10 +751,10 @@ Pagar proveedores esta tarde
 Planear auditoría del próximo mes
 Responder correos pendientes"
              style="width:100%; min-height: 124px; padding: 16px 20px 68px; resize: vertical; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; color: #fff; font-size: 0.95rem; line-height: 1.55; font-family: inherit; outline: none; transition: all 0.3s;"
-             onkeydown="if((event.ctrlKey||event.metaKey)&&event.key==='Enter') m12Classify()"></textarea>
-      <button class="gl-btn gl-btn-primary m12-classify-btn" onclick="m12Classify()" 
-              style="position: absolute; right: 10px; bottom: 10px; padding: 0 20px; height: 42px; border-radius: 10px; font-weight: 800; font-size: 0.85rem; background: var(--accent-gradient);">
-        Clasificar tareas
+             onkeydown="if((event.ctrlKey||event.metaKey)&&event.key==='Enter') window.m12Classify()"></textarea>
+      <button class="gl-btn gl-btn-primary m12-classify-btn" onclick="window.m12Classify()" 
+              style="position: absolute; right: 12px; bottom: 12px; padding: 0 24px; height: 46px; border-radius: 12px; font-weight: 800; font-size: 0.9rem; background: var(--accent-gradient, linear-gradient(135deg, #f59e0b, #d97706)); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); border: none; color: #000; cursor: pointer;">
+        🪄 Clasificar Tareas
       </button>
     </div>
 
@@ -766,7 +847,7 @@ Responder correos pendientes"
       <ol style="margin-top:12px;font-size:0.85rem;line-height:2;">
         <li>Piensa en un proyecto que tengas que realizar este mes (Laboral o Personal).</li>
         <li>Usa el Creador WBS de este módulo para generar el prompt.</li>
-        <li>Pégalo en ChatGPT, Claude o Copilot para obtener el desglose completo.</li>
+        <li>Pégalo en <a href="https://chatgpt.com" target="_blank" style="color:#f59e0b; text-decoration:underline;">ChatGPT</a>, <a href="https://claude.ai" target="_blank" style="color:#f59e0b; text-decoration:underline;">Claude</a> o <a href="https://copilot.microsoft.com" target="_blank" style="color:#f59e0b; text-decoration:underline;">Copilot</a> para obtener el desglose completo.</li>
       </ol>
     </div>
     <textarea class="premium-textarea" placeholder="Pega aquí las fases principales generadas por la IA para tu proyecto..."></textarea>
@@ -789,5 +870,10 @@ Responder correos pendientes"
       el.insertAdjacentHTML('afterbegin', html);
     }
   }
-  return { init: function(app) { console.log('Initialized modules-11-12.js'); } };
+  return { 
+    init: function(app) { 
+      console.log('Initialized modules-11-12.js [DNA v32.5]'); 
+      if (typeof m12RenderTasks === 'function') m12RenderTasks();
+    } 
+  };
 })();

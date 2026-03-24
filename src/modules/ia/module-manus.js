@@ -9,7 +9,7 @@ window.GuiaModules['module-manus'] = (function() {
 <div class="m-ma-container animate-in">
   <div class="module-header premium-header animate-in">
     <div class="badge-titan" style="margin-bottom: 20px;">BONUS: INVESTIGADOR SOBERANO</div>
-    <h2 class="module-title text-gradient-primary">🐙 Manus AI: El Oráculo Digital</h2>
+    <h2 class="module-title text-gradient-primary">🐙 <a href="https://manus.ai" target="_blank" style="color:inherit; text-decoration:none;">Manus AI:</a> El Oráculo Digital</h2>
     <p class="m-pa-note">Domina el arte de la investigación autónoma. Manus no solo busca, <b>navega, extrae y sintetiza</b> el conocimiento del mundo real.</p>
   </div>
 
@@ -104,7 +104,7 @@ window.GuiaModules['module-manus'] = (function() {
         <p>Manus puede navegar redes sociales para detectar tendencias antes de que lleguen a las noticias corporativas.</p>
         <div class="m-ma-card" style="border-style:dashed;">
             <h5>Ejemplo de Tarea:</h5>
-            <p style="font-size:0.85rem; font-style:italic;">"Entra a X (Twitter), busca qué dicen los ingenieros de IA sobre el nuevo motor de Mistral y hazme un resumen de los 5 puntos más técnicos."</p>
+            <p style="font-size:0.85rem; font-style:italic;">"Entra a X (Twitter), busca qué dicen los ingenieros de IA sobre el nuevo motor de <b><a href="https://mistral.ai" target="_blank" style="color:#fb7185; text-decoration:underline;">Mistral</a></b> y hazme un resumen de los 5 puntos más técnicos."</p>
             <button class="ma-btn-glow" style="font-size:0.75rem; padding:8px 16px;" onclick="mMaSimScenario('social')">Ver Proceso</button>
         </div>
     </div>
@@ -308,7 +308,7 @@ window.GuiaModules['module-manus'] = (function() {
       <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
         <li style="display:flex; gap:12px; padding:12px; border:1px solid rgba(255,255,255,0.06); border-radius:8px; cursor:pointer;" onclick="maCheck(this,0,30)">
           <div style="width:20px; height:20px; border:2px solid #475569; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.65rem; margin-top:2px;">✓</div>
-          <div style="flex:1; color:#a1a1aa;"><p style="font-weight:700; font-size:0.85rem; color:#e4e4e7; margin:0 0 4px;">Accede a manus.im y crea una cuenta (lista de espera o prueba direct)</p><p style="font-size:0.78rem; margin:0;">Alternativa inmediata: usa <b>OpenAI GPT-4o con capacidad de búsqueda web</b> o <b>Perplexity AI</b> que son equivalentes y están disponibles hoy.</p><div style="font-size:0.72rem; background:rgba(244,63,94,0.08); border-left:2px solid #f43f5e; padding:4px 8px; border-radius:0 4px 4px 0; color:#fb7185; margin-top:6px;">💡 Perplexity.ai es gratis y puede navegar websits ahora mismo.</div></div>
+          <div style="flex:1; color:#a1a1aa;"><p style="font-weight:700; font-size:0.85rem; color:#e4e4e7; margin:0 0 4px;">Accede a <a href="https://manus.ai" target="_blank" style="color:#fb7185; text-decoration:underline;">manus.ai</a> y crea una cuenta (lista de espera o prueba direct)</p><p style="font-size:0.78rem; margin:0;">Alternativa inmediata: usa <b><a href="https://chatgpt.com" target="_blank" style="color:#fb7185; text-decoration:underline;">OpenAI GPT-4o</a> con capacidad de búsqueda web</b> o <b><a href="https://perplexity.ai" target="_blank" style="color:#fb7185; text-decoration:underline;">Perplexity AI</a></b> que son equivalentes y están disponibles hoy.</p><div style="font-size:0.72rem; background:rgba(244,63,94,0.08); border-left:2px solid #f43f5e; padding:4px 8px; border-radius:0 4px 4px 0; color:#fb7185; margin-top:6px;">💡 <a href="https://perplexity.ai" target="_blank" style="color:#fb7185; text-decoration:underline;">Perplexity.ai</a> es gratis y puede navegar websits ahora mismo.</div></div>
           <span style="font-size:0.7rem; font-weight:800; color:#10b981; flex-shrink:0;">+30 XP</span>
         </li>
         <li style="display:flex; gap:12px; padding:12px; border:1px solid rgba(255,255,255,0.06); border-radius:8px; cursor:pointer;" onclick="maCheck(this,1,50)">

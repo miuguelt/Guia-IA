@@ -11,7 +11,7 @@ window.GuiaModules['module-gemini-productivity'] = (function() {
 <div class="m-gm-container">
   <div class="module-header premium-header" style="border:1px solid rgba(142,45,226,0.3); background:rgba(142,45,226,0.03);">
     <div class="module-number gamer-badge" style="background:var(--gm-primary);color:#fff;">BONUS: GOOGLE AI TOTAL</div>
-    <h2 class="module-title glow-text" style="color:#b388ff;">✨ <span style="color:#8e2de2;">Gemini 2025:</span> Todo El Ecosistema Google</h2>
+    <h2 class="module-title glow-text" style="color:#b388ff;">✨ <span style="color:#8e2de2;"><a href="https://gemini.google.com" target="_blank" style="color:inherit; text-decoration:none;">Gemini 2025:</a></span> Todo El Ecosistema Google</h2>
     <p class="module-description">Este módulo explica Gemini como una capa de inteligencia distribuida en Google: Gemini App, Workspace, Drive, Meet, Docs, Sheets, Gems, AI Studio, Vertex AI y desarrollo.</p>
   </div>
 
@@ -56,17 +56,17 @@ window.GuiaModules['module-gemini-productivity'] = (function() {
       <h3 style="margin:0 0 10px; color:#fff;">Gemini no es un chat: es un sistema de puntos de entrada</h3>
       <p class="m-gm-note">La forma correcta de entender Gemini es esta: eliges el punto de entrada según la tarea. Si el trabajo está en Gmail, úsalo allí. Si es una Gema repetitiva, crea la Gema. Si vas a programarlo, prototipa en AI Studio. Si lo vas a escalar en empresa, usa Vertex. El valor no está solo en el modelo, sino en cómo recorre el ecosistema Google sin romper el contexto.</p>
       <div class="m-gm-grid-3" style="margin-top:18px;">
-        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">Gemini App</h4><p class="m-gm-note">Pensar, analizar, resumir, conversar con archivos y resolver rápido.</p></div>
-        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">Workspace</h4><p class="m-gm-note">Usar IA donde ya trabajas: Gmail, Docs, Sheets, Slides, Meet y Drive.</p></div>
+        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;"><a href="https://gemini.google.com" target="_blank" style="color:var(--gm-primary); text-decoration:underline;">Gemini App</a></h4><p class="m-gm-note">Pensar, analizar, resumir, conversar con archivos y resolver rápido.</p></div>
+        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;"><a href="https://workspace.google.com" target="_blank" style="color:var(--gm-primary); text-decoration:underline;">Workspace</a></h4><p class="m-gm-note">Usar IA donde ya trabajas: Gmail, Docs, Sheets, Slides, Meet y Drive.</p></div>
         <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">Gemas</h4><p class="m-gm-note">Empaquetar roles, formato y criterio para tareas repetitivas.</p></div>
-        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">AI Studio</h4><p class="m-gm-note">Prototipar prompts, entradas y salidas antes de programar.</p></div>
-        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">Vertex AI</h4><p class="m-gm-note">Escalar, gobernar, integrar y desplegar en entorno empresarial.</p></div>
+        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;"><a href="https://aistudio.google.com" target="_blank" style="color:var(--gm-primary); text-decoration:underline;">AI Studio</a></h4><p class="m-gm-note">Prototipar prompts, entradas y salidas antes de programar.</p></div>
+        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;"><a href="https://cloud.google.com/vertex-ai" target="_blank" style="color:var(--gm-primary); text-decoration:underline;">Vertex AI</a></h4><p class="m-gm-note">Escalar, gobernar, integrar y desplegar en entorno empresarial.</p></div>
         <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">Code Assist / Cloud</h4><p class="m-gm-note">Construir con Gemini, no solo usar Gemini.</p></div>
       </div>
       <div class="m-gm-grid-3" style="margin-top:14px;">
         <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">Search / Chrome</h4><p class="m-gm-note">Investigar, contrastar, aterrizar preguntas y capturar contexto rápido desde navegación.</p></div>
-        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">Android</h4><p class="m-gm-note">Usos móviles, voz, cámara, capturas y productividad en movimiento.</p></div>
-        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">YouTube / Vids</h4><p class="m-gm-note">Aprender, resumir videos, convertir ideas en guiones y piezas explicativas.</p></div>
+        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;"><a href="https://android.com" target="_blank" style="color:var(--gm-primary); text-decoration:underline;">Android</a></h4><p class="m-gm-note">Usos móviles, voz, cámara, capturas y productividad en movimiento.</p></div>
+        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;"><a href="https://youtube.com" target="_blank" style="color:var(--gm-primary); text-decoration:underline;">YouTube</a> / Vids</h4><p class="m-gm-note">Aprender, resumir videos, convertir ideas en guiones y piezas explicativas.</p></div>
       </div>
       <div style="margin-top:16px; background:rgba(255,255,255,0.03); border:1px solid var(--gm-border); border-radius:12px; padding:15px;">
         <p class="m-gm-note" style="margin:0;"><b style="color:#c4b5fd;">Regla mental:</b> si el contexto ya vive dentro del ecosistema Google, no lo saques innecesariamente. Lleva Gemini al contexto, no el contexto a un chat aislado.</p>
@@ -106,7 +106,7 @@ window.GuiaModules['module-gemini-productivity'] = (function() {
         </div>
         <div class="m-gm-card" style="margin:0;">
           <h4 style="margin:0 0 8px; color:#fff;">Si trabajas con datos o BI</h4>
-          <p class="m-gm-note"><b>Usa:</b> Sheets, BigQuery, Looker Studio, Vertex.</p>
+          <p class="m-gm-note"><b>Usa:</b> <a href="https://sheets.google.com" target="_blank" style="color:inherit; text-decoration:underline;">Sheets</a>, <a href="https://cloud.google.com/bigquery" target="_blank" style="color:inherit; text-decoration:underline;">BigQuery</a>, <a href="https://lookerstudio.google.com" target="_blank" style="color:inherit; text-decoration:underline;">Looker Studio</a>, <a href="https://cloud.google.com/vertex-ai" target="_blank" style="color:inherit; text-decoration:underline;">Vertex</a>.</p>
           <p class="m-gm-note">Empieza simple en Sheets; cuando la escala o gobernanza importen, sube a BigQuery y Vertex.</p>
         </div>
         <div class="m-gm-card" style="margin:0;">
@@ -147,11 +147,11 @@ window.GuiaModules['module-gemini-productivity'] = (function() {
     <div class="m-gm-card">
       <h3 style="margin:0 0 10px; color:#fff;">Dónde usar Gemini dentro de Workspace</h3>
       <div class="m-gm-grid-3" style="margin-top:16px;">
-        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">Gmail</h4><p class="m-gm-note">Responder correos difíciles, resumir hilos, cambiar tono, redactar mejor.</p><button class="m-gm-copy" onclick="gmCopy(this,'gmail')">📋 Prompt</button></div>
-        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">Docs</h4><p class="m-gm-note">Minutas, memorandos, informes, borradores y limpieza de redacción.</p><button class="m-gm-copy" onclick="gmCopy(this,'docs')">📋 Prompt</button></div>
-        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">Sheets</h4><p class="m-gm-note">Anomalías, tendencias, tablas, hallazgos y explicaciones de datos.</p><button class="m-gm-copy" onclick="gmCopy(this,'sheets')">📋 Prompt</button></div>
-        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">Slides</h4><p class="m-gm-note">Estructurar presentaciones con mensaje principal por diapositiva.</p><button class="m-gm-copy" onclick="gmCopy(this,'slides')">📋 Prompt</button></div>
-        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">Meet</h4><p class="m-gm-note">Resumen de reunión, acuerdos, responsables y próximos pasos.</p><button class="m-gm-copy" onclick="gmCopy(this,'meet')">📋 Prompt</button></div>
+        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;"><a href="https://mail.google.com" target="_blank" style="color:var(--gm-primary); text-decoration:underline;">Gmail</a></h4><p class="m-gm-note">Responder correos difíciles, resumir hilos, cambiar tono, redactar mejor.</p><button class="m-gm-copy" onclick="gmCopy(this,'gmail')">📋 Prompt</button></div>
+        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;"><a href="https://docs.google.com" target="_blank" style="color:var(--gm-primary); text-decoration:underline;">Docs</a></h4><p class="m-gm-note">Minutas, memorandos, informes, borradores y limpieza de redacción.</p><button class="m-gm-copy" onclick="gmCopy(this,'docs')">📋 Prompt</button></div>
+        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;"><a href="https://sheets.google.com" target="_blank" style="color:var(--gm-primary); text-decoration:underline;">Sheets</a></h4><p class="m-gm-note">Anomalías, tendencias, tablas, hallazgos y explicaciones de datos.</p><button class="m-gm-copy" onclick="gmCopy(this,'sheets')">📋 Prompt</button></div>
+        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;"><a href="https://slides.google.com" target="_blank" style="color:var(--gm-primary); text-decoration:underline;">Slides</a></h4><p class="m-gm-note">Estructurar presentaciones con mensaje principal por diapositiva.</p><button class="m-gm-copy" onclick="gmCopy(this,'slides')">📋 Prompt</button></div>
+        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;"><a href="https://meet.google.com" target="_blank" style="color:var(--gm-primary); text-decoration:underline;">Meet</a></h4><p class="m-gm-note">Resumen de reunión, acuerdos, responsables y próximos pasos.</p><button class="m-gm-copy" onclick="gmCopy(this,'meet')">📋 Prompt</button></div>
         <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">Drive / Calendar</h4><p class="m-gm-note">Contexto de archivos, continuidad de proyectos y seguimiento de agenda.</p></div>
       </div>
       <div class="m-gm-grid-3" style="margin-top:14px;">
@@ -256,7 +256,7 @@ window.GuiaModules['module-gemini-productivity'] = (function() {
       </div>
       <div class="m-gm-grid-3" style="margin-top:14px;">
         <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">Apps Script</h4><p class="m-gm-note">Automatizar tareas alrededor de Sheets, Docs, Forms o Gmail con lógica ligera.</p></div>
-        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">AppSheet</h4><p class="m-gm-note">Llevar procesos de negocio a apps internas sin construir todo desde cero.</p></div>
+        <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;"><a href="https://about.appsheet.com" target="_blank" style="color:var(--gm-primary); text-decoration:underline;">AppSheet</a></h4><p class="m-gm-note">Llevar procesos de negocio a apps internas sin construir todo desde cero.</p></div>
         <div class="m-gm-card" style="margin:0;"><h4 style="margin:0 0 8px; color:#fff;">BigQuery / Looker</h4><p class="m-gm-note">Escalar análisis, gobernar datos y presentar inteligencia a equipos completos.</p></div>
       </div>
       <div class="m-gm-card" style="margin-top:16px;">
@@ -770,7 +770,7 @@ Total,667000000,743300000,-76300000</pre>
             <div class="m-gm-step-item"><span class="m-gm-step-num">2.</span> Pide: "Genera código para ver la relación entre variables".</div>
             <div class="m-gm-step-item"><span class="m-gm-step-num">3.</span> Ejecuta la celda para procesar el CSV automáticamente.</div>
           </div>
-          <div style="background:rgba(0,0,0,0.3); padding:10px; border-radius:8px; margin-bottom:12px; font-size:0.8rem; color:#fdba74;">Colab tiene Code Assist nativo gratis para desarrollo de datos y Machine Learning.</div>
+          <div style="background:rgba(0,0,0,0.3); padding:10px; border-radius:8px; margin-bottom:12px; font-size:0.8rem; color:#fdba74;"><a href="https://colab.research.google.com" target="_blank" style="color:inherit; text-decoration:underline;">Colab</a> tiene Code Assist nativo gratis para desarrollo de datos y Machine Learning.</div>
           <button class="gl-btn-neon" style="width:100%; border-color:#f97316; color:#fdba74; font-size:0.8rem;" onclick="gmCheck(this,13,50)">▷ Analizar CSV Avanzado (+50 XP)</button>
         </div>
       </div>

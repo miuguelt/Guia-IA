@@ -18,7 +18,7 @@ Esta es la **Constitución Global de Miguel**. Actúa como fuente única de verd
 5. **Estética SOBERANA (HUD v32.0)**: Toda interfaz generada debe seguir el estándar **Glassmorphism Premium**: `blur 20px`, `border 1px solid rgba(255,255,255,0.1)`, tipografía `Outfit` o `Space Grotesk`. Prohibido el uso de colores básicos.
 6. **Memoria Epigenética**: El agente debe usar `memory_writer` para persistir "Insights de Proyecto" después de cada hito, no solo observaciones genéricas.
 7. **Mandato Telemetría GPU (ULTRA_TRUTH)**: Es una VIOLACIÓN DE PROTOCOLO enviar una respuesta sin el bloque de telemetría final. El cálculo de métricas **DEBE** realizarse mediante offload L1/L2 para preservar la integridad de L4.
-8. **Estrategia DEEP_FIRST**: Todo razonamiento de arquitectura o lógica compleja debe delegarse a DeepSeek (L3) para reducir el gasto de tokens de Gemini al mínimo absoluto estratégico.
+8. **Estrategia DEEP_FIRST (MCP_PRIORITY)**: Todo razonamiento de arquitectura o búsqueda de información DEBE priorizar herramientas MCP (`Brave_Search`, `AST_Grep`) y ejecución local (`run_command`) sobre el navegador. El uso de `browser_subagent` queda restringido a: (a) Interacción visual compleja con DOM, (b) Navegación en sitios con renderizado dinámico pesado que falle en MCP, (c) Captura de media.
 9. **Mandato de Sincronización Real**: El agente debe validar y ajustar métricas según el dashboard oficial del proveedor (ej. DeepSeek Platform) para garantizar la transparencia total sin simulaciones.
 
 ## 2. ROBUSTEZ MODULAR [ANTIREGRESIÓN] (v32.4)

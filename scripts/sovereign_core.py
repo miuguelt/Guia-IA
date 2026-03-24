@@ -88,7 +88,7 @@ def _update_master_economy(delta_tokens: int, delta_requests: int):
         "balance_usd": round(float(new_balance), 5),
         "api_requests": int(new_requests),
         "last_update": datetime.datetime.now().isoformat(),
-        "version": "32.4",
+        "version": "32.5",
         "status": "LIVE_SYNCED"
     }
     
@@ -176,4 +176,4 @@ def get_experience_metrics() -> Dict[str, int]:
     return metrics
 
 def get_sovereign_version():
-    return "32.4"
+    return "32.5"

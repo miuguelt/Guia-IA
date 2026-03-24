@@ -10,13 +10,13 @@ window.GuiaModules['module-notion'] = (function() {
 <div class="m-notion-container animate-in">
   <div class="module-header premium-header animate-in">
     <div class="badge-titan" style="margin-bottom: 20px;">BONUS: PRODUCTIVIDAD</div>
-    <h2 class="module-title text-gradient-primary">🐘 Notion AI: El Cerebro Digital</h2>
+    <h2 class="module-title text-gradient-primary">🐘 <a href="https://notion.so" target="_blank" style="color:inherit; text-decoration:none;">Notion AI:</a> El Cerebro Digital</h2>
     <p class="m-pa-note">No uses Notion para guardar notas. Úsalo para que escriban y piensen por ti.</p>
   </div>
 
   <div class="m-notion-hero">
     <h3 style="margin:0 0 8px; color:#fff;">La idea central de Notion AI</h3>
-    <p class="m-notion-note" style="margin:0;">Notion AI no es solo un asistente de escritura. Su verdadero valor aparece cuando combinas <strong>páginas, bases de datos, contexto del workspace y bloques reutilizables</strong> para convertir información dispersa en operación, criterio y memoria institucional.</p>
+    <p class="m-notion-note" style="margin:0;"><b><a href="https://www.notion.so/product/ai" target="_blank" style="color:var(--primary); text-decoration:underline;">Notion AI</a></b> no es solo un asistente de escritura. Su verdadero valor aparece cuando combinas <strong>páginas, bases de datos, contexto del workspace y bloques reutilizables</strong> para convertir información dispersa en operación, criterio y memoria institucional.</p>
     <div class="m-notion-chip-row">
       <span class="m-notion-chip">Escritura</span>
       <span class="m-notion-chip">Resúmenes</span>
@@ -496,7 +496,7 @@ window.GuiaModules['module-notion'] = (function() {
             </div>
           </div>
           
-          <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 16px; line-height: 1.5;">De una idea suelta a un ecosistema de contenido multimodal adaptado para LinkedIn, X y TikTok.</p>
+          <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 16px; line-height: 1.5;">De una idea suelta a un ecosistema de contenido multimodal adaptado para <b><a href="https://linkedin.com" target="_blank" style="color:#f59e0b; text-decoration:underline;">LinkedIn</a></b>, <b>X (Twitter)</b> y <b><a href="https://tiktok.com" target="_blank" style="color:#f59e0b; text-decoration:underline;">TikTok</a></b>.</p>
           
           <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
             <div style="font-size: 0.75rem; color: #94a3b8; display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
@@ -856,7 +856,7 @@ window.GuiaModules['module-notion'] = (function() {
               <tr>
                 <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); color: #fff;">Crear Landing Page</td>
                 <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05);"><span style="background: rgba(245,158,11,0.15); color: #fbbf24; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">En Progreso</span></td>
-                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); color: #cbd5e1; font-size: 0.8rem; line-height: 1.4;">Diseño listo, falta integrar API de pagos (Stripe). Riesgo medio.</td>
+                <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); color: #cbd5e1; font-size: 0.8rem; line-height: 1.4;">Diseño listo, falta integrar API de pagos (<b><a href="https://stripe.com" target="_blank" style="color:#10b981; text-decoration:underline;">Stripe</a></b>). Riesgo medio.</td>
                 <td style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05);"><button style="background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: #10b981; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; cursor: pointer;">Generar Sub-tareas</button></td>
               </tr>
             </table>
@@ -906,7 +906,7 @@ window.GuiaModules['module-notion'] = (function() {
                 </div>
                 <div style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 15px;">
                   <h5 style="color: #ec4899; margin: 0 0 10px; font-family: var(--font-mono); font-size: 0.75rem;">⚡ AI NEXT BEST ACTION</h5>
-                  <p style="font-size: 0.85rem; line-height: 1.5; margin: 0;">"Aprobar la factura pendiente de AWS ($1,200) para evitar corte de servicio y reasignar 1 Dev al equipo Frontend."</p>
+                  <p style="font-size: 0.85rem; line-height: 1.5; margin: 0;">"Aprobar la factura pendiente de <b><a href="https://aws.amazon.com" target="_blank" style="color:#ec4899; text-decoration:underline;">AWS</a></b> ($1,200) para evitar corte de servicio y reasignar 1 Dev al equipo Frontend."</p>
                 </div>
               </div>
               <div style="background: rgba(236,72,153,0.05); border: 1px dashed rgba(236,72,153,0.2); border-radius: 8px; padding: 20px; text-align: center; color: #fbcfe8; font-size: 0.85rem;">

@@ -13,7 +13,7 @@ def get_si_metrics(root_path=sovereign_core.PROJECT_ROOT):
         "CORTEX_MAP.md", "GEMINI.md", "Dockerfile", 
         "docker-compose.yml", "index.html", ".dockerignore",
         ".gitignore", "package.json", "package-lock.json",
-        "SOVEREIGN_LOG.md", "VERSION.json"
+        "SOVEREIGN_LOG.md", "VERSION.json" # VERSION: 32.5
     ]
     
     root_files = [f for f in os.listdir(root_path) if os.path.isfile(os.path.join(root_path, f))]

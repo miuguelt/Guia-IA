@@ -93,7 +93,7 @@ window.GuiaModules['module-final'] = window.GuiaModules['module-21'] = (function
 
     window.centauroLocalSim = function() {
         const log = document.getElementById('local-ai-log');
-        log.innerHTML += '<div class="centauro-term-line">> Iniciando instancia local segura de DeepSeek...</div>';
+        log.innerHTML += '<div class="centauro-term-line">> Iniciando instancia local segura de <a href="https://www.deepseek.com" target="_blank" style="color:inherit; text-decoration:underline;">DeepSeek</a>...</div>';
         setTimeout(() => { log.innerHTML += '<div class="centauro-term-line">> Cargando matriz de pesos quantificada (4bit)...</div>'; }, 500);
         setTimeout(() => { log.innerHTML += '<div class="centauro-term-line">> Analizando tokens sensibles en entorno aislado...</div>'; }, 1200);
         setTimeout(() => { 
@@ -110,6 +110,24 @@ window.GuiaModules['module-final'] = window.GuiaModules['module-21'] = (function
             if(window.app && window.app.addXP) window.app.addXP(200);
             document.getElementById('centauro-btn-3').style.display = 'block';
         }, 2000);
+    };
+
+    window.centauroFinalReport = function() {
+        const report = document.getElementById('final-report-output');
+        report.innerHTML = '<div class="thinking-process-premium"><span class="pulse-dot"></span> Consolidando bitácora de misión...</div>';
+        setTimeout(() => {
+            report.innerHTML = `
+                <div class="glass-card animate-in" style="padding:20px; border:2px solid #eab308; background:rgba(0,0,0,0.5);">
+                    <h4 style="color:#eab308;">✅ REPORTE SOBERANO GENERADO</h4>
+                    <p style="font-size:0.8rem;"><b>Fase 1 (RAG):</b> Protocolo de Emergencia Nivel 3 Validado.<br><b>Fase 2 (Visual):</b> Artefacto de Alerta para RRSS Generado.<br><b>Fase 3 (Privacidad):</b> Minuta Protegida via IA Local.</p>
+                    <div style="background:#111; padding:10px; border-radius:8px; margin-top:10px; font-size:0.75rem;">
+                        <strong style="color:#10b981;">Prompt de Auditoría Senior (Úsalo en Claude):</strong><br>
+                        "Actúa como Supervisor General de IA. Evalúa mi desempeño en la 'Operación Centauro' basándote en la trazabilidad de mis decisiones y mi uso de la Tríada Soberana. ¿Qué riesgos omití?"
+                    </div>
+                </div>
+            `;
+            if(typeof window.antShowConfetti === 'function') window.antShowConfetti();
+        }, 1500);
     };
 
     const modules = {
@@ -188,7 +206,7 @@ window.GuiaModules['module-final'] = window.GuiaModules['module-21'] = (function
             </aside>
         </div>
         <div class="centauro-nav" id="centauro-btn-1">
-            <button class="gl-btn-neon centauro-next" onclick="centauroNext(2)">Avanzar a fase 2: comunicación</button>
+            <button class="gl-btn-neon centauro-next" onclick="window.centauroNext(2)">Avanzar a fase 2: comunicación</button>
         </div>
     </div>
 </div>
@@ -229,7 +247,7 @@ window.GuiaModules['module-final'] = window.GuiaModules['module-21'] = (function
             </aside>
         </div>
         <div class="centauro-nav" id="centauro-btn-2">
-            <button class="gl-btn-neon centauro-next" onclick="centauroNext(3)">Avanzar a fase 3: privacidad</button>
+            <button class="gl-btn-neon centauro-next" onclick="window.centauroNext(3)">Avanzar a fase 3: privacidad</button>
         </div>
     </div>
 </div>
@@ -255,7 +273,7 @@ window.GuiaModules['module-final'] = window.GuiaModules['module-21'] = (function
                 <div id="local-ai-log" class="centauro-output centauro-terminal">
                     <div>> Esperando ejecución local segura...</div>
                 </div>
-                <button class="gl-btn-neon centauro-action" onclick="window.centauroLocalSim()">Procesar con Ollama / Local Bot</button>
+                <button class="gl-btn-neon centauro-action" onclick="window.centauroLocalSim()">Procesar con <a href="https://ollama.com" target="_blank" style="color:inherit; text-decoration:underline;">Ollama</a> / Local Bot</button>
             </div>
             <aside class="centauro-panel centauro-panel-side">
                 <div class="centauro-side-title">Verificación final</div>
@@ -267,12 +285,50 @@ window.GuiaModules['module-final'] = window.GuiaModules['module-21'] = (function
             </aside>
         </div>
         <div class="centauro-nav" id="centauro-btn-3">
+             <button class="gl-btn-neon centauro-next" onclick="window.centauroNext(4)">Avanzar a fase 4: Cierre y Reporte</button>
+        </div>
+    </div>
+</div>
+
+<!-- FASE 4: REPORTE Y CIERRE -->
+<div id="centauro-step-4" class="centauro-step">
+    <div class="section-card animate-in centauro-card">
+        <div class="centauro-card-header">
+            <div>
+                <span class="centauro-kicker">Fase 4</span>
+                <h3><span class="icon">📜</span> Cierre de Misión y Reporte</h3>
+            </div>
+            <div class="centauro-risk-badge">Certificación Final</div>
+        </div>
+        <p class="centauro-situation"><b>Situación:</b> La crisis ha sido controlada. Debes consolidar tu bitácora de decisiones para la posteridad institucional.</p>
+        
+        <div class="centauro-layout">
+            <div class="centauro-panel centauro-panel-main">
+                <div id="final-report-output" class="centauro-output">
+                    <div class="centauro-placeholder">
+                        <span>📝</span>
+                        <p>Haz clic para consolidar tu bitácora de decisiones finales.</p>
+                    </div>
+                </div>
+                <button class="gl-btn gl-btn-primary centauro-action" onclick="window.centauroFinalReport()">Consolidar Informe Centauro</button>
+            </div>
+            <aside class="centauro-panel centauro-panel-side">
+                <div class="centauro-side-title">Reflexión Final</div>
+                <ul class="centauro-checklist">
+                    <li>Validación ética</li>
+                    <li>Registro Soberano</li>
+                    <li>Feedback de IA</li>
+                </ul>
+            </aside>
+        </div>
+
+        <div class="centauro-nav" id="centauro-btn-4" style="margin-top:25px;">
              <div class="important-box centauro-finish-box">
-                <strong>✅ EXAMEN COMPLETADO</strong>
-                <p style="font-size:0.8rem;">Has demostrado dominio sobre las 3 capas de la IA moderna: Búsqueda, Generación y Seguridad.</p>
+                <strong>✅ ENTRENAMIENTO COMPLETADO</strong>
+                <p style="font-size:0.8rem;">Has demostrado dominio sobre las 4 capas de la IA moderna: Búsqueda, Generación, Seguridad y Reporte.</p>
              </div>
-             <textarea class="premium-textarea centauro-reflection" id="centauro-reflection" placeholder="Resume tus decisiones: qué herramienta elegiste en cada fase, qué validaste y por qué la privacidad cambió tu estrategia."></textarea>
-             <button class="gl-btn gl-btn-primary complete-module-btn centauro-complete" data-module="module-21" data-xp="500">🏆 Finalizar Operación Centauro (+500 XP)</button>
+             <textarea class="premium-textarea centauro-reflection" id="centauro-reflection" placeholder="Resume tus decisiones finales: ¿Qué aprendiste sobre la soberanía de datos en esta crisis?"></textarea>
+             <button class="gl-btn gl-btn-primary complete-module-btn centauro-complete" data-module="module-21" data-xp="500" style="background:#eab308; color:#000; font-weight:900;">🏆 OBTENER CERTIFICACIÓN CENTAURO (+500 XP)</button>
         </div>
     </div>
 </div>

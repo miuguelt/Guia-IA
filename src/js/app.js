@@ -25,6 +25,8 @@ class GuiaIA {
         this.caseStudyMap = this.buildCaseStudyMap();
         this.moduleQuizMap = this.buildModuleQuizMap();
         this.moduleSequence = Array.from({ length: 21 }, (_, index) => `module-${index + 1}`);
+        this.moduleSequence.splice(18, 0, 'module-modelos-frontera');
+        this.moduleSequence.splice(19, 0, 'module-bonus-comet');
         this.competencies = this.createEmptyCompetencies();
       this.evidenceStore = {};
       this.selfAssessments = {};
@@ -62,11 +64,15 @@ class GuiaIA {
       'module-deepseek': 'modules/ia/module-deepseek.js',
       'module-notebooklm': 'modules/ia/module-notebooklm.js',
       'module-multimedia-pro': 'modules/ia/module-multimedia-pro.js',
+      'module-presentaciones-pro': 'modules/ia/module-presentaciones-pro.js',
       'module-notion': 'modules/ia/module-notion.js',
       'module-power-automate': 'modules/tools/module-power-automate.js',
+      'module-modelos-frontera': 'modules/sena/guia-ia/module-bonus-frontera.js',
+      'module-bonus-comet': 'modules/sena/guia-ia/module-bonus-comet.js',
       'mini-games': 'modules/ia/mini-games.js'
     };
     this.moduleInstances = {}; // New: Store scoped module instances
+    this.loadingPromises = {}; // New: Track unique loading promises by path
     this.constitution = ''; // DNA v32.4: Master Constitution
   }
 
@@ -198,12 +204,12 @@ class GuiaIA {
         competencies: { automation: 18, strategy: 4, privacy: 2 }
       },
       'module-14': {
-        title: 'Segundo cerebro funcional',
-        objective: 'Capturar, enlazar y recuperar conocimiento útil.',
-        pitfall: 'Acumular notas sin criterio de conexión ni reutilización.',
-        evidencePrompt: 'Explica qué notas crearías y cómo las conectarías.',
-        checklist: ['Definí notas', 'Definí vínculos', 'Definí uso posterior'],
-        competencies: { strategy: 10, documents: 6, prompting: 2 }
+        title: 'Agentes de IA: De Chatear a Actuar',
+        objective: 'Entender qué es un agente de IA, cómo se diferencia de un chatbot y cómo delegar tareas de forma segura.',
+        pitfall: 'Confundir un chatbot reactivo con un agente proactivo y delegar sin supervisión humana (HITL).',
+        evidencePrompt: 'Diseña el blueprint de un agente para una tarea de tu trabajo, definiendo objetivo, herramientas y límites de autonomía.',
+        checklist: ['Definí el objetivo del agente', 'Identifiqué las herramientas necesarias', 'Establecí límites de autonomía y supervisión', 'Identifiqué riesgos y señales de alerta'],
+        competencies: { strategy: 14, automation: 6, verification: 4 }
       },
       'module-15': {
         title: 'Proyecto integrador',
@@ -237,6 +243,22 @@ class GuiaIA {
         checklist: ['Incluí costo', 'Incluí ahorro', 'Tomé una decisión'],
         competencies: { strategy: 16, verification: 5, automation: 2 }
       },
+      'module-modelos-frontera': {
+        title: 'Modelos de Frontera',
+        objective: 'Dominar la selección estratégica entre los titanes de la IA (GPT, Claude, Gemini, DeepSeek).',
+        pitfall: 'Elegir modelos por fama en lugar de por ventana de contexto, latencia o capacidad de razonamiento.',
+        evidencePrompt: 'Diseña tu Tríada de Frontera: qué modelo usarías para extraer, auditar y redactar en un proceso real.',
+        checklist: ['Elegí modelo para extraer', 'Elegí modelo para auditar', 'Elegí modelo para redactar', 'Justifiqué por capacidad técnica'],
+        competencies: { strategy: 15, verification: 10, prompting: 5 }
+      },
+      'module-bonus-comet': {
+        title: 'Comet: Tu Primer Navegador Agente',
+        objective: 'Dominar Comet desde cero hasta un nivel avanzado de uso, delegando tareas de navegación de forma segura.',
+        pitfall: 'Delegar tareas críticas (bancarias, firma de contratos) o ignorar riesgos de Prompt Injection/CometJacking.',
+        evidencePrompt: 'Resume tu misión final de delegación con Comet y explica qué controles de seguridad aplicaste.',
+        checklist: ['Instalé Comet', 'Realicé investigación con Sidecar', 'Probé el Background Assistant', 'Validé riesgos y configuré confirmaciones'],
+        competencies: { strategy: 15, automation: 10, verification: 5 }
+      },
       'module-19': {
         title: 'Ruta profesional',
         objective: 'Conectar lo aprendido con un rol futuro y una ruta de crecimiento.',
@@ -260,6 +282,86 @@ class GuiaIA {
         evidencePrompt: 'Resume tus decisiones en cada fase y qué validaste antes de cerrar.',
         checklist: ['Elegí herramienta con criterio', 'Justifiqué privacidad', 'Definí validación final'],
         competencies: { prompting: 8, verification: 10, privacy: 8, communication: 4, strategy: 5 }
+      },
+      'module-deepseek': {
+        title: 'DeepSeek R1 — Razonamiento Avanzado',
+        objective: 'Distinguir cuándo un modelo de razonamiento agrega valor real y cómo prompts CoT lo activan.',
+        pitfall: 'Usar DeepSeek como si fuera un chatbot generalista sin pedir razonamiento explícito paso a paso.',
+        evidencePrompt: 'Escribe un prompt CoT, describe el caso elegido y cómo verificarías la respuesta.',
+        checklist: ['El caso requiere razonamiento de varios pasos', 'El prompt obliga a mostrar hipótesis', 'Hay criterio de verificación al final'],
+        competencies: { prompting: 16, verification: 8, strategy: 4 }
+      },
+      'module-manus': {
+        title: 'Manus AI — Agentes Autónomos',
+        objective: 'Saber cuándo delegar a un agente autónomo y cómo darle un marco de trabajo claro.',
+        pitfall: 'Dejar que Manus opere sin definir fuentes válidas, formato de salida ni punto de revisión humana.',
+        evidencePrompt: 'Describe la tarea delegada a Manus: objetivo, límites, fuentes y cómo revisarías el resultado.',
+        checklist: ['Objetivo concreto definido', 'Límites especificados', 'Fuentes válidas indicadas', 'Punto de revisión humana'],
+        competencies: { strategy: 12, prompting: 8, verification: 6 }
+      },
+      'module-notebooklm': {
+        title: 'NotebookLM — Análisis de Fuentes',
+        objective: 'Usar NotebookLM para extraer hallazgos con evidencia verificable de fuentes específicas.',
+        pitfall: 'Hacer preguntas vagas sin pedir cita exacta y aceptar respuestas sin verificar la fuente.',
+        evidencePrompt: 'Describe el cuaderno que crearías, las fuentes que cargarías y la pregunta clave que harías.',
+        checklist: ['Cuaderno por objetivo', 'Pregunta literal + inferencial', 'Cita o fuente exigida', 'Decisión derivada'],
+        competencies: { documents: 16, verification: 10, strategy: 4 }
+      },
+      'module-gemini-productivity': {
+        title: 'Gemini 2025 — Ecosistema Google',
+        objective: 'Elegir el producto Gemini correcto según el tipo de archivo, contexto y resultado necesario.',
+        pitfall: 'Abrir Gemini.google.com para todo sin aprovechar la integración contextual en Docs, Sheets o Gmail.',
+        evidencePrompt: 'Describe un caso real y qué producto Gemini usarías, con el por qué y cómo verificarías el resultado.',
+        checklist: ['Producto Gemini elegido con criterio', 'Tipo de archivo considerado', 'Resultado esperado claro'],
+        competencies: { prompting: 12, communication: 8, strategy: 6 }
+      },
+      'module-notion': {
+        title: 'Notion AI — Cerebro Digital',
+        objective: 'Usar Notion AI para estructurar proyectos, conectar notas y recuperar conocimiento útil.',
+        pitfall: 'Acumular páginas sin estructura relacional ni criterio de recuperación posterior.',
+        evidencePrompt: 'Describe una base de datos o estructura de Notion que crearías para un proyecto real.',
+        checklist: ['Objetivo de la base definido', 'Propiedades clave configuradas', 'Relaciones o vínculos entre páginas', 'Caso de uso de Notion AI'],
+        competencies: { strategy: 12, documents: 8, communication: 4 }
+      },
+      'module-multimedia-pro': {
+        title: 'Multimedia Pro — Generación Visual con IA',
+        objective: 'Crear piezas visuales funcionales con prompts precisos y criterio comunicativo claro.',
+        pitfall: 'Generar imágenes sin definir canal, público ni restricción, obteniendo resultados bonitos pero inútiles.',
+        evidencePrompt: 'Describe el prompt visual que usarías, el canal destino y cómo evaluarías si la imagen es útil.',
+        checklist: ['Objetivo comunicativo claro', 'Canal y público definidos', 'Prompt con sujeto, estilo y restricciones', 'Criterio de evaluación del resultado'],
+        competencies: { creativity: 16, communication: 6, prompting: 4 }
+      },
+      'module-presentaciones-pro': {
+        title: 'Presentaciones Pro — IA para Slides',
+        objective: 'Estructurar presentaciones con narrativa clara usando Gamma, Canva o PowerPoint Copilot.',
+        pitfall: 'Aceptar el borrador de la IA sin editar slides ni garantizar que cada uno tenga una sola idea central.',
+        evidencePrompt: 'Describe la estructura de 5 slides que generarías y cómo editarías el resultado de la IA.',
+        checklist: ['Objetivo de la presentación claro', 'Estructura de 5 slides definida', 'Edición realizada para una idea por slide', 'Cierre con acción concreta'],
+        competencies: { communication: 14, creativity: 6, prompting: 4, strategy: 2 }
+      },
+      'module-power-automate': {
+        title: 'Power Automate — Flujos con IA',
+        objective: 'Diseñar flujos con trigger, condición, acción y manejo de excepciones sin puntos ciegos.',
+        pitfall: 'Automatizar el proceso completo sin definir el punto de control humano en decisiones críticas.',
+        evidencePrompt: 'Describe un flujo real con trigger, condición, acción, excepción y validación humana.',
+        checklist: ['Trigger definido', 'Condición lógica clara', 'Acción concreta', 'Excepción manejada', 'Punto de control humano'],
+        competencies: { automation: 18, strategy: 6, verification: 4 }
+      },
+      'module-teams-meet': {
+        title: 'Teams y Meet con IA — Minutas Inteligentes',
+        objective: 'Usar Copilot o transcripción para convertir reuniones en minutas accionables adaptadas a cada audiencia.',
+        pitfall: 'Aceptar el resumen automático sin revisarlo ni adaptarlo al destinatario y contexto de la reunión.',
+        evidencePrompt: 'Describe cómo obtendrías y adaptarías la minuta de una reunión para al menos dos audiencias.',
+        checklist: ['Herramienta de transcripción activada', 'Minuta generada con decisiones y siguientes pasos', 'Versión adaptada a al menos dos audiencias', 'Revisión humana realizada'],
+        competencies: { communication: 14, automation: 6, verification: 6 }
+      },
+      'module-antigravity': {
+        title: 'Antigravity Academy — Sistema Soberano',
+        objective: 'Configurar una constitución GEMINI.md y orquestar agentes con handoffs claros y sin pérdida de contexto.',
+        pitfall: 'Dejar el agente sin constitución o sin criterios de escalación, generando respuestas inconsistentes.',
+        evidencePrompt: 'Escribe el esqueleto de un archivo GEMINI.md con rol, leyes y criterios de escalación para tu caso.',
+        checklist: ['Rol del agente definido', 'Leyes inmutables escritas', 'Criterios de escalación claros', 'Formato de salida especificado'],
+        competencies: { strategy: 14, prompting: 10, verification: 6 }
       }
     };
     cfg['module-final'] = cfg['module-21'];
@@ -490,21 +592,55 @@ class GuiaIA {
         outcome: 'Comprendes cuándo y cómo diseñar automatizaciones simples con control.'
       },
       'module-14': {
-        title: 'Construcción de un segundo cerebro mínimo',
-        tool: 'Notion, Obsidian, OneNote o tu sistema de notas',
-        scenario: 'Vas a crear una estructura simple para capturar y recuperar conocimiento.',
+        title: 'Misión de agente: Investigar los mejores CRM para una PYME',
+        tool: 'Comet (Perplexity) o Manus AI',
+        scenario: 'Vas a delegarle a un agente una misión de investigación real y supervisar cómo planifica y ejecuta.',
         steps: [
-          'Crea cuatro notas: una de proyecto, una de referencia, una de decisión y una de siguiente acción.',
-          'Usa la IA para resumir una fuente y convertirla en nota utilizable, no solo en texto bonito.',
-          'Conecta las notas con enlaces o etiquetas claras.',
-          'Define una rutina de revisión semanal: qué mantienes, qué archivas y qué conviertes en tarea.',
-          'Prueba recuperación: busca una decisión tomada y verifica si la encuentras en menos de 30 segundos.'
+          'Abre Comet o Manus y escribe este prompt exacto: "Investiga los 3 mejores CRM para una PYME manufacturera con menos de 50 empleados. Compara precios por usuario/mes, funciones clave y facilidad de adopción. Entrega tabla comparativa y recomienda el óptimo."',
+          'Observa los pasos que ejecuta el agente: ¿qué sitios visita? ¿Cita fuentes? ¿Verifica precios actuales?',
+          'Abre uno de los sitios citados por el agente y corrobora que el precio indicado sea real y actual.',
+          'Si el agente no cita fuentes, agregá la instrucción: "Añade cita a la fuente original para cada dato de precio."',
+          'Compara qué hubiera respondido ChatGPT sin acceso web (solo con su conocimiento entrenado) ante la misma pregunta.'
         ],
         observe: [
-          'El valor del segundo cerebro aparece en la recuperación, no en la acumulación.',
-          'Si no hay estructura mínima, la IA solo produce más desorden.'
+          'El agente no solo "sabe" los precios: los busca y los verifica en tiempo real.',
+          'Si el agente actua sobre información incorrecta, el error se escala. Por eso siempre valida al menos un dato crítico.'
         ],
-        outcome: 'Aprendes a usar IA para organizar conocimiento y no solo para generar texto.'
+        outcome: 'Entiendes la diferencia práctica entre pedir una respuesta y delegar una misión.'
+      },
+      'module-modelos-frontera': {
+        title: 'Battle of the Models: Prueba de Selección Crítica',
+        tool: 'GPT-4o, Claude Opus 4, Gemini 2.0 y DeepSeek R2',
+        scenario: 'Vas a someter un problema complejo de la entidad a una comparativa real entre modelos de frontera para decidir cuál es el óptimo.',
+        steps: [
+          'Elige un problema que requiera razonamiento y manejo de contexto (Ej: Auditoría de un contrato de 50 páginas).',
+          'Ejecuta el Benchmarking Soberano en el módulo para ver las fortalezas teóricas de cada modelo.',
+          'Pega el mismo prompt complejo (usando CREA) en dos modelos distintos de tu elección.',
+          'Evalúa: ¿Cuál alucina menos? ¿Cuál tiene mejor tono? ¿Cuál fue más rápido?',
+          'Justifica tu elección final basada en: Precisión vs Velocidad vs Costo.'
+        ],
+        observe: [
+          'No hay un "mejor modelo" absoluto; hay un modelo mejor para cada tarea específica.',
+          'La ventana de contexto es vital: si el documento es muy largo, Gemini o Claude llevan la delantera.'
+        ],
+        outcome: 'Aprendes a elegir con criterio técnico el modelo de frontera que mejor resuelve tu cuello de botella.'
+      },
+      'module-bonus-comet': {
+        title: 'Misión de Navegador Agente con Comet',
+        tool: 'Comet (Perplexity)',
+        scenario: 'Vas a delegar una investigación comparativa multi-fuente y automatizar la extracción a Google Sheets.',
+        steps: [
+          'Instala Comet desde comet.perplexity.ai y vincula tu cuenta.',
+          'Usa el Sidecar para investigar "3 mejores herramientas de gestión de proyectos para equipos remotos".',
+          'Pide a Comet que extraiga los precios y características principales en una tabla.',
+          'Si tienes Pro/Max, usa el Background Assistant para buscar en segundo plano mientras redactas un correo en otra pestaña.',
+          'Verifica al menos un dato crítico abriendo la fuente original citada por el agente.'
+        ],
+        observe: [
+          'El agente navega por ti, pero la validación final es tu responsabilidad.',
+          'Activa siempre "pedir confirmación" para acciones que involucren tus cuentas conectadas.'
+        ],
+        outcome: 'Dominas el flujo de delegación en el navegador, ahorrando tiempo en investigaciones repetitivas.'
       },
       'module-15': {
         title: 'Integración guiada de varias herramientas',
@@ -624,6 +760,176 @@ class GuiaIA {
           'La mejor solución no es la más vistosa; es la más verificable y segura.'
         ],
         outcome: 'Comprendes cómo combinar búsqueda, generación y privacidad en un caso de alto impacto.'
+      },
+      'module-deepseek': {
+        title: 'Diagnóstico y corrección paso a paso con DeepSeek R1',
+        tool: 'DeepSeek R1 (web o Ollama)',
+        scenario: 'Vas a resolver un problema complejo de lógica o cálculo que requiere razonamiento secuencial y verificación de cada hipótesis.',
+        steps: [
+          'Elige un problema real: un cálculo erróneo, un script con bug, una decisión compleja o una comparación de opciones.',
+          'Escribe el prompt con estructura CoT: expón el problema, pide revisión paso a paso y finaliza con criterio de verificación.',
+          'Lee el razonamiento generado y marca qué hipótesis acepta y cuáles descarta en cada paso.',
+          'Identifica dónde el modelo podría estar asumiendo sin evidencia y pide que justifique esa parte.',
+          'Compara la respuesta final con tu estimación o con una fuente de referencia antes de aceptarla.'
+        ],
+        observe: [
+          'El razonamiento explícito te permite detectar el error antes de que llegue a la conclusión.',
+          'Si la IA no muestra sus pasos, el prompt necesita una instrucción más explícita de cadena de pensamiento.'
+        ],
+        outcome: 'Comprendes cuándo un modelo de razonamiento agrega valor real y cómo activarlo con un prompt de CoT.'
+      },
+      'module-manus': {
+        title: 'Delegación controlada de una investigación autónoma',
+        tool: 'Manus AI',
+        scenario: 'Vas a definir una misión de investigación que Manus ejecutará de forma autónoma: navegación, extracción y síntesis.',
+        steps: [
+          'Elige una investigación real: benchmarks de un sector, análisis de competidores, rastreo de normativas recientes.',
+          'Escribe la instrucción con objetivo claro, fuentes válidas a consultar, formato de salida y lo que NO debe incluir.',
+          'Ejecuta la misión y revisa si Manus navegó las fuentes correctas y respetó los límites definidos.',
+          'Evalúa el formato entregado: ¿está completo? ¿hay algo que nunca pediste y sobra?',
+          'Define qué parte del resultado necesita validación humana antes de usarlo en una decisión real.'
+        ],
+        observe: [
+          'Un buen brief para Manus incluye objetivo, fuentes, formato y restricciones, no solo una pregunta vaga.',
+          'El valor de un agente se mide en calidad del resultado verificable, no en velocidad de ejecución.'
+        ],
+        outcome: 'Aprendes a delegar a un agente autónomo sin perder el control del resultado.'
+      },
+      'module-notebooklm': {
+        title: 'Análisis profundo de fuentes propias con NotebookLM',
+        tool: 'NotebookLM',
+        scenario: 'Vas a cargar documentos de tu área y extraer hallazgos verificables con preguntas inferenciales.',
+        steps: [
+          'Crea un cuaderno nuevo en NotebookLM y cárgale entre 2 y 4 documentos del mismo proyecto o tema.',
+          'Formula una pregunta literal: "¿Qué dice el documento X sobre Y?"',
+          'Formula una segunda pregunta inferencial: "¿Qué implicación tiene esto para [proceso / presupuesto / riesgo]?"',
+          'Pide cita exacta (sección, página o párrafo) y verifica abriendo el documento original.',
+          'Cierra con una decisión: qué harías con ese hallazgo y qué confirmarías antes de actuar.'
+        ],
+        observe: [
+          'NotebookLM no sabe nada fuera de tus fuentes: eso es una ventaja cuando trabajas con documentos propios.',
+          'La calidad de la respuesta depende de la calidad de la pregunta, no del volumen de fuentes.'
+        ],
+        outcome: 'Aprendes a interrogar documentos propios con trazabilidad y a convertir hallazgos en decisiones.'
+      },
+      'module-gemini-productivity': {
+        title: 'Flujo de trabajo real dentro del ecosistema Google',
+        tool: 'Gemini en Docs, Sheets y Gmail',
+        scenario: 'Vas a resolver un caso completo usando Gemini en tres productos Google distintos según el tipo de tarea.',
+        steps: [
+          'Elige un caso real: analizar un informe, preparar un correo ejecutivo y construir un resumen en Sheets.',
+          'En Google Docs, activa Gemini y pide que estructure el informe en secciones con objetivo, datos y recomendación.',
+          'En Gmail, usa Gemini para redactar el correo de seguimiento con tono formal y puntos de acción.',
+          'En Sheets, usa Gemini para resumir los datos y sugerir una fórmula de comparación.',
+          'Evalúa: ¿cada producto entregó algo que no podrías hacer igual de rápido en otro contexto?'
+        ],
+        observe: [
+          'Gemini en contexto (Docs, Sheets, Gmail) trabaja con el archivo abierto, no con tu descripción textual.',
+          'La integración es la ventaja: no copies y pegues entre apps; trabaja en el producto correcto.'
+        ],
+        outcome: 'Comprendes cómo elegir el producto Gemini correcto según el tipo de archivo y resultado necesario.'
+      },
+      'module-notion': {
+        title: 'Construcción de un espacio de proyecto con Notion AI',
+        tool: 'Notion AI',
+        scenario: 'Vas a crear una estructura de proyecto reutilizable con base de datos, vistas y asistencia de IA.',
+        steps: [
+          'Crea una página de proyecto con: descripción del objetivo, responsable y fecha límite.',
+          'Añade una base de datos de tareas con propiedades: estado, prioridad, fecha y responsable.',
+          'Usa Notion AI para generar un WBS (desglose de tareas) a partir del objetivo del proyecto.',
+          'Crea al menos dos vistas: tabla para gestión y tablero Kanban para seguimiento visual.',
+          'Usa Notion AI para redactar un resumen ejecutivo del estado del proyecto en 5 líneas.'
+        ],
+        observe: [
+          'Una base de datos relacionada es mucho más útil que una lista de notas sin estructura.',
+          'Notion AI aporta más cuando el espacio ya tiene estructura: tú diseñas la arquitectura, la IA rellena el contenido.'
+        ],
+        outcome: 'Aprendes a construir un sistema de gestión funcional en Notion y a usar la IA dentro de él.'
+      },
+      'module-multimedia-pro': {
+        title: 'Creación de una pieza visual funcional con IA',
+        tool: 'Canva AI, Adobe Firefly o Microsoft Designer',
+        scenario: 'Vas a generar una pieza visual institucional con propósito comunicativo claro y criterio de evaluación.',
+        steps: [
+          'Define la pieza: infografía, banner, póster o portada. Especifica dónde se publicará.',
+          'Escribe el objetivo comunicativo: informar, convocar, orientar o reforzar imagen de marca.',
+          'Construye el prompt con: sujeto principal, estilo visual, paleta de colores, formato y restricciones.',
+          'Genera dos versiones variando un elemento y compara cuál comunica mejor el mensaje.',
+          'Evalúa la pieza final: ¿un desconocido del público objetivo entendería el mensaje en 5 segundos?'
+        ],
+        observe: [
+          'Un prompt visual sin restricciones produce imágenes bonitas pero no funcionales.',
+          'La evaluación real es funcional: si no comunica, no sirve, sin importar cuánto impresione.'
+        ],
+        outcome: 'Aprendes a convertir una necesidad de comunicación en una pieza visual con criterio real.'
+      },
+      'module-presentaciones-pro': {
+        title: 'De un tema amplio a una presentación ejecutiva',
+        tool: 'Gamma, Canva Presentations o PowerPoint Copilot',
+        scenario: 'Vas a convertir un objetivo comunicativo en una presentación de 5 slides lista para editar.',
+        steps: [
+          'Define: tema, audiencia y la decisión o acción que quieres provocar al cierre.',
+          'Pide a Gemini o ChatGPT una estructura de 5 slides: apertura, problema, evidencia, propuesta y cierre.',
+          'Lleva esa estructura a Gamma o Canva y genera la primera versión automática.',
+          'Edita slide por slide: elimina texto excesivo, deja una idea central y añade un dato o visual útil por panel.',
+          'Presenta el cierre en voz alta y verifica que termina con una acción o decisión concreta.'
+        ],
+        observe: [
+          'La IA acelera el borrador, pero la narrativa y el criterio de edición son tuyos.',
+          'Si una slide tiene más de una idea, necesita edición antes de mostrarla.'
+        ],
+        outcome: 'Comprendes cómo usar herramientas de presentación con IA sin perder la claridad narrativa.'
+      },
+      'module-power-automate': {
+        title: 'Diseño de un flujo automatizado simple con control humano',
+        tool: 'Power Automate',
+        scenario: 'Vas a mapear y automatizar un proceso repetitivo de tu área con trigger, acción y validación.',
+        steps: [
+          'Elige un proceso recurrente: recibir formulario, enviar notificación, mover archivos o aprobar solicitudes.',
+          'Diagrama el flujo: trigger → condición → acción → excepción → salida final.',
+          'Construye el flujo en Power Automate usando los conectores correspondientes.',
+          'Añade un punto de aprobación humana antes de cualquier acción irreversible (envío, eliminación, aprobación).',
+          'Prueba el flujo con un caso real y documenta el resultado, los errores encontrados y cómo los resolviste.'
+        ],
+        observe: [
+          'Un flujo sin manejo de excepciones es frágil: siempre define qué pasa cuando la condición no se cumple.',
+          'La aprobación humana no es opcional en procesos críticos; es la diferencia entre automatizar y perder control.'
+        ],
+        outcome: 'Aprendes a diseñar flujos automatizados con control, trazabilidad y punto de revisión humana.'
+      },
+      'module-teams-meet': {
+        title: 'Minuta inteligente desde una reunión real',
+        tool: 'Microsoft Teams Copilot o Google Meet con transcripción',
+        scenario: 'Vas a convertir una reunión en una minuta accionable adaptada a dos audiencias distintas.',
+        steps: [
+          'Activa la grabación o transcripción en Teams (Copilot) o Meet antes de iniciar la reunión.',
+          'Al terminar, genera el resumen automático y revisa si capturó: objetivo, decisiones, responsables y siguientes pasos.',
+          'Corrige o complementa manualmente cualquier punto crítico que el resumen haya perdido o distorsionado.',
+          'Crea una versión para el equipo (operativa) y otra para dirección (ejecutiva, máximo 6 puntos).',
+          'Envía la versión al destinatario correcto y define quién es responsable de verificar el avance en 7 días.'
+        ],
+        observe: [
+          'El resumen de IA es un borrador, no un documento final: siempre requiere revisión humana.',
+          'Adaptar el tono y nivel de detalle según audiencia es la habilidad clave, no solo activar la IA.'
+        ],
+        outcome: 'Comprendes cómo convertir reuniones en decisiones accionables usando IA sin perder precisión.'
+      },
+      'module-antigravity': {
+        title: 'Construcción de una constitución GEMINI.md y orquestación de agentes',
+        tool: 'Antigravity + Editor de texto',
+        scenario: 'Vas a diseñar una constitución de agente y un handoff limpio para un caso de uso real.',
+        steps: [
+          'Define el agente que vas a configurar: su rol, dominio de trabajo y tipo de tareas que resolverá.',
+          'Escribe el archivo GEMINI.md con secciones: Rol, Leyes Inmutables, Herramientas, Criterios de Escalación y Formato de Salida.',
+          'Diseña un prompt de handoff: objetivo de la tarea, hallazgos relevantes, restricciones conocidas y acción esperada.',
+          'Prueba el agente con la constitución cargada y evalúa si la salida respeta el formato y los límites definidos.',
+          'Identifica si hay alguna ley faltante o criterio ambiguo y ajusta la constitución antes de usarla en producción.'
+        ],
+        observe: [
+          'La constitución define el comportamiento del agente; sin ella, opera por suposición propia.',
+          'Un buen handoff no es texto largo: es objetivo, contexto mínimo necesario y acción esperada.'
+        ],
+        outcome: 'Aprendes a configurar agentes soberanos con constitución explícita y handoffs que no pierden contexto.'
       }
     };
   }
@@ -722,11 +1028,11 @@ class GuiaIA {
         verify: ['Incluye punto de control humano.', 'Documenta qué pasa si la entrada llega incompleta.']
       },
       'module-14': {
-        bestFor: 'Capturar, resumir y conectar conocimiento reutilizable.',
-        avoidWhen: 'Solo acumulas notas sin estructura ni recuperación.',
-        weakExample: '“Guarda esto en notas.”',
-        strongExample: '“Convierte este texto en nota de referencia con resumen, fuente, decisión asociada y siguiente acción.”',
-        verify: ['Prueba recuperación de una nota importante.', 'Mantén enlace entre fuente y decisión.']
+        bestFor: 'Delegar investigaciones y tareas complejas de múltiples pasos a un agente autónomo.',
+        avoidWhen: 'El objetivo es vago, sin límites de fuentes ni formato de salida definido.',
+        weakExample: '“Investiga la IA para mi empresa.”',
+        strongExample: '“Investiga los 3 mejores CRM para PYME. Fuentes: G2, sitios oficiales. Entrega tabla con proveedor, precio/usuario y caso de uso. Cita cada dato.”',
+        verify: ['Confirma al menos un dato de precio en la fuente original.', 'Define el punto donde tú revisas antes de actuar sobre el resultado.']
       },
       'module-15': {
         bestFor: 'Orquestar varias herramientas en un solo caso complejo.',
@@ -776,6 +1082,90 @@ class GuiaIA {
         weakExample: '“Haré toda la crisis en el mismo chat.”',
         strongExample: '“Usa RAG para protocolo, generador visual para alerta pública e IA local para minuta sensible, justificando cada elección.”',
         verify: ['Comprueba soporte documental en fase 1.', 'Confirma claridad pública en fase 2 y privacidad en fase 3.']
+      },
+      'module-deepseek': {
+        bestFor: 'Problemas que requieren razonamiento secuencial: bugs de código, comparación de opciones, análisis de escenarios complejos.',
+        avoidWhen: 'La tarea es una redacción breve, una búsqueda simple o una pregunta que no requiere desglosar hipótesis.',
+        weakExample: '"¿Qué opción es mejor?"',
+        strongExample: '"Analiza estas tres opciones paso a paso, muestra hipótesis, descarta las que fallen y justifica la elección final con criterio explícito."',
+        verify: ['El modelo mostró el razonamiento paso a paso.', 'La conclusión se puede comprobar contra una fuente o un caso de prueba mínimo.']
+      },
+      'module-manus': {
+        bestFor: 'Investigaciones multipasos que requieren navegar sitios, extraer datos de PDFs complejos o rastrear información actualizada.',
+        avoidWhen: 'La tarea es un prompt simple de redacción o consulta de conocimiento que un modelo generalista puede resolver sin navegar.',
+        weakExample: '"Investiga el mercado de IA."',
+        strongExample: '"Investiga los 5 principales proveedores de LLM en LATAM en 2025. Fuentes válidas: sitios oficiales y reportes del sector. Entrega tabla con nombre, modelo, precio/1M tokens y caso de uso principal. Excluye noticias de opinión."',
+        verify: ['Las fuentes navegadas son las que solicitaste.', 'El formato entregado cumple exactamente la estructura pedida.', 'Hay un punto definido para revisión humana antes de usar el resultado.']
+      },
+      'module-notebooklm': {
+        bestFor: 'Análisis de fuentes propias cerradas: contratos, informes, normativas, actas o documentos institucionales.',
+        avoidWhen: 'Necesitas información actualizada de internet, la tarea no tiene documentos adjuntos o requiere síntesis de conocimiento general.',
+        weakExample: '"Resúmeme todo."',
+        strongExample: '"¿Qué riesgos operativos menciona el documento sobre el proceso de contratación? Necesito la cita exacta y la página donde aparece."',
+        verify: ['La respuesta cita una fuente de tu cuaderno.', 'Puedes ubicar el fragmento en el documento original.', 'La inferencia derivada tiene base en el texto y no es una suposición de la IA.']
+      },
+      'module-gemini-productivity': {
+        bestFor: 'Flujos de trabajo dentro del ecosistema Google: resumir en Docs, analizar en Sheets, redactar en Gmail o resumir en Meet.',
+        avoidWhen: 'La tarea requiere navegar la web, manejar archivos fuera de Google o razonar sobre problemas complejos de lógica.',
+        weakExample: '"Abre Gemini y pregunta de todo."',
+        strongExample: '"En Google Sheets, usa Gemini para analizar estas ventas y sugerir una fórmula de comparación año sobre año. Entrega resumen en 4 puntos."',
+        verify: ['Usaste Gemini dentro del producto correcto (no copiando texto a gemini.google.com).', 'El resultado es coherente con el archivo original.', 'Verificaste que los datos clave no fueron alterados.']
+      },
+      'module-notion': {
+        bestFor: 'Gestión de proyectos, bases de conocimiento institucional, wikis de equipo y seguimiento de decisiones con IA integrada.',
+        avoidWhen: 'La tarea es tomar una nota rápida sin estructura ni reutilización futura, o si el equipo no tiene acceso a Notion.',
+        weakExample: '"Escribe aquí todo lo que pasa en el proyecto."',
+        strongExample: '"Genera un WBS con 5 hitos, fechas estimadas, criterios de éxito y riesgos para el objetivo: implementar un sistema de gestión documental en el área."',
+        verify: ['Las propiedades de la base de datos están configuradas.', 'Hay al menos dos vistas (tabla + tablero).', 'La IA generó contenido accionable, no solo texto de relleno.']
+      },
+      'module-multimedia-pro': {
+        bestFor: 'Generar imágenes institucionales, infografías, banners y portadas con propósito comunicativo claro.',
+        avoidWhen: 'La pieza requiere fotografía real, identidad visual estricta de marca con elementos específicos o aprobación legal de imagen.',
+        weakExample: '"Genera una imagen de una reunión de trabajo."',
+        strongExample: '"Imagen de un profesional colombiano en oficina moderna, estilo fotorealista, paleta azul institucional, formato 16:9 para banner web, sin texto sobreimpreso."',
+        verify: ['La imagen comunica el mensaje al público correcto.', 'El estilo es coherente con el canal de publicación.', 'No hay elementos inapropiados o fuera del contexto institucional.']
+      },
+      'module-presentaciones-pro': {
+        bestFor: 'Crear primeros borradores de presentaciones, estructurar narrativas y acelerar el diseño de slides.',
+        avoidWhen: 'La presentación requiere datos muy específicos de tu área que la IA no conoce, o necesita aprobación institucional de la estética.',
+        weakExample: '"Crea una presentación sobre el proyecto."',
+        strongExample: '"Estructura una presentación de 5 slides para directivos sobre el proyecto X: apertura con hallazgo clave, evidencia con dato, propuesta con impacto, riesgos y cierre con decisión requerida."',
+        verify: ['Cada slide tiene una sola idea principal.', 'El borrador fue editado antes de presentarlo.', 'El cierre provoca una decisión concreta.']
+      },
+      'module-power-automate': {
+        bestFor: 'Automatizar procesos repetitivos con reglas claras: aprobaciones, notificaciones, sincronización de datos y generación de reportes.',
+        avoidWhen: 'El proceso requiere juicio contextual variable, datos sensibles sin protocolo definido o decisiones legales irreversibles.',
+        weakExample: '"Automatiza todo el proceso de solicitudes."',
+        strongExample: '"Cuando llegue un formulario de solicitud de vacaciones, verifica si el saldo es suficiente. Si sí, notifica al jefe para aprobación. Si no, envía rechazo automático con el saldo disponible."',
+        verify: ['El flujo tiene trigger, condición, acción y manejo de excepción.', 'Hay un paso de aprobación humana antes de acciones irreversibles.', 'Se probó con al menos un caso real antes de activar.']
+      },
+      'module-teams-meet': {
+        bestFor: 'Reuniones recurrentes con asistentes fijos donde la minuta y los puntos de acción son críticos para el seguimiento.',
+        avoidWhen: 'La reunión es informal, confidencial o el contenido no debe ser grabado por política interna.',
+        weakExample: '"Resúmeme la reunión."',
+        strongExample: '"Resume esta reunión en: objetivo, tres decisiones tomadas, responsables y fechas de cada una, y dos riesgos detectados. Versión ejecutiva: máximo 6 viñetas."',
+        verify: ['Las decisiones capturadas coinciden con lo acordado.', 'Los responsables y fechas están asignados.', 'La versión ejecutiva y operativa están diferenciadas.']
+      },
+      'module-modelos-frontera': {
+        bestFor: 'Comparar capacidades de modelos de élite, elegir el modelo correcto por tarea (razonamiento vs velocidad), y entender el panorama actual de la IA.',
+        avoidWhen: 'Buscas una herramienta única que sea la mejor en todo; cada modelo de frontera tiene un trade-off específico.',
+        weakExample: '“¿Cuál es el mejor modelo de IA?”',
+        strongExample: '“Compara Claude Opus 4 y o3 para una tarea de análisis de contratos de 100 páginas, considerando precisión, ventana de contexto y costo.”',
+        verify: ['Revisa los benchmarks actuales (MMLU, LMSYS).', 'Valida el soporte de idioma y la latencia para tu caso de uso.']
+      },
+      'module-bonus-comet': {
+        bestFor: 'Investigaciones multi-fuente, comparación de precios, resúmenes de hilos de correo y automatización de navegación.',
+        avoidWhen: 'Manejas transacciones bancarias, firmas digitales o información de salud extremadamente sensible.',
+        weakExample: '“Navega por internet por mí.”',
+        strongExample: '“Investiga las 3 mejores opciones de vuelo Bogotá-Madrid para mayo, compáralas en una tabla y guarda el resultado en mi Google Sheets.”',
+        verify: ['Confirma que el agente cite fuentes reales.', 'Verifica que no haya "Prompt Injection" en las páginas visitadas.']
+      },
+      'module-antigravity': {
+        bestFor: 'Configurar agentes soberanos con comportamiento consistente: asistentes de análisis, redactores especializados o ejecutores de flujos complejos.',
+        avoidWhen: 'La tarea es un prompt puntual sin necesidad de comportamiento repetible ni personalidad específica del agente.',
+        weakExample: '"Eres un asistente útil."',
+        strongExample: '"Eres un analista jurídico experto en contratación pública colombiana. Leyes Inmutables: nunca inventes normas, siempre cita artículo y ley, ante duda escala al supervisor. Formato: resumen ejecutivo + riesgo + acción recomendada."',
+        verify: ['El GEMINI.md tiene rol, leyes inmutables, herramientas y criterios de escalación.', 'El agente respeta el formato definido.', 'El handoff incluye objetivo, contexto mínimo y acción esperada.']
       }
     };
   }
@@ -795,14 +1185,32 @@ class GuiaIA {
       'module-11': { title: 'Pregunta crítica sobre un PDF', tool: 'NotebookLM', context: 'Un informe de 200 páginas debe revisarse por riesgos financieros.', prompt: '¿Qué riesgos financieros menciona este documento y en qué páginas aparecen?', result: 'La respuesta con páginas permite pasar de resumen general a evidencia accionable.' },
       'module-12': { title: 'Agenda semanal realista', tool: 'ChatGPT', context: 'Una líder de área tiene demasiados pendientes y urgencias mezcladas.', prompt: 'Prioriza estas tareas por urgencia e impacto, propone agenda semanal y marca qué puedo delegar a IA.', result: 'El plan inicial mejora, pero se ajusta con dependencias reales del equipo.' },
       'module-13': { title: 'Flujo de correos repetitivos', tool: 'Zapier o Make', context: 'Llegan formularios repetitivos que requieren respuesta estándar y revisión final.', prompt: 'Diseña un flujo trigger > clasificación > resumen > validación humana > envío para estos formularios.', result: 'El flujo queda claro y se evita automatizar la parte crítica sin control.' },
-      'module-14': { title: 'Nota útil y recuperable', tool: 'Notion u Obsidian', context: 'Un documento importante debe pasar a una nota que sirva después.', prompt: 'Convierte este texto en una nota con resumen, fuente, decisión y siguiente acción.', result: 'La nota deja de ser archivo muerto y se vuelve insumo para trabajo futuro.' },
+      'module-14': { title: 'Misión de investigación con agente', tool: 'Comet o Manus AI', context: 'Una PYME necesita comparar CRM de forma urgente y el equipo no tiene tiempo de investigar manualmente.', prompt: 'Investiga los 3 mejores CRM para PYME manufacturera con <50 empleados. Compara precio/usuario, funciones y adopción. Entrega tabla y recomendación. Cita la fuente de cada precio.', result: 'El agente elabora una tabla con datos actualizados y fuentes válidas. El usuario valida dos precios antes de llevar la información a la junta directiva.' },
       'module-15': { title: 'Caso integrado', tool: 'Claude + ChatGPT + Excel', context: 'Un caso exige leer un informe, corregir un archivo y responder de forma ejecutiva.', prompt: 'Divide el caso en tres frentes, asigna una herramienta a cada uno y describe la salida esperada.', result: 'La orquestación mejora porque cada herramienta resuelve su capa específica.' },
       'module-16': { title: 'Fórmula o prototipo a partir de lenguaje natural', tool: 'ChatGPT o v0', context: 'Un usuario necesita una fórmula compleja o una interfaz simple y no programa.', prompt: 'Traduce esta necesidad operativa a fórmula o interfaz y explica riesgos y validación mínima.', result: 'La IA acelera la solución, pero la prueba sigue siendo obligatoria.' },
       'module-17': { title: 'Decisión nube vs local', tool: 'Ollama', context: 'Se debe resumir un archivo que contiene información contractual sensible.', prompt: 'Clasifica este caso: nube pública, entorno privado o IA local, con justificación por riesgo.', result: 'La decisión termina en IA local porque la sensibilidad supera la conveniencia de la nube.' },
       'module-18': { title: 'Defensa de compra de licencia', tool: 'Calculadora ROI', context: 'Un director pide justificar por qué valdría pagar una licencia premium.', prompt: 'Calcula ahorro mensual con este cuello de botella y redacta un argumento ejecutivo con costo, beneficio y riesgo.', result: 'La justificación mejora cuando incluye adopción y no solo tiempo teórico ahorrado.' },
       'module-19': { title: 'Plan de 90 días', tool: 'ChatGPT como mentor', context: 'Una persona quiere moverse hacia un rol nuevo relacionado con IA.', prompt: 'Diseña un plan de 90 días para perfilarme como [rol], con habilidades, práctica y entregables.', result: 'La ruta se vuelve accionable porque conecta estudio con evidencia.' },
       'module-20': { title: 'Lectura del perfil final', tool: 'Reporte de competencias', context: 'El cierre del curso debe traducirse en una decisión de repaso.', prompt: 'Analiza mis competencias más bajas y sugiere tres módulos para repetir con una meta concreta.', result: 'El usuario deja de ver el cierre como ceremonia y lo usa como diagnóstico.' },
-      'module-21': { title: 'Crisis con tres herramientas', tool: 'RAG + visual + IA local', context: 'Hay que resolver una crisis institucional con restricciones de tiempo y privacidad.', prompt: 'Usa una herramienta distinta para protocolo, comunicación pública y documento sensible, justificando cada elección.', result: 'El caso muestra que la mejor estrategia cambia según tipo de salida y riesgo.' }
+      'module-21': { title: 'Crisis con tres herramientas', tool: 'RAG + visual + IA local', context: 'Hay que resolver una crisis institucional con restricciones de tiempo y privacidad.', prompt: 'Usa una herramienta distinta para protocolo, comunicación pública y documento sensible, justificando cada elección.', result: 'El caso muestra que la mejor estrategia cambia según tipo de salida y riesgo.' },
+      'module-deepseek': { title: 'Debug de nómina con razonamiento paso a paso', tool: 'DeepSeek R1', context: 'Un script de cálculo lleva semanas dando valores incorrectos y el programador original ya no está.', prompt: 'Analiza este script de nómina paso a paso. Expón las hipótesis de error, descarta las que no aplican y señala la línea exacta con el problema.', result: 'DeepSeek identifica la causa raíz en el tercer paso del razonamiento sin adivinar, y el usuario la valida contra el caso de prueba manual.' },
+      'module-manus': { title: 'Investigación de mercado con agente autónomo', tool: 'Manus AI', context: 'Un equipo necesita un benchmark de proveedores de IA en LATAM para una decisión de compra.', prompt: 'Investiga los 5 principales proveedores de LLM en LATAM en 2025. Fuentes: sitios oficiales y reportes del sector. Entrega tabla con: nombre, modelo, precio/1M tokens y caso de uso principal.', result: 'Manus navega las fuentes especificadas, extrae datos estructurados y el equipo valida dos filas antes de cerrar el análisis.' },
+      'module-notebooklm': { title: 'Análisis de riesgo en un contrato extenso', tool: 'NotebookLM', context: 'Un equipo jurídico debe revisar un contrato de 180 páginas para identificar cláusulas de riesgo operativo.', prompt: '¿Qué cláusulas de este contrato representan riesgo operativo para la entidad? Necesito la cita exacta y la página donde aparece cada una.', result: 'NotebookLM entrega las cláusulas con página. El equipo verifica tres antes de incluirlas en el informe final.' },
+      'module-gemini-productivity': { title: 'Análisis de ventas y correo ejecutivo en Google Workspace', tool: 'Gemini en Sheets y Gmail', context: 'El equipo necesita resumir el cierre de mes y comunicar resultados a dirección.', prompt: 'En Sheets: resume las ventas del mes y detecta los tres productos con mayor caída. En Gmail: redacta un correo ejecutivo con esos hallazgos en tono formal y máximo 6 líneas.', result: 'El flujo en dos productos Google es más rápido que copiar y pegar en una sola app, y el correo sale listo para revisar.' },
+      'module-notion': { title: 'Dashboard de proyecto con Notion AI', tool: 'Notion AI', context: 'Un coordinador necesita una vista única de estado del proyecto para compartir con el equipo.', prompt: 'Genera un WBS con 5 hitos, fechas estimadas y criterios de éxito para implementar un sistema documental. Luego redacta el resumen ejecutivo del estado actual en 5 líneas.', result: 'El dashboard queda funcional con tabla, Kanban y resumen ejecutivo generado por IA en menos de 20 minutos.' },
+      'module-multimedia-pro': { title: 'Banner institucional para campaña', tool: 'Canva AI o Adobe Firefly', context: 'Un área necesita un banner digital para anunciar una jornada de capacitación interna.', prompt: 'Genera un banner 16:9 para anuncio de capacitación interna. Estilo institucional, paleta azul-blanca, imagen de profesionales colombianos en sala de trabajo, sin texto sobreimpreso.', result: 'La segunda versión con restricciones de canal y estilo es notablemente más funcional que la primera sin instrucciones.' },
+      'module-presentaciones-pro': { title: 'Presentación de proyecto en 5 slides', tool: 'Gamma + ChatGPT', context: 'Un líder debe presentar avance de proyecto a directivos en 10 minutos.', prompt: 'Estructura una presentación de 5 slides: apertura con hallazgo clave, evidencia con dato, propuesta con impacto estimado, riesgos y cierre con decisión requerida.', result: 'El borrador generado por Gamma se edita para dejar una idea por slide y el cierre provoca la aprobación del presupuesto.' },
+      'module-power-automate': { title: 'Flujo de aprobación de solicitudes', tool: 'Power Automate', context: 'El área recibe formularios de solicitud de materiales que deben aprobarse antes de gestionar.', prompt: 'Diseña el flujo: cuando llegue formulario → verifica categoría → si aprobación requerida: notifica jefe → si aprueba: genera orden → si rechaza: notifica solicitante con razón.', result: 'El flujo reduce el tiempo de aprobación de 2 días a 4 horas, con trazabilidad completa y sin correos perdidos.' },
+      'module-teams-meet': { title: 'Minuta accionable de reunión de seguimiento', tool: 'Teams Copilot', context: 'Una reunión semanal de seguimiento de proyecto debe generar minuta y puntos de acción concretos.', prompt: 'Resume esta reunión en: objetivo, tres decisiones, responsables con fecha, dos riesgos detectados. Versión ejecutiva en máximo 6 viñetas.', result: 'La minuta generada reduce el tiempo de redacción manual de 30 minutos a revisión de 5 minutos, y se adapta a dos versiones de audiencia.' },
+      'module-modelos-frontera': { title: 'Duelo de Gigantes: Estrategia de Selección', tool: 'Múltiples Modelos de Frontera', context: 'Una oficina debe procesar 200 informes técnicos y elegir entre precisión extrema o ahorro de tiempo.', prompt: 'Compara el desempeño de GPT-4o y Claude Opus para este tipo de informe y sugiere el flujo óptimo.', result: 'Se decide usar Claude para la auditoría inicial de riesgo (precisión) y Gemini para el resumen ejecutivo final (contexto/velocidad).' },
+      'module-bonus-comet': {
+        title: 'Operación Delegación Total',
+        tool: 'Comet (Perplexity)',
+        context: 'Un analista debe comparar planes de 5 herramientas y generar un reporte ejecutivo urgente.',
+        prompt: 'Compara los planes de Mailchimp, Brevo y GetResponse, genera una tabla con precios y límites, y guárdalo en Sheets.',
+        result: 'Comet ejecuta la búsqueda en 3 pestañas simultáneas y entrega la tabla lista en 5 minutos.'
+      },
+      'module-antigravity': { title: 'Agente jurídico con constitución GEMINI.md', tool: 'Antigravity + GEMINI.md', context: 'Un equipo jurídico necesita un agente consistente para analizar contratos y normativas institucionales.', prompt: 'Eres analista jurídico experto en contratación pública colombiana. Leyes: nunca inventes normas, siempre cita artículo y ley, ante duda escala al supervisor. Formato: resumen + riesgo + acción recomendada.', result: 'El agente con constitución entrega respuestas coherentes en el formato esperado y escala correctamente cuando hay ambigüedad normativa.' }
     };
   }
 
@@ -861,8 +1269,8 @@ class GuiaIA {
         { q: 'El mejor lugar para automatizar es:', options: ['Tareas repetitivas con reglas claras', 'Decisiones jurídicas finales', 'Todo proceso sensible'], answer: 0, why: 'Las tareas estructuradas son el mejor punto de entrada.' }
       ],
       'module-14': [
-        { q: 'Un segundo cerebro sirve sobre todo para:', options: ['Recuperar conocimiento útil', 'Acumular texto', 'Guardar archivos sin orden'], answer: 0, why: 'Si no recuperas rápido la información, el sistema no está funcionando.' },
-        { q: 'La IA aporta más en PKM cuando:', options: ['Convierte fuentes en notas accionables', 'Duplica notas sin criterio', 'Escribe sin enlazar decisiones'], answer: 0, why: 'El valor está en transformar información en conocimiento reutilizable.' }
+        { q: '¿Cuál es la diferencia más importante entre un chatbot y un agente?', options: ['El agente planifica pasos y usa herramientas para cumplir un objetivo', 'El agente solo tiene mejor diseño de interfaz', 'El chatbot puede ejecutar acciones en apps externas'], answer: 0, why: 'El agente es proactivo: planifica, usa herramientas y actúa. El chatbot es reactivo y solo responde.' },
+        { q: '¿Qué significa el principio HITL?', options: ['Human-in-the-Loop: el humano siempre supervisa decisiones críticas', 'La IA actúa 100% sin intervención', 'Herramientas Integradas en Tiempo Libre'], answer: 0, why: 'HITL es el principio de seguridad fundamental: el humano dispone, el agente propone.' }
       ],
       'module-15': [
         { q: 'En un caso integrado, lo mejor es:', options: ['Separar frentes y asignar herramienta por tarea', 'Resolver todo en una sola herramienta', 'Cambiar de herramienta al azar'], answer: 0, why: 'La orquestación funciona mejor cuando cada herramienta resuelve su capa.' },
@@ -891,6 +1299,54 @@ class GuiaIA {
       'module-21': [
         { q: 'Operación Centauro evalúa sobre todo:', options: ['Uso integrado de búsqueda, generación y privacidad', 'Solo rapidez de escritura', 'Solo diseño visual'], answer: 0, why: 'La prueba final mide integración con criterio y seguridad.' },
         { q: 'La mejor estrategia en una crisis es:', options: ['Cambiar de herramienta según tipo de salida y riesgo', 'Usar la misma herramienta para todo', 'Ignorar verificación por urgencia'], answer: 0, why: 'La elección de herramienta depende de la fase y del riesgo.' }
+      ],
+      'module-deepseek': [
+        { q: 'DeepSeek R1 agrega más valor cuando:', options: ['La tarea requiere razonamiento secuencial de varios pasos', 'Necesitas una respuesta rápida de texto', 'Quieres hacer una búsqueda web'], answer: 0, why: 'El modelo de razonamiento brilla en problemas que exigen descomponer hipótesis.' },
+        { q: 'Un prompt CoT efectivo para DeepSeek debe:', options: ['Pedir revisión paso a paso y criterio de verificación al final', 'Ser lo más corto posible', 'Evitar dar contexto del problema'], answer: 0, why: 'El razonamiento explícito requiere una instrucción que lo active.' }
+      ],
+      'module-manus': [
+        { q: 'Antes de delegar una tarea a Manus, debes definir:', options: ['Objetivo, fuentes válidas, formato y límites', 'Solo el tema general', 'Solo el formato de salida'], answer: 0, why: 'Sin un brief claro, el agente opera sin criterio real.' },
+        { q: 'El valor de Manus sobre un chatbot normal está en:', options: ['Navegar fuentes, extraer y sintetizar en múltiples pasos', 'Responder desde memoria más rápido', 'Tener mejor interfaz visual'], answer: 0, why: 'La navegación autónoma es la diferencia clave.' }
+      ],
+      'module-notebooklm': [
+        { q: 'NotebookLM responde mejor cuando:', options: ['La pregunta es concreta y las fuentes están cargadas', 'Preguntas sobre noticias recientes', 'Tienes pocas fuentes de baja calidad'], answer: 0, why: 'El sistema solo razona sobre las fuentes que subes.' },
+        { q: 'Para validar un hallazgo de NotebookLM debes:', options: ['Pedir la cita exacta y verificar en el documento original', 'Aceptar la respuesta si suena convincente', 'Pedir otro resumen más largo'], answer: 0, why: 'La trazabilidad exige fuente verificable, no solo confianza.' }
+      ],
+      'module-gemini-productivity': [
+        { q: 'Gemini aporta más cuando:', options: ['Se usa dentro del producto correcto con el archivo abierto', 'Se copia el texto a gemini.google.com', 'Se usa solo para redactar correos'], answer: 0, why: 'La integración contextual es la ventaja del ecosistema Google.' },
+        { q: 'El criterio para elegir qué producto Gemini usar es:', options: ['Tipo de archivo y resultado esperado', 'Cuál tiene mejor diseño visual', 'Cuál se abre más rápido'], answer: 0, why: 'Cada producto tiene un contexto de uso óptimo.' }
+      ],
+      'module-notion': [
+        { q: 'Una base de datos en Notion es mejor que una lista de notas cuando:', options: ['Necesitas filtrar, agrupar y reutilizar la información', 'Solo necesitas escribir texto rápido', 'No tienes conexión a internet'], answer: 0, why: 'La estructura relacional multiplica el valor del conocimiento.' },
+        { q: 'Notion AI aporta más valor cuando:', options: ['El espacio ya tiene estructura y le pides que la llene', 'Generas texto sin ninguna base previa', 'Usas páginas sueltas sin vínculos'], answer: 0, why: 'La IA amplifica la estructura existente, no la reemplaza.' }
+      ],
+      'module-multimedia-pro': [
+        { q: 'Un prompt visual funcional debe incluir:', options: ['Sujeto, estilo, paleta, formato y restricciones', 'Solo el nombre del evento', 'Solo el color preferido'], answer: 0, why: 'Las restricciones son las que producen piezas útiles, no solo bonitas.' },
+        { q: 'El criterio de éxito de una pieza visual es:', options: ['Que comunique el mensaje al público correcto en el canal correcto', 'Que tenga muchos efectos y colores', 'Que se genere en el menor tiempo posible'], answer: 0, why: 'La funcionalidad comunicativa es el único criterio real.' }
+      ],
+      'module-presentaciones-pro': [
+        { q: 'El borrador de IA para presentaciones es mejor usarlo como:', options: ['Punto de partida que editas para dejar una idea por slide', 'Versión final lista para presentar', 'Inspiración visual sin estructura'], answer: 0, why: 'La IA acelera, pero la narrativa y la síntesis son tuyas.' },
+        { q: 'Una presentación termina bien cuando:', options: ['Cierra con una acción o decisión concreta', 'Termina con la mayor cantidad de información posible', 'El diseño es más elaborado que el contenido'], answer: 0, why: 'El objetivo de una presentación ejecutiva es provocar decisión.' }
+      ],
+      'module-power-automate': [
+        { q: 'Un flujo automatizado robusto debe incluir:', options: ['Trigger, condición, acción, excepción y validación humana', 'Solo un disparador y una acción', 'Solo las acciones que se ejecutan correctamente'], answer: 0, why: 'Sin manejo de excepciones, el flujo es frágil en producción.' },
+        { q: 'El punto de aprobación humana en un flujo es:', options: ['Obligatorio antes de acciones irreversibles', 'Un paso opcional que ralentiza el proceso', 'Necesario solo en flujos nuevos'], answer: 0, why: 'La automatización no elimina la responsabilidad humana en decisiones críticas.' }
+      ],
+      'module-teams-meet': [
+        { q: 'El resumen de IA de una reunión es:', options: ['Un borrador que debes revisar antes de enviar', 'Un documento final listo para distribuir', 'Un reemplazo de la toma de notas humana'], answer: 0, why: 'La IA puede perder matices o contexto que solo el asistente humano captó.' },
+        { q: 'Adaptar la minuta según audiencia significa:', options: ['Cambiar nivel de detalle y tono según destinatario', 'Enviar el mismo texto a todos', 'Resumir más para todos'], answer: 0, why: 'Dirección necesita 6 puntos clave; el equipo necesita responsables y fechas.' }
+      ],
+      'module-modelos-frontera': [
+        { q: 'La "Frontera" de la IA se define por:', options: ['El límite actual de razonamiento, multimodalidad y escala', 'El modelo que tiene más marketing', 'La herramienta que es gratuita'], answer: 0, why: 'La frontera es el techo tecnológico de lo que es posible hoy.' },
+        { q: 'Si tu prioridad es la honestidad y evitar alucinaciones en un documento largo, el modelo recomendado es:', options: ['Claude Opus 4', 'Grok 3', 'Un modelo pequeño local'], answer: 0, why: 'Claude es reconocido por su alineación ética y menor tasa de alucinación en análisis profundo.' }
+      ],
+      'module-bonus-comet': [
+        { q: '¿Cuál es la función principal del Background Assistant en Comet?', options: ['Ejecutar misiones en segundo plano mientras usas otras pestañas', 'Solo bloquear anuncios', 'Cambiar el color del navegador'], answer: 0, why: 'El Background Assistant permite la multi-tarea agéntica real.' },
+        { q: 'Ante un riesgo de Prompt Injection, la mejor defensa es:', options: ['Activar confirmación obligatoria antes de acciones', 'Desinstalar el navegador', 'Confiar plenamente en el agente'], answer: 0, why: 'El control humano (HITL) previene acciones no deseadas causadas por instrucciones maliciosas en la web.' }
+      ],
+      'module-antigravity': [
+        { q: 'Una constitución GEMINI.md define sobre todo:', options: ['Rol, leyes inmutables, herramientas y criterios de escalación', 'Solo el nombre del agente', 'Solo el formato de respuesta'], answer: 0, why: 'La constitución determina el comportamiento consistente del agente en cualquier tarea.' },
+        { q: 'Un buen handoff para un agente incluye:', options: ['Objetivo claro, contexto mínimo y acción esperada', 'Texto largo con toda la historia del proyecto', 'Solo instrucciones genéricas'], answer: 0, why: 'El handoff limpio es la diferencia entre un agente que opera con criterio y uno que adivina.' }
       ]
     };
   }
@@ -928,7 +1384,7 @@ class GuiaIA {
     this.loadAllModules().then(() => {
         console.log("Sovereign Modules Synchronized.");
         this.updateNavLockState();
-    });
+    }).catch(e => console.error("Critical module loading error:", e));
 
     // 4. Remaining components
     this.setupScrollProgress();
@@ -1284,7 +1740,7 @@ class GuiaIA {
       const guidedHtml = this.renderGuidedExerciseCard(normalized);
       if (!moduleEl || !guidedHtml || moduleEl.querySelector('.guided-exercise-card')) return;
 
-      const grid = this.getOrCreatePedagogyContainer(moduleEl);
+      const grid = this.getOrCreatePedagogyContainer(moduleEl, normalized);
       if (grid) grid.insertAdjacentHTML('beforeend', guidedHtml);
     }
 
@@ -1332,7 +1788,7 @@ class GuiaIA {
       const toolAidHtml = this.renderToolAidCard(normalized);
       if (!moduleEl || !toolAidHtml || moduleEl.querySelector('.tool-aid-card')) return;
 
-      const grid = this.getOrCreatePedagogyContainer(moduleEl);
+      const grid = this.getOrCreatePedagogyContainer(moduleEl, normalized);
       if (grid) grid.insertAdjacentHTML('beforeend', toolAidHtml);
     }
 
@@ -1369,17 +1825,182 @@ class GuiaIA {
       const caseHtml = this.renderCaseStudyCard(normalized);
       if (!moduleEl || !caseHtml || moduleEl.querySelector('.case-study-card')) return;
 
-      const grid = this.getOrCreatePedagogyContainer(moduleEl);
+      const grid = this.getOrCreatePedagogyContainer(moduleEl, normalized);
       if (grid) grid.insertAdjacentHTML('beforeend', caseHtml);
     }
 
   getMiniAssessmentQuestions(moduleId) {
-    const config = this.getLearningConfig(moduleId);
-    const aid = this.toolAidMap[this.normalizeModuleId(moduleId)];
+    const normalized = this.normalizeModuleId(moduleId);
+    const questionMap = {
+      'module-1': [
+        'Puedo clasificar una tarea real de mi área en: delegable a IA, apoyable con IA o reservada para criterio humano.',
+        'Identifico al menos un riesgo concreto antes de llevar una tarea a una herramienta de IA.',
+        'Podría escribir ahora mismo mi regla personal: "usaré IA cuando… y no la usaré cuando…".'
+      ],
+      'module-2': [
+        'Entiendo qué cambiar en un prompt cuando la primera respuesta sale genérica o incompleta.',
+        'Podría tomar un borrador de texto y pedirle a la IA una versión mejorada con tono, audiencia y formato definidos.',
+        'Me siento capaz de hacer tres iteraciones sobre un prompt hasta obtener un resultado útil en mi trabajo.'
+      ],
+      'module-3': [
+        'Puedo construir un prompt completo usando los cuatro componentes de CREA: contexto, rol, estructura y acción.',
+        'Si la salida de la IA sale ambigua, sé qué parte de CREA revisar primero para corregirla.',
+        'Podría reutilizar un prompt que diseñé hoy en una tarea similar la próxima semana sin tener que empezar desde cero.'
+      ],
+      'module-4': [
+        'Puedo ir más allá del resumen y extraer un riesgo y una acción concreta de un documento oficial.',
+        'Sé cómo pedir cita, página o sección exacta para validar un hallazgo documental antes de usarlo.',
+        'Podría convertir un decreto o informe en una decisión ejecutiva usando IA sin perder trazabilidad.'
+      ],
+      'module-5': [
+        'Antes de aplicar una fórmula o limpieza de IA a toda la base, probaría en un subconjunto pequeño.',
+        'Sé cómo anonimizar datos sensibles en un ejemplo antes de pegarlo en una IA pública.',
+        'Puedo describir un problema de Excel en lenguaje natural y obtener una solución que luego verificaría manualmente.'
+      ],
+      'module-6': [
+        'Puedo definir el objetivo comunicativo, el canal y las restricciones de una pieza visual antes de generarla.',
+        'Entiendo la diferencia entre un prompt visual funcional y uno que solo busca estética.',
+        'Podría crear un brief claro para un banner o infografía institucional y evaluarla por su utilidad real, no por ser bonita.'
+      ],
+      'module-7': [
+        'Puedo convertir un tema amplio en una estructura de 5 diapositivas con apertura, problema, evidencia, propuesta y cierre.',
+        'Entiendo que cada diapositiva debe tener una sola idea principal y sé cómo simplificar las que aún tienen demasiado texto.',
+        'Podría llevar una presentación generada por IA a Gamma o Canva y editarla hasta que termine con una acción concreta.'
+      ],
+      'module-8': [
+        'Puedo transformar un mismo mensaje para al menos tres audiencias distintas: alta dirección, ciudadanía y equipo interno.',
+        'Sé detectar cuándo la IA cambió los hechos y no solo el tono, y cómo corregirlo.',
+        'Me siento capaz de adaptar un comunicado institucional a diferentes canales sin perder precisión en el contenido.'
+      ],
+      'module-9': [
+        'Puedo clasificar un dato como público, interno, sensible o crítico antes de incluirlo en un prompt de IA pública.',
+        'Sé redactar un prompt seguro usando variables o marcadores en lugar de datos reales.',
+        'Podría establecer tres reglas de oro de privacidad para mi área y aplicarlas antes de cada interacción con una IA externa.'
+      ],
+      'module-10': [
+        'Puedo justificar la elección de una herramienta según el tipo de problema, la entrada y la salida esperada.',
+        'Sé descartar una herramienta popular cuando no encaja en mi caso y explicar el razonamiento.',
+        'Podría definir mi stack ideal de tres herramientas para las tareas más frecuentes de mi trabajo.'
+      ],
+      'module-11': [
+        'Puedo formular una pregunta literal y una inferencial sobre un documento largo y obtener respuestas con evidencia.',
+        'Sé exigir página, cita o sección exacta para validar un hallazgo antes de usarlo en una decisión.',
+        'Podría convertir un hallazgo documental en una acción concreta y verificarla manualmente antes de proceder.'
+      ],
+      'module-12': [
+        'Puedo convertir una lista caótica de pendientes en un plan priorizado por urgencia, impacto y dependencias.',
+        'Sé identificar qué tareas de mi semana puedo delegar a IA, cuáles debo hacer yo y cuáles podría eliminar.',
+        'Me siento capaz de generar un plan semanal con IA y ajustarlo para que refleje restricciones reales de mi cargo.'
+      ],
+      'module-13': [
+        'Puedo describir un proceso recurrente como flujo con trigger, entrada, transformación, salida y excepción.',
+        'Sé identificar qué punto de control humano debe existir en un flujo automatizado antes de que escale errores.',
+        'Podría resumir una automatización simple en una frase operativa clara y compartirla con mi equipo.'
+      ],
+      'module-14': [
+        'Puedo explicar la diferencia entre un chatbot reactivo y un agente proactivo usando la analogía del asistente ejecutivo.',
+        'Sé identificar los 4 componentes de un agente (Cerebro, Memoria, Herramientas, Acción) y cómo interactúan.',
+        'Me siento capaz de diseñar un blueprint de agente con límites claros de autonomía y puntos de revisión humana (HITL).'
+      ],
+      'module-15': [
+        'Puedo dividir un caso complejo en frentes (documental, datos, redacción) y asignar una herramienta diferente a cada uno.',
+        'Sé consolidar los entregables de varias herramientas en una respuesta coherente usando CREA.',
+        'Me siento capaz de hacer una revisión final de verificación, privacidad y claridad antes de cerrar un caso integrado.'
+      ],
+      'module-16': [
+        'Puedo describir un problema operativo en lenguaje natural y obtener una propuesta técnica (fórmula, macro o prototipo) de la IA.',
+        'Sé probar una solución técnica en un caso pequeño antes de llevarla a producción.',
+        'Podría documentar qué parte de la solución quedó lista y qué parte aún necesita soporte técnico real.'
+      ],
+      'module-17': [
+        'Puedo clasificar un caso real de mi área como apto para nube pública, entorno privado o solo IA local.',
+        'Entiendo por qué usar IA local no es una moda sino una decisión de riesgo y gobernanza de datos.',
+        'Podría escribir una política corta para mi área definiendo qué datos pueden usarse con IA pública y cuáles no.'
+      ],
+      'module-18': [
+        'Puedo calcular un ROI mínimo de una licencia premium usando horas ahorradas y costo mensual real.',
+        'Sé escribir un argumento ejecutivo de 5 líneas para un director que incluye costo, beneficio, riesgo y condición de adopción.',
+        'Entiendo que el ROI depende también de la adopción real del equipo y no solo del ahorro de tiempo ideal.'
+      ],
+      'module-19': [
+        'Puedo identificar el rol profesional con IA que más se alinea con mi perfil y nombrar una fortaleza y una brecha concreta.',
+        'Sé diseñar un plan de 90 días que conecte competencias aprendidas con un microproyecto demostrable.',
+        'Podría definir la primera acción que haré esta semana para avanzar en mi ruta profesional con IA.'
+      ],
+      'module-20': [
+        'Puedo leer mi reporte de competencias e identificar cuáles módulos reforzaría primero por impacto laboral real.',
+        'Sé comparar la evidencia de dos módulos fuertes y dos débiles para detectar qué patrón repito cuando me va bien.',
+        'Podría traducir el cierre del curso en un compromiso de práctica semanal con un entregable concreto.'
+      ],
+      'module-21': [
+        'Puedo elegir herramienta diferente para cada fase de una crisis institucional justificando el tipo de riesgo y salida esperada.',
+        'Sé formular una consulta RAG precisa, identificar si la fuente encontrada realmente responde el problema y verificarla.',
+        'Me siento capaz de cerrar un caso de alto impacto validando coherencia entre decisión, privacidad y soporte documental.'
+      ],
+      'module-deepseek': [
+        'Entiendo cuándo tiene sentido usar DeepSeek R1 en lugar de un modelo generalista: tareas que requieren razonamiento secuencial, depuración o comparación de opciones.',
+        'Puedo escribir un prompt de Chain of Thought que obligue a DeepSeek a revisar hipótesis, mostrar pasos y cerrar con criterio de verificación.',
+        'Sé justificar cuándo conviene correr DeepSeek en local (Ollama) por privacidad en lugar de usarlo vía API pública.'
+      ],
+      'module-manus': [
+        'Entiendo que Manus es un agente autónomo que navega, extrae y sintetiza: sé cuándo eso agrega valor real frente a una consulta de chat normal.',
+        'Puedo definir objetivo, límites, fuentes válidas y formato de salida antes de delegar una tarea a Manus para que no opere sin criterio.',
+        'Sé identificar qué tareas (investigación multipasos, extracción de PDFs complejos, seguimiento de tendencias) justifican un agente en lugar de un prompt directo.'
+      ],
+      'module-notebooklm': [
+        'Entiendo que NotebookLM solo razona sobre las fuentes que yo subí, no sobre conocimiento general: sé explotar esta limitación a mi favor.',
+        'Puedo formular preguntas literales e inferenciales a un cuaderno de NotebookLM y exigir cita exacta para validar la respuesta.',
+        'Sé organizar un cuaderno por objetivo concreto (un proyecto, un documento clave) en vez de acumular fuentes sin criterio.'
+      ],
+      'module-gemini-productivity': [
+        'Puedo elegir en qué producto de Google Gemini trabajar (Docs, Sheets, Gmail, Meet, Vids) según el tipo de archivo y resultado que necesito.',
+        'Entiendo que Gemini no es una pantalla única: es una capa de inteligencia que aparece en contexto y sé cómo activarla en el flujo correcto.',
+        'Me siento capaz de usar Gemini como analista multimodal para combinar tabla, imagen o documento y producir una decisión ejecutiva.'
+      ],
+      'module-notion': [
+        'Puedo usar Notion AI para generar estructuras de proyectos (WBS, hitos, riesgos) a partir de un objetivo simple y no solo para resumir texto.',
+        'Entiendo cuándo usar una base de datos relacionada en Notion AI frente a una página de notas simple, según la reutilización esperada.',
+        'Sé usar las plantillas avanzadas de Notion para crear un dashboard operativo que conecte proyectos, tareas y decisiones en un solo espacio.'
+      ],
+      'module-multimedia-pro': [
+        'Puedo escribir un prompt visual con sujeto, estilo, paleta, formato y restricciones claras para obtener una pieza útil y no solo bonita.',
+        'Entiendo la diferencia entre herramientas de generación de imagen según fortalezas (fotorealismo, contexto de texto, diseño institucional).',
+        'Sé evaluar si una imagen generada sirve para el canal y público definidos, y puedo ajustar el prompt cuando no lo hace.'
+      ],
+      'module-presentaciones-pro': [
+        'Puedo convertir un objetivo comunicativo en una estructura de presentación clara usando herramientas como Gamma, Canva o PowerPoint Copilot.',
+        'Entiendo que la herramienta acelera el diseño pero la narrativa sigue siendo mía: sé editar slides para dejar una sola idea por panel.',
+        'Me siento capaz de llevar una presentación generada por IA hasta que cierre con una acción concreta y no solo con información.'
+      ],
+      'module-power-automate': [
+        'Puedo diseñar un flujo en Power Automate con trigger, condición, acción y manejo de excepciones sin dejar puntos ciegos de error.',
+        'Entiendo en qué casos Power Automate con IA agrega valor real (aprobaciones, alertas, consolidación de datos) y en cuáles es overkill.',
+        'Sé documentar un flujo automatizado de forma que mi equipo pueda mantenerlo sin depender de que yo lo explique cada vez.'
+      ],
+      'module-teams-meet': [
+        'Puedo activar y usar el Copilot de Teams o la transcripción de Meet para obtener minuta, decisiones y siguientes pasos sin revisar toda la grabación.',
+        'Entiendo cuándo el resumen automático de IA es suficiente y cuándo necesito edición humana para garantizar precisión en decisiones clave.',
+        'Sé adaptar el resumen de una reunión a distintas audiencias: equipo, dirección y actas formales, usando el texto generado como borrador base.'
+      ],
+      'module-antigravity': [
+        'Entiendo cómo funciona el sistema Antigravity: constitución GEMINI.md, motor de razonamiento L3 y orquestación de agentes soberanos.',
+        'Puedo construir o ajustar un archivo GEMINI.md con rol, leyes inmutables, criterios de escalación y formato de salida para un agente específico.',
+        'Sé cuándo usar un agente especializado versus un prompt directo, y puedo diseñar un handoff correcto con objetivo, hallazgos y siguiente acción.'
+      ],
+      'module-modelos-frontera': [
+        'Puedo explicar qué es un modelo de frontera y por qué su ventana de contexto o razonamiento (CoT) cambian mi elección.',
+        'Sé identificar cuándo usar Gemini por escala, Claude por alineación o DeepSeek/o1 por razonamiento puro.',
+        'Me siento capaz de diseñar una arquitectura de "Tríada de Frontera" para un proceso institucional complejo.'
+      ]
+    };
+    const questions = questionMap[normalized];
+    if (questions) return questions;
+    // Fallback for unmapped modules
+    const config = this.getLearningConfig(normalized);
     return [
-      `Entiendo cuándo usar esta herramienta para ${config?.title?.toLowerCase() || 'este tema'}.`,
-      `Podría repetir este flujo sin copiar el ejemplo fuerte literal${aid ? ' y adaptándolo a mi caso' : ''}.`,
-      'Me siento capaz de aplicarlo mañana en un caso real de trabajo.'
+      `Entiendo el objetivo de este módulo: ${config?.objective || 'aplicar IA con criterio'}.`,
+      `Podría repetir el ejercicio guiado de este módulo adaptándolo a mi caso real de trabajo.`,
+      'Me siento capaz de aplicar lo aprendido en este módulo mañana en mi área.'
     ];
   }
 
@@ -1460,11 +2081,12 @@ class GuiaIA {
 
   injectModuleQuiz(moduleId) {
       const normalized = this.normalizeModuleId(moduleId);
+      if (normalized === 'welcome' || normalized === 'certificate' || normalized === 'constitution') return;
       const moduleEl = document.getElementById(normalized);
       const quizHtml = this.renderModuleQuiz(normalized);
       if (!moduleEl || !quizHtml || moduleEl.querySelector('.module-quiz-card')) return;
 
-      const grid = this.getOrCreatePedagogyContainer(moduleEl);
+      const grid = this.getOrCreatePedagogyContainer(moduleEl, normalized);
       if (grid) grid.insertAdjacentHTML('beforeend', quizHtml);
     }
 
@@ -1529,7 +2151,7 @@ class GuiaIA {
       <div class="section-card mini-assessment-card animate-in visible" data-mini-assessment-module="${normalized}">
         <div class="mini-assessment-head">
           <div class="mini-assessment-kicker">Mini autoevaluación</div>
-          <h3>Comprensión rápida del módulo</h3>
+          <h3>¿Qué tan listo/a te sientes con: ${this.getLearningConfig(normalized)?.title || 'este módulo'}?</h3>
         </div>
         <div class="mini-assessment-questions">
           ${questions.map((question, index) => {
@@ -1566,19 +2188,57 @@ class GuiaIA {
       const assessmentHtml = this.renderMiniAssessment(normalized);
       if (!moduleEl || !assessmentHtml || moduleEl.querySelector('.mini-assessment-card')) return;
 
-      const grid = this.getOrCreatePedagogyContainer(moduleEl);
+      const grid = this.getOrCreatePedagogyContainer(moduleEl, normalized);
       if (grid) grid.insertAdjacentHTML('beforeend', assessmentHtml);
     }
 
-  getOrCreatePedagogyContainer(moduleEl) {
+  getPedagogyZoneContent(moduleId) {
+    const map = {
+      'module-1':  { icon: '🔍', title: 'Practica tu diagnóstico de tareas IA', sub: 'Decide qué delegar, qué apoyar y qué reservar para criterio humano.' },
+      'module-2':  { icon: '✍️', title: 'Ejercita la iteración de prompts', sub: 'Transforma borradores pobres en instrucciones que den resultados útiles.' },
+      'module-3':  { icon: '🧱', title: 'Construye prompts con CREA', sub: 'Aplica contexto, rol, estructura y acción en tus propios casos.' },
+      'module-4':  { icon: '📄', title: 'Convierte documentos en decisiones', sub: 'Lee más rápido, extrae riesgos y llega a una acción verificable.' },
+      'module-5':  { icon: '📊', title: 'Trabaja datos con control y validación', sub: 'Resuelve problemas de Excel con IA sin sacrificar la comprobación.' },
+      'module-6':  { icon: '🎨', title: 'Diseña piezas visuales con propósito', sub: 'Genera imágenes que comunican, no solo que impresionan.' },
+      'module-7':  { icon: '🖥️', title: 'Estructura presentaciones ejecutivas', sub: 'Una idea por slide, narrativa clara y cierre con acción concreta.' },
+      'module-8':  { icon: '🗣️', title: 'Adapta mensajes a cada audiencia', sub: 'Mismo contenido, tres tonos distintos: dirección, equipo y ciudadanía.' },
+      'module-9':  { icon: '🔒', title: 'Blinda datos antes de usar IA', sub: 'Clasifica, anonimiza y valida antes de enviar cualquier prompt a una IA pública.' },
+      'module-10': { icon: '🛠️', title: 'Elige la herramienta correcta para cada tarea', sub: 'Construye tu stack personal basado en el problema, no en la moda.' },
+      'module-11': { icon: '🔬', title: 'Interroga documentos largos con trazabilidad', sub: 'Extrae hallazgos con cita exacta y conviértelos en decisiones accionables.' },
+      'module-12': { icon: '📅', title: 'Convierte el caos en un plan ejecutable', sub: 'Prioriza por impacto real, delega lo que se puede y elimina lo accesorio.' },
+      'module-13': { icon: '⚙️', title: 'Diseña flujos automatizados con control', sub: 'Trigger, proceso, validación humana y salida: ningún paso sin criterio.' },
+      'module-14': { icon: '🤖', title: 'Diseña y orquesta tu propio agente de IA', sub: 'De la idea al blueprint: define misiones, herramientas y límites para delegar con seguridad.' },
+      'module-15': { icon: '🔗', title: 'Integra herramientas en un caso completo', sub: 'Orquesta documento, datos y redacción sin perder el hilo de verificación.' },
+      'module-16': { icon: '💻', title: 'Traduce necesidades operativas a soluciones técnicas', sub: 'De la descripción del problema a la fórmula, macro o prototipo que lo resuelve.' },
+      'module-17': { icon: '🏠', title: 'Decide cuándo usar IA local y por qué', sub: 'Clasifica datos, elige arquitectura y escribe tu política de privacidad para el área.' },
+      'module-18': { icon: '💰', title: 'Justifica licencias premium con números', sub: 'ROI real: calcula ahorro, costo, adopción y riesgo en tres escenarios.' },
+      'module-19': { icon: '🚀', title: 'Diseña tu ruta profesional con IA', sub: 'Conecta competencias actuales con el rol futuro que quieres lograr.' },
+      'module-20': { icon: '🏆', title: 'Lee tu perfil y define tu plan de repaso', sub: 'El cierre no es una ceremonia: es un diagnóstico que conviertes en acción.' },
+      'module-21': { icon: '🎯', title: 'Operación Centauro: resolución integrada bajo presión', sub: 'Búsqueda, generación visual y privacidad coordinadas en un caso de alto impacto.' },
+      'module-deepseek':           { icon: '🧠', title: 'Pon a prueba tu dominio de DeepSeek R1', sub: 'Razonamiento paso a paso, prompts CoT y decisión local vs. nube.' },
+      'module-manus':              { icon: '🐙', title: 'Ejercita el trabajo con agentes autónomos', sub: 'Define objetivos, límites y fuentes antes de dejar que Manus opere.' },
+      'module-notebooklm':         { icon: '📓', title: 'Interroga tus fuentes con profundidad', sub: 'Un cuaderno por objetivo, preguntas precisas y evidencia verificable.' },
+      'module-gemini-productivity': { icon: '✨', title: 'Domina el ecosistema Gemini en Google', sub: 'El producto correcto según el archivo, el contexto y el resultado necesario.' },
+      'module-notion':             { icon: '🐘', title: 'Conecta proyectos, tareas y decisiones en Notion AI', sub: 'Más que notas: un sistema operativo para tu conocimiento.' },
+      'module-multimedia-pro':     { icon: '🎨', title: 'Genera piezas visuales con intención comunicativa', sub: 'Prompt preciso, herramienta adecuada y criterio de resultado.' },
+      'module-presentaciones-pro': { icon: '🖥️', title: 'Crea presentaciones que terminan en acción', sub: 'Estructura narrativa, una idea por slide y cierre que provoca decisión.' },
+      'module-power-automate':     { icon: '⚡', title: 'Automatiza procesos con control y trazabilidad', sub: 'Flujos que funcionan: trigger, condición, excepción y acción clara.' },
+      'module-teams-meet':         { icon: '📹', title: 'Convierte reuniones en minutas accionables', sub: 'Copilot, transcripción y resumen adaptado a cada audiencia.' },
+      'module-antigravity':        { icon: '🛡️', title: 'Configura y orquesta tu sistema Antigravity', sub: 'GEMINI.md, agentes soberanos y handoffs que no pierden el contexto.' }
+    };
+    return map[moduleId] || { icon: '🏋️', title: 'Área de Práctica y Evaluación', sub: 'Aplica la teoría que aprendiste arriba en estos retos interactivos.' };
+  }
+
+  getOrCreatePedagogyContainer(moduleEl, moduleId) {
     let container = moduleEl.querySelector('.pedagogy-zone');
     if (!container) {
+      const meta = this.getPedagogyZoneContent(moduleId || moduleEl.id);
       container = document.createElement('div');
       container.className = 'pedagogy-zone animate-in';
       container.innerHTML = `
         <div class="pedagogy-zone-header">
-          <h3><span class="icon">🏋️</span> Área de Práctica y Evaluación</h3>
-          <p>Aplica la teoría que aprendiste arriba en estos retos interactivos.</p>
+          <h3><span class="icon">${meta.icon}</span> ${meta.title}</h3>
+          <p>${meta.sub}</p>
         </div>
         <div class="pedagogy-grid"></div>
       `;
@@ -1593,11 +2253,20 @@ class GuiaIA {
   }
 
   renderPedagogicalLayers(moduleId) {
+    const normalized = this.normalizeModuleId(moduleId);
+    if (normalized === 'welcome' || normalized === 'certificate' || normalized === 'constitution') return;
+    
+    // 1. Core Educational Brief (Always safe)
     this.renderLearningSignals(moduleId);
-    this.injectGuidedExercises(moduleId);
-    this.injectToolAid(moduleId);
-    this.injectCaseStudy(moduleId);
-    this.injectMiniAssessment(moduleId);
+
+    // 2. Specialized Layers (Skip if module has native labs/tabs like 1-5)
+    const isLegacyTabbed = ['module-1', 'module-2', 'module-3', 'module-4', 'module-5'].includes(normalized);
+    if (!isLegacyTabbed) {
+      this.injectGuidedExercises(moduleId);
+      this.injectToolAid(moduleId);
+      this.injectCaseStudy(moduleId);
+      this.injectMiniAssessment(moduleId);
+    }
   }
 
   setupMiniAssessment() {
@@ -1691,6 +2360,7 @@ class GuiaIA {
         ${this.renderEvidenceFeedback(normalized)}
       </div>
     `;
+    // DNA v32.4: Standard learning brief placement (right below header)
     anchor.insertAdjacentElement('afterend', brief);
   }
 
@@ -1994,7 +2664,7 @@ class GuiaIA {
     };
 
     try {
-      const API_URL = window.location.port === '5500' ? `http://${window.location.hostname}:8080` : '';
+      const API_URL = window.location.port === '5500' ? `http://${window.location.hostname}:8020` : '';
       const resp = await fetch(`${API_URL}/api/leaderboard`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -2179,17 +2849,8 @@ class GuiaIA {
   }
 
   setupQuickActions() {
-    const viewMapBtn = document.getElementById('viewMapBtn');
-
-    if (viewMapBtn) {
-      viewMapBtn.addEventListener('click', () => {
-        if (window.innerWidth <= 1024) {
-          document.querySelector('.sidebar')?.classList.add('open');
-          document.querySelector('.sidebar-overlay')?.classList.add('show');
-        }
-        this.showToast('Mapa completo disponible. Navega por los diferentes niveles.', 'info');
-      });
-    }
+    // Redundant "Ver mapa completo" button removed as requested.
+    // Sidebar/Map is always accessible via menu or direct sidebar.
   }
 
 
@@ -2248,6 +2909,10 @@ class GuiaIA {
                 console.error('Error rendering module 20 reports:', reportError);
               }
             }, 100);
+          }
+
+          if (moduleId === 'welcome') {
+            this.refreshWelcomeUI();
           }
           
           // Ensure new content becomes visible
@@ -2315,6 +2980,52 @@ class GuiaIA {
     }
   }
 
+  refreshWelcomeUI() {
+    console.log('🔄 Refreshing Welcome Module UI...');
+    const welcome = document.getElementById('welcome');
+    if (!welcome) return;
+
+    // 1. Update Hero Stats Dynamically
+    const stats = welcome.querySelectorAll('.hero-stat-number');
+    if (stats.length >= 4) {
+      // Modules completed vs total
+      const totalModules = 21;
+      const completedCount = this.completedModules.size;
+      stats[0].textContent = completedCount > 0 ? `${completedCount}` : '21';
+      stats[0].nextElementSibling.textContent = completedCount > 0 ? 'Módulos Listos' : 'Módulos';
+      
+      // We can also change the CTA button if they have progress
+      const startBtn = document.getElementById('startBtn');
+      if (startBtn) {
+        if (completedCount > 0) {
+          const next = this.getRecommendedModuleMeta();
+          startBtn.textContent = `Continuar: ${next.title} →`;
+          startBtn.dataset.targetModule = next.id;
+        } else {
+          startBtn.textContent = 'Empezar ruta recomendada →';
+          startBtn.dataset.targetModule = 'module-1';
+        }
+      }
+    }
+
+    // 2. Personalize subtitle if name is set
+    const subtitle = welcome.querySelector('.hero-subtitle');
+    const userName = localStorage.getItem('guia-ia-username');
+    if (subtitle && userName && !subtitle.dataset.personalized) {
+        subtitle.innerHTML = `Bienvenido de nuevo, <b>${userName}</b>. ${subtitle.textContent}`;
+        subtitle.dataset.personalized = "true";
+    }
+
+    // 3. Update active specialization if any
+    const spec = localStorage.getItem('guia-ia-specialization');
+    if (spec) {
+        const cards = welcome.querySelectorAll('.value-card');
+        cards.forEach(card => card.classList.remove('active-focus'));
+        if (spec === 'cotidiano') cards[1]?.classList.add('active-focus');
+        if (spec === 'administrativo' || spec === 'coordinador') cards[0]?.classList.add('active-focus');
+    }
+  }
+
   async fetchConstitution() {
     try {
       const resp = await fetch('GEMINI.md?v=' + Date.now());
@@ -2331,35 +3042,49 @@ class GuiaIA {
     const path = this.modulesRegistry[moduleId];
     if (!path) return null;
 
-    return new Promise((resolve, reject) => {
-      // Check if already in window
-      if (window.GuiaModules?.[moduleId]) {
-        this.moduleInstances[moduleId] = window.GuiaModules[moduleId];
-        return resolve(window.GuiaModules[moduleId]);
+    // Check if instance already exists
+    if (this.moduleInstances[moduleId]) return this.moduleInstances[moduleId];
+
+    // Check if already in window
+    if (window.GuiaModules?.[moduleId]) {
+      this.moduleInstances[moduleId] = window.GuiaModules[moduleId];
+      return window.GuiaModules[moduleId];
+    }
+
+    // Deduplicate by file path
+    if (!this.loadingPromises[path]) {
+      this.loadingPromises[path] = new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = `/src/${path}?v=${Date.now()}`;
+        script.async = true;
+        
+        script.onload = () => {
+          console.log(`[App] Script path loaded: ${path}`);
+          resolve();
+        };
+
+        script.onerror = (err) => {
+          console.error(`[App] Failed to load script: ${script.src}`, err);
+          delete this.loadingPromises[path]; // Allow retry
+          reject(err);
+        };
+
+        document.head.appendChild(script);
+      });
+    }
+
+    try {
+      await this.loadingPromises[path];
+      const instance = window.GuiaModules?.[moduleId];
+      if (instance) {
+        this.moduleInstances[moduleId] = instance;
+        return instance;
       }
-
-      const script = document.createElement('script');
-      script.src = `/src/${path}?v=${Date.now()}`;
-      script.async = true;
-      
-      script.onload = () => {
-        const instance = window.GuiaModules?.[moduleId];
-        if (instance) {
-          this.moduleInstances[moduleId] = instance;
-          resolve(instance);
-        } else {
-          console.warn(`[App] Script loaded but GuiaModules['${moduleId}'] is missing.`);
-          resolve(null);
-        }
-      };
-
-      script.onerror = (err) => {
-        console.error(`[App] Failed to load script: ${script.src}`, err);
-        reject(err);
-      };
-
-      document.head.appendChild(script);
-    });
+      console.warn(`[App] Script path ${path} loaded but moduleId '${moduleId}' not found in window.GuiaModules`);
+      return null;
+    } catch (err) {
+      return null;
+    }
   }
 
   // ── Prompt Sandbox ──
@@ -2868,10 +3593,14 @@ class GuiaIA {
           tabGroup.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           
-          // Scroll to the top of the tab group so user doesn't get lost
-          const yOffset = -80; // Account for fixed header
-          const y = tabGroup.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({top: y, behavior: 'smooth'});
+          // Scroll slightly above the tab group or to the target content
+          setTimeout(() => {
+              const rect = tabGroup.getBoundingClientRect();
+              const isMobile = window.innerWidth <= 768;
+              const yOffset = isMobile ? -60 : -100;
+              const y = rect.top + window.pageYOffset + yOffset;
+              window.scrollTo({top: y, behavior: 'smooth'});
+          }, 100);
         }
 
         // Toggle panels in the module
@@ -3229,6 +3958,32 @@ class GuiaIA {
 }
 
 // Global Exposure
+window.copyToClipboard = function(text) {
+    if (!text) return;
+    navigator.clipboard.writeText(text).then(() => {
+        if (window.showToast) window.showToast('Copiado al portapapeles', 'success');
+    }).catch(err => {
+        console.error('Error al copiar:', err);
+        try {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            textArea.style.top = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            const successful = document.execCommand('copy');
+            document.body.removeChild(textArea);
+            if (successful && window.showToast) {
+                window.showToast('Copiado al portapapeles', 'success');
+            }
+        } catch (fallbackErr) {
+            if (window.showToast) window.showToast('Error al copiar al portapapeles', 'error');
+        }
+    });
+};
+
 window.showToast = (msg, type) => {
     if (window.app) {
         window.app.showToast(msg, type);
@@ -3275,3 +4030,182 @@ window.m5UnlockAndGo = function(level) {
     if (progressLabel) progressLabel.textContent = 'Nivel ' + level + ' de ' + totalLevels;
     window.m5ShowLevel(level);
 };
+
+/* ============================================
+   MEJORAS GLOBALES v2.0 — Antigravity Systems
+   G1: localStorage Autosave
+   G2: Glosario Global Modal
+   G3: Prerequisites Banner
+   ============================================ */
+
+// ── G1: Auto-save all textareas ──────────────────────────────
+(function initAutoSave() {
+  const SAVE_PREFIX = 'guia-ia-textarea-';
+  let debounceTimers = {};
+
+  function saveIndicator(el) {
+    let ind = el.parentElement.querySelector('.autosave-indicator');
+    if (!ind) {
+      ind = document.createElement('div');
+      ind.className = 'autosave-indicator';
+      ind.style.cssText = 'font-size:0.68rem;color:#10b981;opacity:0;transition:opacity 0.4s;margin-top:4px;text-align:right;font-weight:600;';
+      el.parentElement.insertBefore(ind, el.nextSibling);
+    }
+    ind.textContent = '💾 Guardado automáticamente';
+    ind.style.opacity = '1';
+    setTimeout(() => { ind.style.opacity = '0'; }, 2000);
+  }
+
+  function restoreTextareas() {
+    document.querySelectorAll('textarea').forEach(ta => {
+      if (!ta.id) ta.id = 'ta-' + Math.random().toString(36).substr(2, 8);
+      const saved = localStorage.getItem(SAVE_PREFIX + ta.id);
+      if (saved && !ta.value) ta.value = saved;
+    });
+  }
+
+  function observeTextareas() {
+    document.querySelectorAll('textarea').forEach(ta => {
+      if (ta.dataset.autosave) return;
+      ta.dataset.autosave = '1';
+      if (!ta.id) ta.id = 'ta-' + Math.random().toString(36).substr(2, 8);
+      const saved = localStorage.getItem(SAVE_PREFIX + ta.id);
+      if (saved && !ta.value) ta.value = saved;
+      ta.addEventListener('input', () => {
+        clearTimeout(debounceTimers[ta.id]);
+        debounceTimers[ta.id] = setTimeout(() => {
+          localStorage.setItem(SAVE_PREFIX + ta.id, ta.value);
+          saveIndicator(ta);
+        }, 1000);
+      });
+    });
+  }
+
+  // Re-scan when new content loads
+  const mutationObs = new MutationObserver(() => observeTextareas());
+  mutationObs.observe(document.body, { childList: true, subtree: true });
+  setTimeout(observeTextareas, 500);
+})();
+
+// ── G2: Glosario Global ────────────────────────────────────────
+(function initGlosario() {
+  const terms = [
+    { t: 'LLM', d: 'Large Language Model — Modelo de lenguaje grande. Es el "cerebro" de herramientas como ChatGPT o Claude. Predice la siguiente palabra más probable según el contexto.' },
+    { t: 'Prompt', d: 'La instrucción que le escribes a la IA. La calidad del prompt determina el 80% de la calidad de la respuesta.' },
+    { t: 'Alucinación', d: 'Cuando la IA inventa información que suena convincente pero es falsa. Siempre verifica fechas, cifras y citas.' },
+    { t: 'RAG', d: 'Retrieval-Augmented Generation — La IA primero busca en una base de datos real y luego genera la respuesta. Reduce alucinaciones.' },
+    { t: 'Token', d: 'La unidad mínima de texto que procesa una IA. Aproximadamente 4 caracteres o 0.75 palabras. Los modelos tienen un límite de tokens por conversación.' },
+    { t: 'Contexto (Context Window)', d: 'El máximo de texto que un modelo puede "recordar" en una conversación. GPT-4: ~128k tokens. Claude: ~200k tokens.' },
+    { t: 'Temperatura', d: 'Parámetro que controla la creatividad de la IA. Alta temperatura = respuestas más creativas/aleatorias. Baja = más precisas/predecibles.' },
+    { t: 'Fine-tuning', d: 'Entrenar un modelo ya existente con datos específicos de una empresa o dominio para que sea experto en ese tema.' },
+    { t: 'Embedding', d: 'Representación matemática del significado de un texto. Permite a la IA comparar documentos por similaridad de contenido.' },
+    { t: 'Agente (AI Agent)', d: 'IA que puede planificar, razonar y ejecutar acciones autónomas (navegar web, leer archivos, enviar correos) para completar una tarea compleja.' },
+    { t: 'HITL', d: 'Human-in-the-Loop — Principio que exige supervisión humana en decisiones importantes tomadas por una IA.' },
+    { t: 'ReAct', d: 'Reason + Act — Ciclo que siguen los agentes: pensar el plan → actuar → observar resultado → repetir.' },
+    { t: 'MCP', d: 'Model Context Protocol — Estándar para conectar modelos de IA con herramientas externas (bases de datos, APIs, archivos) de forma segura.' },
+    { t: 'Sesgo (Bias)', d: 'Tendencia de la IA a favorecer ciertos puntos de vista sobre otros, heredada de sus datos de entrenamiento.' },
+    { t: 'Sandbox', d: 'Entorno aislado donde un agente puede ejecutar código sin afectar sistemas reales. Zona de pruebas segura.' },
+    { t: 'System Prompt', d: 'Instrucción oculta que define el "rol" y las "reglas" de la IA antes de que el usuario empiece a chatear.' },
+    { t: 'Chain-of-Thought (CoT)', d: 'Técnica de prompts que pide a la IA razonar paso a paso antes de dar la respuesta final. Mejora notablemente la precisión.' },
+    { t: 'Few-Shot', d: 'Técnica de proporcionar 2-3 ejemplos en el prompt para que la IA aprenda el patrón esperado en el momento.' },
+    { t: 'Multimodal', d: 'IA que puede procesar múltiples tipos de datos: texto, imágenes, audio y video. GPT-4o y Gemini son multimodales.' },
+    { t: 'Vector DB', d: 'Base de datos diseñada para guardar embeddings y hacer búsquedas por similaridad semántica. Ej: Qdrant, Pinecone.' },
+    { t: 'Ollama', d: 'Herramienta gratuita para ejecutar modelos de IA localmente en tu PC, sin internet y con total privacidad.' },
+    { t: 'Habeas Data', d: 'Derecho constitucional colombiano (Ley 1581) que protege los datos personales. Prohíbe compartirlos con IA externas sin consentimiento.' },
+    { t: 'Prompt Injection', d: 'Ataque donde se intenta manipular una IA insertando instrucciones maliciosas en un documento o texto que ella procesa.' },
+    { t: 'Latencia', d: 'Tiempo que tarda un modelo en generar la primera respuesta. Los modelos de razonamiento (o1, DeepSeek R1) tienen mayor latencia.' },
+    { t: 'Tool Use / Function Calling', d: 'Capacidad de la IA de invocar herramientas externas (calculadoras, búsquedas web, APIs) como parte de su respuesta.' }
+  ];
+
+  function buildModal() {
+    if (document.getElementById('glosario-modal')) return;
+    const modal = document.createElement('div');
+    modal.id = 'glosario-modal';
+    modal.style.cssText = 'display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);overflow-y:auto;';
+    
+    const inner = document.createElement('div');
+    inner.style.cssText = 'max-width:760px;margin:40px auto;background:rgba(15,15,35,0.95);border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:30px;box-shadow:0 0 40px rgba(99,102,241,0.2);';
+    
+    inner.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+        <div>
+          <div style="font-size:0.7rem;color:#818cf8;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">📖 DICCIONARIO OFICIAL</div>
+          <h2 style="margin:0;font-size:1.4rem;color:#fff;">Glosario de IA</h2>
+        </div>
+        <button onclick="document.getElementById('glosario-modal').style.display='none'" 
+          style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#fff;width:36px;height:36px;border-radius:8px;font-size:1.2rem;cursor:pointer;">✕</button>
+      </div>
+      <input id="glosario-search" type="text" placeholder="🔍 Buscar término..." 
+        style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#fff;font-size:0.9rem;margin-bottom:20px;outline:none;"
+        oninput="window.filterGlosario(this.value)">
+      <div id="glosario-list" style="display:grid;gap:10px;"></div>
+    `;
+    
+    modal.appendChild(inner);
+    document.body.appendChild(modal);
+    modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+
+    window.filterGlosario = function(q) {
+      const list = document.getElementById('glosario-list');
+      if (!list) return;
+      const filtered = terms.filter(t => 
+        t.t.toLowerCase().includes(q.toLowerCase()) || t.d.toLowerCase().includes(q.toLowerCase())
+      );
+      list.innerHTML = filtered.map(t => `
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:15px;">
+          <div style="font-weight:800;color:#818cf8;font-size:0.85rem;margin-bottom:6px;">${t.t}</div>
+          <div style="font-size:0.82rem;line-height:1.6;color:#cbd5e1;">${t.d}</div>
+        </div>`).join('');
+    };
+    window.filterGlosario('');
+  }
+
+  window.openGlosario = function() {
+    buildModal();
+    document.getElementById('glosario-modal').style.display = 'block';
+  };
+
+  // Inject floating button
+  setTimeout(() => {
+    if (document.getElementById('glosario-fab')) return;
+    const fab = document.createElement('button');
+    fab.id = 'glosario-fab';
+    fab.onclick = window.openGlosario;
+    fab.title = 'Abrir Glosario de IA';
+    fab.innerHTML = '📖';
+    fab.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:8888;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#4f46e5);border:none;color:#fff;font-size:1.4rem;cursor:pointer;box-shadow:0 4px 20px rgba(99,102,241,0.4);transition:all 0.3s;display:flex;align-items:center;justify-content:center;';
+    fab.onmouseover = () => { fab.style.transform = 'scale(1.15)'; fab.style.boxShadow = '0 6px 30px rgba(99,102,241,0.6)'; };
+    fab.onmouseout = () => { fab.style.transform = 'scale(1)'; fab.style.boxShadow = '0 4px 20px rgba(99,102,241,0.4)'; };
+    document.body.appendChild(fab);
+    buildModal();
+  }, 1000);
+})();
+
+// ── G3: Prerequisites Banner ──────────────────────────────────
+(function initPrerequisites() {
+  const prereqMap = {
+    'module-13': ['Módulo 10 (Arsenal)', 'Módulo 12 (Proyectos)'],
+    'module-14': ['Módulo 3 (CREA)', 'Módulo 13 (Conectividad)'],
+    'module-15': ['Módulos 1-14 — todos los módulos anteriores'],
+    'module-16': ['Módulo 5 (Excel)', 'Módulo 3 (CREA)'],
+    'module-17': ['Módulo 9 (Ética y Seguridad)'],
+    'module-18': ['Módulo 10 (Arsenal)'],
+    'module-19': ['Módulo 15 (Centauro)'],
+    'module-21': ['Módulo 15 (Centauro)', 'Módulo 18 (ROI)']
+  };
+
+  const observer = new MutationObserver(() => {
+    Object.entries(prereqMap).forEach(([modId, prereqs]) => {
+      const el = document.getElementById(modId);
+      if (!el || !el.classList.contains('active')) return;
+      if (el.querySelector('.prereq-banner')) return;
+      const completed = window.app?.completedModules;
+      const banner = document.createElement('div');
+      banner.className = 'prereq-banner';
+      banner.style.cssText = 'background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.25);border-left:4px solid #6366f1;border-radius:10px;padding:12px 16px;margin-bottom:18px;font-size:0.82rem;display:flex;align-items:center;gap:10px;';
+      banner.innerHTML = `<span style="font-size:1.2rem;">💡</span><span><strong style="color:#818cf8;">Módulo avanzado</strong> — Funciona mejor si completaste: <em style="color:#cbd5e1;">${prereqs.join(', ')}</em></span>`;
+      el.insertBefore(banner, el.firstChild);
+    });
+  });
+  observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['class'] });
+})();

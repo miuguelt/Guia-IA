@@ -27,9 +27,9 @@
       <h2 class="decoder-title">Elige el enfoque que más se parece a tu trabajo</h2>
       <p class="hero-subtitle">Esto solo ajusta ejemplos y recomendaciones. Puedes cambiarlo después sin perder avance.</p>
       
-      <div class="decoder-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+      <div class="decoder-grid">
         <!-- Cotidiano -->
-        <div class="profession-card holographic-glare" id="chooseCotidiano" style="--card-accent: #60a5fa;">
+        <div class="profession-card holographic-glare" id="chooseCotidiano" data-accent="#60a5fa">
           <div class="card-content">
             <span class="card-icon">🏠</span>
             <h3 class="card-name">Usuario Cotidiano</h3>
@@ -38,7 +38,7 @@
         </div>
 
         <!-- Administrativo -->
-        <div class="profession-card holographic-glare" id="chooseAdministrativo" style="--card-accent: #94a3b8;">
+        <div class="profession-card holographic-glare" id="chooseAdministrativo" data-accent="#94a3b8">
           <div class="card-content">
             <span class="card-icon">📁</span>
             <h3 class="card-name">Personal Administrativo</h3>
@@ -47,7 +47,7 @@
         </div>
 
         <!-- Docente -->
-        <div class="profession-card holographic-glare" id="chooseDocente" style="--card-accent: #f472b6;">
+        <div class="profession-card holographic-glare" id="chooseDocente" data-accent="#f472b6">
           <div class="card-content">
             <span class="card-icon">🎓</span>
             <h3 class="card-name">Docente / Educador</h3>
@@ -56,7 +56,7 @@
         </div>
 
         <!-- Coordinador -->
-        <div class="profession-card holographic-glare" id="chooseCoordinador" style="--card-accent: #fbbf24;">
+        <div class="profession-card holographic-glare" id="chooseCoordinador" data-accent="#fbbf24">
           <div class="card-content">
             <span class="card-icon">⚖️</span>
             <h3 class="card-name">Coordinador / Líder</h3>
@@ -65,7 +65,7 @@
         </div>
 
         <!-- Analista -->
-        <div class="profession-card holographic-glare" id="chooseAnalista" style="--card-accent: #10b981;">
+        <div class="profession-card holographic-glare" id="chooseAnalista" data-accent="#10b981">
           <div class="card-content">
             <span class="card-icon">📊</span>
             <h3 class="card-name">Analista de Datos</h3>
@@ -74,7 +74,7 @@
         </div>
 
         <!-- Emprendedor -->
-        <div class="profession-card holographic-glare" id="chooseEmprendedor" style="--card-accent: #8b5cf6;">
+        <div class="profession-card holographic-glare" id="chooseEmprendedor" data-accent="#8b5cf6">
           <div class="card-content">
             <span class="card-icon">🚀</span>
             <h3 class="card-name">Emprendedor</h3>
@@ -207,8 +207,8 @@
         <span class="nav-label">13. Automatización (No-Code)</span>
       </a>
       <a class="nav-item" data-module="module-14" data-prereqs="module-9">
-        <span class="nav-icon">🧠</span>
-        <span class="nav-label">14. Segundo Cerebro (PKM)</span>
+        <span class="nav-icon">🤖</span>
+        <span class="nav-label">14. Agentes de IA: De Chatear a Actuar</span>
       </a>
     </div>
 
@@ -233,6 +233,10 @@
       <a class="nav-item" data-module="module-18">
         <span class="nav-icon">💰</span>
         <span class="nav-label">18. ROI y Modelos Premium</span>
+      </a>
+      <a class="nav-item" data-module="module-modelos-frontera" style="border-left: 2px solid #f97316;">
+        <span class="nav-icon">⚡</span>
+        <span class="nav-label">18b. Modelos de Frontera</span>
       </a>
       <a class="nav-item" data-module="module-19">
         <span class="nav-icon">🚀</span>
@@ -266,6 +270,10 @@
         <span class="nav-icon">📹</span>
         <span class="nav-label">Bonus: Teams y Meet con IA</span>
       </a>
+      <a class="nav-item" data-module="module-bonus-comet" data-prereqs="module-14">
+        <span class="nav-icon">🌠</span>
+        <span class="nav-label">Bonus: Comet (Navegador)</span>
+      </a>
       <a class="nav-item" data-module="module-manus" data-prereqs="module-antigravity">
         <span class="nav-icon">🐙</span>
         <span class="nav-label">Bonus: Manus AI (Agente)</span>
@@ -281,6 +289,10 @@
       <a class="nav-item" data-module="module-multimedia-pro" data-prereqs="module-12">
         <span class="nav-icon">🎬</span>
         <span class="nav-label">Bonus: Multimedia Pro</span>
+      </a>
+      <a class="nav-item" data-module="module-presentaciones-pro" data-prereqs="module-12">
+        <span class="nav-icon">🎯</span>
+        <span class="nav-label">Bonus: Presentaciones Pro</span>
       </a>
       <a class="nav-item" data-module="module-notion" data-prereqs="module-4">
         <span class="nav-icon">📝</span>
@@ -366,7 +378,7 @@
 
         <div class="hero-actions">
           <button class="gl-btn gl-btn-primary hero-start-btn" id="startBtn">Continuar ruta recomendada →</button>
-          <button class="gl-btn gl-btn-outline hero-secondary-btn" id="viewMapBtn">Ver mapa completo</button>
+
         </div>
 
         <details class="bonus-quick-access">
@@ -385,6 +397,10 @@
               <span style="font-size: 1.5rem; display: block; margin-bottom: 4px;">🎬</span>
               <span style="font-size: 0.75rem; font-weight: 600;">Multimedia Pro</span>
             </div>
+            <div class="bonus-item-card" onclick="window.app.navigateTo('module-presentaciones-pro')" style="background: var(--bg-glass); padding: 12px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; text-align: center; transition: all 0.2s ease;">
+              <span style="font-size: 1.5rem; display: block; margin-bottom: 4px;">🎯</span>
+              <span style="font-size: 0.75rem; font-weight: 600;">Presentaciones Pro</span>
+            </div>
             <div class="bonus-item-card" onclick="window.app.navigateTo('module-notebooklm')" style="background: var(--bg-glass); padding: 12px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; text-align: center; transition: all 0.2s ease;">
               <span style="font-size: 1.5rem; display: block; margin-bottom: 4px;">📓</span>
               <span style="font-size: 0.75rem; font-weight: 600;">NotebookLM</span>
@@ -392,6 +408,14 @@
             <div class="bonus-item-card" onclick="window.app.navigateTo('module-power-automate')" style="background: var(--bg-glass); padding: 12px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; text-align: center; transition: all 0.2s ease;">
               <span style="font-size: 1.5rem; display: block; margin-bottom: 4px;">🌊</span>
               <span style="font-size: 0.75rem; font-weight: 600;">Power Automate</span>
+            </div>
+            <div class="bonus-item-card" onclick="window.app.navigateTo('module-modelos-frontera')" style="background: var(--bg-glass); padding: 12px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; text-align: center; transition: all 0.2s ease;">
+              <span style="font-size: 1.5rem; display: block; margin-bottom: 4px;">⚡</span>
+              <span style="font-size: 0.75rem; font-weight: 600;">Modelos de Frontera</span>
+            </div>
+            <div class="bonus-item-card" onclick="window.app.navigateTo('module-bonus-comet')" style="background: var(--bg-glass); padding: 12px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; text-align: center; transition: all 0.2s ease;">
+              <span style="font-size: 1.5rem; display: block; margin-bottom: 4px;">🌠</span>
+              <span style="font-size: 0.75rem; font-weight: 600;">Comet Agente</span>
             </div>
           </div>
         </details>
@@ -424,6 +448,7 @@
     <div class="module" id="module-16"></div>
     <div class="module" id="module-17"></div>
     <div class="module" id="module-18"></div>
+    <div class="module" id="module-modelos-frontera"></div>
     <div class="module" id="module-19"></div>
     <div class="module" id="module-20"></div>
     <div class="module" id="module-21"></div>
@@ -431,11 +456,13 @@
     <div class="module" id="module-deepseek"></div>
     <div class="module" id="module-notebooklm"></div>
     <div class="module" id="module-multimedia-pro"></div>
+    <div class="module" id="module-presentaciones-pro"></div>
     <div class="module" id="module-notion"></div>
     <div class="module" id="module-power-automate"></div>
     <div class="module" id="module-antigravity"></div>
     <div class="module" id="module-gemini-productivity"></div>
     <div class="module" id="module-teams-meet"></div>
+    <div class="module" id="module-bonus-comet"></div>
 
     <div class="module" id="certificate">
       <div class="certificate-container animate-in">

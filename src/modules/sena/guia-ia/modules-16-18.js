@@ -212,20 +212,20 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
 <div id="m16-excel" class="ag-content active">
   <div class="section-card animate-in">
     <h3><span class="icon">📈</span> El Fin de Buscar Fórmulas en Google</h3>
-    <p>Simplemente escríbele a ChatGPT lo que quieres que pase con tus celdas, y él te dará la fórmula exacta (incluso Macros completas).</p>
+    <p>Simplemente escríbele a <a href="https://chatgpt.com" target="_blank" style="color:var(--primary); text-decoration:underline;">ChatGPT</a> lo que quieres que pase con tus celdas, y él te dará la fórmula exacta (incluso Macros completas).</p>
     
-    <div style="background:rgba(255,255,255,0.02);padding:20px;border-radius:12px;margin-top:20px;border:1px solid #10b981;">
+    <div class="m16-lab-card">
       <h4 style="margin:0 0 10px;color:#10b981;">🧪 Laboratorio: Autogenerador de Excel</h4>
       <p style="font-size:0.8rem;margin-bottom:15px;opacity:0.8;">Escribe lo que necesitas resolver en lenguaje natural y mira cómo la IA lo traduce a código Excel/Sheets de inmediato.</p>
       
-      <div style="display:flex;gap:10px;">
-        <select id="m16-excel-req" style="flex:1;padding:12px;background:#050a0e;border:1px solid #333;border-radius:8px;color:#fff;font-size:0.85rem;">
+      <div class="m16-lab-group">
+        <select id="m16-excel-req" class="m16-lab-select">
           <option value="q1">Sumar la columna Ingresos (C) SOLO si la ciudad (A) es 'Bogotá'</option>
           <option value="q2">Quiero buscar el número de cédula de E2 en la hoja 'Empleados' y traer el nombre</option>
           <option value="q3">Si la fecha en A1 ya pasó, pon 'VENCIDO' en rojo, sino 'A TIEMPO'</option>
           <option value="q4">Macro VBA: Haz un botón que borre todo el contenido de la hoja activa</option>
         </select>
-        <button class="gl-btn gl-btn-primary" style="background:#10b981;color:#000;font-weight:700;" onclick="m16GenFormula()">Traducir</button>
+        <button class="gl-btn gl-btn-primary m16-lab-btn" onclick="window.m16GenFormula()">Traducir</button>
       </div>
 
       <div id="m16-formula-result" style="display:none;margin-top:15px;padding:15px;background:#1a1a2e;border-left:4px solid #3b82f6;border-radius:8px;font-family:monospace;font-size:0.9rem;color:#93c5fd;"></div>
@@ -235,6 +235,31 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
       💡 <b>Prompt Maestro para Excel:</b> "Actúa como experto en Excel avanzado. Tengo mi base de datos en [Rango]. La columna A tiene [Dato] y la B [Dato]. Necesito una fórmula que [Tu Objetivo]. Explícame paso a paso cómo aplicarla."
     </div>
 
+    <!-- VBA paste guide -->
+    <div style="background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);border-radius:12px;padding:16px;margin-top:18px;">
+      <div style="font-weight:800;color:#c4b5fd;font-size:0.83rem;margin-bottom:10px;">🔧 Cómo Pegar una Macro VBA en Excel (Paso a Paso)</div>
+      <ol style="font-size:0.8rem;line-height:2;padding-left:18px;color:#cbd5e1;margin:0;">
+        <li>Copia el código VBA que generó la IA (todo, desde <code style="color:#fbbf24;">Sub</code> hasta <code style="color:#fbbf24;">End Sub</code>)</li>
+        <li>En Excel, presiona <kbd style="background:#1e293b;padding:2px 6px;border-radius:4px;border:1px solid #475569;font-size:0.75rem;">Alt + F11</kbd> para abrir el Editor de VBA</li>
+        <li>Haz clic en <strong style="color:#fff">Insertar → Módulo</strong> en la barra superior</li>
+        <li>Pega el código en el área blanca que aparece (<kbd style="background:#1e293b;padding:2px 6px;border-radius:4px;border:1px solid #475569;font-size:0.75rem;">Ctrl+V</kbd>)</li>
+        <li>Presiona <kbd style="background:#1e293b;padding:2px 6px;border-radius:4px;border:1px solid #475569;font-size:0.75rem;">F5</kbd> o el botón ▶ para ejecutar</li>
+      </ol>
+      <div style="background:rgba(245,158,11,0.08);border-radius:8px;padding:10px;margin-top:10px;font-size:0.78rem;color:#fde68a;">⚠️ Si Excel bloquea las macros: ve a <strong>Archivo → Opciones → Centro de Confianza → Config. del Centro de Confianza → Configuración de Macros</strong> y selecciona "Habilitar todas".</div>
+    </div>
+
+    <div class="comparison-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px;">
+      <div class="m-pa-panel-card" style="background: rgba(239,68,68,0.03); border: 1px solid rgba(239,68,68,0.2);">
+        <div style="margin-bottom: 12px;"><span class="badge-titan" style="background: #ef4444; color: #fff;">SIN IA ❌</span></div>
+        <div style="font-size: 0.85rem; opacity: 0.9;"><strong>Tarea:</strong> Unir 10 archivos Excel de diferentes formatos en uno solo.</div>
+        <div style="font-size: 0.75rem; color: #ef4444; margin-top: 10px; font-weight: 700;">Esfuerzo: 4 horas de copy-paste manual, propenso a errores humanos.</div>
+      </div>
+      <div class="m-pa-panel-card holographic-glare" style="background: rgba(16,185,129,0.03); border: 1px solid rgba(16,185,129,0.3);">
+        <div style="margin-bottom: 12px;"><span class="badge-titan" style="background: #10b981; color: #fff;">CON IA ✅</span></div>
+        <div style="font-size: 0.85rem; opacity: 0.9;"><strong>Tarea:</strong> Usar una Macro VBA generada en 10 segundos por ChatGPT.</div>
+        <div style="font-size: 0.75rem; color: #10b981; margin-top: 10px; font-weight: 700;">Esfuerzo: 2 minutos (Ejecutar macro). Limpieza automática de datos.</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -261,7 +286,7 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
 <div id="m16-nocode" class="ag-content">
   <div class="section-card animate-in">
     <h3><span class="icon">🔮</span> Generadores Universitarios (Apps enteras en 1 clic)</h3>
-    <p>Herramientas como <b>Bolt.new</b> o <b>v0.dev</b> están revolucionando el mundo. Tú escribes "Quiero una app para registrar visitas que tenga un formulario y una tabla gráfica", y la IA programa toda la app del lado del navegador frente a tus ojos.</p>
+    <p>Herramientas como <b><a href="https://bolt.new" target="_blank" style="color:#fcd34d; text-decoration:underline;">Bolt.new</a></b> o <b><a href="https://v0.dev" target="_blank" style="color:#cbd5e1; text-decoration:underline;">v0.dev</a></b> están revolucionando el mundo. Tú escribes "Quiero una app para registrar visitas que tenga un formulario y una tabla gráfica", y la IA programa toda la app del lado del navegador frente a tus ojos.</p>
     
     <div class="m16-code-window">
       <div class="m16-code-header">
@@ -275,17 +300,17 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
       </div>
     </div>
     <div style="text-align:center;margin-top:15px;">
-      <button class="gl-btn gl-btn-primary" onclick="m16SimulateBolt(this)">⚡ Ejecutar Simulación IA</button>
+      <button class="gl-btn gl-btn-primary" onclick="window.m16SimulateBolt(this)">⚡ Ejecutar Simulación IA</button>
     </div>
 
     
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:20px;">
       <div class="m11-tool-card" onclick="window.open('https://bolt.new','_blank')">
-        <h4 style="margin:0 0 5px;color:#fcd34d;">Bolt.new</h4>
+        <h4 style="margin:0 0 5px;color:#fcd34d;"><a href="https://bolt.new" target="_blank" style="color:inherit; text-decoration:underline;">Bolt.new</a></h4>
         <p style="font-size:0.75rem;margin:0;">Sitios web y apps web completas (funcionales y con backend simulado).</p>
       </div>
       <div class="m11-tool-card" onclick="window.open('https://v0.dev','_blank')">
-        <h4 style="margin:0 0 5px;color:#cbd5e1;">v0 by Vercel</h4>
+        <h4 style="margin:0 0 5px;color:#cbd5e1;"><a href="https://v0.dev" target="_blank" style="color:inherit; text-decoration:underline;">v0 by Vercel</a></h4>
         <p style="font-size:0.75rem;margin:0;">El mejor diseñador UI del mundo. Dile cómo quieres que se vea una pantalla y te da el código exacto.</p>
       </div>
     </div>
@@ -305,7 +330,7 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
       <ol style="margin-top:12px;font-size:0.85rem;line-height:2;">
         <li>Identifica tu peor dolor de cabeza en Excel (ese archivo gigante que siempre da errores).</li>
         <li>Abre ChatGPT o Claude y usa el "Prompt Maestro" descrito en la primera pestaña para pedirle una macro (VBA) o fórmula compleja que lo solucione todo con un clic.</li>
-        <li>(Nivel Dios): Prueba entrar a <b>V0.dev</b> y pídele que diseñe "Una interfaz de una app del Gobierno para reportar huecos en la calle". Mira cómo la dibuja en segundos.</li>
+        <li>(Nivel Dios): Prueba entrar a <b><a href="https://v0.dev" target="_blank" style="color:#2563eb; text-decoration:underline;">V0.dev</a></b> y pídele que diseñe "Una interfaz de una app del Gobierno para reportar huecos en la calle". Mira cómo la dibuja en segundos.</li>
       </ol>
     </div>
     <textarea class="premium-textarea" placeholder="¿Qué fórmula compleja o herramienta lograste crear con ayuda de la IA sin tener que programar?..."></textarea>
@@ -346,7 +371,7 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
 <div id="m17-concept" class="ag-content active">
   <div class="section-card animate-in">
     <h3><span class="icon">🏦</span> Privacidad por Diseño (El Cortafuegos)</h3>
-    <p>Cuando usas ChatGPT, toda la info viaja a los servidores de OpenAI (EE.UU.). Si analizas un <b>Expediente Médico</b> o <b>Información Tributaria</b>, estás vulnerando leyes de protección de datos (Habeas Data).</p>
+    <p>Cuando usas <a href="https://chatgpt.com" target="_blank" style="color:var(--primary); text-decoration:underline;">ChatGPT</a>, toda la info viaja a los servidores de OpenAI (EE.UU.). Si analizas un <b>Expediente Médico</b> o <b>Información Tributaria</b>, estás vulnerando leyes de protección de datos (Habeas Data).</p>
     
     <div class="m17-arch">
       <div class="m17-box" style="border-color:#3b82f6;background:rgba(59,130,246,0.1);">
@@ -365,10 +390,26 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
       </div>
     </div>
 
-    <div style="text-align:center;color:#ef4444;font-weight:700;font-size:1.1rem;margin:20px 0;">
-      ❌ INTERNET DESCONECTADO ❌<br><small style="color:#94a3b8;font-weight:400;">La IA responde igual, los datos NUNCA salen de tu máquina.</small>
+    <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(16,185,129,0.2);border-radius:16px;padding:25px;margin-top:25px;">
+      <h4 style="color:#6ee7b7;margin-top:0;">📋 Guía de Selección de Hardware para IA Local</h4>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:15px;">
+        <div style="text-align:center;">
+          <div style="font-size:2rem;margin-bottom:10px;">📉</div>
+          <div style="font-weight:800;font-size:0.8rem;color:#94a3b8;">GPU INTEGRADA (Intel/AMD)</div>
+          <div style="font-size:0.75rem;opacity:0.8;margin-top:5px;">Lento. Para modelos pequeños (<2B). Útil para resúmenes simples.</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:2rem;margin-bottom:10px;">📈</div>
+          <div style="font-weight:800;font-size:0.8rem;color:#10b981;">GPU DEDICADA (RTX 3060+)</div>
+          <div style="font-size:0.75rem;opacity:0.8;margin-top:5px;">Nivel Pro. Razonamiento en tiempo real (Llama 8B). Ideal para auditoría.</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-size:2rem;margin-bottom:10px;">🚀</div>
+          <div style="font-weight:800;font-size:0.8rem;color:#f59e0b;">MAC M1/M2/M3 (Apple)</div>
+          <div style="font-size:0.75rem;opacity:0.8;margin-top:5px;">El Rey de la IA Local. Memoria unificada para modelos gigantes (30B+).</div>
+        </div>
+      </div>
     </div>
-    
   </div>
 </div>
 
@@ -376,11 +417,11 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
 <div id="m17-lab" class="ag-content">
   <div class="section-card animate-in">
     <h3><span class="icon">🛠️</span> Ejecutando una IA en tu Terminal</h3>
-    <p>Instalar <b>Ollama</b> (ollama.com) es tan fácil como instalar Chrome. Una vez instalado, abres la consola y llamas al modelo que quieras. Pruébalo en esta simulación:</p>
+    <p>Instalar <b><a href="https://ollama.com" target="_blank" style="color:#10b981; text-decoration:underline;">Ollama</a></b> (ollama.com) es tan fácil como instalar Chrome. Una vez instalado, abres la consola y llamas al modelo que quieras. Pruébalo en esta simulación:</p>
     
     <div style="display:flex;gap:10px;margin-top:15px;">
-      <button class="gl-btn gl-btn-outline" style="flex:1" onclick="m17Simulate('run llama3.2')">💻 Cargar Llama 3.2</button>
-      <button class="gl-btn gl-btn-outline" style="flex:1" onclick="m17Simulate('run deepseek-r1')">💻 Cargar DeepSeek</button>
+      <button class="gl-btn gl-btn-outline" style="flex:1" onclick="window.m17Simulate('run llama3.2')">💻 Cargar Llama 3.2</button>
+      <button class="gl-btn gl-btn-outline" style="flex:1" onclick="window.m17Simulate('run deepseek-r1')">💻 Cargar DeepSeek</button>
     </div>
 
     <div class="m17-terminal">
@@ -389,7 +430,7 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
     </div>
     
     <div class="pista-ia" style="margin-top:20px;">
-      💡 <b>¿No te gusta la pantalla negra?</b> No hay problema. Instalas <b>AnythingLLM</b> o <b>Chatbox</b>, lo conectas a tu Ollama local, y tendrás tu propio "ChatGPT Privado" con interfaz hermosa, gratis y seguro.
+      💡 <b>¿No te gusta la pantalla negra?</b> No hay problema. Instalas <b><a href="https://useanything.com" target="_blank" style="color:#10b981; text-decoration:underline;">AnythingLLM</a></b> o <b><a href="https://chatboxai.app" target="_blank" style="color:#10b981; text-decoration:underline;">Chatbox</a></b>, lo conectas a tu Ollama local, y tendrás tu propio "ChatGPT Privado" con interfaz hermosa, gratis y seguro.
     </div>
 
   </div>
@@ -408,10 +449,39 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
       <ol style="margin-top:12px;font-size:0.85rem;line-height:2;">
         <li>Identifica un conjunto de datos en tu área que (por ley) sea clasificado o sensible (Ej: Base de datos de ciudadanos, historias clínicas, PQR con cédulas).</li>
         <li>Imagina que necesitas que la IA lo resuma. ¿Qué harías? Si tu respuesta es "subírselo a ChatGPT", repruebas la misión corporativa vital.</li>
-        <li>Si tu computadora de trabajo tiene más de 8GB de RAM, entra a Ollama.com y descarga el instalador.</li>
+        <li>Si tu computadora de trabajo tiene más de 8GB de RAM, entra a <a href="https://ollama.com" target="_blank" style="color:#10b981; text-decoration:underline;">Ollama.com</a> y descarga el instalador.</li>
       </ol>
     </div>
     <textarea class="premium-textarea" placeholder="Nombra qué tipo de información NUNCA enviarías a la nube comercial de OpenAI..."></textarea>
+
+    <!-- Windows Ollama Install Guide -->
+    <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.25);border-radius:14px;padding:18px;margin-top:18px;">
+      <div style="font-weight:800;color:#10b981;font-size:0.85rem;margin-bottom:14px;">💻 Instalar Ollama en Windows (Paso a Paso)</div>
+      
+      <!-- Hardware checklist first -->
+      <div style="background:rgba(0,0,0,0.2);border-radius:10px;padding:14px;margin-bottom:14px;">
+        <div style="font-size:0.8rem;font-weight:700;color:#e2e8f0;margin-bottom:8px;">✅ Requisitos mínimos (verifica antes de empezar):</div>
+        <div style="display:grid;gap:6px;">
+          <div style="font-size:0.78rem;color:#94a3b8;">🔲 <strong style="color:#e2e8f0;">RAM:</strong> mínimo 8 GB (ideal 16 GB) — ver en Panel de Control → Sistema</div>
+          <div style="font-size:0.78rem;color:#94a3b8;">🔲 <strong style="color:#e2e8f0;">Espacio disco:</strong> mínimo 5 GB libres para el modelo</div>
+          <div style="font-size:0.78rem;color:#94a3b8;">🔲 <strong style="color:#e2e8f0;">Windows:</strong> 10 u 11 (cualquier edición) — sin admin si es PC corporativa, pide autorización</div>
+          <div style="font-size:0.78rem;color:#94a3b8;">🔲 <strong style="color:#e2e8f0;">GPU NVIDIA:</strong> opcional pero acelera enormemente (Si tienes RTX, ya ganaste)</div>
+        </div>
+      </div>
+
+      <ol style="font-size:0.8rem;line-height:2.2;padding-left:18px;color:#cbd5e1;margin:0;">
+        <li>Ve a <a href="https://ollama.com/download/windows" target="_blank" style="color:#10b981;">ollama.com/download/windows</a> → descarga el instalador .exe</li>
+        <li>Ejecuta el instalador y acepta los permisos — <strong style="color:#fff;">no necesita cuenta ni activación</strong></li>
+        <li>Abre PowerShell o CMD (tecla Win + R, escribe <code style="background:#0d1117;padding:2px 6px;border-radius:4px;">powershell</code>)</li>
+        <li>Escribe este comando y presiona Enter:
+          <div style="background:#0d1117;border-radius:8px;padding:10px;margin:8px 0;font-family:monospace;color:#10b981;font-size:0.82rem;border:1px solid rgba(16,185,129,0.3);">ollama run llama3.2</div>
+          (Descargará el modelo ~2GB — espera la primera vez)
+        </li>
+        <li>Escribe en la terminal: <code style="background:#0d1117;padding:2px 6px;border-radius:4px;color:#10b981;">Analiza esta situación: [tu texto]</code> — ¡ya tienes IA local!</li>
+      </ol>
+      <div style="background:rgba(245,158,11,0.08);border-radius:8px;padding:10px;margin-top:10px;font-size:0.78rem;color:#fde68a;">⚠️ <strong>¿No cumples requisitos?</strong> Alternativa gratuita online con privacidad mejorada: <a href="https://lmstudio.ai" target="_blank" style="color:#fbbf24;">LM Studio</a> (interfaz gráfica más sencilla).</div>
+    </div>
+
     <div class="reward-tag" style="margin-top:15px;">+150 XP · Insignia: Guardián de Datos 🛡️</div>
     <button class="gl-btn gl-btn-primary complete-module-btn" data-module="module-17" style="width:100%;margin-top:15px;background:#10b981;">✅ Misión Completada — Reclamar Insignia</button>
   </div>
@@ -431,7 +501,7 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
 <div class="module-header premium-header" style="background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(124,58,237,0.15)); border: 1px solid rgba(139,92,246,0.2);">
   <div class="module-number gamer-badge" style="background:#8b5cf6;color:#fff;">Módulo 18 — Impacto Económico</div>
   <h2 class="module-title glow-text" style="color:#c4b5fd;">💰 ROI y Modelos Premium</h2>
-  <p class="module-description">¿Vale la pena pagar $20 dólares al mes por ChatGPT Plus o Claude Pro? Analicemos el Retorno de Inversión (ROI) y justifiquemos licencias ante los jefes.</p>
+  <p class="module-description">¿Vale la pena pagar $20 dólares al mes por <a href="https://chatgpt.com" target="_blank" style="color:var(--primary); text-decoration:underline;">ChatGPT Plus</a> o <a href="https://claude.ai" target="_blank" style="color:var(--primary); text-decoration:underline;">Claude Pro</a>? Analicemos el Retorno de Inversión (ROI) y justifiquemos licencias ante los jefes.</p>
   <div class="module-meta">
     <span class="module-meta-item">⏱️ 30 min</span>
     <span class="module-meta-item">💎 150 XP</span>
@@ -456,32 +526,32 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
       <div class="m18-roi-grid-2" style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:16px;">
         <div style="background:rgba(0,0,0,0.2);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);">
           <label style="font-size:0.8rem;color:#cbd5e1;font-weight:700;display:block;">Horas operativas por semana</label>
-          <input type="range" id="m18-hours" min="1" max="30" value="8" style="width:100%;margin:14px 0 8px;accent-color:#8b5cf6;" oninput="m18Calc()">
+          <input type="range" id="m18-hours" min="1" max="30" value="8" style="width:100%;margin:14px 0 8px;accent-color:#8b5cf6;" oninput="window.m18Calc()">
           <div style="font-size:1rem;color:#c4b5fd;font-weight:700;"><span id="m18-h-val">8</span> h/semana</div>
         </div>
 
         <div style="background:rgba(0,0,0,0.2);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);">
           <label style="font-size:0.8rem;color:#cbd5e1;font-weight:700;display:block;">Porcentaje automatizable</label>
-          <input type="range" id="m18-automation" min="10" max="90" step="5" value="45" style="width:100%;margin:14px 0 8px;accent-color:#8b5cf6;" oninput="m18Calc()">
+          <input type="range" id="m18-automation" min="10" max="90" step="5" value="45" style="width:100%;margin:14px 0 8px;accent-color:#8b5cf6;" oninput="window.m18Calc()">
           <div style="font-size:1rem;color:#c4b5fd;font-weight:700;"><span id="m18-a-val">45%</span> del trabajo repetitivo</div>
         </div>
 
         <div style="background:rgba(0,0,0,0.2);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);">
           <label style="font-size:0.8rem;color:#cbd5e1;font-weight:700;display:block;">Costo hora estimado (COP)</label>
-          <input type="range" id="m18-rate" min="12000" max="80000" step="1000" value="25000" style="width:100%;margin:14px 0 8px;accent-color:#8b5cf6;" oninput="m18Calc()">
+          <input type="range" id="m18-rate" min="12000" max="80000" step="1000" value="25000" style="width:100%;margin:14px 0 8px;accent-color:#8b5cf6;" oninput="window.m18Calc()">
           <div style="font-size:1rem;color:#c4b5fd;font-weight:700;"><span id="m18-r-val">$25.000</span> por hora</div>
         </div>
 
         <div style="background:rgba(0,0,0,0.2);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);">
           <label style="font-size:0.8rem;color:#cbd5e1;font-weight:700;display:block;">Número de licencias</label>
-          <input type="range" id="m18-licenses" min="1" max="20" value="1" style="width:100%;margin:14px 0 8px;accent-color:#8b5cf6;" oninput="m18Calc()">
+          <input type="range" id="m18-licenses" min="1" max="20" value="1" style="width:100%;margin:14px 0 8px;accent-color:#8b5cf6;" oninput="window.m18Calc()">
           <div style="font-size:1rem;color:#c4b5fd;font-weight:700;"><span id="m18-l-val">1</span> licencia(s)</div>
         </div>
       </div>
 
       <div style="margin-top:16px;background:rgba(0,0,0,0.2);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);">
         <label style="font-size:0.8rem;color:#cbd5e1;font-weight:700;display:block;">Costo mensual por licencia (COP)</label>
-        <input type="range" id="m18-license-cost" min="40000" max="200000" step="5000" value="85000" style="width:100%;margin:14px 0 8px;accent-color:#8b5cf6;" oninput="m18Calc()">
+        <input type="range" id="m18-license-cost" min="40000" max="200000" step="5000" value="85000" style="width:100%;margin:14px 0 8px;accent-color:#8b5cf6;" oninput="window.m18Calc()">
         <div style="font-size:1rem;color:#c4b5fd;font-weight:700;"><span id="m18-c-val">$85.000</span> por licencia/mes</div>
       </div>
       
@@ -582,6 +652,18 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
         <button class="gl-btn small" style="width:100%;margin-top:10px;background:#8b5cf6;border:none;" onclick="window.app&&window.app.addXP(20);this.disabled=true;this.innerText='💡 Entendido'">Marcar como Revisado</button>
       </div>
 
+    </div>
+    <div class="exercise-box mission-card animate-in" style="margin-top:30px; border-left:4px solid #8b5cf6; background:rgba(139,92,246,0.03);">
+      <h4 style="color:#c4b5fd; margin-top:0;">📊 Caso de Negocio: Plantilla de Justificación</h4>
+      <p style="font-size:0.85rem; opacity:0.9;">Usa este borrador para enviárselo a tu departamento de compras o jefe directo.</p>
+      <div class="m-pa-codebox" style="font-size:0.8rem; color:#cbd5e1; user-select:all; cursor:pointer;" onclick="navigator.clipboard.writeText(this.innerText); window.showToast('Plantilla copiada','success');">
+        ASUNTO: Solicitud de Licencia AI Premium para Optimización de Procesos en [Área].<br><br>
+        Estimados,<br>
+        Tras un análisis de ROI en el programa Guia IA, hemos identificado que el uso de [ChatGPT Plus / Claude Pro] en el área de [Área] generará un ahorro estimado de [X] horas mensuales en tareas de [Tarea].<br><br>
+        Esto representa un retorno de inversión del [X]% mensual, permitiendo que el equipo se enfoque en tareas de mayor impacto estratégico y ciberseguridad.<br><br>
+        Quedo atento a su aprobación para el piloto inicial.
+      </div>
+      <button class="gl-btn gl-btn-primary small" style="margin-top:15px; width:100%; border:none; background:#8b5cf6;" onclick="window.showToast('Plantilla copiada','success');">📋 Copiar Borrador de Negocio</button>
     </div>
   </div>
 </div>

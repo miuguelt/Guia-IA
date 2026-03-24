@@ -83,7 +83,7 @@ def check_brace_integrity(file_path: str) -> List[str]:
     return errors
 
 def main(path):
-    print(f"🛡️ Sovereign Validator [DNA v32.4] - Scanning {path}")
+    print(f"🛡️ Sovereign Validator [DNA v32.5] - Scanning {path}")
     total_files = 0
     total_errors = 0
     

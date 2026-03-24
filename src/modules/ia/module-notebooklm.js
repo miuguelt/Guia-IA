@@ -10,7 +10,7 @@ window.GuiaModules['module-notebooklm'] = (function() {
 <div class="m-nlm-container animate-in">
   <div class="module-header premium-header animate-in">
     <div class="badge-titan" style="margin-bottom: 20px;">BONUS TOOL</div>
-    <h2 class="module-title text-gradient-primary">📓 NotebookLM: Tu Asistente de Investigación</h2>
+    <h2 class="module-title text-gradient-primary">📓 <a href="https://notebooklm.google.com" target="_blank" style="color:inherit; text-decoration:none;">NotebookLM:</a> Tu Asistente de Investigación</h2>
     <p class="m-pa-note">Sube hasta 50 documentos (PDFs, PPTs, Enlaces, YouTube) y Google creará un asistente que <strong>solo sabe lo que tú le diste</strong>. Evita alucinaciones citando siempre la página exacta.</p>
     <div class="module-meta" style="margin-top: 20px; display: flex; gap: 20px;">
       <span class="module-meta-item">⏱️ 20 min</span>
@@ -123,7 +123,7 @@ window.GuiaModules['module-notebooklm'] = (function() {
         </button>
         
         <div style="margin-top:20px; font-size:0.75rem; color:#94a3b8; text-align:center;">
-          *En la vida real puedes enlazar todo tu Drive aquí.*
+          *En la vida real puedes enlazar todo tu <a href="https://drive.google.com" target="_blank" style="color:var(--primary); text-decoration:underline;">Google Drive</a> aquí.*
         </div>
       </div>
       
@@ -315,7 +315,7 @@ window.GuiaModules['module-notebooklm'] = (function() {
           <p class="kit-asset-name">Audio Overview: Guía de Configuración</p>
           <p class="kit-asset-desc">Cómo generar tu podcast de 10 min sobre el contrato.</p>
         </div>
-        <button class="kit-copy-btn" onclick="nlmCopyAsset(this, 'notebooklm.google.com → Nuevo Cuaderno → Fuentes → Subir PDF → Panel derecho: Audio Overview → Generar')">📋 Copiar Ruta</button>
+        <button class="kit-copy-btn" onclick="nlmCopyAsset(this, 'https://notebooklm.google.com → Nuevo Cuaderno → Fuentes → Subir PDF → Panel derecho: Audio Overview → Generar')">📋 Copiar Ruta</button>
       </div>
     </div>
 

@@ -13,11 +13,13 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
           <span class="module-meta-item">⏱️ 20 min</span>
           <span class="module-meta-item">💎 100 XP</span>
           <span class="module-meta-item">🏆 Insignia: Explorador IA</span>
+          <span class="module-meta-item" style="background:rgba(16,185,129,0.15);border-color:#10b981;color:#6ee7b7;">⚡ Ahorra ~3h/semana</span>
         </div>
       </div>
 
       <div class="ag-tabs game-tabs">
         <button class="tab-btn active" data-tab="m1-lab-intro"><span>🎬</span> Intro</button>
+        <button class="tab-btn" data-tab="m1-lab-mitos"><span>🚫</span> Mitos</button>
         <button class="tab-btn" data-tab="m1-lab-concept"><span>🧠</span> Concepto</button>
         <button class="tab-btn" data-tab="m1-lab-demo"><span>👁️</span> Demo</button>
         <button class="tab-btn" data-tab="m1-lab-simulator"><span>✨</span> Simulador</button>
@@ -30,6 +32,65 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
           <h3><span class="icon">🏢</span> Crónica de Oficina</h3>
           <p class="narrative-text">"Llegas a las 8:00 AM. Tu escritorio está inundado de 50 correos sin leer, 3 informes por resumir y un Excel que parece un jeroglífico. Sientes que el tiempo te gana... hasta que descubres que tienes un copiloto que nunca duerme."</p>
           <div class="pista-ia">💡 <strong>Tu objetivo:</strong> Aprender a delegar lo aburrido a la IA para enfocarte en lo importante.</div>
+        </div>
+      </div>
+
+      <!-- NUEVA PESTAÑA: 3 MITOS -->
+      <div id="m1-lab-mitos" class="ag-content">
+        <div class="section-card animate-in">
+    <h3><span class="icon">🆓</span> Guía: Crea tu Cuenta Gratis</h3>
+    <p>No necesitas pagar para empezar. Aquí tienes los pasos para las 3 herramientas líderes:</p>
+    
+    <details style="background:rgba(255,255,255,0.03); padding:10px; border-radius:8px; margin-bottom:10px; border:1px solid #333;">
+      <summary style="cursor:pointer; font-weight:bold; color:var(--primary-light);">1. ChatGPT (OpenAI)</summary>
+      <div style="padding-top:10px; font-size:0.85rem; line-height:1.6;">
+        1. Ve a <a href="https://chat.openai.com" target="_blank" style="color:#10b981;">chat.openai.com</a>.<br>
+        2. Clic en "Sign Up".<br>
+        3. Usa tu Google/Microsoft account o un email.<br>
+        4. ¡Listo! Acceso inmediato al modelo GPT-4o-mini (rápido y gratis).
+      </div>
+    </details>
+
+    <details style="background:rgba(255,255,255,0.03); padding:10px; border-radius:8px; margin-bottom:10px; border:1px solid #333;">
+      <summary style="cursor:pointer; font-weight:bold; color:var(--primary-light);">2. Claude (Anthropic)</summary>
+      <div style="padding-top:10px; font-size:0.85rem; line-height:1.6;">
+        1. Ve a <a href="https://claude.ai" target="_blank" style="color:#f97316;">claude.ai</a>.<br>
+        2. Ingresa tu email.<br>
+        3. Verifica el código que llega a tu correo.<br>
+        4. Ideal para redacción humana y análisis de documentos largos.
+      </div>
+    </details>
+
+    <details style="background:rgba(255,255,255,0.03); padding:10px; border-radius:8px; margin-bottom:10px; border:1px solid #333;">
+      <summary style="cursor:pointer; font-weight:bold; color:var(--primary-light);">3. Gemini (Google)</summary>
+      <div style="padding-top:10px; font-size:0.85rem; line-height:1.6;">
+        1. Ve a <a href="https://gemini.google.com" target="_blank" style="color:#3b82f6;">gemini.google.com</a>.<br>
+        2. Inicia sesión con cualquier cuenta @gmail.com.<br>
+        3. Integración perfecta con Google Workspace.
+      </div>
+    </details>
+  </div>
+        <div class="section-card animate-in">
+          <h3><span class="icon">🚫</span> 3 Mitos que te Frenan (y la Verdad)</h3>
+          <p style="margin-bottom:20px;">Antes de aprender, necesitamos eliminar lo que <em>crees</em> que es verdad sobre la IA.</p>
+          <div style="display:grid;gap:16px;">
+            <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3);border-left:4px solid #ef4444;border-radius:12px;padding:18px;">
+              <div style="font-size:0.7rem;font-weight:800;color:#ef4444;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">MITO 1 ❌</div>
+              <div style="font-weight:700;color:#fca5a5;margin-bottom:8px;">"La IA siempre dice la verdad"</div>
+              <div style="font-size:0.83rem;color:#cbd5e1;line-height:1.6;"><strong style="color:#10b981;">Realidad:</strong> La IA puede inventar datos, fechas o citas bibliográficas con total confianza. Aprenderás a detectarlo en el Módulo 9 (Detective de Alucinaciones). <em>Regla de oro: nunca cites datos sin verificar la fuente.</em></div>
+            </div>
+            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-left:4px solid #f59e0b;border-radius:12px;padding:18px;">
+              <div style="font-size:0.7rem;font-weight:800;color:#f59e0b;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">MITO 2 ❌</div>
+              <div style="font-weight:700;color:#fde68a;margin-bottom:8px;">"La IA es como Google — solo busca información"</div>
+              <div style="font-size:0.83rem;color:#cbd5e1;line-height:1.6;"><strong style="color:#10b981;">Realidad:</strong> Google indexa páginas existentes. Un LLM (como ChatGPT) <em>genera</em> texto nuevo razonando sobre patrones. Por eso puede redactar, analizar, programar y resumir — no solo buscar.</div>
+            </div>
+            <div style="background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.3);border-left:4px solid #6366f1;border-radius:12px;padding:18px;">
+              <div style="font-size:0.7rem;font-weight:800;color:#6366f1;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">MITO 3 ❌</div>
+              <div style="font-weight:700;color:#a5b4fc;margin-bottom:8px;">"Necesito saber programar para usar IA"</div>
+              <div style="font-size:0.83rem;color:#cbd5e1;line-height:1.6;"><strong style="color:#10b981;">Realidad:</strong> Este curso completo — incluyendo automatizaciones y IA local — se hace en lenguaje natural (español normal). Escribirás instrucciones, no código. La programación es <em>opcional</em> y es para el nivel experto (Módulo 16).</div>
+            </div>
+          </div>
+          <div class="pista-ia" style="margin-top:20px;">💡 <b>Recuerda:</b> A medida que avances, volverás a estos conceptos. El objetivo hoy es empezar con expectativas realistas.</div>
         </div>
       </div>
 
@@ -70,7 +131,7 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
                 <p class="text-gradient-primary" style="font-size: 0.9rem; margin-bottom: 12px;">🎯 Paso a paso:</p>
                 <ol style="font-size: 0.75rem; padding-left: 20px; line-height: 1.6;">
                   <li>Abre tu correo y selecciona los asuntos de los 50 correos pendientes.</li>
-                  <li>Pégalos en ChatGPT o Gemini.</li>
+                  <li>Pégalos en <a href="https://chatgpt.com" target="_blank" style="color:var(--primary); text-decoration:underline;">ChatGPT</a> o <a href="https://gemini.google.com" target="_blank" style="color:var(--primary); text-decoration:underline;">Gemini</a>.</li>
                   <li>Usa esta instrucción (Pruébala abajo):</li>
                 </ol>
                 <div class="prompt-pill m-pa-codebox" style="border-left: 4px solid var(--primary);">
@@ -91,7 +152,7 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
               <div class="action-box m-pa-panel-card" style="margin: 20px 0;">
                 <p class="text-gradient-primary" style="font-size: 0.9rem; margin-bottom: 12px; color: #10b981;">🎯 Paso a paso:</p>
                 <ol style="font-size: 0.75rem; padding-left: 20px; line-height: 1.6;">
-                  <li>Sube tu PDF de 200 páginas a Claude o Gemini (el ícono del clip 📎).</li>
+                  <li>Sube tu PDF de 200 páginas a <a href="https://claude.ai" target="_blank" style="color:#10b981; text-decoration:underline;">Claude</a> o <a href="https://gemini.google.com" target="_blank" style="color:#10b981; text-decoration:underline;">Gemini</a> (el ícono del clip 📎).</li>
                   <li>Dile tu cargo (ej: "Soy el coordinador de talento humano").</li>
                   <li>Usa esta instrucción:</li>
                 </ol>
@@ -166,15 +227,20 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
         <div class="exercise-box mission-card animate-in">
           <div class="preparation-step" style="background: rgba(var(--primary-rgb), 0.1); border: 1px solid var(--primary); padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid var(--primary);">
             <h4 style="margin-top: 0; color: var(--primary); font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">🛠️ Preparación de la Plataforma</h4>
-            <p style="font-size: 0.8rem; margin-bottom: 0; opacity: 0.9;">Antes de iniciar, asegúrate de tener una cuenta activa en ChatGPT, Gemini o Perplexity para realizar tus pruebas.</p>
+            <p style="font-size: 0.8rem; margin-bottom: 0; opacity: 0.9;">Antes de iniciar, asegúrate de tener una cuenta activa en <a href="https://chatgpt.com" target="_blank" style="color:var(--primary); text-decoration:none; font-weight:bold;">ChatGPT</a>, <a href="https://gemini.google.com" target="_blank" style="color:var(--primary); text-decoration:none; font-weight:bold;">Gemini</a> o <a href="https://perplexity.ai" target="_blank" style="color:var(--primary); text-decoration:none; font-weight:bold;">Perplexity</a> para realizar tus pruebas.</p>
           </div>
           <div class="exercise-header"><span class="exercise-icon">🔥</span><span class="exercise-title">Misión 1: El Diagnóstico</span></div>
           <p>Identifica una tarea que consideres "tu mayor pesadilla" en la oficina.</p>
           <textarea placeholder="Ej: Clasificar manualmente 200 PQRS cada lunes..."></textarea>
           <div class="reward-tag">+60 XP por honestidad operacional</div>
         </div>
-        <button class="gl-btn gl-btn-outline complete-module-btn" data-module="module-1">☐ Reclamar Victoria (Insignia)</button>
-      </div>
+        <button class="gl-btn gl-btn-primary complete-module-btn" data-module="module-1" onclick="document.getElementById('m1-feedback').style.display='block'; window.app && window.app.addXP(50);">✅ Finalizar Misión</button>
+    <div id="m1-feedback" style="display:none; margin-top:15px; background:rgba(16,185,129,0.1); border:1px solid #10b981; padding:15px; border-radius:10px;">
+      <h4 style="color:#10b981; margin-top:0;">📋 Ejemplo de Respuesta Correcta:</h4>
+      <p style="font-size:0.85rem; opacity:0.9;">"Usaría la IA para redactar borradores de respuestas a PQRS comunes. Mi rol sería el de **Auditor**, asegurándome de que la IA no invente compromisos legales y manteniendo el tono institucional. Esto me ahorraría unas 4 horas semanales de redacción básica."</p>
+    </div>
+    <div class="reward-tag">+100 XP · Insignia: Pionero Digital 🚀</div>
+  </div>
 
       <div class="module-nav">
         <button class="gl-btn" disabled>← Bloqueado</button>
@@ -214,8 +280,8 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
               <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
                 <span style="font-size: 2rem;">🤖</span>
                 <div>
-                  <h4 style="margin: 0; color: var(--primary);">ChatGPT</h4>
-                  <p style="font-size: 0.75rem; margin: 0; opacity: 0.7;">El Asistente Universal</p>
+                  <h4 style="margin: 0; color: var(--primary);"><a href="https://chatgpt.com" target="_blank" style="color:inherit; text-decoration:underline;">ChatGPT</a></h4>
+                  <p style="font-size: 0.75rem; margin: 0; opacity: 0.7;">El Asistente Universal (OpenAI)</p>
                 </div>
               </div>
               <ul style="font-size: 0.85rem; margin-bottom: 20px; padding-left: 15px;">
@@ -231,7 +297,7 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
               <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
                 <span style="font-size: 2rem;">✍️</span>
                 <div>
-                  <h4 style="margin: 0; color: #f59e0b;">Claude</h4>
+                  <h4 style="margin: 0; color: #f59e0b;"><a href="https://claude.ai" target="_blank" style="color:inherit; text-decoration:underline;">Claude</a></h4>
                   <p style="font-size: 0.75rem; margin: 0; opacity: 0.7;">Análisis y Escritura Humana</p>
                 </div>
               </div>
@@ -248,7 +314,7 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
               <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
                 <span style="font-size: 2rem;">♊</span>
                 <div>
-                  <h4 style="margin: 0; color: #2563eb;">Gemini</h4>
+                  <h4 style="margin: 0; color: #2563eb;"><a href="https://gemini.google.com" target="_blank" style="color:inherit; text-decoration:underline;">Gemini</a></h4>
                   <p style="font-size: 0.75rem; margin: 0; opacity: 0.7;">Integración Google Workspace</p>
                 </div>
               </div>
@@ -265,7 +331,7 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
               <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
                 <span style="font-size: 2rem;">🟣</span>
                 <div>
-                  <h4 style="margin: 0; color: #8b5cf6;">DeepSeek (R1)</h4>
+                  <h4 style="margin: 0; color: #8b5cf6;"><a href="https://chat.deepseek.com" target="_blank" style="color:inherit; text-decoration:underline;">DeepSeek (R1)</a></h4>
                   <p style="font-size: 0.75rem; margin: 0; opacity: 0.7;">Razonamiento Matemático y Lógico</p>
                 </div>
               </div>
@@ -428,11 +494,11 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
       
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px; margin:20px 0;">
         <div class="tool-access-card" style="border: 1px solid rgba(16,185,129,0.3); padding:15px; border-radius:12px; background:rgba(255,255,255,0.02);">
-          <h4 style="color:#10b981; margin:0 0 10px;">🤖 ChatGPT: GPTs</h4>
+          <h4 style="color:#10b981; margin:0 0 10px;">🤖 <a href="https://chatgpt.com" target="_blank" style="color:inherit; text-decoration:underline;">ChatGPT: GPTs</a></h4>
           <p style="font-size:0.75rem; color:#94a3b8; margin:0;">Ideal para crear herramientas interactivas que otros puedan usar. Sube tus manuales de procesos y deja que el GPT responda dudas basadas en ellos.</p>
         </div>
         <div class="tool-access-card" style="border: 1px solid rgba(245,158,11,0.3); padding:15px; border-radius:12px; background:rgba(255,255,255,0.02);">
-          <h4 style="color:#f59e0b; margin:0 0 10px;">✍️ Claude: Projects</h4>
+          <h4 style="color:#f59e0b; margin:0 0 10px;">✍️ <a href="https://claude.ai" target="_blank" style="color:inherit; text-decoration:underline;">Claude: Projects</a></h4>
           <p style="font-size:0.75rem; color:#94a3b8; margin:0;">Perfecto para análisis técnico profundo. Crea un "Proyecto" para cada expediente y adjunta todos los PDFs relacionados para cruzarlos entre sí.</p>
         </div>
       </div>
@@ -440,6 +506,15 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
       <div class="exercise-box" style="border: 1px solid var(--primary); background: rgba(var(--primary-rgb), 0.05); padding: 20px; border-radius: 12px;">
         <h4 style="color:var(--primary); margin-top:0;">📋 Ejercicio de Maestría: El Acta Maestra v31.4</h4>
         <p style="font-size: 0.85rem;">Vamos a configurar un sistema que tome una reunión grabada (transcripción) y la convierta en un acta formal lista para firma.</p>
+        
+        <div class="glass-card" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-top: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+          <h5 style="color: var(--primary-light, #58a6ff); font-size: 0.9rem; margin-top: 0; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;"><span>🎯</span> Paso a Paso para Principiantes:</h5>
+          <ol style="font-size: 0.8rem; margin: 0; padding-left: 20px; color: #c9d1d9; line-height: 1.7;">
+            <li style="margin-bottom: 6px;"><strong style="color: #fff;">Abre la Herramienta:</strong> Ve a <a href="https://chatgpt.com" target="_blank" style="color:#58a6ff; font-weight:bold;">ChatGPT</a> o <a href="https://claude.ai" target="_blank" style="color:#f59e0b; font-weight:bold;">Claude</a> y prepárate para escribir en el chat.</li>
+            <li style="margin-bottom: 6px;"><strong style="color: #fff;">Dale el "Rol" (Paso 1):</strong> Haz clic en <span style="background:rgba(255,255,255,0.1); padding:2px 6px; border-radius:4px; font-size:0.7rem;">📋 Copiar</span> en el Cuadro 1 y envíalo en el chat. Esto le enseña a la IA cómo debe comportarse.</li>
+            <li><strong style="color: #fff;">Procesa el Texto (Paso 2):</strong> Copia el Cuadro 2 y envíalo en ese <strong>mismo</strong> chat. ¡Observa cómo transforma el texto desordenado en un acta formal al instante!</li>
+          </ol>
+        </div>
         
         <div style="margin-top:20px; display:flex; flex-direction:column; gap:15px;">
           <!-- Prompt -->
@@ -472,6 +547,11 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
           <div class="preparation-step" style="background: rgba(16,185,129,0.1); border: 1px solid #10b981; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #10b981;">
             <h4 style="margin-top: 0; color: #10b981; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">🛠️ Preparación de la Plataforma</h4>
             <p style="font-size: 0.8rem; margin-bottom: 0; opacity: 0.9;">Antes de iniciar, asegúrate de haber configurado tu nombre en la sección de Perfil para que tu misión sea personalizada.</p>
+          </div>
+          <!-- Advertencia GPTs premium -->
+          <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.35);border-radius:12px;padding:14px 18px;margin-bottom:18px;font-size:0.82rem;display:flex;align-items:flex-start;gap:10px;">
+            <span style="font-size:1.3rem;flex-shrink:0;">⚠️</span>
+            <span><strong style="color:#fbbf24;">GPTs Personalizados y Proyectos</strong> requieren <strong>ChatGPT Plus (~$20 USD/mes)</strong>. Las cuentas gratuitas tienen límites de mensajes diarios. Aprenderemos a calcular si vale la pena en el <em>Módulo 18 (ROI)</em>.</span>
           </div>
           <div class="exercise-header"><span class="exercise-icon">🔥</span><span class="exercise-title">Misión 2: El Saludo Institucional</span></div>
           <p>¿Lograste entrar a alguna herramienta? Elige tu favorita y pide: "Redacta un correo corto para un ciudadano avisando que su PQRS fue radicado satisfactoriamente."</p>
@@ -510,11 +590,11 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
       </div>
 
       <div class="ag-tabs game-tabs">
-        <button class="tab-btn active" data-level="1" id="m3-tab-1" onclick="m3ShowLevel(1)">1. Anatomía<br><small>El Método CREA</small></button>
-        <button class="tab-btn locked" data-level="2" id="m3-tab-2" onclick="m3ShowLevel(2)">2. Técnicas<br><small>Elite Prompting</small></button>
-        <button class="tab-btn locked" data-level="3" id="m3-tab-3" onclick="m3ShowLevel(3)">3. Biblioteca<br><small>Ejemplos Reales</small></button>
-        <button class="tab-btn locked" data-level="4" id="m3-tab-4" onclick="m3ShowLevel(4)">4. Constructor<br><small>Dynamic Builder</small></button>
-        <button class="tab-btn locked" data-level="5" id="m3-tab-5" onclick="m3ShowLevel(5)">5. Desafío<br><small>Certificación</small></button>
+        <button class="tab-btn active" data-level="1" id="m3-tab-1" onclick="window.m3ShowLevel(1)">1. Anatomía<br><small>El Método CREA</small></button>
+        <button class="tab-btn locked" data-level="2" id="m3-tab-2" onclick="window.m3ShowLevel(2)">2. Técnicas<br><small>Elite Prompting</small></button>
+        <button class="tab-btn locked" data-level="3" id="m3-tab-3" onclick="window.m3ShowLevel(3)">3. Biblioteca<br><small>Ejemplos Reales</small></button>
+        <button class="tab-btn locked" data-level="4" id="m3-tab-4" onclick="window.m3ShowLevel(4)">4. Constructor<br><small>Dynamic Builder</small></button>
+        <button class="tab-btn locked" data-level="5" id="m3-tab-5" onclick="window.m3ShowLevel(5)">5. Desafío<br><small>Certificación</small></button>
       </div>
 
       <!-- NIVEL 1: ANATOMÍA CREA -->
@@ -544,13 +624,13 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
             </div>
             <div class="crea-card glass-card-premium" style="padding: 25px; border-radius: 20px;">
               <div class="crea-letter" style="color:#ef4444; font-size: 3rem; font-weight: 900; text-shadow: 0 0 15px rgba(239,68,68,0.4);">A</div>
-              <h4 style="color:#ef4444; font-family: 'Space Grotesk'; margin: 10px 0;">Acción/Formato</h4>
+              <h4 style="color:#ef4444; font-family: 'Space Grotesk'; margin: 10px 0;'>Acción/Formato</h4>
               <p style="font-size:0.85rem; opacity:0.8; line-height: 1.6;">¿Cómo quieres el resultado? (Tabla, Lista, PDF, Tono formal).</p>
               <div class="prompt-pill" style="font-size:0.75rem; border-color:#ef4444; background: rgba(239,68,68,0.1);">"Dame una tabla Markdown con: Hallazgo, Gravedad y Solución."</div>
             </div>
           </div>
           
-          <button class="gl-btn gl-btn-primary" style="width:100%; margin-top:20px;" onclick="m3UnlockLevel(2)">Entendido: Ir a Técnicas de Élite →</button>
+          <button class="gl-btn gl-btn-primary" style="width:100%; margin-top:20px;" onclick="window.m3UnlockLevel(2)">Entendido: Ir a Técnicas de Élite →</button>
         </div>
       </div>
 
@@ -610,7 +690,7 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
             <strong>Pro Tip:</strong> Combina el método CREA con el Pensamiento Paso a Paso (Chain-of-Thought) para investigar y redactar informes complejos que requieran gran precisión de análisis.
           </div>
           
-          <button class="gl-btn gl-btn-primary" style="width:100%; margin-top:25px;" onclick="m3UnlockLevel(3)">Continuar a la Biblioteca →</button>
+          <button class="gl-btn gl-btn-primary" style="width:100%; margin-top:25px;" onclick="window.m3UnlockLevel(3)">Continuar a la Biblioteca →</button>
         </div>
       </div>
 
@@ -640,7 +720,7 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
             </div>
           </div>
           
-          <button class="gl-btn gl-btn-primary" style="width:100%; margin-top:20px;" onclick="m3UnlockLevel(4)">Ir al Constructor de Prompts →</button>
+          <button class="gl-btn gl-btn-primary" style="width:100%; margin-top:20px;" onclick="window.m3UnlockLevel(4)">Ir al Constructor de Prompts →</button>
         </div>
       </div>
 
@@ -653,7 +733,7 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
           <div class="builder-columns" style="display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 20px;">
             <div class="builder-options" style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 12px; border: 1px solid rgba(var(--primary-rgb), 0.2);">
               <label class="premium-label">1. ROL (Identidad)</label>
-              <select id="m3-builder-role" class="game-select" onchange="m3UpdateBuilder()" style="width:100%; margin-bottom:15px;">
+              <select id="m3-builder-role" class="game-select" onchange="window.m3UpdateBuilder()" style="width:100%; margin-bottom:15px;">
                 <option value="Eres un experto en contratación pública">Contratación Pública</option>
                 <option value="Actúa como un experto en gestión del talento humano">Talento Humano</option>
                 <option value="Eres un analista de presupuesto">Analista de Presupuesto</option>
@@ -661,7 +741,7 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
               </select>
 
               <label class="premium-label">2. CONTEXTO (Situación)</label>
-              <select id="m3-builder-context" class="game-select" onchange="m3UpdateBuilder()" style="width:100%; margin-bottom:15px;">
+              <select id="m3-builder-context" class="game-select" onchange="window.m3UpdateBuilder()" style="width:100%; margin-bottom:15px;">
                 <option value="Estamos diseñando los pliegos para un nuevo proyecto de infraestructura.">Pliegos de Infraestructura</option>
                 <option value="Estamos revisando el clima organizacional después de una reestructuración.">Clima Organizacional</option>
                 <option value="Necesitamos optimizar el gasto en papelería y servicios básicos.">Optimización de Gastos</option>
@@ -669,7 +749,7 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
               </select>
 
               <label class="premium-label">3. TAREA (Acción)</label>
-              <select id="m3-builder-task" class="game-select" onchange="m3UpdateBuilder()" style="width:100%;">
+              <select id="m3-builder-task" class="game-select" onchange="window.m3UpdateBuilder()" style="width:100%;">
                 <option value="redacta una lista de 5 requisitos técnicos indispensables.">Redactar Requisitos</option>
                 <option value="propón 3 estrategias para mejorar la comunicación interna.">Proponer Estrategias</option>
                 <option value="identifica 3 áreas de ahorro inmediato sin afectar la operación.">Identificar Ahorro</option>
@@ -689,7 +769,7 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
             </div>
           </div>
           
-          <button class="gl-btn btn-titan-primary animate-pulse" style="width:100%; margin-top:32px;" onclick="m3UnlockLevel(5)">Finalizar y Certificar →</button>
+          <button class="gl-btn btn-titan-primary animate-pulse" style="width:100%; margin-top:32px;" onclick="window.m3UnlockLevel(5)">Finalizar y Certificar →</button>
         </div>
       </div>
 
@@ -699,13 +779,9 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
           <h3><span class="icon">🏆</span> Certificación: Maestro Alquimista</h3>
           <p>Valida tu dominio de la fórmula CREA para reclamar tu insignia.</p>
           
-          <div class="quiz-card">
-            <p style="font-weight:bold; margin-bottom:15px;">¿Cuál de estos componentes de CREA define el FORMATO de salida?</p>
-            <div class="quiz-options">
-              <div class="quiz-option" onclick="m3ValidateQuiz(this, 'n')">Contexto</div>
-              <div class="quiz-option" onclick="m3ValidateQuiz(this, 'n')">Especificación</div>
-              <div class="quiz-option" onclick="m3ValidateQuiz(this, 'y')">Acción / Formato</div>
-            </div>
+          <div id="m3-quiz-container" class="quiz-card">
+            <!-- Quiz questions will be rendered here by JS -->
+            <button class="gl-btn gl-btn-primary" onclick="window.m3StartQuiz()">Iniciar Quiz</button>
           </div>
           
           <div id="m3-final-mission" class="exercise-box mission-card" style="margin-top:25px; display:none;">
@@ -734,7 +810,7 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
                 </div>
               </div>
               <div class="reward-tag">+150 XP y Insignia Crystal Prompt</div>
-              <button class="gl-btn gl-btn-primary complete-module-btn" style="width:100%; margin-top:15px;" data-module="module-3" onclick="m3FinalizeModule()">Finalizar Módulo y Reclamar Insignia</button>
+              <button class="gl-btn gl-btn-primary complete-module-btn" style="width:100%; margin-top:15px;" data-module="module-3" onclick="window.m3FinalizeModule()">Finalizar Módulo y Reclamar Insignia</button>
             </div>
           </div>
         </div>
@@ -782,20 +858,46 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
                <p>Análisis de expedientes pesados y redacción técnica.</p>
              </div>
           </div>
+          <div class="prompt-example-card">
+          <div class="prompt-example-header">
+            <span class="prompt-example-area">RRHH</span>
+            <span class="prompt-example-title">Evaluación de Desempeño</span>
+          </div>
+          <p class="prompt-example-text">"Actúa como Especialista en Talento Humano. Ayúdame a redactar una retroalimentación constructiva para un analista que cumplió sus metas técnicas pero debe mejorar su comunicación asertiva. Usa un tono motivador y profesional."</p>
+          <button class="gl-btn small" onclick="navigator.clipboard.writeText(this.previousElementSibling.innerText); window.showToast('Prompt copiado','success')">Copiado Rápido</button>
+        </div>
+
+        <div class="prompt-example-card">
+          <div class="prompt-example-header">
+            <span class="prompt-example-area">COMUNICACIONES</span>
+            <span class="prompt-example-title">Comunicado de Crisis</span>
+          </div>
+          <p class="prompt-example-text">"Actúa como Director de Comunicaciones. Redacta urgentemente un borrador de comunicado de prensa sobre un fallo eléctrico en la sede central que afectará el servicio por 4 horas. Prioriza la transparencia y ofrece disculpas."</p>
+          <button class="gl-btn small" onclick="navigator.clipboard.writeText(this.previousElementSibling.innerText); window.showToast('Prompt copiado','success')">Copiado Rápido</button>
+        </div>
+
+        <div class="prompt-example-card">
+          <div class="prompt-example-header">
+            <span class="prompt-example-area">FINANCIERO</span>
+            <span class="prompt-example-title">Análisis de Ejecución</span>
+          </div>
+          <p class="prompt-example-text">"Actúa como Analista Financiero. Tengo una tabla de ejecución presupuestal con desviaciones del 15%. Ayúdame a redactar 3 posibles causas técnicas y justificaciones para una adición presupuestal basándote en imprevistos climáticos."</p>
+          <button class="gl-btn small" onclick="navigator.clipboard.writeText(this.previousElementSibling.innerText); window.showToast('Prompt copiado','success')">Copiado Rápido</button>
+        </div>
           
           <!-- Classifier Game Section -->
           <div class="classifier-game glass-card" style="margin-top: 40px;">
              <h4><span class="icon">🎮</span> Mini-Juego: Clasificador Pro</h4>
              <p>Asigna cada tarea a la herramienta IA más eficiente para ganar XP.</p>
              <div class="classifier-items" id="m4-drag-items">
-                <div class="drag-item" draggable="true" ondragstart="app.drag(event)" id="drag-1" data-target="perplexity">"¿Decreto de austeridad 2024?"</div>
-                <div class="drag-item" draggable="true" ondragstart="app.drag(event)" id="drag-2" data-target="claude">"Resumir este PDF de 80 pág"</div>
-                <div class="drag-item" draggable="true" ondragstart="app.drag(event)" id="drag-3" data-target="notebooklm">"Podcast de mis archivos"</div>
+                <div class="drag-item" draggable="true" ondragstart="window.app.drag(event)" id="drag-1" data-target="perplexity">"¿Decreto de austeridad 2024?"</div>
+                <div class="drag-item" draggable="true" ondragstart="window.app.drag(event)" id="drag-2" data-target="claude">"Resumir este PDF de 80 pág"</div>
+                <div class="drag-item" draggable="true" ondragstart="window.app.drag(event)" id="drag-3" data-target="notebooklm">"Podcast de mis archivos"</div>
              </div>
              <div class="drop-zones">
-                <div class="drop-zone" id="perplexity" ondrop="app.drop(event)" ondragover="app.allowDrop(event)"><span>🔎</span> Perplexity</div>
-                <div class="drop-zone" id="claude" ondrop="app.drop(event)" ondragover="app.allowDrop(event)"><span>✍️</span> Claude</div>
-                <div class="drop-zone" id="notebooklm" ondrop="app.drop(event)" ondragover="app.allowDrop(event)"><span>📚</span> NotebookLM</div>
+                <div class="drop-zone" id="perplexity" ondrop="window.app.drop(event)" ondragover="window.app.allowDrop(event)"><span>🔎</span> Perplexity</div>
+                <div class="drop-zone" id="claude" ondrop="window.app.drop(event)" ondragover="window.app.allowDrop(event)"><span>✍️</span> Claude</div>
+                <div class="drop-zone" id="notebooklm" ondrop="window.app.drop(event)" ondragover="window.app.allowDrop(event)"><span>📚</span> <a href="https://notebooklm.google.com" target="_blank" style="color:inherit; text-decoration:none;">NotebookLM</a></div>
              </div>
           </div>
         </div>
@@ -818,13 +920,13 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
              </p>
              <div id="m4-audit-screen">
                <div class="audit-challenge-container">
-                  <div class="audit-card glass-card subtle-border elegant-transition" onclick="app.checkAudit(this, false)">
+                  <div class="audit-card glass-card subtle-border elegant-transition" onclick="window.app.checkAudit(this, false)">
                     <strong>#01: Reducción de viáticos:</strong> "Según el decreto de austeridad, los viajes de servidores públicos al exterior deben priorizar clase económica en vuelos de más de 4 horas."
                   </div>
-                  <div class="audit-card glass-card-premium animate-in" onclick="app.checkAudit(this, true)" style="margin-bottom: 12px; cursor: pointer;">
+                  <div class="audit-card glass-card-premium animate-in" onclick="window.app.checkAudit(this, true)" style="margin-bottom: 12px; cursor: pointer;">
                     <strong>#02: Impuesto digital:</strong> "La reforma establece un impuesto del 5% por cada correo electrónico institucional enviado después de las 6:00 PM para desincentivar el trabajo extra."
                   </div>
-                  <div class="audit-card glass-card-premium animate-in" onclick="app.checkAudit(this, false)" style="margin-bottom: 12px; cursor: pointer;">
+                  <div class="audit-card glass-card-premium animate-in" onclick="window.app.checkAudit(this, false)" style="margin-bottom: 12px; cursor: pointer;">
                     <strong>#03: Planta de personal:</strong> "Está prohibida la creación de nuevos cargos en las entidades públicas a menos que exista una viabilidad fiscal previa del Ministerio."
                   </div>
                </div>
@@ -833,27 +935,78 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
           </div>
         </div>
 
-        <!-- Comparison Engine Simulator -->
+        <!-- Comparison Engine Simulator - REPARADO -->
         <div class="section-card animate-in glass-card-premium" style="margin-top: 35px;">
-           <h4 class="text-gradient-primary" style="margin-bottom: 20px;"><span class="icon">⚖️</span> Motor de Comparación</h4>
-           <div class="comparison-engine" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-              <div class="m-pa-panel-card animate-in">
-                 <div class="badge-titan" style="margin-bottom: 10px;">🔎 PERPLEXITY AI · BUSQUEDA</div>
-                 <div class="m-pa-codebox" style="color: var(--primary-light);">
-                    <span style="opacity: 0.5;">></span> Buscando Decreto_81_2024 EN VIVO...<br>
-                    <span style="opacity: 0.5;">></span> Encontrado en portal.gov.co ✅<br>
-                    <span style="opacity: 0.5;">></span> Cita: "Art. 1 establece límites..."
+           <h4 class="text-gradient-primary" style="margin-bottom: 20px;"><span class="icon">⚖️</span> Motor de Comparación: Resumen vs Análisis Profundo</h4>
+           <p style="font-size:0.83rem;color:var(--text-muted);margin-bottom:16px;">Observa cómo cambia la calidad de la respuesta según el tipo de instrucción que le das a la IA.</p>
+           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+             <div class="m-pa-panel-card" style="border: 1px solid rgba(239,68,68,0.2);">
+               <div class="badge-titan" style="margin-bottom:10px;background:rgba(239,68,68,0.1);border-color:#ef4444;color:#ef4444;">❌ INSTRUCCIÓN BÁSICA (DÉBIL)</div>
+               <div class="m-pa-codebox" style="color:#e2e8f0;font-size:0.78rem;border:1px solid rgba(239,68,68,0.1);">
+                 "Resumé este documento."
+               </div>
+               <div style="margin-top:12px;padding:10px;background:rgba(239,68,68,0.06);border-radius:8px;font-size:0.78rem;color:#fca5a5;border:1px solid rgba(239,68,68,0.1);">
+                 🛡️ <b>Resultado:</b> Resumen genérico de 5 puntos sin mencionar riesgos, plazos ni quien debe actuar.
+               </div>
+             </div>
+             <div class="m-pa-panel-card" style="border-color:var(--primary); box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.1);">
+               <div class="badge-titan" style="margin-bottom:10px;background:rgba(var(--primary-rgb), 0.2);border-color:var(--primary);color:var(--primary-light);">💎 INSTRUCCIÓN CREA (ESTRATÉGICA)</div>
+               <div class="m-pa-codebox" style="color:#e2e8f0;font-size:0.78rem;border:1px solid rgba(var(--primary-rgb), 0.3);">
+                 "Actúa como analista. Revisa este documento y extrae riesgos, plazos críticos e inconsistencias con la normativa vigente."
+               </div>
+               <div style="margin-top:12px;padding:10px;background:rgba(16,185,129,0.06);border-radius:8px;font-size:0.78rem;color:#6ee7b7; border: 1px solid rgba(16,185,129,0.2);">
+                 <div style="font-size: 0.7rem; color: #a7f3d0; margin-bottom: 6px; font-family: monospace; border-bottom: 1px solid rgba(16,185,129,0.2); padding-bottom: 6px;">
+                   <span style="opacity:0.6;">&gt; Leyendo 4.500 palabras...</span><br>
+                   <span style="opacity:0.6;">&gt; Cruzando con Decreto 2023...</span>
                  </div>
-              </div>
-              <div class="m-pa-panel-card animate-in">
-                 <div class="badge-titan" style="margin-bottom: 10px; background: var(--warning); border-color: var(--warning); color: #000;">✍️ CLAUDE AI · SÍNTESIS</div>
-                 <div class="m-pa-codebox" style="color: var(--warning);">
-                    <span style="opacity: 0.5;">></span> Leyendo 4.500 palabras...<br>
-                    <span style="opacity: 0.5;">></span> Hallazgo: Contradicción con Decreto 2023.<br>
-                    <span style="opacity: 0.5;">></span> Propuesta: "En virtud de..."
-                 </div>
-              </div>
+                 ✅ <b>Resultado:</b> Identificó 2 riesgos, 1 contradicción normativa y 3 acciones con responsable y fecha.
+               </div>
+             </div>
            </div>
+           <div class="pista-ia" style="margin-top:16px;">💡 <b>Clave:</b> El análisis estratégico requiere instrucción CREA. "Resumé" siempre da menos que "Extrae riesgos, plazos e inconsistencias con normativa".</div>
+        </div>
+      </div>
+
+      <!-- 📄 NUEVA PESTAÑA: GUÍA SUBIR PDF -->
+      <div id="m4-pdf-guide" class="ag-content">
+        <div class="section-card animate-in">
+          <h3><span class="icon">📄</span> Cómo Subir un Documento a la IA</h3>
+          <p>Esta es la habilidad #1 para el análisis documental. Sigue estos pasos según la herramienta que prefieras.</p>
+          <div style="display:grid;gap:20px;margin-top:20px;">
+            
+            <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.3);border-radius:14px;padding:20px;">
+              <div style="font-weight:800;color:#10b981;font-size:0.9rem;margin-bottom:12px;">📊 ChatGPT (Free/Plus)</div>
+              <ol style="font-size:0.82rem;line-height:2;padding-left:18px;color:#cbd5e1;">
+                <li>Ve a <a href="https://chatgpt.com" target="_blank" style="color:#10b981;">chatgpt.com</a> e inicia sesión</li>
+                <li>Haz clic en el ícono <strong style="color:#fff">📎 (clip)</strong> en la barra de texto inferior</li>
+                <li>Selecciona tu archivo PDF, Word, Excel o imagen</li>
+                <li>Escribe tu pregunta — la IA ya tiene acceso al contenido completo</li>
+              </ol>
+              <div style="background:rgba(0,0,0,0.2);padding:10px;border-radius:8px;font-size:0.78rem;color:#86efac;margin-top:10px;">ℹ️ Límite plan gratuito: PDF &lt;32MB. Plus: sin límite práctico.</div>
+            </div>
+
+            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.35);border-radius:14px;padding:20px;">
+              <div style="font-weight:800;color:#f59e0b;font-size:0.9rem;margin-bottom:12px;">🤖 Claude (Anthropic)</div>
+              <ol style="font-size:0.82rem;line-height:2;padding-left:18px;color:#cbd5e1;">
+                <li>Ve a <a href="https://claude.ai" target="_blank" style="color:#f59e0b;">claude.ai</a> e inicia sesión</li>
+                <li>Haz clic en <strong style="color:#fff">⊕ (más)</strong> o el clip al lado del texto</li>
+                <li>Puedes subir <strong>hasta 5 archivos simultáneos</strong> por conversación</li>
+                <li>Claude es superior para documentos legales y textos muy largos (+100 páginas)</li>
+              </ol>
+              <div style="background:rgba(0,0,0,0.2);padding:10px;border-radius:8px;font-size:0.78rem;color:#fde68a;margin-top:10px;">❗ <strong>Seguridad:</strong> Nunca subas expedientes con cédulas o datos personales a estas plataformas. Ver Módulo 17 (IA Local).</div>
+            </div>
+
+            <div style="background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.3);border-radius:14px;padding:20px;">
+              <div style="font-weight:800;color:#818cf8;font-size:0.9rem;margin-bottom:12px;">📓 NotebookLM (Google) — La mejor opción para documentos oficiales</div>
+              <ol style="font-size:0.82rem;line-height:2;padding-left:18px;color:#cbd5e1;">
+                <li>Ve a <a href="https://notebooklm.google.com" target="_blank" style="color:#818cf8;">notebooklm.google.com</a></li>
+                <li>Haz clic en <strong style="color:#fff">➕ Añadir fuentes</strong></li>
+                <li>Puedes añadir: PDF, Google Docs, URL de página web o texto manual</li>
+                <li>Chat directamente con tus documentos — las respuestas vienen con citas exactas de página</li>
+              </ol>
+              <div style="background:rgba(0,0,0,0.2);padding:10px;border-radius:8px;font-size:0.78rem;color:#a5b4fc;margin-top:10px;">✅ Gratis con cuenta Google. Excelente para informes de gestión, CONPES, leyes y manuales institucionales.</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -863,15 +1016,15 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
             <h3 class="text-gradient-primary"><span class="icon">💡</span> Blueprint Lab: Estructuras Maestras</h3>
             <p class="m-pa-note">Copia estos "Blueprints" para que la IA genere documentos perfectos.</p>
             <div class="blueprint-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px;">
-               <div class="m-pa-panel-card" style="text-align: center; cursor: pointer; transition: 0.3s;" onclick="app.showBlueprint('resolution')">
+               <div class="m-pa-panel-card" style="text-align: center; cursor: pointer; transition: 0.3s;" onclick="window.app.showBlueprint('resolution')">
                   <span style="font-size: 2.5rem; display: block; margin-bottom: 10px;">📜</span>
                   <h5 style="margin: 0; color: #fff;">Resolución</h5>
                </div>
-               <div class="m-pa-panel-card" style="text-align: center; cursor: pointer; transition: 0.3s;" onclick="app.showBlueprint('memo')">
+               <div class="m-pa-panel-card" style="text-align: center; cursor: pointer; transition: 0.3s;" onclick="window.app.showBlueprint('memo')">
                   <span style="font-size: 2.5rem; display: block; margin-bottom: 10px;">📧</span>
                   <h5 style="margin: 0; color: #fff;">Memorando</h5>
                </div>
-               <div class="m-pa-panel-card" style="text-align: center; cursor: pointer; transition: 0.3s;" onclick="app.showBlueprint('report')">
+               <div class="m-pa-panel-card" style="text-align: center; cursor: pointer; transition: 0.3s;" onclick="window.app.showBlueprint('report')">
                   <span style="font-size: 2.5rem; display: block; margin-bottom: 10px;">📊</span>
                   <h5 style="margin: 0; color: #fff;">Acta Técnica</h5>
                </div>
@@ -880,7 +1033,7 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
                <div class="m-pa-panel-card" style="border: 1px solid var(--primary); padding: 0; overflow: hidden;">
                   <div class="code-header" style="background: rgba(var(--primary-rgb), 0.1); padding: 12px 20px; border-bottom: 1px solid var(--primary); display: flex; justify-content: space-between; align-items: center;">
                     <span id="blueprint-title" class="text-gradient-primary" style="font-weight: bold; font-family: 'Space Grotesk';"></span>
-                    <button class="gl-btn-outline small" style="padding: 6px 12px;" onclick="app.copyBlueprint()">📋 Copiar</button>
+                    <button class="gl-btn-outline small" style="padding: 6px 12px;" onclick="window.app.copyBlueprint()">📋 Copiar</button>
                   </div>
                   <pre id="blueprint-content" class="m-pa-codebox" style="margin: 0; border: none; border-radius: 0; padding: 20px; font-size: 0.9rem; line-height: 1.6;"></pre>
                </div>
@@ -916,20 +1069,20 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
               </div>
               <div class="input-glow-wrapper">
                 <label for="m4-mission-summary" style="display:block; font-weight:700; margin-bottom:6px;">2. Resumen ejecutivo</label>
-                <textarea id="m4-mission-summary" placeholder="Resume en pocas líneas de qué trata el documento y por qué importa." class="premium-textarea" style="min-height: 100px;"></textarea>
+                <textarea id="m4-mission-summary" class="premium-textarea" style="min-height: 100px;" placeholder="Resume en pocas líneas de qué trata el documento y por qué importa."></textarea>
               </div>
               <div class="input-glow-wrapper">
                 <label for="m4-mission-risk" style="display:block; font-weight:700; margin-bottom:6px;">3. Riesgo o hallazgo crítico</label>
-                <textarea id="m4-mission-risk" placeholder="Describe el principal riesgo, inconsistencia o alerta que detectaste." class="premium-textarea" style="min-height: 90px;"></textarea>
+                <textarea id="m4-mission-risk" class="premium-textarea" style="min-height: 90px;" placeholder="Describe el principal riesgo, inconsistencia o alerta que detectaste."></textarea>
               </div>
               <div class="input-glow-wrapper">
                 <label for="m4-mission-action" style="display:block; font-weight:700; margin-bottom:6px;">4. Acción y verificación</label>
-                <textarea id="m4-mission-action" placeholder="Explica qué decisión tomarías y cómo verificarías que el hallazgo sí está soportado por la fuente." class="premium-textarea" style="min-height: 100px;"></textarea>
+                <textarea id="m4-mission-action" class="premium-textarea" style="min-height: 100px;" placeholder="Explica qué decisión tomarías y cómo verificarías que el hallazgo sí está soportado por la fuente."></textarea>
               </div>
             </div>
           
           <div class="reward-tag" style="margin-top: 25px; background: rgba(169, 114, 255, 0.1); border: 1px solid rgba(169, 114, 255, 0.3); color: #a972ff;">+150 XP • Insignia Analista Soberano</div>
-          <button class="gl-btn gl-btn-primary complete-module-btn" data-module="module-4" style="width: 100%; margin-top: 20px; padding: 16px;" onclick="app.finalizeM4Mission()">Finalizar e Indexar Módulo 4</button>
+          <button class="gl-btn gl-btn-primary complete-module-btn" data-module="module-4" style="width: 100%; margin-top: 20px; padding: 16px;" onclick="window.app.finalizeM4Mission()">Finalizar e Indexar Módulo 4</button>
         </div>
       </div>
 
@@ -963,18 +1116,51 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
 
       <!-- ══ NAVEGACIÓN POR NIVELES ══ -->
       <div id="m5-levels-nav" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;">
-        <button class="m5-tab active" data-level="1" onclick="m5ShowLevel(1)">🌱 Nivel 1<br><small>Fundamentos</small></button>
-        <button class="m5-tab locked" data-level="2" onclick="m5ShowLevel(2)">🧹 Nivel 2<br><small>Limpieza</small></button>
-        <button class="m5-tab locked" data-level="3" onclick="m5ShowLevel(3)">🔍 Nivel 3<br><small>Auditoría</small></button>
-        <button class="m5-tab locked" data-level="4" onclick="m5ShowLevel(4)">🚀 Nivel 4<br><small>Automatización</small></button>
-        <button class="m5-tab locked" data-level="5" onclick="m5ShowLevel(5)">🏆 Nivel 5<br><small>Hito Final</small></button>
+        <button class="m5-tab active" data-level="1" onclick="window.m5ShowLevel(1)">🌱 Nivel 1<br><small>Fundamentos</small></button>
+        <button class="m5-tab locked" data-level="2" onclick="window.m5ShowLevel(2)">🧹 Nivel 2<br><small>Limpieza</small></button>
+        <button class="m5-tab locked" data-level="3" onclick="window.m5ShowLevel(3)">🔍 Nivel 3<br><small>Auditoría</small></button>
+        <button class="m5-tab locked" data-level="4" onclick="window.m5ShowLevel(4)">🚀 Nivel 4<br><small>Automatización</small></button>
+        <button class="m5-tab locked" data-level="5" onclick="window.m5ShowLevel(5)">🏆 Nivel 5<br><small>Hito Final</small></button>
       </div>
 
       <div id="m5-level-1" class="ag-content active animate-in">
         <div class="section-card storytelling" style="border-left-color:var(--primary);">
             <p class="narrative-text">"El caos domina el servidor central. Miles de filas de Excel con errores de formato, nombres duplicados y cifras que no cuadran..."</p>
         </div>
-        <button class="quiz-btn" style="width:100%;margin-top:1.5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));" onclick="m5UnlockAndGo(2)">
+        <div class="level-card" style="border-left:4px solid #3b82f6;">
+        <h4 style="color:#3b82f6;">Nivel 1: El Mapa del Tesoro (Fundamentos)</h4>
+        <p style="font-size:0.85rem; opacity:0.8;">Antes de usar IA en Excel, debes entender la jerarquía del dato:</p>
+        <div style="margin:15px 0; background:rgba(0,0,0,0.2); padding:10px; border-radius:8px; font-size:0.8rem;">
+          <b>Fase A) Limpieza:</b> Quitar duplicados, arreglar formatos de fecha.<br>
+          <b>Fase B) Análisis:</b> ¿Qué pasó? (Sumas, Promedios, Tablas Dinámicas).<br>
+          <b>Fase C) Predicción:</b> ¿Qué pasará? (Tendencias, Forecast).
+        </div>
+        <p style="font-size:0.75rem; color:#94a3b8;">💡 Ejercicio: ¿Qué fase es más urgente si tienes una base de datos con 500 filas de nombres escritos en mayúsculas y minúsculas?</p>
+        <button class="gl-btn gl-btn-small" onclick="window.showToast('¡Correcto! Fase A: Limpieza. Sin datos limpios, el análisis falla.', 'success')">Responder: Limpieza</button>
+      </div>
+        
+      <!-- ═══ TOP-10 FÓRMULAS PARA SECTOR PÚBLICO ═══ -->
+      <div class="section-card animate-in" style="margin-top:30px;background:rgba(20,184,166,0.04);border:1px solid rgba(20,184,166,0.2);">
+        <h3><span class="icon">📋</span> Top 10 Fórmulas Esenciales para el Sector Público</h3>
+        <p style="font-size:0.83rem;margin-bottom:16px;">Pídele a ChatGPT o Claude que te <em>explique cómo aplicarlas en tu archivo específico</em> — sin estudiar manuales.</p>
+        <div style="display:grid;gap:10px;">
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:10px 16px;align-items:start;">
+            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">SUMAR.SI</code><span style="font-size:0.82rem;">Suma celdas que cumplan una condición (ej: total gastos de Bogotá)</span>
+            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">CONTAR.SI</code><span style="font-size:0.82rem;">Cuenta celdas que cumplan una condición (ej: cuántas PQRS están "Pendientes")</span>
+            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">BUSCARV</code><span style="font-size:0.82rem;">Busca un valor en una tabla y trae lo que necesitas (ej: nombre dado el número de cédula)</span>
+            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">SI</code><span style="font-size:0.82rem;">Evalúa una condición y muestra un resultado u otro (ej: "Vencido" / "A tiempo")</span>
+            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">TEXTO</code><span style="font-size:0.82rem;">Convierte números a texto con formato específico (ej: fechas, monedas)</span>
+            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">FECHAS / HOY()</code><span style="font-size:0.82rem;">Calcula días hábiles, vencimientos y plazos legales automáticamente</span>
+            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">TABLAS DINÁMICAS</code><span style="font-size:0.82rem;">Resumen interactivo de grandes bases de datos sin escribir fórmulas</span>
+            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">CONCATENAR / &amp;</code><span style="font-size:0.82rem;">Une textos de varias celdas (ej: nombre + apellido + contrato)</span>
+            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">ELIMINAR.ESPACIOS</code><span style="font-size:0.82rem;">Limpia datos importados de sistemas bogotanos con dobles espacios</span>
+            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">ÍNDICE + COINCIDIR</code><span style="font-size:0.82rem;">La versión avanzada de BUSCARV — busca en cualquier dirección</span>
+          </div>
+        </div>
+        <button class="gl-btn small" style="margin-top:14px;border-color:#14b8a6;color:#14b8a6;" onclick="navigator.clipboard.writeText('Actúa como experto en Excel para el sector público colombiano. Tengo estas columnas: [describe tus columnas]. Necesito [describe qué quieres lograr]. Dame la fórmula exacta con explicación paso a paso de cómo copiarla.');window.showToast('Prompt copiado','success');">📋 Copiar Prompt Maestro de Excel</button>
+      </div>
+
+        <button class="quiz-btn" style="width:100%;margin-top:1.5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));" onclick="window.m5UnlockAndGo(2)">
           ✅ Entendí el flujo → Iniciar Limpieza (Nivel 2)
         </button>
       </div>
@@ -1005,7 +1191,7 @@ MAria G; NULL; 1/1/24
 
               <div style="background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column;">
                 <div style="font-size: 0.7rem; color: #10b981; font-weight: bold; margin-bottom: 8px;">SALIDA IA (LIMPIA):</div>
-                <div id="m5-clean-output" style="background: rgba(0,0,0,0.3); flex: 1; border-radius: 6px; padding: 10px; font-size: 0.75rem; color: #8b949e; font-family: monospace; overflow-y: auto; border: 1px solid rgba(16,185,129,0.1);">
+                <div id="m5-clean-output" style="background: rgba(0,0,0,0.3); flex: 1; border-radius: 6px; padding: 10px; font-size: 0.75rem; color: #c9d1d9; font-family: monospace; overflow-y: auto; border: 1px solid rgba(16,185,129,0.1);">
                   <div style="text-align:center; margin-top:25px; opacity:0.5;">
                     <span style="font-size:2rem; display:block; margin-bottom:10px;">🤖</span>
                     Esperando datos...
@@ -1014,7 +1200,7 @@ MAria G; NULL; 1/1/24
               </div>
             </div>
         </div>
-        <button class="quiz-btn" style="width:100%;margin-top:1.5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));" onclick="m5UnlockAndGo(3)">
+        <button class="quiz-btn" style="width:100%;margin-top:1.5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));" onclick="window.m5UnlockAndGo(3)">
           🚀 Continuar a Auditoría (Nivel 3) →
         </button>
       </div>
@@ -1070,16 +1256,16 @@ MAria G; NULL; 1/1/24
               <div style="display: flex; gap: 20px; align-items: flex-start;">
                 <span style="font-size: 2.5rem;">🚨</span>
                 <div>
-                  <h4 style="color: #ef4444; margin: 0 0 8px;">ANOMALÍA DETECTADA: Error de Magnitud</h4>
-                  <p class="m-pa-note" style="color: #fff; margin: 0;">
-                    Se ha identificado una inconsistencia estadística en la sede <b>Medellín</b>. El incremento del 900.0% respecto al periodo anterior supera los umbrales institucionales permitidos sin justificación técnica adjunta.
-                  </p>
-                  <div class="badge-titan" style="margin-top: 15px; background: rgba(169, 114, 255, 0.1); border-color: rgba(169, 114, 255, 0.3); color: #a972ff;">+50 XP • Agente Auditor</div>
+                   <h4 style="color: #ef4444; margin: 0 0 8px;">ANOMALÍA DETECTADA: Error de Magnitud</h4>
+                   <p class="m-pa-note" style="color: #fff; margin: 0;">
+                     Se ha identificado una inconsistencia estadística en la sede <b>Medellín</b>. El incremento del 900.0% respecto al periodo anterior supera los umbrales institucionales permitidos sin justificación técnica adjunta.
+                   </p>
+                   <div class="badge-titan" style="margin-top: 15px; background: rgba(169, 114, 255, 0.1); border-color: rgba(169, 114, 255, 0.3); color: #a972ff;">+50 XP • Agente Auditor</div>
                 </div>
               </div>
             </div>
         </div>
-        <button class="quiz-btn" style="width:100%;margin-top:1.5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));" onclick="m5UnlockAndGo(4)">
+        <button class="quiz-btn" style="width:100%;margin-top:1.5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));" onclick="window.m5UnlockAndGo(4)">
           🛠️ Ir a Automatización (Nivel 4) →
         </button>
       </div>
@@ -1090,27 +1276,13 @@ MAria G; NULL; 1/1/24
             <p>Ya no necesitas saber programar en VBA. Solo necesitas saber pedirlo.</p>
             
             <div class="vba-generator-box" style="background: #1e1e1e; padding: 20px; border-radius: 8px; border: 1px solid #333; margin-top: 20px;">
-              <div style="color: #6366f1; font-size: 0.75rem; margin-bottom: 10px;">Petición a la IA:</div>
-              <div style="font-family: monospace; font-size: 0.85rem; color: #fff; margin-bottom: 20px;">
-                "Crea una macro en Excel que resalte en rojo todas las celdas de la columna 'Presupuesto' que superen los 5 millones."
-              </div>
-              <button class="nav-btn small" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">⚙️ Generar Código</button>
-              <div style="display: none;" class="animate-in">
-                <pre style="background: #000; padding: 15px; border-radius: 6px; font-size: 0.7rem; color: #10b981; overflow-x: auto;">
-Sub ResaltarPresupuesto()
-  Dim cell As Range
-  For Each cell In Range("B2:B100")
-    If cell.Value > 5000000 Then
-      cell.Interior.Color = RGB(255, 0, 0)
-    End If
-  Next cell
-End Sub
-                </pre>
-                <p style="font-size: 0.75rem; color: #aaa; margin-top: 10px;">Copia y pega este código en el editor de VBA (Alt+F11) y listo. 🤖✨</p>
-              </div>
+              <p>Describe el problema de Excel que quieres resolver con código:</p>
+      <input type="text" id="m5-excel-input" class="premium-input" placeholder="Ej: Separar nombres de apellidos..." style="margin-bottom:15px;">
+      <button class="gl-btn gl-btn-primary" style="width:100%;" onclick="window.m5GenerateVBA()">Generar Macro Especializada ⚡</button>
+      <div id="m5-excel-output" class="ag-terminal" style="margin-top:20px; min-height:100px;"></div>
             </div>
         </div>
-        <button class="quiz-btn" style="width:100%;margin-top:1.5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));" onclick="m5UnlockAndGo(5)">
+        <button class="quiz-btn" style="width:100%;margin-top:1.5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));" onclick="window.m5UnlockAndGo(5)">
           🏁 Finalizar Módulo 5 →
         </button>
       </div>
@@ -1264,6 +1436,24 @@ End Sub
       }, 3000);
     };
 
+    window.m5ShowLevel = function(level) {
+      document.querySelectorAll('.m5-tab').forEach(tab => {
+        if (parseInt(tab.dataset.level) === level) tab.classList.add('active');
+        else tab.classList.remove('active');
+      });
+      for(let i=1; i<=5; i++) {
+        const el = document.getElementById('m5-level-'+i);
+        if(el) {
+          if(i===level) el.classList.add('active');
+          else el.classList.remove('active');
+        }
+      }
+      const pFill = document.getElementById('m5-progress-fill');
+      const pLabel = document.getElementById('m5-progress-label');
+      if(pFill) pFill.style.width = (level/5*100)+'%';
+      if(pLabel) pLabel.innerText = 'Nivel '+level+' de 5';
+    };
+
     window.m5UnlockAndGo = function(level) {
       const nextTab = document.querySelector(`.m5-tab[data-level="${level}"]`);
       if (nextTab) {
@@ -1337,6 +1527,28 @@ End Sub
       }
     };
 
+    window.m5GenerateVBA = function() {
+    const input = document.getElementById('m5-excel-input');
+    const out = document.getElementById('m5-excel-output');
+    if (!out) return;
+    
+    const problem = input ? input.value : "separar nombres";
+    
+    out.innerHTML = '<p style="color:#10b981;">// Generando Script VBA Optimizado...</p>';
+    setTimeout(() => {
+      out.innerHTML = `
+<pre style="color:#fff; font-size:0.75rem; font-family:monospace;">
+Sub SolucionInteligente()
+  ' Problema detectado: ${problem}
+  Dim ws As Worksheet
+  Set ws = ActiveSheet
+  ' Código generado por IA Soberana
+  MsgBox "Script para ${problem} generado. Pégalo en el editor VBA (Alt+F11)."
+End Sub
+</pre>`;
+    }, 1500);
+  };
+
     window.m3ShowLevel = function(level) {
       const container = document.getElementById('module-3');
       if (!container) return;
@@ -1359,6 +1571,11 @@ End Sub
       const progressText = document.getElementById('m3-progress-text');
       if (progressFill) progressFill.style.width = (level / 5 * 100) + '%';
       if (progressText) progressText.innerText = 'Nivel ' + level + '/5';
+
+      // AUTO-START QUIZ AT LEVEL 5 (Premium Experience)
+      if (level === 5 && typeof window.m3StartQuiz === 'function') {
+        setTimeout(() => window.m3StartQuiz(), 300);
+      }
 
       // Scroll to top of the tabs
       const tabsNav = container.querySelector('.ag-tabs');
@@ -1391,16 +1608,41 @@ End Sub
       outputEl.innerText = output;
     };
 
+    window.m3StartQuiz = function() {
+      const container = document.getElementById('m3-quiz-container');
+      if (!container) return;
+      
+      container.innerHTML = `
+        <div class="quiz-question animate-in visible">
+          <p style="font-weight:bold; margin-bottom:15px; color:#fff; font-family:'Space Grotesk', sans-serif;">¿Qué componente del método CREA se encarga de definir el tono y formato de la respuesta (ej. Tabla, Lista, PDF)?</p>
+          <div style="display:grid; gap:10px;">
+            <button class="gl-btn gl-btn-outline" onclick="window.m3ValidateQuiz(this, 'n')">C: Contexto</button>
+            <button class="gl-btn gl-btn-outline" onclick="window.m3ValidateQuiz(this, 'n')">R: Rol</button>
+            <button class="gl-btn gl-btn-outline" onclick="window.m3ValidateQuiz(this, 'n')">E: Especificación</button>
+            <button class="gl-btn gl-btn-outline" onclick="window.m3ValidateQuiz(this, 'y')">A: Acción / Formato</button>
+          </div>
+        </div>
+      `;
+    };
+
+    window.m3UpdateProgress = function(level) {
+      const progressFill = document.getElementById('m3-progress-fill');
+      const progressText = document.getElementById('m3-progress-text');
+      if (progressFill) progressFill.style.width = (level / 5 * 100) + '%';
+      if (progressText) progressText.innerText = 'Nivel ' + level + '/5';
+    };
+
     window.m3ValidateQuiz = function(el, type) {
       if (type === 'y') {
-        el.classList.add('correct');
-        window.showToast('¡Correcto! Desbloqueando misión final.', 'success');
+        el.className = 'gl-btn correct';
+        window.showToast('¡Correcto! El Formato es la A de Acción.', 'success');
         const mission = document.getElementById('m3-final-mission');
         if (mission) mission.style.display = 'block';
+        window.m3UpdateProgress(5);
       } else {
         el.classList.add('incorrect');
         setTimeout(() => el.classList.remove('incorrect'), 800);
-        window.showToast('Intenta de nuevo. El Formato es la A de Acción.', 'error');
+        window.showToast('Casi. El componente que define CÓMO se entrega la respuesta es el Formato (la A).', 'error');
       }
     };
 

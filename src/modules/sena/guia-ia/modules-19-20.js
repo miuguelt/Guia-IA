@@ -2,29 +2,88 @@ window.GuiaModules = window.GuiaModules || {};
 window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() {
   // --- MÓDULO 20: Lógica Centralizada ---
   window.m20DownloadCert = function() {
-    window.showToast('Generando Blockchain PDF...', 'success');
-    typeof antShowConfetti === 'function' && antShowConfetti();
+    window.showToast('Generando Certificado Premium...', 'success');
+    typeof window.antShowConfetti === 'function' && window.antShowConfetti();
     
     setTimeout(() => {
-      // Simulamos la descarga de un certificado
-      const a = document.createElement('a');
-      const text = "\n------------------------------------------\n"+
-                   "   CERTIFICADO OFICIAL DE COMPETENCIA IA\n"+
-                   "------------------------------------------\n\n"+
-                   "Por medio de la presente se certifica que el Usuario\n"+
-                   "ha completado satisfactoriamente los 20 Módulos del\n"+
-                   "Programa Avanzado de Productividad AI Institucional.\n\n"+
-                   "Puntos Obtenidos: " + (window.app ? (window.app.xp || window.app.state?.xp || 2850) : "2850") + " XP\n"+
-                   "Competencias: CREA, RAG, Privacidad Local, Automatizacion.\n\n"+
-                   "Emitido por el Sistema Antigravity Guia IA.\n"+
-                   "Fecha: " + new Date().toLocaleDateString() + "\n";
-                   
-      const blob = new Blob([text], { type: 'text/plain' });
-      a.href = URL.createObjectURL(blob);
-      a.download = "Certificado_IA_Experto.txt";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      const userName = localStorage.getItem('guia-ia-username') || 'El Funcionario Elite';
+      const xp = (window.app?.xp ?? window.app?.state?.xp ?? 2850);
+      const today = new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' });
+      
+      const certHTML = `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Certificado IA — ${userName}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#0f0f23; display:flex; align-items:center; justify-content:center; min-height:100vh; font-family:'Outfit',sans-serif; padding:40px; }
+    .cert { max-width:800px; width:100%; background:rgba(13,21,44,0.95); border:2px solid rgba(99,102,241,0.4); border-radius:24px; padding:60px; text-align:center; 
+      box-shadow: 0 0 80px rgba(99,102,241,0.2), 0 0 30px rgba(6,182,212,0.1);
+      background-image: radial-gradient(ellipse at 20% 50%, rgba(99,102,241,0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(6,182,212,0.05) 0%, transparent 50%); }
+    .badge { display:inline-block; font-size:0.65rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:#818cf8; background:rgba(99,102,241,0.1); border:1px solid rgba(99,102,241,0.3); padding:6px 16px; border-radius:20px; margin-bottom:24px; }
+    .logo { font-size:4rem; margin-bottom:16px; }
+    h1 { font-size:2.2rem; font-weight:900; background:linear-gradient(135deg,#818cf8,#22d3ee); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px; }
+    .subtitle { font-size:0.9rem; color:#64748b; margin-bottom:40px; }
+    .declares { font-size:0.85rem; color:#94a3b8; margin-bottom:10px; }
+    .name { font-size:2.4rem; font-weight:800; color:#f1f5f9; margin-bottom:20px; font-family:'Space Grotesk'; }
+    .desc { font-size:1rem; color:#cbd5e1; line-height:1.8; max-width:560px; margin:0 auto 32px; }
+    .skills { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:40px; }
+    .skill { background:rgba(99,102,241,0.1); border:1px solid rgba(99,102,241,0.25); padding:6px 14px; border-radius:20px; font-size:0.75rem; font-weight:700; color:#a5b4fc; }
+    .stats { display:flex; gap:30px; justify-content:center; margin-bottom:40px; }
+    .stat { text-align:center; }
+    .stat-n { font-size:1.8rem; font-weight:800; color:#818cf8; }
+    .stat-l { font-size:0.7rem; color:#64748b; text-transform:uppercase; letter-spacing:1px; }
+    .divider { height:1px; background:linear-gradient(90deg,transparent,rgba(99,102,241,0.3),transparent); margin:30px 0; }
+    .footer { font-size:0.75rem; color:#475569; }
+    .date { font-size:0.8rem; color:#818cf8; margin-top:8px; }
+    @media print { body { background:#fff; } .cert { border-color:#333; box-shadow:none; background:#fff; } .name, h1 { -webkit-text-fill-color: #1e293b !important; } }
+  </style>
+</head>
+<body>
+  <div class="cert">
+    <div class="badge">🏛️ Antigravity Systems · Certificación Oficial</div>
+    <div class="logo">🤖</div>
+    <h1>Certificado de Competencia en IA</h1>
+    <div class="subtitle">Programa Avanzado de Productividad AI Institucional</div>
+    <div class="divider"></div>
+    <div class="declares">Se certifica que</div>
+    <div class="name">${userName}</div>
+    <div class="desc">Ha completado satisfactoriamente los <strong>20 Módulos</strong> del Programa de Inteligencia Artificial aplicada al Sector Público, demostrando competencias en Ingeniería de Prompts, Análisis Documental, Automatización de Procesos, Seguridad de Datos e IA Local.</div>
+    <div class="skills">
+      <span class="skill">Método CREA</span>
+      <span class="skill">RAG Documental</span>
+      <span class="skill">Ética IA (Ley 1581)</span>
+      <span class="skill">Automatización Zapier</span>
+      <span class="skill">IA Local (Ollama)</span>
+      <span class="skill">Análisis ROI</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-n">${xp} XP</div><div class="stat-l">Puntos Obtenidos</div></div>
+      <div class="stat"><div class="stat-n">20</div><div class="stat-l">Módulos Completados</div></div>
+      <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Programa Finalizado</div></div>
+    </div>
+    <div class="divider"></div>
+    <div class="footer">Emitido por el Sistema Antigravity Guia IA · SENA Colombia</div>
+    <div class="date">📅 ${today}</div>
+  </div>
+</body>
+</html>`;
+      
+      const win = window.open('', '_blank');
+      if (win) {
+        win.document.write(certHTML);
+        win.document.close();
+      } else {
+        const blob = new Blob([certHTML], { type: 'text/html' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'Certificado_IA_Experto.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
     }, 1500);
   };
 
@@ -34,8 +93,8 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
     if (!container) return;
 
     try {
-      // Dynamic API URL detection: If served by Live Server (5500), point to Node Backend (8080)
-      const API_URL = window.location.port === '5500' ? `http://${window.location.hostname}:8080` : '';
+      // Dynamic API URL detection: If served by Live Server (5500), point to Node Backend (8020)
+      const API_URL = window.location.port === '5500' ? `http://${window.location.hostname}:8020` : '';
       const resp = await fetch(`${API_URL}/api/leaderboard`);
       if (!resp.ok) throw new Error('No se pudo conectar con el Ledger');
       const data = await resp.json();
@@ -64,7 +123,7 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
     } catch (e) {
       console.warn('Backend unavailable, using local simulation');
       const currentUserName = localStorage.getItem('guia-ia-username') || 'Tú (El Funcionario Elite)';
-      const currentXP = (window.app?.xp || window.app?.state?.xp || 2850);
+      const currentXP = (window.app?.xp ?? window.app?.state?.xp ?? 2850);
       
       container.innerHTML = `
         <div class="m20-lb-row rank-1">
@@ -111,6 +170,28 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
     }
   }, 1000);
 
+  // M19 Career Path Logic
+  window.m19UpdatePath = function() {
+    const sel = document.getElementById('m19-role-selector');
+    const disp = document.getElementById('m19-path-display');
+    if(!sel || !disp) return;
+    
+    const paths = {
+      'prompt': '<b>Rol:</b> Prompt Engineer<br><b>Prompt Maestro:</b> "Actúa como mi mentor. Quiero ser Prompt Engineer... [Ver Misión]"<br><b>Hoja de Ruta:</b> 1. Lógica CREA avanzada, 2. Testing de modelos, 3. Gestión de versiones.',
+      'automator': '<b>Rol:</b> Orquestador IA<br><b>Prompt Maestro:</b> "Ayúdame a diseñar un flujo Zapier/Make..."<br><b>Hoja de Ruta:</b> 1. Dominar n8n/Zapier, 2. Manejo de APIs/JSON, 3. Lógica de agentes.',
+      'auditor': '<b>Rol:</b> Auditor Ético<br><b>Prompt Maestro:</b> "Analiza este proceso institucional bajo la Ley 1581..."<br><b>Hoja de Ruta:</b> 1. Marco Legal Ético, 2. Detección de Sesgos, 3. Seguridad de Datos.',
+      'rag': '<b>Rol:</b> Curador RAG<br><b>Prompt Maestro:</b> "Cómo estructuro mis documentos para NotebookLM..."<br><b>Hoja de Ruta:</b> 1. Arquitectura de Info, 2. Limpieza de Dataset, 3. Vectores/Embeddings.'
+    };
+    disp.innerHTML = paths[sel.value] || 'Selecciona un rol...';
+    window.app && window.app.addXP(10);
+  };
+  window.m19CopyPlan = function() {
+    const disp = document.getElementById('m19-path-display');
+    if(!disp) return;
+    navigator.clipboard.writeText(disp.innerText);
+    window.showToast('Plan de Carrera copiado', 'success');
+  };
+
   const modules = {
 
 /* ══════════════════════════════════════════════════════════════
@@ -139,7 +220,7 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
 <div id="m19-roles" class="ag-content active">
   <div class="section-card animate-in">
     <h3><span class="icon">🧭</span> El Nuevo Ecosistema Laboral</h3>
-    <p>Aprender la herramienta que está de moda hoy (ChatGPT) es útil, pero las herramientas cambian. Lo que perdura es la <b>Arquitectura de Soluciones</b>. Estos son los roles reales que las empresas de Fortune 500 ya están contratando:</p>
+    <p>Aprender la herramienta que está de moda hoy (<a href="https://chatgpt.com" target="_blank" style="color:var(--primary); text-decoration:underline;">ChatGPT</a>) es útil, pero las herramientas cambian. Lo que perdura es la <b>Arquitectura de Soluciones</b>. Estos son los roles reales que las empresas de Fortune 500 ya están contratando:</p>
     
     <div style="margin-top:20px;">
       
@@ -150,12 +231,13 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
         <div>
           <span class="m19-role-skill">Lógica Condicional</span><span class="m19-role-skill">Lingüística Aplicada</span><span class="m19-role-skill">Testing QA</span>
         </div>
+        <div style="font-size:0.75rem;color:#6ee7b7;margin-top:10px;padding:8px;background:rgba(16,185,129,0.05);border-radius:8px;">🇨🇴 En Colombia: equivale a <strong>$400M — $500M COP/año</strong> aprox. (TRM ~$4000). Perfiles junior arrancan en $80M — $120M COP para entidades públicas.</div>
       </div>
       
       <div class="m19-role-card">
         <div class="m19-role-title">⚙️ Orquestador de Agentes (AI Automator)</div>
         <div class="m19-salary">+$120k USD/año</div>
-        <div class="m19-role-desc">Conecta Zapier, Make o n8n con IA. Su trabajo es que 5 IAs distintas hablen entre sí para resolver un proceso (Ej: IA-1 lee el PDF, IA-2 decide a quién asignarlo, IA-3 redacta la respuesta, IA-4 manda el correo).</div>
+        <div class="m19-role-desc">Conecta <a href="https://zapier.com" target="_blank" style="color:#3b82f6; text-decoration:underline;">Zapier</a>, <a href="https://make.com" target="_blank" style="color:#3b82f6; text-decoration:underline;">Make</a> o <a href="https://n8n.io" target="_blank" style="color:#3b82f6; text-decoration:underline;">n8n</a> con IA. Su trabajo es que 5 IAs distintas hablen entre sí para resolver un proceso (Ej: IA-1 lee el PDF, IA-2 decide a quién asignarlo, IA-3 redacta la respuesta, IA-4 manda el correo).</div>
         <div>
           <span class="m19-role-skill">Zapier / Make</span><span class="m19-role-skill">Visión Sistémica</span><span class="m19-role-skill">JSON / APIs</span>
         </div>
@@ -173,7 +255,7 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
       <div class="m19-role-card">
         <div class="m19-role-title">🧠 Curador de Conocimiento (RAG Manager)</div>
         <div class="m19-salary">+$90k USD/año</div>
-        <div class="m19-role-desc">La IA es tan buena como los datos que consume. Este rol organiza, limpia y etiqueta los PDFs, Excels y manuales de la empresa para que la IA (NotebookLM, Copilot) responda con precisión exacta sin equivocarse.</div>
+        <div class="m19-role-desc">La IA es tan buena como los datos que consume. Este rol organiza, limpia y etiqueta los PDFs, Excels y manuales de la empresa para que la IA (<b><a href="https://notebooklm.google.com" target="_blank" style="color:#3b82f6; text-decoration:underline;">NotebookLM</a></b>, <b><a href="https://copilot.microsoft.com" target="_blank" style="color:#3b82f6; text-decoration:underline;">Copilot</a></b>) responda con precisión exacta sin equivocarse.</div>
         <div>
           <span class="m19-role-skill">Arquitectura de Info</span><span class="m19-role-skill">Limpieza de Datos</span><span class="m19-role-skill">Vectorización Base</span>
         </div>
@@ -215,6 +297,23 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
       </div>
 
     </div>
+    
+    <div style="background:linear-gradient(135deg, rgba(59,130,246,0.05), rgba(37,99,235,0.05)); border:1px solid rgba(59,130,246,0.2); border-radius:16px; padding:25px; margin-top:25px;">
+      <h4 style="color:#60a5fa; margin-top:0;">🗺️ Selector de Career Path IA</h4>
+      <p style="font-size:0.85rem; opacity:0.9;">Selecciona un rol para ver tu hoja de ruta sugerida y el prompt para iniciar tu mentoría.</p>
+      <div style="display:flex; gap:10px; margin-top:15px;">
+        <select id="m19-role-selector" class="game-select" style="flex:1; background:#0d1117; border:1px solid #3b82f6; color:#fff; border-radius:6px; padding:10px;" onchange="window.m19UpdatePath()">
+          <option value="prompt">Ingeniero de Prompts</option>
+          <option value="automator">Orquestador de Agentes</option>
+          <option value="auditor">Auditor de Ética IA</option>
+          <option value="rag">Curador de Conocimiento (RAG)</option>
+        </select>
+        <button class="gl-btn gl-btn-primary small" style="background:#3b82f6;" onclick="window.m19CopyPlan()">📋 Copiar Plan</button>
+      </div>
+      <div id="m19-path-display" class="m-pa-codebox" style="margin-top:15px; font-size:0.82rem; min-height:100px; border-left:3px solid #60a5fa; padding:15px; background:rgba(0,0,0,0.2); border-radius:8px;">
+        Selecciona un rol para ver detalles...
+      </div>
+    </div>
   </div>
 </div>
 
@@ -241,7 +340,7 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
 </div>
 
 <div class="module-nav">
-  <button class="gl-btn" data-goto="module-18">← Anterior</button>
+  <button class="gl-btn" data-goto="module-bonus-comet">← Anterior (Comet)</button>
   <button class="gl-btn gl-btn-primary" data-goto="module-20">ÚLTIMO MÓDULO: Hall of Fame →</button>
 </div>
 `,
@@ -279,10 +378,40 @@ window.GuiaModules['module-19'] = window.GuiaModules['module-20'] = (function() 
   </div>
 
   <div style="margin-top:40px;">
-    <button class="gl-btn gl-btn-primary glow-btn" style="font-size:1.2rem;padding:20px 50px;font-weight:800;letter-spacing:1px;" onclick="m20DownloadCert()">
+    <button class="gl-btn gl-btn-primary glow-btn" style="font-size:1.2rem;padding:20px 50px;font-weight:800;letter-spacing:1px;" onclick="window.m20DownloadCert()">
       📜 GENERAR CERTIFICADO DIGITAL
     </button>
-    <p style="font-size:0.75rem;color:#64748b;margin-top:15px;">(Se descargará un PDF en tu dispositivo avalando tus competencias CREA y RAG)</p>
+    <p style="font-size:0.75rem;color:#64748b;margin-top:15px;">(Se generará un Certificado Premium HTML en tu dispositivo)</p>
+  </div>
+
+  <!-- ¿Y ahora qué? — 3 caminos -->
+  <div class="section-card animate-in" style="margin-top:40px;background:linear-gradient(135deg, rgba(99,102,241,0.06), rgba(6,182,212,0.06));border:1px solid rgba(99,102,241,0.2);">
+    <h3><span class="icon">🚀</span> ¿Y Ahora Qué? 3 Caminos para Continuar</h3>
+    <p style="margin-bottom:24px;">Completar esta guía es el punto de partida, no el destino. Aquí tienes 3 rutas concretas según tu situación:</p>
+    <div style="display:grid;gap:16px;">
+      <div style="background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.25);border-radius:14px;padding:20px;display:flex;gap:16px;align-items:flex-start;">
+        <div style="font-size:2rem;flex-shrink:0;">🏢</div>
+        <div>
+          <div style="font-weight:800;color:#818cf8;font-size:0.9rem;margin-bottom:6px;">CAMINO 1: Aplicar en tu Entidad Actual</div>
+          <div style="font-size:0.82rem;color:#cbd5e1;line-height:1.7;">Propón un <strong style="color:#fff">piloto de IA en tu área</strong> (Ej: automatizar las PQRS o el resumen de informes semanales). Con este certificado y los módulos de ROI, ya tienes los argumentos para llevarle la propuesta a tu jefe. <em>Plazo sugerido: 30 días.</em></div>
+        </div>
+      </div>
+      <div style="background:rgba(6,182,212,0.08);border:1px solid rgba(6,182,212,0.25);border-radius:14px;padding:20px;display:flex;gap:16px;align-items:flex-start;">
+        <div style="font-size:2rem;flex-shrink:0;">📚</div>
+        <div>
+          <div style="font-weight:800;color:#22d3ee;font-size:0.9rem;margin-bottom:6px;">CAMINO 2: Profundizar y Especializarte</div>
+          <div style="font-size:0.82rem;color:#cbd5e1;line-height:1.7;">Toma un curso específico de tu área de interés: <a href="https://www.deeplearning.ai" target="_blank" style="color:#22d3ee;">DeepLearning.AI</a> (Agentes, LLMs), <a href="https://platzi.com/ia/" target="_blank" style="color:#22d3ee;">Platzi IA</a> (en español), o el programa de <a href="https://huggingface.co/learn" target="_blank" style="color:#22d3ee;">Hugging Face</a>. <em>Plazo sugerido: 90 días.</em></div>
+        </div>
+      </div>
+      <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:14px;padding:20px;display:flex;gap:16px;align-items:flex-start;">
+        <div style="font-size:2rem;flex-shrink:0;">💼</div>
+        <div>
+          <div style="font-weight:800;color:#fbbf24;font-size:0.9rem;margin-bottom:6px;">CAMINO 3: Pivotar Hacia Roles de IA</div>
+          <div style="font-size:0.82rem;color:#cbd5e1;line-height:1.7;">Usa el Módulo 19 para identificar el rol que más te atrajo. Comienza a construir un portafolio en <a href="https://github.com" target="_blank" style="color:#fbbf24;">GitHub</a>, documenta tus proyectos internos y solicita una mentoría en <a href="https://www.linkedin.com" target="_blank" style="color:#fbbf24;">LinkedIn</a>. <em>Plazo sugerido: 6 meses.</em></div>
+        </div>
+      </div>
+    </div>
+    <button class="gl-btn" style="margin-top:20px;border-color:#6366f1;color:#818cf8;" onclick="navigator.clipboard.writeText('Actúa como coach de carrera en IA para el sector público colombiano. Completé un programa de 20 módulos de IA (CREA, RAG, automatización, ética, IA local). Mi cargo actual es [tu cargo] en [tu entidad]. Diseñame un plan de 90 días para aplicar IA en mi área y fortalecer mi perfil profesional hacia un rol de [el rol que te interesa del Módulo 19].');window.showToast('Prompt copiado','success');">📋 Copiar Prompt de Plan de Carrera personalizado</button>
   </div>
 </div>
 

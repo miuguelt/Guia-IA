@@ -8,7 +8,7 @@ window.GuiaModules['module-deepseek'] = (function() {
 <div class="m-ds-container" style="--ds-primary: var(--primary); --ds-bg: var(--bg-dark); --ds-border: var(--glass-border);">
   <div class="module-header premium-header">
     <div class="module-number gamer-badge">BONUS: EL CEREBRO DE LA TRÍADA</div>
-    <h2 class="module-title glow-text" style="color:var(--primary-light);">🧠 <span style="color:var(--primary);">DeepSeek R1:</span> Inteligencia Pura</h2>
+    <h2 class="module-title glow-text" style="color:var(--primary-light);">🧠 <span style="color:var(--primary);"><a href="https://chat.deepseek.com" target="_blank" style="color:var(--primary); text-decoration:none;">DeepSeek R1:</a></span> Inteligencia Pura</h2>
     <p class="module-description">Domina el modelo que rompió el mercado. R1 no solo predice palabras, <b>razona mediante procesos de pensamiento internos</b> antes de responder.</p>
   </div>
 
@@ -89,7 +89,7 @@ window.GuiaModules['module-deepseek'] = (function() {
   <div id="m-ds-local" class="ag-content">
     <div class="section-card animate-in">
         <h3>🏠 Inferencia Soberana (Local)</h3>
-        <p>Puedes correr DeepSeek R1 en tu propia hardware (RTX 4070) usando Ollama. Esto garantiza privacidad total y cero latencia de servidor.</p>
+        <p>Puedes correr <b><a href="https://chat.deepseek.com" target="_blank" style="color:var(--primary); text-decoration:underline;">DeepSeek R1</a></b> en tu propia hardware (RTX 4070) usando <b><a href="https://ollama.com" target="_blank" style="color:var(--primary); text-decoration:underline;">Ollama</a></b>. Esto garantiza privacidad total y cero latencia de servidor.</p>
         <div class="m-ds-terminal" style="height:auto;">
             <div class="m-ds-t-header">INSTALACIÓN OLLAMA</div>
             <div style="padding:15px; font-size:0.85rem;">
