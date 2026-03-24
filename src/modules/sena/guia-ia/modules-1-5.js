@@ -1125,40 +1125,80 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
 
       <div id="m5-level-1" class="ag-content active animate-in">
         <div class="section-card storytelling" style="border-left-color:var(--primary);">
-            <p class="narrative-text">"El caos domina el servidor central. Miles de filas de Excel con errores de formato, nombres duplicados y cifras que no cuadran..."</p>
+            <p class="narrative-text">"El caos domina el servidor central. Lunes, 8:00 AM. Miles de filas de Excel aterrizan en tu bandeja con errores de formato, nombres en mayúsculas mezclados con minúsculas, fechas que Excel no reconoce, y cifras que no cuadran. Tu jefe espera el reporte a las 9:00 AM. Antes sudabas frío, hoy... sonríes. Tienes el antídoto."</p>
         </div>
-        <div class="level-card" style="border-left:4px solid #3b82f6;">
-        <h4 style="color:#3b82f6;">Nivel 1: El Mapa del Tesoro (Fundamentos)</h4>
-        <p style="font-size:0.85rem; opacity:0.8;">Antes de usar IA en Excel, debes entender la jerarquía del dato:</p>
-        <div style="margin:15px 0; background:rgba(0,0,0,0.2); padding:10px; border-radius:8px; font-size:0.8rem;">
-          <b>Fase A) Limpieza:</b> Quitar duplicados, arreglar formatos de fecha.<br>
-          <b>Fase B) Análisis:</b> ¿Qué pasó? (Sumas, Promedios, Tablas Dinámicas).<br>
-          <b>Fase C) Predicción:</b> ¿Qué pasará? (Tendencias, Forecast).
-        </div>
-        <p style="font-size:0.75rem; color:#94a3b8;">💡 Ejercicio: ¿Qué fase es más urgente si tienes una base de datos con 500 filas de nombres escritos en mayúsculas y minúsculas?</p>
-        <button class="gl-btn gl-btn-small" onclick="window.showToast('¡Correcto! Fase A: Limpieza. Sin datos limpios, el análisis falla.', 'success')">Responder: Limpieza</button>
-      </div>
         
-      <!-- ═══ TOP-10 FÓRMULAS PARA SECTOR PÚBLICO ═══ -->
-      <div class="section-card animate-in" style="margin-top:30px;background:rgba(20,184,166,0.04);border:1px solid rgba(20,184,166,0.2);">
-        <h3><span class="icon">📋</span> Top 10 Fórmulas Esenciales para el Sector Público</h3>
-        <p style="font-size:0.83rem;margin-bottom:16px;">Pídele a ChatGPT o Claude que te <em>explique cómo aplicarlas en tu archivo específico</em> — sin estudiar manuales.</p>
-        <div style="display:grid;gap:10px;">
-          <div style="display:grid;grid-template-columns:auto 1fr;gap:10px 16px;align-items:start;">
-            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">SUMAR.SI</code><span style="font-size:0.82rem;">Suma celdas que cumplan una condición (ej: total gastos de Bogotá)</span>
-            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">CONTAR.SI</code><span style="font-size:0.82rem;">Cuenta celdas que cumplan una condición (ej: cuántas PQRS están "Pendientes")</span>
-            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">BUSCARV</code><span style="font-size:0.82rem;">Busca un valor en una tabla y trae lo que necesitas (ej: nombre dado el número de cédula)</span>
-            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">SI</code><span style="font-size:0.82rem;">Evalúa una condición y muestra un resultado u otro (ej: "Vencido" / "A tiempo")</span>
-            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">TEXTO</code><span style="font-size:0.82rem;">Convierte números a texto con formato específico (ej: fechas, monedas)</span>
-            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">FECHAS / HOY()</code><span style="font-size:0.82rem;">Calcula días hábiles, vencimientos y plazos legales automáticamente</span>
-            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">TABLAS DINÁMICAS</code><span style="font-size:0.82rem;">Resumen interactivo de grandes bases de datos sin escribir fórmulas</span>
-            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">CONCATENAR / &amp;</code><span style="font-size:0.82rem;">Une textos de varias celdas (ej: nombre + apellido + contrato)</span>
-            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">ELIMINAR.ESPACIOS</code><span style="font-size:0.82rem;">Limpia datos importados de sistemas bogotanos con dobles espacios</span>
-            <code style="background:#0d1117;padding:4px 10px;border-radius:6px;font-size:0.78rem;color:#14b8a6;white-space:nowrap;">ÍNDICE + COINCIDIR</code><span style="font-size:0.82rem;">La versión avanzada de BUSCARV — busca en cualquier dirección</span>
+        <div class="level-card" style="border-left:4px solid #3b82f6;">
+          <h4 style="color:#3b82f6;">Nivel 1: El Mapa del Tesoro (Fundamentos Analíticos)</h4>
+          <p style="font-size:0.85rem; opacity:0.8;">La regla de oro del analista moderno no es memorizar fórmulas, sino entender el ciclo de vida del dato. No puedes pedirle a la IA que "analice" basura, porque producirá basura. Sigue este orden estructurado:</p>
+          
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 20px 0;">
+            <div style="background:rgba(239,68,68,0.08); padding:15px; border-radius:8px; border-top:3px solid #ef4444;">
+              <b style="color:#ef4444; font-size: 0.9rem;">Fase A) Limpieza (El Cimiento)</b>
+              <p style="font-size: 0.75rem; margin-top: 8px; color: #cbd5e1; line-height: 1.5;">El 80% del trabajo. Quitar duplicados, arreglar formatos de fecha, estandarizar textos completos, eliminar espacios invisibles y rellenar vacíos lógicos.</p>
+            </div>
+            <div style="background:rgba(245,158,11,0.08); padding:15px; border-radius:8px; border-top:3px solid #f59e0b;">
+              <b style="color:#f59e0b; font-size: 0.9rem;">Fase B) Análisis (El Diagnóstico)</b>
+              <p style="font-size: 0.75rem; margin-top: 8px; color: #cbd5e1; line-height: 1.5;">¿Qué pasó? Cruzar bases de datos (BUSCARV), agregar totales por categoría (SUMAR.SI), agrupar información estructurada, y generar Tablas Dinámicas.</p>
+            </div>
+            <div style="background:rgba(16,185,129,0.08); padding:15px; border-radius:8px; border-top:3px solid #10b981;">
+              <b style="color:#10b981; font-size: 0.9rem;">Fase C) Predicción (El Futuro)</b>
+              <p style="font-size: 0.75rem; margin-top: 8px; color: #cbd5e1; line-height: 1.5;">¿Qué pasará? Modelos de regresión de Excel, proyecciones de presupuesto, análisis de tendencias y escenarios "Qué pasaría si...".</p>
+            </div>
+          </div>
+          
+          <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border-left: 3px solid var(--primary-light);">
+            <p style="font-size:0.8rem; margin:0 0 10px 0; color:#94a3b8;">💡 <b>Ejercicio Guiado:</b> Recibes una base del Sisbén con 5.000 filas. Algunas cédulas tienen puntos (1.234.567) y otras no (1234567). ¿Cuál es la fase crítica ANTES de intentar promediar sus puntajes?</p>
+            <div style="display:flex; gap:10px;">
+              <button class="gl-btn small" style="border-color:#10b981; color:#10b981;" onclick="window.showToast('¡Correcto! Fase A (Limpieza). Si no estandarizas la cédula, Excel no podrá cruzar datos correctamente luego.', 'success'); window.app?.addXP(10);">Fase A: Limpieza</button>
+              <button class="gl-btn small" onclick="window.showToast('Incorrecto. Si analizas datos con formatos mixtos, Excel omitirá valores o dará #¡VALOR!. Primero debes limpiar.', 'error');">Fase B: Análisis</button>
+            </div>
           </div>
         </div>
-        <button class="gl-btn small" style="margin-top:14px;border-color:#14b8a6;color:#14b8a6;" onclick="navigator.clipboard.writeText('Actúa como experto en Excel para el sector público colombiano. Tengo estas columnas: [describe tus columnas]. Necesito [describe qué quieres lograr]. Dame la fórmula exacta con explicación paso a paso de cómo copiarla.');window.showToast('Prompt copiado','success');">📋 Copiar Prompt Maestro de Excel</button>
-      </div>
+        
+        <!-- ═══ TOP-10 FÓRMULAS PARA SECTOR PÚBLICO MEJORADO ═══ -->
+        <div class="section-card animate-in" style="margin-top:30px;background:rgba(20,184,166,0.04);border:1px solid rgba(20,184,166,0.2);">
+          <h3><span class="icon">📋</span> El Arsenal: 5 Fórmulas Críticas (Con IA)</h3>
+          <p style="font-size:0.85rem;margin-bottom:20px;">No te memorices la sintaxis. Pídele la fórmula a la IA usando un <strong>Prompt Específico</strong>.</p>
+          
+          <div style="display:grid;gap:15px;">
+            <!-- Fórmula 1 -->
+            <div style="background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.05); border-radius:10px; padding:15px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <code style="background:#0d1117;padding:5px 12px;border-radius:6px;font-size:0.9rem;color:#14b8a6;font-weight:bold;">=BUSCARX() o BUSCARV()</code>
+                <span class="badge-titan" style="font-size:0.65rem; background:#3b82f6;">CRUCE DE DATOS</span>
+              </div>
+              <p style="font-size:0.8rem; color:#cbd5e1; margin:8px 0;"><strong>Caso Real:</strong> Tienes una tabla con cédulas y necesitas traer los nombres desde otra hoja diferente (ej: Contratistas).</p>
+              <div style="background:#1e1e24; padding:10px; border-radius:6px; border-left:3px solid #14b8a6; font-family:monospace; font-size:0.75rem; color:#a78bfa;">
+                👉 <strong>Prompt para IA:</strong> "Estoy en Excel. En la Hoja1 tengo una lista de Cédulas en la columna A. En la Hoja2 tengo una base de datos maestra donde la Cédula está en la columna C y el Nombre en la B. Dame la fórmula exacta (BUSCARV o BUSCARX) para traer el Nombre a la Hoja1."
+              </div>
+            </div>
+
+            <!-- Fórmula 2 -->
+            <div style="background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.05); border-radius:10px; padding:15px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <code style="background:#0d1117;padding:5px 12px;border-radius:6px;font-size:0.9rem;color:#14b8a6;font-weight:bold;">=SUMAR.SI.CONJUNTO()</code>
+                <span class="badge-titan" style="font-size:0.65rem; background:#f59e0b;">FINANZAS / PRESUPUESTO</span>
+              </div>
+              <p style="font-size:0.8rem; color:#cbd5e1; margin:8px 0;"><strong>Caso Real:</strong> Necesitas sumar los gastos SOLO si el rubro es "Materiales" y el mes es "Febrero".</p>
+              <div style="background:#1e1e24; padding:10px; border-radius:6px; border-left:3px solid #14b8a6; font-family:monospace; font-size:0.75rem; color:#a78bfa;">
+                👉 <strong>Prompt para IA:</strong> "En Excel, quiero sumar los valores de la columna D (Gastos), pero solo cuando la columna B diga 'Materiales' y la columna C diga 'Febrero'. Créame la fórmula de SUMAR.SI.CONJUNTO."
+              </div>
+            </div>
+            
+            <!-- Fórmula 3 -->
+            <div style="background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.05); border-radius:10px; padding:15px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <code style="background:#0d1117;padding:5px 12px;border-radius:6px;font-size:0.9rem;color:#14b8a6;font-weight:bold;">=SI() Anidado + HOY()</code>
+                <span class="badge-titan" style="font-size:0.65rem; background:#ef4444;">ALERTAS Y VENCIMIENTOS</span>
+              </div>
+              <p style="font-size:0.8rem; color:#cbd5e1; margin:8px 0;"><strong>Caso Real:</strong> Tu hoja controla Peticiones (PQRS), quieres que diga "Vencido" si la fecha ya pasó la de hoy, y "A tiempo" si no.</p>
+              <div style="background:#1e1e24; padding:10px; border-radius:6px; border-left:3px solid #14b8a6; font-family:monospace; font-size:0.75rem; color:#a78bfa;">
+                👉 <strong>Prompt para IA:</strong> "La columna E tiene fechas límite. Construye una fórmula que compare esa fecha con la fecha de hoy. Si ya pasó, que escriba 'VENCIDO'. Si faltan menos de 3 días, que diga 'ALERTA'. De lo contrario, 'A TIEMPO'."
+              </div>
+            </div>
+          </div>
+        </div>
 
         <button class="quiz-btn" style="width:100%;margin-top:1.5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));" onclick="window.m5UnlockAndGo(2)">
           ✅ Entendí el flujo → Iniciar Limpieza (Nivel 2)
@@ -1167,37 +1207,52 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
 
       <div id="m5-level-2" class="ag-content animate-in">
         <div class="section-card">
-            <h3>🧹 Laboratorio de Limpieza de Datos</h3>
-            <p>Mira cómo la IA transforma un "caos" de datos en información estructurada. Modifica los datos o el prompt y prueba el procesamiento.</p>
+            <h3><span class="icon">🧹</span> Laboratorio de Limpieza Asistida por IA</h3>
+            <p>Mira cómo la IA transforma un "caos" de datos en información estructurada. A diferencia de Excel, la IA entiende el <strong>contexto</strong> de que "Juan P." y "Juan Perez" probablemente son el mismo si le das las instrucciones correctas.</p>
             
             <div class="cleaning-sim" style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 15px; margin-top: 20px; align-items: stretch;">
               <div style="background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column;">
-                <div style="font-size: 0.7rem; color: #ef4444; font-weight: bold; margin-bottom: 8px;">ENTRADA SUCIA (CSV):</div>
-                <textarea id="m5-raw-data" spellcheck="false" style="flex:1; width: 100%; min-height: 100px; background: rgba(0,0,0,0.2); border: 1px solid rgba(239,68,68,0.3); color: #ef4444; font-family: monospace; font-size: 0.75rem; padding: 10px; border-radius: 6px; resize: none; margin-bottom: 10px;">
-Nombreee; ID; Fecha
-Juan Perez; '123; 01-ene
+                <div style="font-size: 0.7rem; color: #ef4444; font-weight: bold; margin-bottom: 8px; display: flex; justify-content: space-between;">
+                  <span>ENTRADA SUCIA (CSV):</span>
+                  <span style="background: rgba(239,68,68,0.2); padding: 2px 6px; border-radius: 4px;">CAOS LÓGICO</span>
+                </div>
+                <textarea id="m5-raw-data" spellcheck="false" style="flex:1; width: 100%; min-height: 120px; background: rgba(0,0,0,0.2); border: 1px solid rgba(239,68,68,0.3); color: #ef4444; font-family: monospace; font-size: 0.75rem; padding: 10px; border-radius: 6px; resize: none; margin-bottom: 10px;">
+Nombreee; ID_Contrato; Fecha_Radicacion
+Juan Perez; '001-2024; 01-ene
 MAria G; NULL; 1/1/24
-; 456; 2024-05-01</textarea>
-                <div style="font-size: 0.7rem; color: var(--primary-light); font-weight: bold; margin-bottom: 5px;">INSTRUCCIÓN IA:</div>
-                <textarea id="m5-clean-prompt" spellcheck="false" style="width: 100%; height: 60px; background: rgba(0,0,0,0.4); border: 1px solid var(--primary); color: #fff; font-family: monospace; font-size: 0.75rem; padding: 8px; border-radius: 6px; resize: none;">Limpia este CSV: normaliza nombres, convierte fechas y rellena vacíos con 'Desconocido'.</textarea>
+    ; 002-2B; 2024-05-01
+Pedro Ruiz;; hoy</textarea>
+                <div style="font-size: 0.7rem; color: var(--primary-light); font-weight: bold; margin-bottom: 5px;">INSTRUCCIÓN IA (PROMPT SOBERANO):</div>
+                <textarea id="m5-clean-prompt" spellcheck="false" style="width: 100%; height: 80px; background: rgba(0,0,0,0.4); border: 1px solid var(--primary); color: #fff; font-family: monospace; font-size: 0.75rem; padding: 10px; border-radius: 6px; resize: none;">Actúa como Data Steward. Limpia este CSV:
+1. Normaliza los nombres (Capitalize).
+2. Arregla las fechas al formato ISO AAAA-MM-DD (asume año 2024).
+3. Rellena IDs vacíos con "SIN_ASIGNAR".
+4. Retorna el formato en tabla Markdown.</textarea>
               </div>
               
               <div style="display: flex; flex-direction: column; justify-content: center; padding: 10px 0;">
-                <button id="m5-btn-clean" class="gl-btn gl-btn-primary" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100px; width: 85px; padding: 10px; border-radius: 12px; border: 1px solid var(--primary-light); box-shadow: 0 0 15px rgba(99,102,241,0.3); transition: all 0.3s ease;" onclick="window.m5ProcessData()">
-                  <span style="font-size: 1.8rem; margin-bottom: 5px;">⚡</span>
-                  <span style="font-size: 0.7rem; font-weight: bold; text-align: center; text-transform: uppercase;">Limpiar<br>Datos</span>
+                <button id="m5-btn-clean" class="gl-btn gl-btn-primary" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 110px; width: 95px; padding: 10px; border-radius: 12px; border: 1px solid var(--primary-light); box-shadow: 0 0 15px rgba(99,102,241,0.3); transition: all 0.3s ease;" onclick="window.m5ProcessData()">
+                  <span style="font-size: 2rem; margin-bottom: 8px;">⚡</span>
+                  <span style="font-size: 0.7rem; font-weight: 800; text-align: center; text-transform: uppercase; letter-spacing: 0.5px;">Limpiar<br>Datos</span>
                 </button>
               </div>
 
               <div style="background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column;">
-                <div style="font-size: 0.7rem; color: #10b981; font-weight: bold; margin-bottom: 8px;">SALIDA IA (LIMPIA):</div>
-                <div id="m5-clean-output" style="background: rgba(0,0,0,0.3); flex: 1; border-radius: 6px; padding: 10px; font-size: 0.75rem; color: #c9d1d9; font-family: monospace; overflow-y: auto; border: 1px solid rgba(16,185,129,0.1);">
+                <div style="font-size: 0.7rem; color: #10b981; font-weight: bold; margin-bottom: 8px; display: flex; justify-content: space-between;">
+                  <span>SALIDA IA (ESTRUCTURADA):</span>
+                  <span style="background: rgba(16,185,129,0.2); padding: 2px 6px; border-radius: 4px;">LISTO PARA EXCEL</span>
+                </div>
+                <div id="m5-clean-output" style="background: rgba(0,0,0,0.3); flex: 1; border-radius: 6px; padding: 15px; font-size: 0.75rem; color: #c9d1d9; font-family: monospace; overflow-y: auto; border: 1px solid rgba(16,185,129,0.1);">
                   <div style="text-align:center; margin-top:25px; opacity:0.5;">
-                    <span style="font-size:2rem; display:block; margin-bottom:10px;">🤖</span>
-                    Esperando datos...
+                    <span style="font-size:2.5rem; display:block; margin-bottom:15px; filter: grayscale(1);">🧹</span>
+                    Esperando ejecución de limpieza...
                   </div>
                 </div>
               </div>
+            </div>
+            
+            <div class="pista-ia" style="margin-top:20px; background: rgba(var(--primary-rgb), 0.1);">
+              💡 <b>¿Por qué usar IA y no las herramientas de Excel?</b> Excel es rígido. Si le dices "buscar y reemplazar", reemplazará texto exacto. La IA, al entender semántica, puede convertir "01-ene", "1/1/24" y "primero de enero" todos a "2024-01-01" en un solo paso, ahorrando horas de trabajo manual.
             </div>
         </div>
         <button class="quiz-btn" style="width:100%;margin-top:1.5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));" onclick="window.m5UnlockAndGo(3)">
@@ -1209,9 +1264,9 @@ MAria G; NULL; 1/1/24
         <div class="section-card glass-card-premium">
             <div class="card-header-premium" style="margin-bottom: 20px;">
               <div class="badge-titan" style="margin-bottom: 10px;">LABORATORIO SOBERANO</div>
-              <h3 class="text-gradient-primary" style="margin: 0;"><span class="icon">🔍</span> Auditoría de Datos v32.1</h3>
+              <h3 class="text-gradient-primary" style="margin: 0;"><span class="icon">🔍</span> Auditoría de Datos Asistida</h3>
             </div>
-            <p class="m-pa-note" style="font-size: 1rem; color: #fff;">
+            <p class="m-pa-note" style="font-size: 0.95rem; color: #fff;">
               El ojo humano falla ante miles de datos. La IA detecta anomalías estadísticas en nanosegundos. 
               Activa el <b>Sovereign Scan</b> para auditar esta tabla de ejecución presupuestal.
             </p>
@@ -1222,33 +1277,33 @@ MAria G; NULL; 1/1/24
               <table style="width: 100%; font-size: 0.9rem; border-collapse: separate; border-spacing: 0 10px;">
                 <thead>
                   <tr style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">
-                    <th style="padding: 10px; text-align: left;">Entidad / Sede</th>
-                    <th style="padding: 10px; text-align: left;">Gastos 2023</th>
-                    <th style="padding: 10px; text-align: left;">Gastos 2024</th>
+                    <th style="padding: 10px; text-align: left;">Sede</th>
+                    <th style="padding: 10px; text-align: left;">Gastos Oct</th>
+                    <th style="padding: 10px; text-align: left;">Gastos Nov</th>
                   </tr>
                 </thead>
                 <tbody id="m5-audit-tbody">
                   <tr class="audit-row-premium" style="background: rgba(255,255,255,0.03); transition: all 0.3s ease;">
-                    <td style="padding: 15px; border-radius: 12px 0 0 12px;">📍 Bogotá D.C.</td>
+                    <td style="padding: 15px; border-radius: 12px 0 0 12px;">📍 Cundinamarca</td>
                     <td style="padding: 15px;">$1.200M</td>
-                    <td style="padding: 15px; border-radius: 0 12px 12px 0;">$1.250M</td>
+                    <td style="padding: 15px; border-radius: 0 12px 12px 0;">$1.250M <span style="font-size:0.7rem; color:#10b981;">(+4%)</span></td>
                   </tr>
                   <tr id="m5-audit-row-error" class="audit-row-premium" style="background: rgba(255,255,255,0.03); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);">
-                    <td style="padding: 15px; border-radius: 12px 0 0 12px;">📍 Medellín</td>
+                    <td style="padding: 15px; border-radius: 12px 0 0 12px;">📍 Antioquia</td>
                     <td style="padding: 15px;">$900M</td>
-                    <td id="m5-error-cell" style="padding: 15px; border-radius: 0 12px 12px 0; font-weight: 700;">$9.000M</td>
+                    <td id="m5-error-cell" style="padding: 15px; border-radius: 0 12px 12px 0; font-weight: 700;">$9.000M <span style="font-size:0.7rem; color:#ef4444; display:none;" id="m5-error-badge">(+900%)</span></td>
                   </tr>
                   <tr class="audit-row-premium" style="background: rgba(255,255,255,0.03); transition: all 0.3s ease;">
-                    <td style="padding: 15px; border-radius: 12px 0 0 12px;">📍 Cali</td>
+                    <td style="padding: 15px; border-radius: 12px 0 0 12px;">📍 Valle</td>
                     <td style="padding: 15px;">$600M</td>
-                    <td style="padding: 15px; border-radius: 0 12px 12px 0;">$610M</td>
+                    <td style="padding: 15px; border-radius: 0 12px 12px 0;">$610M <span style="font-size:0.7rem; color:#10b981;">(+1%)</span></td>
                   </tr>
                 </tbody>
               </table>
 
               <div id="m5-audit-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter: blur(4px); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:15px; z-index:5; border-radius: 16px;">
                  <div class="scan-pulse" style="width: 80px; height: 80px; background: rgba(99, 102, 241, 0.2); border: 2px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; animation: pulse 2s infinite;">🔍</div>
-                 <button class="gl-btn gl-btn-primary gl-btn-lux" onclick="window.m5RunSovereignScan(this)">Activar Sovereign Scan ⚡</button>
+                 <button class="gl-btn gl-btn-primary gl-btn-lux" onclick="window.m5RunSovereignScan(this); const eb=document.getElementById('m5-error-badge'); if(eb)eb.style.display='inline';">Activar Escáner IA ⚡</button>
               </div>
             </div>
 
@@ -1256,14 +1311,25 @@ MAria G; NULL; 1/1/24
               <div style="display: flex; gap: 20px; align-items: flex-start;">
                 <span style="font-size: 2.5rem;">🚨</span>
                 <div>
-                   <h4 style="color: #ef4444; margin: 0 0 8px;">ANOMALÍA DETECTADA: Error de Magnitud</h4>
+                   <h4 style="color: #ef4444; margin: 0 0 8px;">ANOMALÍA DETECTADA: Error de Ojo Humano ("Zero extra")</h4>
                    <p class="m-pa-note" style="color: #fff; margin: 0;">
-                     Se ha identificado una inconsistencia estadística en la sede <b>Medellín</b>. El incremento del 900.0% respecto al periodo anterior supera los umbrales institucionales permitidos sin justificación técnica adjunta.
+                     Se identificó una desviación del <b>900%</b> en la sede Antioquia. A nivel estadístico y contable, esto sugiere un error de digitación humano (agregar un cero de más) en lugar de un aumento real del gasto.
                    </p>
                    <div class="badge-titan" style="margin-top: 15px; background: rgba(169, 114, 255, 0.1); border-color: rgba(169, 114, 255, 0.3); color: #a972ff;">+50 XP • Agente Auditor</div>
                 </div>
               </div>
             </div>
+
+            <!-- Prompt Maestro para Auditoría -->
+            <div style="margin-top:25px; background: rgba(0,0,0,0.3); padding:20px; border-radius:12px; border-left:4px solid #f59e0b;">
+              <h4 style="color:#f59e0b; margin-top:0;">📋 Prompt Maestro de Auditoría</h4>
+              <p style="font-size:0.85rem; color:#cbd5e1; margin-bottom:15px;">Usa este texto al subir tu Excel a ChatGPT o Claude para revisar contrataciones, planillas o presupuestos:</p>
+              <div style="background:#1e1e24; padding:12px; border-radius:6px; font-family:monospace; font-size:0.8rem; color:#fde68a;">
+                "Actúa como un Auditor Forense Financiero. Analiza el archivo adjunto y busca 3 cosas: 1) Inconsistencias lógicas o campos faltantes graves. 2) Valores atípicos (outliers) que destaquen estadísticamente del resto. 3) Errores de suma de subtotales. Preséntame tus hallazgos en formato de tabla calificados por riesgo crítico, alto o moderado."
+              </div>
+              <button class="gl-btn small" style="margin-top:15px; border-color:#f59e0b; color:#f59e0b;" onclick="navigator.clipboard.writeText('Actúa como un Auditor Forense Financiero. Analiza el archivo adjunto y busca 3 cosas: 1) Inconsistencias lógicas o campos faltantes graves. 2) Valores atípicos (outliers) que destaquen estadísticamente del resto. 3) Errores de suma de subtotales. Preséntame tus hallazgos en formato de tabla calificados por riesgo crítico, alto o moderado.'); window.showToast('Prompt Maestro copiado', 'success');">📋 Copiar Prompt de Auditoría</button>
+            </div>
+            
         </div>
         <button class="quiz-btn" style="width:100%;margin-top:1.5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));" onclick="window.m5UnlockAndGo(4)">
           🛠️ Ir a Automatización (Nivel 4) →
@@ -1272,40 +1338,77 @@ MAria G; NULL; 1/1/24
 
       <div id="m5-level-4" class="ag-content animate-in">
         <div class="section-card">
-            <h3>🚀 Automatización con Macros 2.0</h3>
-            <p>Ya no necesitas saber programar en VBA. Solo necesitas saber pedirlo.</p>
+            <h3><span class="icon">🚀</span> Automatización Nivel Dios (Macros + IA)</h3>
+            <p>El código VBA permite automatizar tareas aburridas de Excel con un solo botón. <b>Antes necesitabas un ingeniero para esto; ahora, la IA te da el código exacto.</b></p>
             
-            <div class="vba-generator-box" style="background: #1e1e1e; padding: 20px; border-radius: 8px; border: 1px solid #333; margin-top: 20px;">
-              <p>Describe el problema de Excel que quieres resolver con código:</p>
-      <input type="text" id="m5-excel-input" class="premium-input" placeholder="Ej: Separar nombres de apellidos..." style="margin-bottom:15px;">
-      <button class="gl-btn gl-btn-primary" style="width:100%;" onclick="window.m5GenerateVBA()">Generar Macro Especializada ⚡</button>
-      <div id="m5-excel-output" class="ag-terminal" style="margin-top:20px; min-height:100px;"></div>
+            <div style="background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);border-radius:12px;padding:16px;margin:20px 0;">
+              <div style="font-weight:800;color:#c4b5fd;font-size:0.83rem;margin-bottom:10px;">🔧 Cómo Usar las Macros (En 3 Clics)</div>
+              <ol style="font-size:0.8rem;line-height:1.8;padding-left:18px;color:#cbd5e1;margin:0;">
+                <li>En Excel, presiona <kbd style="background:#1e293b;padding:2px 6px;border-radius:4px;border:1px solid #475569;">Alt + F11</kbd> (Abre el Editor Visual Basic).</li>
+                <li>Haz clic en <strong style="color:#fff">Insertar → Módulo</strong>.</li>
+                <li>Pega el código de la macro y haz clic en ▶ (Ejecutar) o presiona <kbd style="background:#1e293b;padding:2px 6px;border-radius:4px;border:1px solid #475569;">F5</kbd>. ¡Listo!</li>
+              </ol>
+            </div>
+
+            <!-- Biblioteca de Macros -->
+            <div class="macro-library" style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-top:20px;">
+              
+              <!-- Macro 1 -->
+              <div style="background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.05); border-radius:10px; padding:15px;">
+                <h4 style="color:#3fb950; margin:0 0 10px 0;">🧹 Cero Espacios Blancos</h4>
+                <p style="font-size:0.75rem; color:#94a3b8; height:40px;">Elimina espacios al inicio o final de las celdas (Error #1 de formato cruzado).</p>
+                <div id="m5-macro-1" style="display:none;font-family:monospace;font-size:0.7rem;">Sub LimpiarEspacios()
+Dim celda As Range
+For Each celda In Selection
+  If Not IsEmpty(celda) And VarType(celda) = vbString Then celda.Value = Trim(celda.Value)
+Next celda
+MsgBox "Limpieza Completa"
+End Sub</div>
+                <button class="gl-btn small" style="width:100%; border-color:#3fb950; color:#3fb950;" onclick="navigator.clipboard.writeText(document.getElementById('m5-macro-1').innerText); window.showToast('Macro Copiada', 'success');">📋 Copiar Macro VBA</button>
+              </div>
+
+              <!-- Macro 2 -->
+              <div style="background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.05); border-radius:10px; padding:15px;">
+                <h4 style="color:#58a6ff; margin:0 0 10px 0;">📑 Separar Todo en Hojas</h4>
+                <p style="font-size:0.75rem; color:#94a3b8; height:40px;">Divide tu tabla gigante en múltiples pestañas basadas en la Columna A.</p>
+                <button class="gl-btn small" style="width:100%; border-color:#58a6ff; color:#58a6ff; margin-top:14px;" onclick="window.showToast('Solo pídele esto a la IA: Genera una macro VBA que separe mi tabla principal en nuevas pestañas, agrupando por los valores de la Columna A.', 'info');">🤖 Ver Prompt Generador</button>
+              </div>
+
+            </div>
+            
+            <div class="vba-generator-box" style="background: #1e1e1e; padding: 20px; border-radius: 8px; border: 1px solid #3b82f6; margin-top: 25px;">
+              <h4 style="color:#60a5fa; margin-top:0;">Generador en Vivo</h4>
+              <p style="font-size:0.85rem;">Describe qué acción tediosa quieres que el simulador convierta a VBA ahora mismo:</p>
+              <input type="text" id="m5-excel-input" class="premium-input" placeholder="Ej: Poner en rojo todas las filas que contengan la palabra PENDIENTE..." style="margin-bottom:15px;">
+              <button class="gl-btn gl-btn-primary" style="width:100%;" onclick="window.m5GenerateVBA()">Generar Macro Personalizada ⚡</button>
+              <div id="m5-excel-output" class="ag-terminal" style="margin-top:20px; min-height:100px; display:none;"></div>
             </div>
         </div>
         <button class="quiz-btn" style="width:100%;margin-top:1.5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));" onclick="window.m5UnlockAndGo(5)">
-          🏁 Finalizar Módulo 5 →
+          🏁 Finalizar Módulo 5 (Prueba Final) →
         </button>
       </div>
 
       <div id="m5-level-5" class="ag-content animate-in">
         <div class="section-card">
             <div class="preparation-step" style="background: rgba(245,158,11,0.1); border: 1px solid #f59e0b; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #f59e0b;">
-              <h4 style="margin-top: 0; color: #f59e0b; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">🛠️ Preparación de la Plataforma</h4>
-              <p style="font-size: 0.8rem; margin-bottom: 0; opacity: 0.9;">Antes de iniciar, prepara una base de datos ficticia en Excel con nombres y cuentas bancarias para practicar la censura de datos sensibles.</p>
+              <h4 style="margin-top: 0; color: #f59e0b; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">🛠️ Ejercicio Final Integrado</h4>
+              <p style="font-size: 0.8rem; margin-bottom: 0; opacity: 0.9;">Aplica todo lo aprendido. Limpia, analiza y protege los datos en un solo flujo de trabajo realista.</p>
             </div>
+            
             <h3><span class="icon">🛡️</span> Desafío Final: El Filtro Ético</h3>
-            <p>Antes de automatizar y enviar datos a la IA pública, debes proteger la información sensible (PII). Un verdadero Analista de Datos protege la privacidad institucional.</p>
+            <p>Antes de automatizar y enviar datos a la IA pública (ChatGPT/Claude/Gemini), debes proteger la información sensible (PII). Un verdadero Analista Soberano de Datos nunca expone información crítica institucional.</p>
             
             <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin-top: 20px; border:1px solid #333;">
-              <div style="font-size: 0.8rem; color: #f59e0b; margin-bottom: 10px;"><b>ÓRDEN:</b> Haz clic en las palabras rojizas que sean "Información Sensible" para censurarlas antes de presionar Enviar.</div>
+              <div style="font-size: 0.8rem; color: #f59e0b; margin-bottom: 10px;"><b>CENSURA OBLIGATORIA:</b> Haz clic EXCLUSIVAMENTE en las palabras rojizas que contengan "Información Personal y Sensible" para ocultarlas antes de presionar Enviar.</div>
               <div id="m5-leak-text" style="font-family: monospace; font-size: 0.85rem; color: #c9d1d9; line-height: 1.8; padding:15px; background:#161b22; border-radius:6px; user-select:none;">
-                La funcionaria <span class="m5-clk" data-sens="1" onclick="this.innerText='******'; this.style.color='#10b981'; this.dataset.done='1';" style="color:#ef4444; cursor:pointer; font-weight:bold; border-bottom:1px dashed #ef4444;">Ana Milena López</span> 
-                reportó un error en sus cesantías. El pago se hizo a la cuenta de ahorros 
-                <span class="m5-clk" data-sens="1" onclick="this.innerText='******'; this.style.color='#10b981'; this.dataset.done='1';" style="color:#ef4444; cursor:pointer; font-weight:bold; border-bottom:1px dashed #ef4444;">Bancolombia #837-1293-22</span>. 
-                Se aprueba reliquidación en el sistema central de <span class="m5-clk" data-sens="0" onclick="window.showToast('Esto NO es sensible','warning')" style="color:#ef4444; cursor:pointer; font-weight:bold; border-bottom:1px dashed #ef4444;">Bogotá</span>.
+                La contratista <span class="m5-clk" data-sens="1" onclick="this.innerText='[NOMBRE_OCULTO]'; this.style.color='#10b981'; this.dataset.done='1';" style="color:#ef4444; cursor:pointer; font-weight:bold; border-bottom:1px dashed #ef4444;">Ana Milena López</span> 
+                (C.C. <span class="m5-clk" data-sens="1" onclick="this.innerText='[DOCUMENTO_OCULTO]'; this.style.color='#10b981'; this.dataset.done='1';" style="color:#ef4444; cursor:pointer; font-weight:bold; border-bottom:1px dashed #ef4444;">51.890.345</span>)
+                reportó un error en el cálculo mensual en <span class="m5-clk" data-sens="0" onclick="window.showToast('¡Cuidado! El municipio es un dato público, no hace falta censurarlo.','warning')" style="color:#ef4444; cursor:pointer; font-weight:bold; border-bottom:1px dashed #ef4444;">Excel</span>. El pago de su salario se realizó a la cuenta 
+                <span class="m5-clk" data-sens="1" onclick="this.innerText='[CUENTA_OCULTA]'; this.style.color='#10b981'; this.dataset.done='1';" style="color:#ef4444; cursor:pointer; font-weight:bold; border-bottom:1px dashed #ef4444;">Bancolombia #837-1293-22</span> en la sede de <span class="m5-clk" data-sens="0" onclick="window.showToast('¡Cuidado! El municipio es un dato público, no hace falta censurarlo.','warning')" style="color:#ef4444; cursor:pointer; font-weight:bold; border-bottom:1px dashed #ef4444;">Bogotá</span>.
               </div>
               
-              <button class="gl-btn" style="width:100%; margin-top:15px; background:#6366f1; color:#fff;" onclick="window.m5FinalCheck()">Enviar Documento a la IA ☁️</button>
+              <button class="gl-btn" style="width:100%; margin-top:15px; background:#6366f1; color:#fff;" onclick="window.m5FinalCheck()">Enviar Prompt Seguro a la IA ☁️</button>
               
               <div id="m5-leak-feedback" style="display:none; margin-top:15px; text-align:center; font-weight:bold;"></div>
             </div>
@@ -1313,29 +1416,29 @@ MAria G; NULL; 1/1/24
 
         <div id="m5-victory-panel" class="section-card animate-in glass-card-premium" style="text-align: center; display:none; margin-top:30px; border: 1px solid var(--primary);">
           <div style="font-size: 4rem; margin-bottom: 25px; filter: drop-shadow(0 0 15px var(--primary-glow));">🏆</div>
-          <h3 class="text-gradient-primary">Hito Alcanzado: Alquimista de Datos</h3>
+          <h3 class="text-gradient-primary">Hito Alcanzado: Data Steward Soberano</h3>
           <div class="badge-titan animate-bounce" style="display: inline-block; background: var(--primary); color: #fff; padding: 12px 24px; font-weight: 800; margin-top: 20px; margin-bottom:25px; font-size: 1rem;">
-              INSIGNIA: CEREBRO ANALÍTICO
+              INSIGNIA: MAESTRO ANALÍTICO EXCEL + IA
           </div>
+          
+          <div style="margin: 0 auto 30px; max-width: 600px; text-align:left; background: rgba(0,0,0,0.2); border-radius:12px; padding:20px; border:1px solid rgba(255,255,255,0.05);">
+            <h4 style="margin-top:0; color:#3b82f6;">🎓 Qué aprendiste en este Módulo:</h4>
+            <ul style="font-size:0.85rem; color:#cbd5e1; line-height:1.6; padding-left:20px; margin:0;">
+              <li>Que la Limpieza (Fase A) es vital antes de pedirle fórmulas a la IA.</li>
+              <li>A usar un <b>Prompt Maestro</b> para encontrar fórmulas exactas (BUSCARV, SI, etc) en segundos, sin buscar tutoriales.</li>
+              <li>A usar la IA como <b>Auditor Estadístico</b> para detectar sobrecostos y anomalías humanas.</li>
+              <li>A automatizar un Excel entero usando Macros VBA dictadas por la IA y ejecutadas con Alt+F11.</li>
+              <li>A anonimizar IPs, cédulas y nombres antes de usar la nube pública.</li>
+            </ul>
+          </div>
+          
           <div class="learning-mission-grid" style="display:grid; gap:12px; text-align:left; margin: 0 auto 20px; max-width: 860px;">
             <div>
-              <label for="m5-mission-problem" style="display:block; font-weight:700; margin-bottom:6px;">1. Problema de datos</label>
-              <textarea id="m5-mission-problem" class="premium-textarea" style="min-height: 90px;" placeholder="Describe el archivo, el error principal y el impacto operativo del problema."></textarea>
-            </div>
-            <div>
-              <label for="m5-mission-formula" style="display:block; font-weight:700; margin-bottom:6px;">2. Fórmula o enfoque propuesto</label>
-              <textarea id="m5-mission-formula" class="premium-textarea" style="min-height: 90px;" placeholder="Escribe la fórmula, prompt o paso técnico que usarías para corregir o analizar la información."></textarea>
-            </div>
-            <div>
-              <label for="m5-mission-result" style="display:block; font-weight:700; margin-bottom:6px;">3. Resultado esperado</label>
-              <textarea id="m5-mission-result" class="premium-textarea" style="min-height: 80px;" placeholder="Explica cómo debería verse la salida correcta después de aplicar tu solución."></textarea>
-            </div>
-            <div>
-              <label for="m5-mission-validation" style="display:block; font-weight:700; margin-bottom:6px;">4. Validación y privacidad</label>
-              <textarea id="m5-mission-validation" class="premium-textarea" style="min-height: 90px;" placeholder="Indica cómo comprobarías el resultado y qué dato sensible ocultarías antes de usar IA pública."></textarea>
+              <label for="m5-mission-problem" style="display:block; font-weight:700; margin-bottom:6px;">Documenta tu Estrategia de IA para Datos</label>
+              <textarea id="m5-mission-problem" class="premium-textarea" style="min-height: 90px;" placeholder="¿Cómo aplicarás la táctica de buscar fórmulas o generar Macros en tus plantillas diarias? Escribe al menos 2 oraciones."></textarea>
             </div>
           </div>
-          <button class="gl-btn gl-btn-primary complete-module-btn" style="width:100%; padding: 16px;" data-module="module-5">✅ Reclamar Victoria Final (+150 XP)</button>
+          <button class="gl-btn gl-btn-primary complete-module-btn" style="width:100%; padding: 16px;" data-module="module-5">✅ Reclamar Victoria y 500 XP</button>
           </div>
         </div>
 

@@ -1367,10 +1367,10 @@ class GuiaIA {
     // 1. Initialize core system dependencies
     try {
       this.progressManager = (await import('../core/progress-manager.js')).progressManager;
-      this.loadProgress();
     } catch (e) {
       console.error('Error loading ProgressManager:', e);
     }
+    this.loadProgress();
 
     // 2. IMMEDIATE UI SETUP (Critical for responsiveness)
     this.setupMobileMenu();

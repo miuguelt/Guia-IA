@@ -47,20 +47,20 @@ window.GuiaModules['module-modelos-frontera'] = (function() {
       <h3><span class="icon">🧠</span> Titanes de la Frontera</h3>
       <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-top:15px;">
         <div class="glass-card" style="padding:15px; border-top: 3px solid #3b82f6;">
-          <h4 style="color:#3b82f6;">GPT-4o (OpenAI)</h4>
-          <p style="font-size:0.8rem; opacity:0.8;">El estándar de la industria. Multimodal nativo y extremadamente equilibrado entre velocidad y capacidad.</p>
+          <h4 style="color:#3b82f6;">GPT-4o / o3-mini (OpenAI)</h4>
+          <p style="font-size:0.8rem; opacity:0.8;">El estándar integral. o3-mini lidera en razonamiento rápido para código y matemáticas, mientras 4o es el rey de la multimodalidad y la voz.</p>
         </div>
         <div class="glass-card" style="padding:15px; border-top: 3px solid #f97316;">
-          <h4 style="color:#f97316;">Claude 3.5/4 (Anthropic)</h4>
-          <p style="font-size:0.8rem; opacity:0.8;">Líder en alineación ética y "humanismo". Su capacidad de análisis documental y tono natural no tiene rival.</p>
+          <h4 style="color:#f97316;">Claude 3.7 Sonnet (Anthropic)</h4>
+          <p style="font-size:0.8rem; opacity:0.8;">El modelo híbrido definitivo. Permite elegir respuesta estándar o razonamiento extendido. Líder indiscutible en programación, alineación y flujos agénticos.</p>
         </div>
         <div class="glass-card" style="padding:15px; border-top: 3px solid #8b5cf6;">
-          <h4 style="color:#8b5cf6;">Gemini 1.5/2.0 (Google)</h4>
-          <p style="font-size:0.8rem; opacity:0.8;">El rey del contexto. Puede procesar bibliotecas completas (2M+ tokens) de una sola vez.</p>
+          <h4 style="color:#8b5cf6;">Gemini 2.0 Flash / Pro (Google)</h4>
+          <p style="font-size:0.8rem; opacity:0.8;">El rey del contexto absoluto. Procesa bibliotecas completas (hasta 2M de tokens) e integra búsqueda web y ejecución de código de forma nativa.</p>
         </div>
         <div class="glass-card" style="padding:15px; border-top: 3px solid #10b981;">
-          <h4 style="color:#10b981;">DeepSeek R1/o1 (Razonadores)</h4>
-          <p style="font-size:0.8rem; opacity:0.8;">Modelos que usan Reinforcement Learning para "pensar" paso a paso antes de entregar el resultado.</p>
+          <h4 style="color:#10b981;">DeepSeek R1 / Grok 3</h4>
+          <p style="font-size:0.8rem; opacity:0.8;">R1 democratizó el razonamiento transparente extremo con eficiencia sin igual. Grok 3 domina en análisis de datos masivos en tiempo real sin censura restrictiva.</p>
         </div>
       </div>
     </div>
@@ -100,28 +100,34 @@ window.GuiaModules['module-modelos-frontera'] = (function() {
             <th style="padding:8px;">Costo</th>
           </tr>
           <tr>
-            <td style="padding:8px;">Gemini 1.5 Pro</td>
-            <td style="padding:8px; color:#10b981;">⭐⭐⭐⭐⭐ (2M+)</td>
+            <td style="padding:8px;">Claude 3.7 Sonnet</td>
+            <td style="padding:8px;">⭐⭐⭐⭐ (200k)</td>
+            <td style="padding:8px; color:#10b981;">⭐⭐⭐⭐⭐+ (Híbrido)</td>
+            <td style="padding:8px;">Medio</td>
+          </tr>
+          <tr>
+            <td style="padding:8px;">OpenAI o3-mini / o1</td>
+            <td style="padding:8px;">⭐⭐⭐ (200k)</td>
+            <td style="padding:8px; color:#10b981;">⭐⭐⭐⭐⭐</td>
+            <td style="padding:8px;">Bajo a Alto</td>
+          </tr>
+          <tr>
+            <td style="padding:8px;">Gemini 2.0 Pro</td>
+            <td style="padding:8px; color:#10b981;">⭐⭐⭐⭐⭐ (2M)</td>
             <td style="padding:8px;">⭐⭐⭐⭐</td>
             <td style="padding:8px;">Medio</td>
           </tr>
           <tr>
-            <td style="padding:8px;">GPT-4o</td>
+            <td style="padding:8px;">DeepSeek R1</td>
             <td style="padding:8px;">⭐⭐ (128k)</td>
             <td style="padding:8px; color:#10b981;">⭐⭐⭐⭐⭐</td>
-            <td style="padding:8px;">Alto</td>
+            <td style="padding:8px; color:#10b981;">Muy Bajo</td>
           </tr>
           <tr>
-            <td style="padding:8px;">Claude 3.5 Sonnet</td>
-            <td style="padding:8px;">⭐⭐⭐ (200k)</td>
+            <td style="padding:8px;">Grok 3</td>
+            <td style="padding:8px;">⭐⭐⭐ (128k)</td>
             <td style="padding:8px; color:#10b981;">⭐⭐⭐⭐⭐</td>
             <td style="padding:8px;">Medio</td>
-          </tr>
-          <tr>
-            <td style="padding:8px;">DeepSeek R1</td>
-            <td style="padding:8px;">⭐⭐ (64k)</td>
-            <td style="padding:8px; color:#10b981;">⭐⭐⭐⭐⭐+</td>
-            <td style="padding:8px; color:#10b981;">Muy Bajo</td>
           </tr>
         </table>
       </div>
@@ -134,10 +140,11 @@ window.GuiaModules['module-modelos-frontera'] = (function() {
       <h3><span class="icon">🌳</span> Árbol de Decisión Soberano</h3>
       <div style="background:rgba(255,255,255,0.02); padding:20px; border-radius:12px; border:1px dashed #444;">
         <ul style="list-style:none; padding:0; margin:0;">
-          <li style="margin-bottom:10px;">❓ <b>¿Necesitas procesar 50+ PDFs de una vez?</b> → 💎 <b>Gemini</b></li>
-          <li style="margin-bottom:10px;">❓ <b>¿Buscas redacción con tono impecable y auditable?</b> → 🛡️ <b>Claude</b></li>
-          <li style="margin-bottom:10px;">❓ <b>¿Necesitas programación compleja o uso general?</b> → ⚡ <b>GPT-4o</b></li>
-          <li style="margin-bottom:10px;">❓ <b>¿Quieres razonamiento lógico extremo y gratuito?</b> → 🧠 <b>DeepSeek R1</b></li>
+          <li style="margin-bottom:10px;">❓ <b>¿Necesitas procesar 50+ PDFs de una vez o video nativo?</b> → 💎 <b>Gemini 2.0</b></li>
+          <li style="margin-bottom:10px;">❓ <b>¿Buscas el mejor en código y flujos agénticos autónomos?</b> → 🛡️ <b>Claude 3.7 Sonnet</b></li>
+          <li style="margin-bottom:10px;">❓ <b>¿Necesitas matemáticas complejas o ciencia rápida?</b> → ⚡ <b>o3-mini / o1</b></li>
+          <li style="margin-bottom:10px;">❓ <b>¿Quieres razonamiento lógico extremo y gratuito/API barata?</b> → 🧠 <b>DeepSeek R1</b></li>
+          <li style="margin-bottom:10px;">❓ <b>¿Buscas análisis de datos masivo con información de hoy?</b> → 🌌 <b>Grok 3</b></li>
         </ul>
       </div>
     </div>
@@ -226,8 +233,11 @@ window.GuiaModules['module-modelos-frontera'] = (function() {
           <dt style="color:var(--f-primary); font-weight:bold;">Opus / Ultra / 4o</dt>
           <dd style="margin-bottom:10px; opacity:0.8;">Modelos de frontera total. Máxima capacidad de análisis, creatividad y seguimiento de instrucciones complejas.</dd>
           
-          <dt style="color:var(--f-primary); font-weight:bold;">Reasoning (R1 / o1)</dt>
-          <dd style="margin-bottom:10px; opacity:0.8;">Capacidad de un modelo para ejecutar un "proceso de pensamiento" interno antes de responder.</dd>
+          <dt style="color:var(--f-primary); font-weight:bold;">Reasoning (R1 / o1 / 3.7 Sonnet)</dt>
+          <dd style="margin-bottom:10px; opacity:0.8;">Modelos que ejecutan una "cadena de pensamiento" interna (CoT) antes de responder, aumentando masivamente la precisión en tareas complejas.</dd>
+
+          <dt style="color:var(--f-primary); font-weight:bold;">Comportamiento Agéntico (Agentic)</dt>
+          <dd style="margin-bottom:10px; opacity:0.8;">Cuando la IA no solo responde, sino que planifica, ejecuta, corrige errores y usa herramientas iterativamente sin supervisión constante.</dd>
 
           <dt style="color:var(--f-primary); font-weight:bold;">Fine-tuning</dt>
           <dd style="margin-bottom:10px; opacity:0.8;">Entrenamiento adicional de un modelo base con datos específicos de una entidad para especializarlo.</dd>
@@ -302,13 +312,14 @@ window.GuiaModules['module-modelos-frontera'] = (function() {
       
       const logs = [
         "🚀 Iniciando Benchmarking Soberano...",
-        "⚖️ Cargando prompt de razonamiento complejo...",
-        "🧠 GPT-4o: Procesando semántica... (0.8s)",
-        "🛡️ Claude 3.5: Analizando alineación ética... (1.2s)",
-        "💎 Gemini 1.5: Cargando ventana de 2M tokens... (0.5s)",
-        "🧠 DeepSeek R1: Iniciando Chain of Thought... (2.4s)",
-        "📊 RESULTADO: Claude gana en estilo, DeepSeek gana en lógica bruta, Gemini gana en escala.",
-        "✅ Comparativa finalizada. ¡Usa este criterio para elegir!"
+        "⚖️ Cargando prompt agéntico complejo (código + lógica)...",
+        "🧠 o3-mini: Generando 5,000 tokens de razonamiento en 3s... (1.8s)",
+        "🛡️ Claude 3.7 Sonnet: Activando modo extended thinking interactivo... (2.1s)",
+        "💎 Gemini 2.0: Ingiriendo documentación base de 1.5M tokens... (0.5s)",
+        "🧠 DeepSeek R1: Destilando lógica matemática pura asíncrona... (2.4s)",
+        "🌌 Grok 3: Validando variables sociales en tiempo real en X... (1.2s)",
+        "📊 RESULTADO: Claude en agentes de código, o3-mini en velocidad analítica, Grok 3 en data fresca, DeepSeek R1 en costo-beneficio.",
+        "✅ Comparativa finalizada. ¡Elige el Titan según el escenario!"
       ];
       
       let i = 0;

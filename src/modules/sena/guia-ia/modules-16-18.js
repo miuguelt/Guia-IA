@@ -205,96 +205,152 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
   <button class="tab-btn active" data-tab="m16-excel">📊 Experto en Excel</button>
   <button class="tab-btn" data-tab="m16-ventas">🤝 Trámites y Ventas</button>
   <button class="tab-btn" data-tab="m16-nocode">🔮 Generadores de Apps</button>
-  <button class="tab-btn" data-tab="m16-mission">⚔️ Misión</button>
+  <button class="tab-btn" data-tab="m16-mission">⚔️ Misión Final</button>
 </div>
 
 <!-- TAB 1: EXCEL / SHEETS -->
 <div id="m16-excel" class="ag-content active">
   <div class="section-card animate-in">
     <h3><span class="icon">📈</span> El Fin de Buscar Fórmulas en Google</h3>
-    <p>Simplemente escríbele a <a href="https://chatgpt.com" target="_blank" style="color:var(--primary); text-decoration:underline;">ChatGPT</a> lo que quieres que pase con tus celdas, y él te dará la fórmula exacta (incluso Macros completas).</p>
+    <p>Simplemente descríbele a ChatGPT o Claude lo que quieres que pase con tus celdas en lenguaje natural, y la IA escribirá la fórmula exacta, por más compleja que sea (incluso Macros completas).</p>
     
-    <div class="m16-lab-card">
-      <h4 style="margin:0 0 10px;color:#10b981;">🧪 Laboratorio: Autogenerador de Excel</h4>
-      <p style="font-size:0.8rem;margin-bottom:15px;opacity:0.8;">Escribe lo que necesitas resolver en lenguaje natural y mira cómo la IA lo traduce a código Excel/Sheets de inmediato.</p>
+    <div style="background: rgba(16,185,129,0.05); border-left: 4px solid #10b981; padding: 15px; border-radius: 8px; margin: 20px 0;">
+      <h4 style="color:#10b981; margin-top:0;">💡 Ejercicio Guiado: Tu Primera Fórmula con IA</h4>
+      <p style="font-size:0.85rem; margin-bottom:10px;">Sigue estos 5 pasos para nunca volver a atascarte en Excel:</p>
+      <ol style="font-size:0.8rem; margin-left: 20px; color:#cbd5e1; line-height: 1.6;">
+        <li>Identifica tu objetivo (Ej: "Quiero saber cuánto se gastó en papelería en febrero").</li>
+        <li>Mira en qué columnas están tus datos (Ej: B tiene Fechas, C tiene Rubros, D tiene Valores).</li>
+        <li>Copia el <b>Prompt Maestro</b> de abajo.</li>
+        <li>Pégalo en ChatGPT, módificalo con tus columnas y dáselo a la IA.</li>
+        <li>Copia la fórmula que te da la IA <code>SUMAR.SI.CONJUNTO(...)</code> y pégala en Excel.</li>
+      </ol>
+      <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; font-family: monospace; font-size: 0.8rem; color: #6ee7b7; border: 1px solid rgba(16,185,129,0.2);">
+        "Actúa como experto en Excel avanzado. Tengo mi base de datos en las columnas A hasta F. La columna C tiene [Dato] y la D tiene [Dato]. Necesito una fórmula que [Tu Objetivo]. Explícame paso a paso cómo aplicarla."
+      </div>
+    </div>
+    
+    <div class="m16-lab-card" style="margin-top:25px;">
+      <h4 style="margin:0 0 10px;color:#3b82f6;">🧪 Simulador: Autogenerador de Excel 2.0</h4>
+      <p style="font-size:0.8rem;margin-bottom:15px;opacity:0.8;">Escribe lo que necesitas resolver (o elige un caso) y mira cómo la IA lo traduce a código Excel/Sheets al instante.</p>
       
       <div class="m16-lab-group">
-        <select id="m16-excel-req" class="m16-lab-select">
-          <option value="q1">Sumar la columna Ingresos (C) SOLO si la ciudad (A) es 'Bogotá'</option>
-          <option value="q2">Quiero buscar el número de cédula de E2 en la hoja 'Empleados' y traer el nombre</option>
-          <option value="q3">Si la fecha en A1 ya pasó, pon 'VENCIDO' en rojo, sino 'A TIEMPO'</option>
-          <option value="q4">Macro VBA: Haz un botón que borre todo el contenido de la hoja activa</option>
+        <select id="m16-excel-req" class="m16-lab-select" style="font-size:0.85rem;">
+          <option value="q1">Sumar la columna Ingresos (C) SOLO si la ciudad (A) es 'Cali'</option>
+          <option value="q2">Buscar el número de cédula de E2 en la hoja 'Contratistas' y traer el nombre (Columna B)</option>
+          <option value="q3">Si la fecha límite en A1 ya pasó la fecha de hoy, pon 'VENCIDO' en rojo, sino 'A TIEMPO'</option>
+          <option value="q5">Sumar valores en C, solo si A es 'Bogotá' Y la fecha en B es de este año</option>
+          <option value="q6">Extraer solo el primer nombre de la celda A2 que dice 'Juan Perez Lopez'</option>
+          <option value="q4">Macro VBA: Haz un botón que limpie filtros, elimine filas vacías y guarde como PDF</option>
         </select>
-        <button class="gl-btn gl-btn-primary m16-lab-btn" onclick="window.m16GenFormula()">Traducir</button>
+        <button class="gl-btn gl-btn-primary m16-lab-btn" onclick="window.m16GenFormula()">Generar Solución ⚡</button>
       </div>
 
       <div id="m16-formula-result" style="display:none;margin-top:15px;padding:15px;background:#1a1a2e;border-left:4px solid #3b82f6;border-radius:8px;font-family:monospace;font-size:0.9rem;color:#93c5fd;"></div>
     </div>
-    
-    <div class="pista-ia" style="margin-top:20px;">
-      💡 <b>Prompt Maestro para Excel:</b> "Actúa como experto en Excel avanzado. Tengo mi base de datos en [Rango]. La columna A tiene [Dato] y la B [Dato]. Necesito una fórmula que [Tu Objetivo]. Explícame paso a paso cómo aplicarla."
+
+    <!-- VBA Library -->
+    <h4 style="margin-top:35px; color:#c4b5fd;">📚 Biblioteca Rápida de Macros Útiles</h4>
+    <div class="comparison-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+      
+      <div style="background:rgba(0,0,0,0.2); border:1px solid rgba(139,92,246,0.3); border-radius:10px; padding:15px;">
+        <h5 style="color:#d8b4fe; margin:0 0 8px 0;">📄 Guardar Hojas en PDFs separados</h5>
+        <div id="m16-macro-1" style="display:none;">Sub GuardarHojasPDF()
+  Dim ws As Worksheet
+  For Each ws In ActiveWorkbook.Worksheets
+    ws.ExportAsFixedFormat Type:=xlTypePDF, Filename:=ThisWorkbook.Path & "\" & ws.Name & ".pdf"
+  Next ws
+End Sub</div>
+        <button class="gl-btn small" style="width:100%; border-color:#d8b4fe; color:#d8b4fe;" onclick="navigator.clipboard.writeText(document.getElementById('m16-macro-1').innerText); window.showToast('Macro Copiada', 'success');">📋 Copiar VBA</button>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.2); border:1px solid rgba(139,92,246,0.3); border-radius:10px; padding:15px;">
+        <h5 style="color:#d8b4fe; margin:0 0 8px 0;">🗑️ Eliminar Filas Vacías</h5>
+        <div id="m16-macro-2" style="display:none;">Sub EliminarFilasVacias()
+  Dim Rng As Range
+  On Error Resume Next
+  Set Rng = Selection.SpecialCells(xlCellTypeBlanks)
+  On Error GoTo 0
+  If Not Rng Is Nothing Then Rng.EntireRow.Delete
+End Sub</div>
+        <button class="gl-btn small" style="width:100%; border-color:#d8b4fe; color:#d8b4fe;" onclick="navigator.clipboard.writeText(document.getElementById('m16-macro-2').innerText); window.showToast('Macro Copiada', 'success');">📋 Copiar VBA</button>
+      </div>
+
     </div>
 
     <!-- VBA paste guide -->
-    <div style="background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);border-radius:12px;padding:16px;margin-top:18px;">
+    <div style="background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.3);border-radius:12px;padding:16px;margin-top:25px;">
       <div style="font-weight:800;color:#c4b5fd;font-size:0.83rem;margin-bottom:10px;">🔧 Cómo Pegar una Macro VBA en Excel (Paso a Paso)</div>
       <ol style="font-size:0.8rem;line-height:2;padding-left:18px;color:#cbd5e1;margin:0;">
-        <li>Copia el código VBA que generó la IA (todo, desde <code style="color:#fbbf24;">Sub</code> hasta <code style="color:#fbbf24;">End Sub</code>)</li>
+        <li>Copia el código VBA generado (todo, desde <code style="color:#fbbf24;">Sub</code> hasta <code style="color:#fbbf24;">End Sub</code>)</li>
         <li>En Excel, presiona <kbd style="background:#1e293b;padding:2px 6px;border-radius:4px;border:1px solid #475569;font-size:0.75rem;">Alt + F11</kbd> para abrir el Editor de VBA</li>
         <li>Haz clic en <strong style="color:#fff">Insertar → Módulo</strong> en la barra superior</li>
         <li>Pega el código en el área blanca que aparece (<kbd style="background:#1e293b;padding:2px 6px;border-radius:4px;border:1px solid #475569;font-size:0.75rem;">Ctrl+V</kbd>)</li>
         <li>Presiona <kbd style="background:#1e293b;padding:2px 6px;border-radius:4px;border:1px solid #475569;font-size:0.75rem;">F5</kbd> o el botón ▶ para ejecutar</li>
       </ol>
-      <div style="background:rgba(245,158,11,0.08);border-radius:8px;padding:10px;margin-top:10px;font-size:0.78rem;color:#fde68a;">⚠️ Si Excel bloquea las macros: ve a <strong>Archivo → Opciones → Centro de Confianza → Config. del Centro de Confianza → Configuración de Macros</strong> y selecciona "Habilitar todas".</div>
+      <div style="background:rgba(245,158,11,0.08);border-radius:8px;padding:10px;margin-top:10px;font-size:0.75rem;color:#fde68a;">⚠️ Si Excel bloquea las macros: ve a <strong>Archivo → Opciones → Centro de Confianza → Config. del Centro de Confianza → Configuración de Macros</strong> y selecciona "Habilitar todas".</div>
     </div>
 
-    <div class="comparison-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px;">
-      <div class="m-pa-panel-card" style="background: rgba(239,68,68,0.03); border: 1px solid rgba(239,68,68,0.2);">
-        <div style="margin-bottom: 12px;"><span class="badge-titan" style="background: #ef4444; color: #fff;">SIN IA ❌</span></div>
-        <div style="font-size: 0.85rem; opacity: 0.9;"><strong>Tarea:</strong> Unir 10 archivos Excel de diferentes formatos en uno solo.</div>
-        <div style="font-size: 0.75rem; color: #ef4444; margin-top: 10px; font-weight: 700;">Esfuerzo: 4 horas de copy-paste manual, propenso a errores humanos.</div>
-      </div>
-      <div class="m-pa-panel-card holographic-glare" style="background: rgba(16,185,129,0.03); border: 1px solid rgba(16,185,129,0.3);">
-        <div style="margin-bottom: 12px;"><span class="badge-titan" style="background: #10b981; color: #fff;">CON IA ✅</span></div>
-        <div style="font-size: 0.85rem; opacity: 0.9;"><strong>Tarea:</strong> Usar una Macro VBA generada en 10 segundos por ChatGPT.</div>
-        <div style="font-size: 0.75rem; color: #10b981; margin-top: 10px; font-weight: 700;">Esfuerzo: 2 minutos (Ejecutar macro). Limpieza automática de datos.</div>
-      </div>
-    </div>
   </div>
 </div>
 
-<!-- TAB 2: TRÁMITES Y VENTAS -->
+<!-- TAB 2: TRÁMITES Y COMUNICACIONES -->
 <div id="m16-ventas" class="ag-content">
   <div class="section-card animate-in">
-    <h3><span class="icon">🤝</span> Optimización de Trámites y Ventas</h3>
-    <p>La IA no solo suma números, redacta procesos. Usa estos prompts especializados para agilizar la gestión pública y cerrar acuerdos efectivos.</p>
+    <h3><span class="icon">🤝</span> Textos que Mueven Montañas</h3>
+    <p>La IA no solo suma números; redacta procesos que destraban cuellos de botella. Agiliza tus comunicaciones institucionales con estos <strong>Prompts de Alta Conversión</strong>.</p>
     
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;">
-      <div style="background:rgba(255,255,255,0.02);padding:15px;border-radius:12px;border:1px solid #3b82f6;">
-        <h4 style="color:#60a5fa;margin-top:0;">📋 Simplificación de Trámites</h4>
-        <p style="font-size:0.8rem;opacity:0.8;">"Resume este manual de 50 páginas sobre [Trámite], identifica 3 pasos redundantes y propón un flujo digital automatizado para el ciudadano."</p>
+    <div style="background: rgba(59,130,246,0.05); border-left: 4px solid #3b82f6; padding: 15px; border-radius: 8px; margin: 20px 0;">
+      <h4 style="color:#3b82f6; margin-top:0;">📝 Ejercicio: Construye tu Oficio Perfecto</h4>
+      <p style="font-size:0.85rem; margin-bottom:10px;">En lugar de escribir un requerimiento desde cero, dile a la IA qué necesitas. Selecciona una opción y cópiala a ChatGPT:</p>
+      
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; font-family: monospace; font-size: 0.8rem; border: 1px solid rgba(59,130,246,0.2); display:flex; justify-content:space-between; align-items:center;">
+          <span style="color: #93c5fd; padding-right:15px;">"Redacta un correo formal de 3 párrafos cobrando amablemente una factura vencida al contratista X. Usa un tono firme pero institucional."</span>
+          <button class="gl-btn small" onclick="navigator.clipboard.writeText('Redacta un correo formal de 3 párrafos cobrando amablemente una factura vencida al contratista X. Usa un tono firme pero institucional.'); window.showToast('Prompt Copiado','success');">Copiar</button>
+        </div>
+        <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; font-family: monospace; font-size: 0.8rem; border: 1px solid rgba(59,130,246,0.2); display:flex; justify-content:space-between; align-items:center;">
+          <span style="color: #93c5fd; padding-right:15px;">"Resume este manual de 50 páginas sobre Contratación, identifica 3 pasos redundantes y propón un flujo digital más rápido."</span>
+          <button class="gl-btn small" onclick="navigator.clipboard.writeText('Resume este manual de 50 páginas sobre Contratación, identifica 3 pasos redundantes y propón un flujo digital más rápido.'); window.showToast('Prompt Copiado','success');">Copiar</button>
+        </div>
       </div>
+    </div>
+    
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:25px;">
       <div style="background:rgba(255,255,255,0.02);padding:15px;border-radius:12px;border:1px solid #10b981;">
-        <h4 style="color:#10b981;margin-top:0;">💰 Persuasión y Ventas</h4>
-        <p style="font-size:0.8rem;opacity:0.8;">"Redacta un mensaje de LinkedIn altamente personalizado para [Cargo] de [Entidad], ofreciendo [Servicio] basado en su necesidad de [Problema]."</p>
+        <h4 style="color:#10b981;margin-top:0;display:flex;align-items:center;gap:8px;"><span>🎯</span> Persuasión Directa</h4>
+        <p style="font-size:0.8rem;opacity:0.8;margin-bottom:12px;">"Redacta un mensaje de LinkedIn altamente personalizado para [Cargo] de [Entidad], ofreciendo colaboración interinstitucional para [Problema]."</p>
+        <button class="gl-btn small" style="width:100%; border-color:#10b981; color:#10b981;" onclick="navigator.clipboard.writeText('Redacta un mensaje de LinkedIn altamente personalizado para [Cargo] de [Entidad], ofreciendo colaboración interinstitucional para [Problema].'); window.showToast('Prompt Copiado','success');">Copiar Prompt</button>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);padding:15px;border-radius:12px;border:1px solid #f59e0b;">
+        <h4 style="color:#f59e0b;margin-top:0;display:flex;align-items:center;gap:8px;"><span>📑</span> Simplificación Ciudadana</h4>
+        <p style="font-size:0.8rem;opacity:0.8;margin-bottom:12px;">"Reescribe esta respuesta normativa de 5 páginas para que un ciudadano de 15 años sin estudios legales sepa exactamente si tiene derecho al subsidio o no."</p>
+        <button class="gl-btn small" style="width:100%; border-color:#f59e0b; color:#f59e0b;" onclick="navigator.clipboard.writeText('Reescribe esta respuesta normativa de 5 páginas para que un ciudadano de 15 años sin estudios legales sepa exactamente si tiene derecho al subsidio o no.'); window.showToast('Prompt Copiado','success');">Copiar Prompt</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- TAB 2: NO-CODE (BOLT) -->
+<!-- TAB 3: NO-CODE (BOLT/V0) -->
 <div id="m16-nocode" class="ag-content">
   <div class="section-card animate-in">
-    <h3><span class="icon">🔮</span> Generadores Universitarios (Apps enteras en 1 clic)</h3>
-    <p>Herramientas como <b><a href="https://bolt.new" target="_blank" style="color:#fcd34d; text-decoration:underline;">Bolt.new</a></b> o <b><a href="https://v0.dev" target="_blank" style="color:#cbd5e1; text-decoration:underline;">v0.dev</a></b> están revolucionando el mundo. Tú escribes "Quiero una app para registrar visitas que tenga un formulario y una tabla gráfica", y la IA programa toda la app del lado del navegador frente a tus ojos.</p>
+    <h3><span class="icon">🔮</span> Creadores de Software (Apps en 1 clic)</h3>
+    <p>Tú escribes: "Quiero un sistema para registrar visitas con un formulario y una gráfica". La IA escribe el código, monta el servidor y publica la app frente a tus ojos.</p>
     
-    <div class="m16-code-window">
+    <div style="background:rgba(244,63,94,0.08); border-left:4px solid #f43f5e; padding:15px; border-radius:8px; margin:20px 0;">
+      <h4 style="color:#f43f5e; margin-top:0;">🤖 El Prompt de Arquitecto de Software</h4>
+      <p style="font-size:0.85rem; color:#cbd5e1; margin-bottom:10px;">Para usar Bolt o v0, debes ser descriptivo. Copia esta plantilla:</p>
+      <div style="background:#1e1e24; padding:12px; border-radius:6px; font-family:monospace; font-size:0.8rem; color:#fda4af;">
+        "Crea un dashboard tipo Saas. Tema oscuro corporativo. Navbar lateral con 3 iconos. Al centro, una tabla de datos simulada de 'Peticiones Ciudadanas' con columnas: ID, Fecha, Estado. Arriba de la tabla pon un gráfico de torta de 3 colores con los estados. Haz que la tabla sea ordenable."
+      </div>
+    </div>
+
+    <div class="m16-code-window" style="margin-top:20px;">
       <div class="m16-code-header">
         <div class="m16-dot r"></div><div class="m16-dot y"></div><div class="m16-dot g"></div>
         <span style="margin-left:10px;font-size:0.75rem;color:#64748b;">Bolt.new — Escribiendo App V1.0</span>
       </div>
       <div class="m16-code-body">
-        <span style="color:#10b981;">> user:</span> crea un dashboard institucional para PQRs. Que tenga botones para "Responder", "Derivar" y gráficas de torta.<br>
+        <span style="color:#10b981;">> user:</span> crea un dashboard institucional para PQRs con gráficas.<br>
         <span style="color:#8b5cf6;">> ai:</span> ¡Entendido! Creando arquitectura React + Tailwind...<br>
         <span id="m16-typing"></span><span class="m16-cursor" id="m16-c"></span>
       </div>
@@ -303,39 +359,45 @@ window.GuiaModules['module-16'] = window.GuiaModules['module-17'] = window.GuiaM
       <button class="gl-btn gl-btn-primary" onclick="window.m16SimulateBolt(this)">⚡ Ejecutar Simulación IA</button>
     </div>
 
-    
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:20px;">
-      <div class="m11-tool-card" onclick="window.open('https://bolt.new','_blank')">
-        <h4 style="margin:0 0 5px;color:#fcd34d;"><a href="https://bolt.new" target="_blank" style="color:inherit; text-decoration:underline;">Bolt.new</a></h4>
-        <p style="font-size:0.75rem;margin:0;">Sitios web y apps web completas (funcionales y con backend simulado).</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:25px;">
+      <div class="m11-tool-card" style="border: 1px solid rgba(252,211,77,0.3); transition:all 0.3s ease;" onmouseover="this.style.borderColor='#fcd34d'" onmouseout="this.style.borderColor='rgba(252,211,77,0.3)'" onclick="window.open('https://bolt.new','_blank')">
+        <h4 style="margin:0 0 5px;color:#fcd34d;"><a href="https://bolt.new" target="_blank" style="color:inherit; text-decoration:none;">⚡ Bolt.new</a></h4>
+        <p style="font-size:0.75rem;margin:0;">Genera Aplicaciones Web completas y funcionales. Ideal para sistemas internos rápidos.</p>
       </div>
-      <div class="m11-tool-card" onclick="window.open('https://v0.dev','_blank')">
-        <h4 style="margin:0 0 5px;color:#cbd5e1;"><a href="https://v0.dev" target="_blank" style="color:inherit; text-decoration:underline;">v0 by Vercel</a></h4>
-        <p style="font-size:0.75rem;margin:0;">El mejor diseñador UI del mundo. Dile cómo quieres que se vea una pantalla y te da el código exacto.</p>
+      <div class="m11-tool-card" style="border: 1px solid rgba(203,213,225,0.3); transition:all 0.3s ease;" onmouseover="this.style.borderColor='#cbd5e1'" onmouseout="this.style.borderColor='rgba(203,213,225,0.3)'" onclick="window.open('https://v0.dev','_blank')">
+        <h4 style="margin:0 0 5px;color:#cbd5e1;"><a href="https://v0.dev" target="_blank" style="color:inherit; text-decoration:none;">🎨 v0.dev (Vercel)</a></h4>
+        <p style="font-size:0.75rem;margin:0;">El mejor diseñador UI del mundo. Crea interfaces visuales impactantes con un solo prompt.</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- TAB 3: MISIÓN -->
+<!-- TAB 4: MISIÓN -->
 <div id="m16-mission" class="ag-content">
-  <div class="exercise-box mission-card animate-in">
+  <div class="exercise-box mission-card animate-in glass-card-premium">
     <div class="exercise-header"><span class="exercise-icon">🧑‍💻</span><span class="exercise-title">Misión 16: El Hacker Sin Código</span></div>
+    
     <div class="preparation-step" style="background: rgba(37,99,235,0.1); border: 1px solid #2563eb; padding: 15px; border-radius: 10px; margin-top: 20px; border-left: 4px solid #2563eb;">
-      <h4 style="margin-top: 0; color: #2563eb; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">🛠️ Preparación de la Plataforma</h4>
-      <p style="font-size: 0.8rem; margin-bottom: 0; opacity: 0.9;">Antes de iniciar, prepara un problema real de Excel (fórmula que no te sale) o una idea de app institucional sencilla.</p>
+      <h4 style="margin-top: 0; color: #2563eb; font-size: 0.9rem; display: flex; align-items: center; gap: 8px;">🛠️ Prueba de Fuego</h4>
+      <p style="font-size: 0.8rem; margin-bottom: 0; opacity: 0.9;">No hay aprendizaje real sin ejecución. Aplica uno de los 3 casos prácticos que te enseñamos.</p>
     </div>
+    
     <div class="mission-instructions" style="background:rgba(37,99,235,0.05);padding:20px;border-radius:12px;border-left:4px solid #2563eb;margin:20px 0;">
-      <strong>🎯 Tu Desafío:</strong>
-      <ol style="margin-top:12px;font-size:0.85rem;line-height:2;">
-        <li>Identifica tu peor dolor de cabeza en Excel (ese archivo gigante que siempre da errores).</li>
-        <li>Abre ChatGPT o Claude y usa el "Prompt Maestro" descrito en la primera pestaña para pedirle una macro (VBA) o fórmula compleja que lo solucione todo con un clic.</li>
-        <li>(Nivel Dios): Prueba entrar a <b><a href="https://v0.dev" target="_blank" style="color:#2563eb; text-decoration:underline;">V0.dev</a></b> y pídele que diseñe "Una interfaz de una app del Gobierno para reportar huecos en la calle". Mira cómo la dibuja en segundos.</li>
+      <strong>🎯 Tu Desafío (Selecciona 1):</strong>
+      <ol style="margin-top:12px;font-size:0.85rem;line-height:2; color:#cbd5e1;">
+        <li><b>Opción A (Excel):</b> Abre tu archivo de Excel más difícil. Pídele a ChatGPT una Macro VBA o fórmula avanzada que lo solucione y aplícala.</li>
+        <li><b>Opción B (Trámites):</b> Toma un correo institucional burocrático, dáselo a Claude y pídele que lo resuma para un ciudadano en un solo párrafo claro.</li>
+        <li><b>Opción C (No-Code):</b> Entra a <a href="https://v0.dev" target="_blank" style="color:#60a5fa; text-decoration:underline;">v0.dev</a> y pídele que dibuje una "App de celular para reportar baches en las vías de la ciudad".</li>
       </ol>
     </div>
-    <textarea class="premium-textarea" placeholder="¿Qué fórmula compleja o herramienta lograste crear con ayuda de la IA sin tener que programar?..."></textarea>
-    <div class="reward-tag" style="margin-top:15px;">+150 XP · Insignia: Desarrollador Ciudadano 👨‍💻</div>
-    <button class="gl-btn gl-btn-primary complete-module-btn" data-module="module-16" style="width:100%;margin-top:15px;background:#2563eb;">✅ Misión Completada — Reclamar Insignia</button>
+    
+    <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 20px;">
+      <label for="m16-mission-result" style="display:block; font-weight:700; margin-bottom:10px; color:#93c5fd;">¿Qué Opción elegiste y qué lograste?</label>
+      <textarea id="m16-mission-result" class="premium-textarea" style="min-height: 100px; font-size: 0.85rem;" placeholder="Ej: Elegí la Opción A. La IA me generó una Macro VBA que al ejecutarla separó todos los correos electrónicos erróneos..."></textarea>
+    </div>
+    
+    <div class="reward-tag" style="text-align:center;">+150 XP · Insignia: Desarrollador Ciudadano 👨‍💻</div>
+    <button class="gl-btn gl-btn-primary complete-module-btn" data-module="module-16" style="width:100%;margin-top:15px;background:#2563eb; padding:16px;">✅ Reclamar Victoria y Finalizar</button>
   </div>
 </div>
 
