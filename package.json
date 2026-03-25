@@ -4,9 +4,9 @@
   "description": "Guía de IA con Ranking Global Real en SQLite",
   "main": "server.js",
   "scripts": {
-    "prestart": "fuser -k 8020/tcp || true",
+    "prestart": "node --version",
     "start": "node server.js",
-    "predev": "fuser -k 8020/tcp || true",
+    "predev": "fuser -k 8020/tcp 2>/dev/null || true",
     "dev": "nodemon server.js",
     "init-db": "node scripts/init_db.js",
     "test": "node tests/test_server.js",
