@@ -1,6 +1,7 @@
 {
   "name": "guia-ia-sovereign",
   "version": "32.4.0",
+  "license": "MIT",
   "description": "Guía de IA con Ranking Global Real en SQLite",
   "main": "server.js",
   "scripts": {
