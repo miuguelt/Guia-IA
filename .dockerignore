@@ -11,3 +11,11 @@ __pycache__
 !CORTEX_MAP.md
 experience_log.json
 .playwright-mcp
+
+# Database and Local Data (Do not bundle)
+*.db
+*.sqlite
+data/
+src/data/*.db
+src/data/*.sqlite
+!src/data/token_economy.json

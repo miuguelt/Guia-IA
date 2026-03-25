@@ -10,10 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 8020;
 
 // ── Persistent DB path (must match Docker volume: /app/data) ──
-// DB_PATH priority:
-// 1. DB_PATH env var (set in Docker/Coolify to point to the persistent volume: /app/data/leaderboard.db)
-// 2. src/data/ fallback for local Linux development (WSL cannot write to /mnt/c/ with native sqlite3)
-const DB_PATH = process.env.DB_PATH || path.join(__dirname === '.' ? '' : __dirname, 'src/data/leaderboard.db');
+const DB_PATH = process.env.DB_PATH || path.join(__dirname, 'src/data/leaderboard.db');
 
 
 // Ensure data directory exists

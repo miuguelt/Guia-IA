@@ -10,6 +10,7 @@ services:
       - knowledge_base:/app/src/knowledge
     environment:
       - PORT=8020
+      - DB_PATH=/app/data/leaderboard.db
       - ADMIN_TOKEN=${ADMIN_TOKEN:-}
     restart: unless-stopped
 
