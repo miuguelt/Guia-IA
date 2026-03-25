@@ -231,7 +231,8 @@ window.GuiaModules['mini-games'] = window.GuiaModules['module-20'] = (function()
     }, 1000);
   };
 
-  const m20Updater = setInterval(() => {
+  if (window.m20Updater) clearInterval(window.m20Updater);
+  window.m20Updater = setInterval(() => {
     const xpEl = document.getElementById('final-total-xp');
     const appState = window.app || window.app?.state;
     if (xpEl && appState && appState.isInitialSyncComplete !== false) {

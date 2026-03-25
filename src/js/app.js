@@ -51,7 +51,7 @@ class GuiaIA {
       'module-17': 'modules/sena/guia-ia/modules-16-18.js',
       'module-18': 'modules/sena/guia-ia/modules-16-18.js',
       'module-19': 'modules/sena/guia-ia/modules-19-20.js',
-      'module-20': 'modules/sena/guia-ia/modules-19-20.js',
+      'module-20': 'modules/ia/mini-games.js',
       'module-21': 'modules/sena/guia-ia/module-final.js',
       'module-fundamentals': 'modules/sena/guia-ia/modules-1-5.js',
       'module-prompt-hygiene': 'modules/sena/guia-ia/modules-1-5.js',
@@ -4141,6 +4141,65 @@ window.showToast = (msg, type) => {
 
 window.antShowConfetti = function() {
     if (window.app) window.app.triggerConfetti();
+};
+
+window.renderSovereignRanking = async function() {
+    const container = document.getElementById('m20-leaderboard-container');
+    if (!container) return;
+
+    try {
+        const API_URL = window.location.port === '5500' ? `http://${window.location.hostname}:8020` : '';
+        const resp = await fetch(`${API_URL}/api/leaderboard?v=${Date.now()}`);
+        if (!resp.ok) throw new Error('Failed to fetch leaderboard');
+        
+        const data = await resp.json();
+        const currentUserName = localStorage.getItem('guia-ia-username');
+
+        if (data.length === 0) {
+            container.innerHTML = '<div style="padding:20px; text-align:center; opacity:0.6;">No hay registros soberanos todavía.</div>';
+            return;
+        }
+
+        container.innerHTML = `
+            <table class="leaderboard-table" style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+                <thead>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.5); font-size:0.75rem; text-transform:uppercase;">
+                        <th style="padding:12px; text-align:left;">Rango</th>
+                        <th style="padding:12px; text-align:left;">Soberano</th>
+                        <th style="padding:12px; text-align:right;">Dominio (XP)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${data.map((user, index) => {
+                        const isMe = user.name === currentUserName;
+                        const medal = index === 0 ? '🥇' : (index === 1 ? '🥈' : (index === 2 ? '🥉' : ''));
+                        return `
+                            <tr style="border-bottom:1px solid rgba(255,255,255,0.05); ${isMe ? 'background:rgba(99,102,241,0.1);' : ''} transition:all 0.2s;">
+                                <td style="padding:12px; font-weight:800; color:${index < 3 ? 'var(--accent)' : 'rgba(255,255,255,0.4)'};">
+                                    ${medal || (index + 1)}
+                                </td>
+                                <td style="padding:12px;">
+                                    <div style="display:flex; align-items:center; gap:10px;">
+                                        <span style="font-size:1.2rem;">${user.avatar || '👤'}</span>
+                                        <div>
+                                            <div style="font-weight:600; color:${isMe ? 'var(--accent)' : '#fff'};">${user.name}</div>
+                                            <div style="font-size:0.7rem; color:rgba(255,255,255,0.5);">${user.title || 'Iniciado'}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="padding:12px; text-align:right; font-weight:700; font-family:'Space Grotesk', monospace;">
+                                    ${user.xp.toLocaleString()} XP
+                                </td>
+                            </tr>
+                        `;
+                    }).join('')}
+                </tbody>
+            </table>
+        `;
+    } catch (e) {
+        console.error('Error rendering leaderboard:', e);
+        container.innerHTML = '<div style="padding:20px; text-align:center; color:var(--danger);">Error al sincronizar el Registro Soberano.</div>';
+    }
 };
 
 window.renderCompetencyReport = function() {
