@@ -14,7 +14,7 @@
   <!-- 🧬 ADN Maestro (Global DNA - Sincronizado) -->
   <link rel="stylesheet" href="src/css/dna_theme.css">
   <link rel="stylesheet" href="src/css/modules.css">
-  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -121,7 +121,8 @@
       </div>
 
       <div class="user-meta-input">
-        <input type="text" id="userNameProfile" name="username" autocomplete="name" placeholder="Escribe tu nombre aquí..." maxlength="25">
+        <span id="userAvatarProfile" style="font-size: 1.5rem; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"></span>
+        <input type="text" id="userNameProfile" name="username" autocomplete="name" placeholder="Escribe tu nombre aquí..." maxlength="100">
       </div>
       <div class="xp-bar-container">
         <div class="xp-bar-fill" id="xpBarFill"></div>
@@ -302,9 +303,40 @@
         <span class="nav-icon">🌊</span>
         <span class="nav-label">Bonus: Power Automate + IA</span>
       </a>
+      <a class="nav-item" data-module="module-bonus-huggingface">
+        <span class="nav-icon">🤗</span>
+        <span class="nav-label">Bonus: Hugging Face</span>
+      </a>
     </div>
 
-
+    <!-- 🧬 SOVEREIGNTY STATUS WIDGET (v22.0) -->
+    <div class="sovereignty-widget" id="sovereigntyWidget" style="margin: 20px 16px; padding: 15px; background: var(--bg-glass); border-radius: 12px; border: 1px solid var(--border);">
+      <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: bold;">Estatus de Soberanía</div>
+      <div id="sovMetrics" style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.8rem;">
+            <span>SCD (Density)</span>
+            <span id="sovScd" style="font-weight: bold; color: var(--accent);">--%</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.8rem;">
+            <span>AER (Evolution)</span>
+            <span id="sovAer" style="font-weight: bold; color: var(--accent);">--%</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.8rem;">
+            <span>SI (Integrity)</span>
+            <span id="sovSi" style="font-weight: bold; color: var(--accent);">--%</span>
+        </div>
+        <div style="border-top: 1px solid rgba(255,255,255,0.05); margin-top: 5px; padding-top: 5px; display: flex; flex-direction: column; gap: 4px;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted);">
+                <span>DeepSeek Vol.</span>
+                <span id="sovTokens" style="color: #60a5fa;">-- M</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted);">
+                <span>Offload %</span>
+                <span id="sovUsd" style="color: #f87171;">--%</span>
+            </div>
+        </div>
+      </div>
+    </div>
   </nav>
 
   <!-- ═══ MAIN CONTENT ═══ -->
@@ -417,6 +449,10 @@
               <span style="font-size: 1.5rem; display: block; margin-bottom: 4px;">🌠</span>
               <span style="font-size: 0.75rem; font-weight: 600;">Comet Agente</span>
             </div>
+            <div class="bonus-item-card" onclick="window.app.navigateTo('module-bonus-huggingface')" style="background: var(--bg-glass); padding: 12px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; text-align: center; transition: all 0.2s ease;">
+              <span style="font-size: 1.5rem; display: block; margin-bottom: 4px;">🤗</span>
+              <span style="font-size: 0.75rem; font-weight: 600;">Hugging Face</span>
+            </div>
           </div>
         </details>
       </div>
@@ -463,6 +499,7 @@
     <div class="module" id="module-gemini-productivity"></div>
     <div class="module" id="module-teams-meet"></div>
     <div class="module" id="module-bonus-comet"></div>
+    <div class="module" id="module-bonus-huggingface"></div>
 
     <div class="module" id="certificate">
       <div class="certificate-container animate-in">
@@ -515,10 +552,10 @@
 
   <div id="toast-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 10000; pointer-events: none;"></div>
 
-  <script type="module" src="src/js/app.js?v=32.12"></script>
-  <script src="src/js/dna_components.js?v=32.12"></script>
-
-  <script src="src/core/secret-terminal.js?v=32.12"></script>
+  <script type="module" src="src/js/app.js?v=32.13"></script>
+  <script src="src/js/dna_components.js?v=32.13"></script>
+  <script src="src/js/sovereign_ui.js?v=32.13"></script>
+  <script src="src/core/secret-terminal.js?v=32.13"></script>
 </body>
 
 </html>

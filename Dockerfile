@@ -20,8 +20,8 @@ RUN npm install
 # Copy source code
 COPY . .
 
-# Ensure data directory exists for SQLite
-RUN mkdir -p src/data
+# Ensure persistent data directory exists (aligned with Docker volume)
+RUN mkdir -p /app/data
 
 # Expose the API and Web port
 EXPOSE 8020

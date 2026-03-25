@@ -8,6 +8,9 @@ services:
     volumes:
       - experience_data:/app/data
       - knowledge_base:/app/src/knowledge
+    environment:
+      - PORT=8020
+      - ADMIN_TOKEN=${ADMIN_TOKEN:-}
     restart: unless-stopped
 
 volumes:

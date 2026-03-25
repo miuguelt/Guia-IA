@@ -34,5 +34,10 @@ Esta es la **Constitución Global de Miguel**. Actúa como fuente única de verd
 4. **Cero Alucinaciones**: Los datos deben ser DETERMINÍSTICOS y extraídos en tiempo real. No se permiten reportes "estáticos" si el motor local está disponible.
 5. **Incremento de Sesión**: Esta métrica debe reflejar fielmente la suma de `tokens_in` + `tokens_out` de la interacción actual, leída desde `session_usage.json`.
 
+## 7. PROTOCOLO DE SOBERANÍA DE PUERTOS (PORT_RELEASE) v32.5
+1. **Mandato de Limpieza**: Antes de iniciar el servidor (`dev` o `start`), el agente DEBE ejecutar `fuser -k 8020/tcp || true` (o equivalente según OS) para garantizar un puerto limpio. Prohibido iniciar si el puerto está ocupado por procesos huérfanos.
+2. **Ciclo de Vida Soberano**: El servidor DEBE implementar manejadores de señales (`SIGINT`, `SIGTERM`) para cerrar el listener y las conexiones a BD de forma elegante antes de salir.
+3. **Persistencia de Puerto**: Si la ejecución falla por `EADDRINUSE`, el agente tiene la OBLIGACIÓN de identificar y terminar el proceso intruso antes de reportar el error.
+
 ---
 *Versión: 32.5 | SUPRAMIND S-SOT | Protocolo: ULTRA_TRUTH & Glassmorphism v32.0*

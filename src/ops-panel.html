@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ops · Guía IA</title>
+  <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{--bg:#05070f;--surface:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.07);--primary:#6366f1;--primary-glow:rgba(99,102,241,0.15);--text:#e2e8f0;--muted:#475569;--success:#10b981;--warn:#fbbf24;--danger:#f87171;--info:#38bdf8;}
+    body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;padding:24px 28px;}
+    .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;}
+    .header-left h1{font-size:1.4rem;font-weight:800;background:linear-gradient(135deg,#818cf8,#22d3ee);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+    .header-left p{font-size:0.72rem;color:var(--muted);margin-top:2px;}
+    .header-right{display:flex;gap:10px;flex-wrap:wrap;}
+    .stats-bar{display:flex;gap:14px;margin-bottom:22px;flex-wrap:wrap;}
+    .stat-pill{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 18px;flex:1;min-width:130px;}
+    .stat-pill .num{font-size:1.6rem;font-weight:800;color:var(--primary);}
+    .stat-pill .lbl{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+    .toolbar{display:flex;gap:10px;margin-bottom:16px;align-items:center;flex-wrap:wrap;}
+    .search-wrap{flex:1;min-width:200px;position:relative;}
+    .search-wrap input{background:#0d1117;border:1px solid var(--border);color:var(--text);padding:9px 14px 9px 36px;border-radius:10px;font-family:'Outfit',sans-serif;font-size:0.82rem;width:100%;outline:none;transition:border 0.2s;}
+    .search-wrap input:focus{border-color:var(--primary);}
+    .search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:0.9rem;}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+    .table-wrap{overflow-x:auto;}
+    table{width:100%;border-collapse:collapse;font-size:0.8rem;}
+    th{background:rgba(99,102,241,0.08);color:#818cf8;padding:11px 14px;text-align:left;font-weight:700;white-space:nowrap;border-bottom:1px solid var(--border);}
+    td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:middle;}
+    tr:last-child td{border-bottom:none;}
+    tr:hover td{background:rgba(99,102,241,0.04);}
+    .xp-high{color:#818cf8;font-weight:800;}
+    .xp-mid{color:#34d399;font-weight:700;}
+    .xp-low{color:#94a3b8;font-weight:600;}
+    .btn{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:8px;border:1px solid;font-size:0.72rem;cursor:pointer;font-family:'Outfit',sans-serif;font-weight:700;background:transparent;transition:all 0.15s;white-space:nowrap;}
+    .btn:hover{opacity:0.85;transform:translateY(-1px);}
+    .btn-edit{color:#34d399;border-color:rgba(52,211,153,0.35);}
+    .btn-edit:hover{background:rgba(52,211,153,0.08);}
+    .btn-del{color:var(--danger);border-color:rgba(248,113,113,0.35);}
+    .btn-del:hover{background:rgba(248,113,113,0.08);}
+    .btn-reset{color:var(--warn);border-color:rgba(251,191,36,0.35);}
+    .btn-reset:hover{background:rgba(251,191,36,0.08);}
+    .btn-view{color:var(--info);border-color:rgba(56,189,248,0.35);}
+    .btn-view:hover{background:rgba(56,189,248,0.08);}
+    .btn-primary{background:var(--primary);color:#fff;border-color:var(--primary);padding:8px 16px;font-size:0.8rem;}
+    .btn-ghost{color:var(--muted);border-color:var(--border);padding:8px 16px;font-size:0.8rem;}
+    .badge{font-size:0.62rem;font-weight:700;padding:2px 8px;border-radius:9999px;border:1px solid;}
+    .badge-npc{background:var(--primary-glow);color:#818cf8;border-color:rgba(99,102,241,0.3);}
+    .badge-real{background:rgba(16,185,129,0.1);color:#34d399;border-color:rgba(16,185,129,0.3);}
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:200;align-items:center;justify-content:center;padding:20px;}
+    .modal-overlay.active{display:flex;}
+    .modal{background:#0b0e18;border:1px solid rgba(99,102,241,0.25);border-radius:18px;padding:28px;width:500px;max-width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+    .modal h2{color:#818cf8;font-size:1.05rem;font-weight:700;margin-bottom:20px;}
+    .field{margin-bottom:14px;}
+    .field label{display:block;font-size:0.72rem;color:var(--muted);margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;}
+    .field input{background:#111827;border:1px solid var(--border);color:var(--text);padding:9px 13px;border-radius:9px;font-family:'Outfit',sans-serif;font-size:0.83rem;width:100%;outline:none;transition:border 0.2s;}
+    .field input:focus{border-color:var(--primary);}
+    .modal-actions{display:flex;flex-direction:column;gap:8px;margin-top:20px;}
+    .progress-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+    .p-stat{background:rgba(99,102,241,0.06);border:1px solid var(--border);border-radius:10px;padding:12px;}
+    .p-stat .v{font-size:1.3rem;font-weight:800;color:var(--primary);}
+    .p-stat .k{font-size:0.68rem;color:var(--muted);}
+    .modules-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+    .mod-chip{font-size:0.65rem;background:rgba(52,211,153,0.08);color:#34d399;border:1px solid rgba(52,211,153,0.2);padding:3px 9px;border-radius:9999px;}
+    .json-raw{max-height:200px;overflow-y:auto;background:#0a0d14;padding:12px;border-radius:10px;font-size:0.68rem;color:var(--muted);border:1px solid var(--border);white-space:pre-wrap;word-break:break-all;margin-top:10px;}
+    #toast{position:fixed;bottom:24px;right:24px;padding:11px 22px;border-radius:11px;font-size:0.82rem;font-weight:600;opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:999;}
+    #toast.success{background:#10b981;color:#fff;}
+    #toast.error{background:#f87171;color:#fff;}
+    #toast.info{background:#6366f1;color:#fff;}
+    .empty{text-align:center;padding:50px 20px;color:var(--muted);}
+    .empty .icon{font-size:2.5rem;margin-bottom:10px;}
+    .loading{display:flex;align-items:center;justify-content:center;padding:50px;gap:12px;color:var(--muted);}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .spinner{width:22px;height:22px;border:2px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin 0.8s linear infinite;}
+    select{background:#0d1117;border:1px solid var(--border);color:var(--text);padding:9px 12px;border-radius:10px;font-family:'Outfit',sans-serif;font-size:0.8rem;outline:none;}
+    .btn-bulk-del{color:#fff;background:rgba(248,113,113,0.1);border-color:rgba(248,113,113,0.3);padding:8px 16px;display:none;}
+    .btn-bulk-del.active{display:inline-flex;background:var(--danger);}
+    .chk-col{width:40px;text-align:center;}
+    input[type="checkbox"]{accent-color:var(--primary);cursor:pointer;width:15px;height:15px;}
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-left">
+      <h1>&#9881;&#65039; Ops Panel — Guía IA</h1>
+      <p id="server-label">Conectando con el servidor...</p>
+    </div>
+    <div class="header-right">
+      <button class="btn btn-ghost" onclick="exportBackup()">&#128230; Exportar BD</button>
+      <button class="btn btn-primary" onclick="loadUsers()">&#128260; Actualizar</button>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-pill"><div class="num" id="stat-total">—</div><div class="lbl">Usuarios totales</div></div>
+    <div class="stat-pill"><div class="num" id="stat-real" style="color:#34d399">—</div><div class="lbl">Usuarios reales</div></div>
+    <div class="stat-pill"><div class="num" id="stat-xp" style="color:#fbbf24">—</div><div class="lbl">XP total acumulado</div></div>
+    <div class="stat-pill"><div class="num" id="stat-active" style="color:#38bdf8">—</div><div class="lbl">Con progreso JSON</div></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search-wrap">
+      <span class="search-icon">&#128269;</span>
+      <input id="search" type="text" placeholder="Buscar por nombre, entidad o título..." oninput="filterUsers()">
+    </div>
+    <select id="filter-type" onchange="filterUsers()">
+      <option value="all">Todos</option>
+      <option value="real">Solo reales</option>
+      <option value="npc">Solo NPCs</option>
+    </select>
+    <button id="btn-bulk-delete" class="btn btn-bulk-del" onclick="bulkDelete()">&#128465; Eliminar seleccionados</button>
+  </div>
+
+  <div class="card">
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th class="chk-col"><input type="checkbox" id="chk-all" onclick="toggleSelectAll()"></th>
+          <th>#</th><th>Nombre</th><th>XP</th><th>Módulos</th><th>Título</th><th>Entidad</th><th>Última act.</th><th>Tipo</th><th>Acciones</th>
+        </tr></thead>
+        <tbody id="users-body">
+          <tr><td colspan="9"><div class="loading"><div class="spinner"></div>Cargando usuarios...</div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Edit Modal -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal">
+      <h2>&#9999;&#65039; Editar Usuario</h2>
+      <input type="hidden" id="edit-id">
+      <div class="field"><label>Nombre</label><input id="edit-name" type="text"></div>
+      <div class="field"><label>XP</label><input id="edit-xp" type="number" min="0"></div>
+      <div class="field"><label>Título</label><input id="edit-title" type="text"></div>
+      <div class="field"><label>Avatar (emoji)</label><input id="edit-avatar" type="text" style="font-size:1.3rem;"></div>
+      <div class="field"><label>Entidad / Regional</label><input id="edit-entity" type="text"></div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" style="padding:11px;" onclick="saveEdit()">&#128190; Guardar cambios</button>
+        <button class="btn btn-ghost" style="padding:11px;" onclick="closeModal('editModal')">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress Modal -->
+  <div class="modal-overlay" id="progressModal">
+    <div class="modal">
+      <h2 id="progress-modal-title">&#128202; Progreso del Usuario</h2>
+      <div class="progress-grid" id="progress-stats"></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Módulos completados</div>
+      <div class="modules-list" id="progress-modules"></div>
+      <div style="font-size:0.72rem;color:var(--muted);margin:12px 0 5px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">JSON completo</div>
+      <div class="json-raw" id="progress-content">Cargando...</div>
+      <div class="modal-actions" style="margin-top:16px;">
+        <button class="btn btn-ghost" style="padding:10px;" onclick="closeModal('progressModal')">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script>
+    const TOKEN = new URLSearchParams(window.location.search).get('token') || '';
+    const API = window.location.origin;
+    const H = { 'Content-Type': 'application/json', 'x-admin-token': TOKEN };
+    let allUsers = [];
+
+    document.getElementById('server-label').textContent = 'Servidor: ' + API;
+
+    async function loadUsers() {
+      document.getElementById('users-body').innerHTML = '<tr><td colspan="9"><div class="loading"><div class="spinner"></div>Cargando...</div></td></tr>';
+      try {
+        const res = await fetch(API + '/ops/users', { headers: H });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        allUsers = await res.json();
+        updateStats();
+        renderTable(allUsers);
+      } catch(e) {
+        document.getElementById('users-body').innerHTML = '<tr><td colspan="9"><div class="empty"><div class="icon">&#9888;&#65039;</div>Error al cargar: ' + e.message + '</div></td></tr>';
+        showToast('Error de conexión: ' + e.message, 'error');
+      }
+    }
+
+    function updateStats() {
+      const real = allUsers.filter(function(u) { return !u.is_npc; });
+      const withProgress = allUsers.filter(function(u) { return u.progress_json && u.progress_json !== '{}' && u.progress_json !== 'null'; });
+      const totalXP = real.reduce(function(sum, u) { return sum + (u.xp || 0); }, 0);
+      document.getElementById('stat-total').textContent = allUsers.length;
+      document.getElementById('stat-real').textContent = real.length;
+      document.getElementById('stat-xp').textContent = totalXP.toLocaleString('es-CO');
+      document.getElementById('stat-active').textContent = withProgress.length;
+    }
+
+    function filterUsers() {
+      const q = document.getElementById('search').value.toLowerCase();
+      const type = document.getElementById('filter-type').value;
+      const filtered = allUsers.filter(function(u) {
+        const matchType = type === 'all' || (type === 'real' && !u.is_npc) || (type === 'npc' && u.is_npc);
+        const matchSearch = !q || (u.name || '').toLowerCase().includes(q) || (u.entity || '').toLowerCase().includes(q) || (u.title || '').toLowerCase().includes(q);
+        return matchType && matchSearch;
+      });
+      renderTable(filtered);
+    }
+
+    function xpClass(xp) {
+      if (xp >= 2000) return 'xp-high';
+      if (xp >= 500) return 'xp-mid';
+      return 'xp-low';
+    }
+
+    function getModulesCount(u) {
+      try {
+        const p = typeof u.progress_json === 'string' ? JSON.parse(u.progress_json) : u.progress_json;
+        return (p && p.completed) ? p.completed.length : 0;
+      } catch(e) { return 0; }
+    }
+
+    function esc(s) { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+    function renderTable(users) {
+      const tbody = document.getElementById('users-body');
+      if (!users.length) {
+        tbody.innerHTML = '<tr><td colspan="9"><div class="empty"><div class="icon">&#128269;</div>Sin resultados</div></td></tr>';
+        return;
+      }
+      tbody.innerHTML = users.map(function(u) {
+        const mods = getModulesCount(u);
+        const actions = [
+          '<button class="btn btn-view" data-id="' + u.id + '" data-name="' + esc(u.name) + '" onclick="viewProgress(' + u.id + ', this.dataset.name)">&#128065;</button>',
+          '<button class="btn btn-edit" data-id="' + u.id + '" onclick="loadEdit(' + u.id + ')">&#9999;&#65039;</button>',
+          '<button class="btn btn-reset" data-id="' + u.id + '" data-name="' + esc(u.name) + '" onclick="resetProgress(' + u.id + ', this.dataset.name)">&#8617;&#65039;</button>',
+          (!u.is_npc ? '<button class="btn btn-del" data-id="' + u.id + '" data-name="' + esc(u.name) + '" onclick="deleteUser(' + u.id + ', this.dataset.name)">&#128465;</button>' : '')
+        ].join('');
+        return '<tr>' +
+          '<td class="chk-col">' + (!u.is_npc ? '<input type="checkbox" class="user-chk" value="' + u.id + '" onclick="updateBulkActions()">' : '') + '</td>' +
+          '<td style="color:var(--muted);font-size:0.72rem;">' + u.id + '</td>' +
+          '<td style="font-weight:600;max-width:220px;">' + esc((u.avatar ? u.avatar + ' ' : '') + u.name) + '</td>' +
+          '<td class="' + xpClass(u.xp) + '">' + (u.xp || 0).toLocaleString('es-CO') + '</td>' +
+          '<td style="color:' + (mods > 0 ? '#34d399' : 'var(--muted)') + ';">' + (mods > 0 ? mods + '/21' : '—') + '</td>' +
+          '<td style="color:var(--muted);font-size:0.75rem;max-width:160px;">' + esc(u.title || '—') + '</td>' +
+          '<td style="font-size:0.75rem;max-width:140px;">' + esc(u.entity || '—') + '</td>' +
+          '<td style="font-size:0.68rem;color:var(--muted);white-space:nowrap;">' + (u.updated_at ? new Date(u.updated_at).toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'}) : '—') + '</td>' +
+          '<td><span class="badge ' + (u.is_npc ? 'badge-npc' : 'badge-real') + '">' + (u.is_npc ? 'NPC' : 'Real') + '</span></td>' +
+          '<td><div style="display:flex;gap:5px;flex-wrap:wrap;">' + actions + '</div></td>' +
+          '</tr>';
+      }).join('');
+      updateBulkActions();
+    }
+
+    function toggleSelectAll() {
+      const master = document.getElementById('chk-all');
+      document.querySelectorAll('.user-chk').forEach(function(c) { c.checked = master.checked; });
+      updateBulkActions();
+    }
+
+    function updateBulkActions() {
+      const selected = document.querySelectorAll('.user-chk:checked');
+      const btn = document.getElementById('btn-bulk-delete');
+      const master = document.getElementById('chk-all');
+      const all = document.querySelectorAll('.user-chk');
+      
+      if (selected.length > 0) {
+        btn.classList.add('active');
+        btn.textContent = '\uD83D\uDDD1 Eliminar seleccionados (' + selected.length + ')';
+      } else {
+        btn.classList.remove('active');
+      }
+      
+      if (all.length > 0) {
+        master.checked = selected.length === all.length;
+      }
+    }
+
+    async function bulkDelete() {
+      const selected = Array.from(document.querySelectorAll('.user-chk:checked')).map(function(c) { return parseInt(c.value); });
+      if (!selected.length) return;
+      if (!confirm('\u00BFEst\u00E1s seguro de eliminar ' + selected.length + ' usuarios? Esta acci\u00F3n no se puede deshacer.')) return;
+      
+      try {
+        const res = await fetch(API + '/ops/users/bulk-delete', {
+          method: 'POST',
+          headers: H,
+          body: JSON.stringify({ ids: selected })
+        });
+        const data = await res.json();
+        if (data.status === 'deleted') {
+          showToast('Eliminados ' + data.count + ' usuarios', 'success');
+          loadUsers();
+        } else {
+          showToast('Error al eliminar', 'error');
+        }
+      } catch(e) {
+        showToast('Error de red: ' + e.message, 'error');
+      }
+    }
+
+    function loadEdit(id) {
+      const u = allUsers.find(function(x) { return x.id === id; });
+      if (!u) return;
+      document.getElementById('edit-id').value = u.id;
+      document.getElementById('edit-name').value = u.name || '';
+      document.getElementById('edit-xp').value = u.xp || 0;
+      document.getElementById('edit-title').value = u.title || '';
+      document.getElementById('edit-avatar').value = u.avatar || '';
+      document.getElementById('edit-entity').value = u.entity || '';
+      document.getElementById('editModal').classList.add('active');
+    }
+
+    async function saveEdit() {
+      const id = document.getElementById('edit-id').value;
+      const body = {
+        name: document.getElementById('edit-name').value.trim(),
+        xp: parseInt(document.getElementById('edit-xp').value) || 0,
+        title: document.getElementById('edit-title').value.trim(),
+        avatar: document.getElementById('edit-avatar').value.trim(),
+        entity: document.getElementById('edit-entity').value.trim()
+      };
+      if (!body.name) { showToast('El nombre no puede estar vacío', 'error'); return; }
+      const res = await fetch(API + '/ops/users/' + id, { method:'PATCH', headers: H, body: JSON.stringify(body) });
+      const data = await res.json();
+      if (data.status === 'updated') { showToast('Usuario actualizado', 'success'); closeModal('editModal'); loadUsers(); }
+      else showToast('Error al actualizar', 'error');
+    }
+
+    async function deleteUser(id, name) {
+      const input = prompt('Para confirmar, escribe exactamente el nombre:\n"' + name + '"');
+      if (input !== name) { showToast('Nombre incorrecto. Cancelado.', 'info'); return; }
+      const res = await fetch(API + '/ops/users/' + id, { method: 'DELETE', headers: H });
+      const data = await res.json();
+      if (data.status === 'deleted') { showToast('Usuario eliminado', 'success'); loadUsers(); }
+      else showToast('Error al eliminar', 'error');
+    }
+
+    async function resetProgress(id, name) {
+      if (!confirm('Resetear XP y progreso de "' + name + '" a cero?')) return;
+      const res = await fetch(API + '/ops/users/' + id + '/reset', { method: 'POST', headers: H });
+      const data = await res.json();
+      if (data.status === 'reset') { showToast('Progreso reseteado', 'success'); loadUsers(); }
+      else showToast('Error al resetear', 'error');
+    }
+
+    async function viewProgress(id, name) {
+      document.getElementById('progress-modal-title').textContent = 'Progreso: ' + name;
+      document.getElementById('progress-stats').innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--muted);">Cargando...</div>';
+      document.getElementById('progress-modules').innerHTML = '';
+      document.getElementById('progress-content').textContent = '...';
+      document.getElementById('progressModal').classList.add('active');
+      try {
+        const res = await fetch(API + '/ops/users/' + id + '/progress', { headers: H });
+        const data = await res.json();
+        const p = data.progress || {};
+        document.getElementById('progress-stats').innerHTML =
+          '<div class="p-stat"><div class="v">' + (p.xp || 0).toLocaleString('es-CO') + '</div><div class="k">XP Total</div></div>' +
+          '<div class="p-stat"><div class="v">' + ((p.completed || []).length) + '/21</div><div class="k">Módulos</div></div>' +
+          '<div class="p-stat"><div class="v">' + (p.level || 1) + '</div><div class="k">Nivel</div></div>' +
+          '<div class="p-stat"><div class="v">' + (data.updated_at ? new Date(data.updated_at).toLocaleDateString('es-CO') : '—') + '</div><div class="k">Actualizado</div></div>';
+        const modules = p.completed || [];
+        document.getElementById('progress-modules').innerHTML = modules.length
+          ? modules.map(function(m) { return '<span class="mod-chip">' + esc(m) + '</span>'; }).join('')
+          : '<span style="color:var(--muted);font-size:0.75rem;">Sin módulos completados</span>';
+        document.getElementById('progress-content').textContent = JSON.stringify(p, null, 2);
+      } catch(e) {
+        document.getElementById('progress-content').textContent = 'Error: ' + e.message;
+      }
+    }
+
+    async function exportBackup() {
+      showToast('Generando backup...', 'info');
+      try {
+        const res = await fetch(API + '/ops/users', { headers: H });
+        const users = await res.json();
+        const backup = { exported_at: new Date().toISOString(), total_users: users.length, users: users };
+        const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'guia-ia-backup-' + new Date().toISOString().slice(0,10) + '.json';
+        a.click();
+        showToast('Backup descargado (' + users.length + ' usuarios)', 'success');
+      } catch(e) {
+        showToast('Error al exportar: ' + e.message, 'error');
+      }
+    }
+
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+    document.querySelectorAll('.modal-overlay').forEach(function(el) {
+      el.addEventListener('click', function(e) { if(e.target === el) el.classList.remove('active'); });
+    });
+
+    function showToast(msg, type) {
+      type = type || 'success';
+      const t = document.getElementById('toast');
+      t.className = type;
+      t.textContent = msg;
+      t.style.opacity = 1;
+      clearTimeout(t._to);
+      t._to = setTimeout(function() { t.style.opacity = 0; }, 3500);
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.active').forEach(function(m) { m.classList.remove('active'); });
+    });
+
+    loadUsers();
+  </script>
+</body>
+</html>

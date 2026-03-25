@@ -230,11 +230,23 @@ window.GuiaModules['module-fundamentals'] = window.GuiaModules['module-prompt-hy
             <p style="font-size: 0.8rem; margin-bottom: 0; opacity: 0.9;">Antes de iniciar, asegúrate de tener una cuenta activa en <a href="https://chatgpt.com" target="_blank" style="color:var(--primary); text-decoration:none; font-weight:bold;">ChatGPT</a>, <a href="https://gemini.google.com" target="_blank" style="color:var(--primary); text-decoration:none; font-weight:bold;">Gemini</a> o <a href="https://perplexity.ai" target="_blank" style="color:var(--primary); text-decoration:none; font-weight:bold;">Perplexity</a> para realizar tus pruebas.</p>
           </div>
           <div class="exercise-header"><span class="exercise-icon">🔥</span><span class="exercise-title">Misión 1: El Diagnóstico</span></div>
-          <p>Identifica una tarea que consideres "tu mayor pesadilla" en la oficina.</p>
-          <textarea placeholder="Ej: Clasificar manualmente 200 PQRS cada lunes..."></textarea>
+          <div style="display:grid; gap:16px; margin-top:15px;">
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:6px; color:var(--primary-light);">1. ¿Cuál es la tarea que es "tu mayor pesadilla"?</label>
+              <textarea placeholder="Ej: Clasificar manualmente 200 PQRS cada lunes..."></textarea>
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:6px; color:var(--primary-light);">2. ¿Por qué crees que la IA podría (o no) ayudar aquí?</label>
+              <textarea placeholder="Ej: Porque es repetitivo y no requiere firma legal en esta fase..."></textarea>
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:6px; color:var(--primary-light);">3. ¿Qué resultado ahorraría más tiempo?</label>
+              <textarea placeholder="Ej: Una lista de PQRS categorizadas por tema automáticamente."></textarea>
+            </div>
+          </div>
           <div class="reward-tag">+60 XP por honestidad operacional</div>
         </div>
-        <button class="gl-btn gl-btn-primary complete-module-btn" data-module="module-1" onclick="document.getElementById('m1-feedback').style.display='block'; window.app && window.app.addXP(50);">✅ Finalizar Misión</button>
+        <button class="gl-btn gl-btn-primary complete-module-btn" data-module="module-1" onclick="const f = document.getElementById('m1-feedback'); if(f) f.style.display='block';">✅ Finalizar Misión</button>
     <div id="m1-feedback" style="display:none; margin-top:15px; background:rgba(16,185,129,0.1); border:1px solid #10b981; padding:15px; border-radius:10px;">
       <h4 style="color:#10b981; margin-top:0;">📋 Ejemplo de Respuesta Correcta:</h4>
       <p style="font-size:0.85rem; opacity:0.9;">"Usaría la IA para redactar borradores de respuestas a PQRS comunes. Mi rol sería el de **Auditor**, asegurándome de que la IA no invente compromisos legales y manteniendo el tono institucional. Esto me ahorraría unas 4 horas semanales de redacción básica."</p>

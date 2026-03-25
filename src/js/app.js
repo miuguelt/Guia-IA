@@ -15,6 +15,7 @@ class GuiaIA {
     this.quizScores = {};
     this.xp = 0;
     this.level = 1;
+    this.COURSE_MAX_XP = 3200; // DNA v32.5: Standardized Total Course XP
     this.STORAGE_KEY = 'guia-ia-general';
       this.XP_PER_MODULE = 100;
       this.XP_PER_QUIZ = 50;
@@ -1484,7 +1485,8 @@ class GuiaIA {
         this.currentModule = this.normalizeModuleId(data.currentModule || 'welcome');
         this.quizScores = data.quizScores || {};
         this.xp = data.xp || 0;
-        this.level = data.level || 1;
+        this.level = Math.floor(this.xp / 500) + 1;
+        this.avatar = data.avatar || '';
         this.competencies = { ...this.createEmptyCompetencies(), ...(data.competencies || {}) };
         this.evidenceStore = data.evidenceStore || {};
         this.selfAssessments = data.selfAssessments || {};
@@ -1493,6 +1495,31 @@ class GuiaIA {
     } catch (e) {
       console.log('No saved progress found.');
     }
+  }
+
+  resetFields() {
+    console.log('🧹 Resetting Local Progress for New Profile...');
+    this.completedModules = new Set();
+    this.quizScores = {};
+    this.xp = 0;
+    this.level = 1;
+    this.avatar = '';
+    this.competencies = this.createEmptyCompetencies();
+    this.evidenceStore = {};
+    this.selfAssessments = {};
+    const name = localStorage.getItem('guia-ia-username');
+    localStorage.removeItem(this.STORAGE_KEY);
+    if (name) localStorage.setItem('guia-ia-username', name);
+  }
+
+  refreshAppState() {
+    console.log('🔄 Re-initializing App State from LocalStorage...');
+    this.loadProgress();
+    this.updateXPDashboard();
+    if (typeof this.updateGlobalProgress === 'function') this.updateGlobalProgress();
+    if (typeof this.updateCompetencyDashboard === 'function') this.updateCompetencyDashboard();
+    if (this.currentModule) this.navigateToModule(this.currentModule);
+    this.showToast('¡Progreso sincronizado!', 'success');
   }
 
   saveProgress() {
@@ -1655,7 +1682,7 @@ class GuiaIA {
       feedback.push('Aporta más de un campo o aspecto del caso para fortalecer la evidencia.');
     }
 
-    const valid = score >= 45;
+    const valid = (normalized === 'module-1') ? score >= 30 : score >= 45;
     const awards = {};
     if (valid) {
       const multiplier = score >= 85 ? 1 : score >= 65 ? 0.75 : 0.5;
@@ -2650,37 +2677,132 @@ class GuiaIA {
     this.updateXPDashboard();
     this.updateCompetencyDashboard();
     this.saveProgress();
+    this.saveProgressToCloud(); // Persist full state to server
     this.syncLeaderboard();
   }
 
-  async syncLeaderboard() {
-    const name = localStorage.getItem('guia-ia-username') || this.generateSovereignName();
-    const data = {
-      name: name,
+  saveProgressToCloud() {
+    // Guard: never overwrite cloud data before initial sync has loaded it
+    if (!this.isInitialSyncComplete) {
+      console.log('🔒 Sync not yet complete, skipping cloud save to prevent XP overwrite.');
+      return;
+    }
+    const savedName = localStorage.getItem('guia-ia-username');
+    if (!savedName || savedName === 'PARTICIPANTE') return;
+
+    const API_URL = window.location.port === '5500' ? `http://${window.location.hostname}:8020` : '';
+    const progress = {
+      completed: [...this.completedModules],
+      currentModule: this.currentModule,
+      quizScores: this.quizScores,
       xp: this.xp,
-      title: document.getElementById('levelName')?.textContent || 'Básico',
-      avatar: this.xp > 5000 ? '🐉' : (this.xp > 1000 ? '⚡' : '💡'),
-      entity: this.specialization === 'institucional' ? 'Regional SENA' : 'Corporativo'
+      level: this.level,
+      competencies: this.competencies,
+      evidenceStore: this.evidenceStore,
+      selfAssessments: this.selfAssessments,
+      theme: document.documentElement.getAttribute('data-theme') || 'dark'
     };
+
+    // Fire-and-forget — no await, doesn't block UI
+    fetch(`${API_URL}/api/progress`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: savedName, progress_json: progress })
+    }).catch(e => console.warn('Cloud save failed (non-critical):', e));
+  }
+
+  async loadProgressFromCloud(nameOverride) {
+    const savedName = nameOverride || localStorage.getItem('guia-ia-username');
+    if (!savedName) return false;
+
+    const API_URL = window.location.port === '5500' ? `http://${window.location.hostname}:8020` : '';
+    const resp = await fetch(`${API_URL}/api/progress/${encodeURIComponent(savedName)}`);
+    if (!resp.ok) return false;
+
+    const data = await resp.json();
+    console.log('☁️ Cloud data received:', data);
+
+    // Apply all cloud fields to app state
+    if (Array.isArray(data.completed)) {
+      this.completedModules = new Set(data.completed.map(id => this.normalizeModuleId(id)));
+    }
+    if (data.currentModule) {
+      this.currentModule = this.normalizeModuleId(data.currentModule);
+    }
+    if (data.quizScores) this.quizScores = data.quizScores;
+    if (typeof data.xp === 'number') {
+      this.xp = data.xp;
+      this.level = Math.floor(this.xp / 500) + 1;
+    }
+    if (data.avatar) this.avatar = data.avatar;
+    if (data.competencies) {
+      this.competencies = { ...this.createEmptyCompetencies(), ...data.competencies };
+    }
+    if (data.evidenceStore) this.evidenceStore = data.evidenceStore;
+    if (data.selfAssessments) this.selfAssessments = data.selfAssessments;
+    if (data.theme) document.documentElement.setAttribute('data-theme', data.theme);
+
+    // Persist to localStorage so offline still works
+    this.saveProgress();
+    return true;
+  }
+
+  async syncLeaderboard() {
+    const savedName = localStorage.getItem('guia-ia-username');
+    if (!savedName || savedName === 'PARTICIPANTE') return;
 
     try {
       const API_URL = window.location.port === '5500' ? `http://${window.location.hostname}:8020` : '';
-      const resp = await fetch(`${API_URL}/api/leaderboard`, {
+      this.isInitialSyncComplete = false;
+
+      const checkResp = await fetch(`${API_URL}/api/progress/${encodeURIComponent(savedName)}`);
+
+      if (checkResp.ok) {
+        console.log('👤 Profile found. Loading from cloud...');
+        const loaded = await this.loadProgressFromCloud(savedName);
+        if (loaded) {
+          // Refresh all UI with the newly loaded data
+          this.updateXPDashboard();
+          if (typeof this.updateGlobalProgress === 'function') this.updateGlobalProgress();
+          if (typeof this.updateCompetencyDashboard === 'function') this.updateCompetencyDashboard();
+          this.refreshWelcomeUI(); // Force refresh welcome message
+          this.showToast('¡Progreso cargado desde la nube! ☁️', 'success');
+        }
+      } else if (checkResp.status === 404) {
+        console.log('🌱 New profile. Starting fresh...');
+        this.resetFields();
+        localStorage.setItem('guia-ia-username', savedName);
+        this.updateXPDashboard();
+        if (typeof this.updateGlobalProgress === 'function') this.updateGlobalProgress();
+        if (typeof this.updateCompetencyDashboard === 'function') this.updateCompetencyDashboard();
+        this.refreshWelcomeUI(); // Refresh for new profile too
+        this.showToast('¡Perfil nuevo creado! Empieza desde cero. 🌱', 'success');
+      } else {
+        console.error('⚠️ Server Error during sync pre-check.');
+        this.isInitialSyncComplete = true;
+        return;
+      }
+
+      // POST updated (or fresh-zero) XP to leaderboard AFTER loading so values are correct
+      const data = {
+        name: savedName,
+        xp: this.xp,
+        title: document.getElementById('levelName')?.textContent || 'Básico',
+        avatar: this.xp > 5000 ? '🐉' : (this.xp > 1000 ? '⚡' : '💡'),
+        entity: this.specialization === 'institucional' ? 'Regional SENA' : 'Corporativo'
+      };
+
+      await fetch(`${API_URL}/api/leaderboard`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
-      if (resp.ok) {
-        const result = await resp.json();
-        if (result.name && !localStorage.getItem('guia-ia-username')) {
-            localStorage.setItem('guia-ia-username', result.name);
-            const nameInput = document.getElementById('userNameProfile');
-            if (nameInput) nameInput.value = result.name;
-        }
-        console.log('🧬 Sovereign Sync Complete');
-      }
+
+      this.isInitialSyncComplete = true;
+      console.log('🧬 Sovereign Sync Complete');
     } catch (e) {
-      console.warn('Offline Mode: Sync deferred');
+      console.warn('Sync failed', e);
+      this.isInitialSyncComplete = true;
     }
   }
 
@@ -2719,14 +2841,19 @@ class GuiaIA {
     const xpText = document.getElementById('xpText');
     const levelNum = document.getElementById('levelNum');
     const levelName = document.getElementById('levelName');
+    const avatarImg = document.getElementById('userAvatarProfile');
 
-    const nextLevelXP = this.level * 500;
-    const prevLevelXP = (this.level - 1) * 500;
-    const progress = ((this.xp - prevLevelXP) / (nextLevelXP - prevLevelXP)) * 100;
+    // DNA v32.5: Standardized total XP (3.200) instead of level-based
+    const progress = (this.xp / this.COURSE_MAX_XP) * 100;
 
     if (xpFill) xpFill.style.width = Math.min(100, progress) + '%';
-    if (xpText) xpText.textContent = `${this.xp} / ${nextLevelXP} XP`;
+    if (xpText) xpText.textContent = `${this.xp.toLocaleString('es-CO')} / ${this.COURSE_MAX_XP.toLocaleString('es-CO')} XP`;
     if (levelNum) levelNum.textContent = `Nivel ${this.level}`;
+    
+    if (avatarImg) {
+        const defaultAvatar = this.xp > 5000 ? '🐉' : (this.xp > 1000 ? '⚡' : '💡');
+        avatarImg.textContent = this.avatar || defaultAvatar;
+    }
 
     if (levelName) {
       levelName.className = 'xp-level-badge'; // Reset
@@ -3011,8 +3138,11 @@ class GuiaIA {
     // 2. Personalize subtitle if name is set
     const subtitle = welcome.querySelector('.hero-subtitle');
     const userName = localStorage.getItem('guia-ia-username');
-    if (subtitle && userName && !subtitle.dataset.personalized) {
-        subtitle.innerHTML = `Bienvenido de nuevo, <b>${userName}</b>. ${subtitle.textContent}`;
+    if (subtitle && userName) {
+        if (!subtitle.dataset.original) {
+            subtitle.dataset.original = subtitle.textContent;
+        }
+        subtitle.innerHTML = `Bienvenido de nuevo, <b>${userName}</b>. ${subtitle.dataset.original}`;
         subtitle.dataset.personalized = "true";
     }
 
@@ -3510,10 +3640,26 @@ class GuiaIA {
     nameInput.value = savedName;
 
     nameInput.addEventListener('input', (e) => {
-      const newName = e.target.value;
-      localStorage.setItem('guia-ia-username', newName);
+      let newName = e.target.value;
+      // Strip ALL emojis/icons and collapse spaces (Universal cleaning)
+      const cleanName = newName.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F1E6}-\u{1F1FF}]/gu, '').replace(/\s+/g, ' ').trim();
+      
+      localStorage.setItem('guia-ia-username', cleanName);
       this.generateCertificate();
-      this.syncLeaderboard();
+      
+      if (this.syncTimeout) clearTimeout(this.syncTimeout);
+      this.syncTimeout = setTimeout(() => {
+        this.syncLeaderboard();
+      }, 1000); 
+    });
+
+    nameInput.addEventListener('blur', (e) => {
+        if (!e.target.value || e.target.value.trim() === '') {
+            const random = this.generateSovereignName();
+            e.target.value = random;
+            localStorage.setItem('guia-ia-username', random);
+            this.syncLeaderboard();
+        }
     });
   }
 

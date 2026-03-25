@@ -3,8 +3,8 @@ const path = require('path');
 const app = express();
 const PORT = 8002;
 
-app.use('/src', express.static(path.join(__dirname, 'src')));
-app.use(express.static(__dirname));
+app.use('/src', express.static(path.join(__dirname, '../src')));
+app.use(express.static(path.join(__dirname, '..')));
 
 app.use((req, res, next) => {
     console.log(`[TEST] ${req.method} ${req.url}`);
