@@ -1640,6 +1640,7 @@ class GuiaIA {
   }
 
   evaluateModuleEvidence(moduleId, evidence) {
+    const normalized = this.normalizeModuleId(moduleId);
     const config = this.getLearningConfig(moduleId);
     if (!config) return { valid: true, score: 100, feedback: [], awards: {} };
 
